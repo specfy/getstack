@@ -1,0 +1,33 @@
+{
+  "name": "@stackhub/backend",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "migrate": "tsx src/db/migrate.ts",
+    "migrate:up": "tsx src/db/migrate.ts up",
+    "migrate:down": "tsx src/db/migrate.ts down"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.4.1",
+    "@fastify/swagger": "^8.12.0",
+    "@fastify/swagger-ui": "^1.10.1",
+    "fastify": "^4.24.3",
+    "kysely": "^0.27.2",
+    "node-cron": "^3.0.3",
+    "octokit": "^3.1.2",
+    "pg": "^8.11.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/node-cron": "^3.0.11",
+    "@types/pg": "^8.10.9",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+} 

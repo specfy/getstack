@@ -1,0 +1,6 @@
+{
+  "extends": ["h1fra"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+} 

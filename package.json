@@ -1,0 +1,23 @@
+{
+  "name": "stackhub",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/backend & npm run dev --workspace=apps/frontend",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "db:migrate": "npm run migrate --workspace=@stackhub/backend"
+  },
+  "devDependencies": {
+    "@h1fra/eslint-config": "^1.0.12",
+    "eslint": "^9.0.0",
+    "prettier": "^3.2.5"
+  }
+}
