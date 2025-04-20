@@ -7,6 +7,8 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=apps/backend & npm run dev --workspace=apps/frontend",
+    "dev:back": "npm run dev --workspace=apps/backend",
+    "build:type": "tsc -b tsconfig.build.json",
     "build": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

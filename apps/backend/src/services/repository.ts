@@ -1,17 +1,14 @@
-import { db } from '../db/kysely'
-import type { RepositoriesTable } from '../db/kysely'
+import { db } from '../db/kysely';
 
-export interface CreateRepositoryInput {
-  org: string
-  name: string
-}
+import type { RepositoryInsert } from '../db';
+import type { RepositoriesTable } from '../db/kysely';
 
 export interface UpdateRepositoryInput {
-  last_fetched_at?: Date
+  last_fetched_at?: Date;
 }
 
 export class RepositoryService {
-  async create(input: CreateRepositoryInput): Promise<RepositoriesTable> {
+  async create(input: RepositoryInsert): Promise<RepositoriesTable> {
     return db
       .insertInto('repositories')
       .values({
@@ -19,11 +16,11 @@ export class RepositoryService {
         name: input.name,
       })
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirstOrThrow();
   }
 
   async update(id: string, input: UpdateRepositoryInput): Promise<RepositoriesTable> {
-    return db
+    return await db
       .updateTable('repositories')
       .set({
         ...input,
@@ -31,31 +28,23 @@ export class RepositoryService {
       })
       .where('id', '=', id)
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirstOrThrow();
   }
 
-  async findById(id: string): Promise<RepositoriesTable | null> {
-    return db
-      .selectFrom('repositories')
-      .selectAll()
-      .where('id', '=', id)
-      .executeTakeFirst()
+  async findById(id: string): Promise<RepositoriesTable | undefined> {
+    return await db.selectFrom('repositories').selectAll().where('id', '=', id).executeTakeFirst();
   }
 
-  async findByOrgAndName(org: string, name: string): Promise<RepositoriesTable | null> {
-    return db
+  async findByOrgAndName(org: string, name: string): Promise<RepositoriesTable | undefined> {
+    return await db
       .selectFrom('repositories')
       .selectAll()
       .where('org', '=', org)
       .where('name', '=', name)
-      .executeTakeFirst()
+      .executeTakeFirst();
   }
 
   async list(): Promise<RepositoriesTable[]> {
-    return db
-      .selectFrom('repositories')
-      .selectAll()
-      .orderBy('created_at', 'desc')
-      .execute()
+    return await db.selectFrom('repositories').selectAll().orderBy('created_at', 'desc').execute();
   }
-} 
+}

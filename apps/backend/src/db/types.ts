@@ -11,17 +11,19 @@ export type UpdatedAt = ColumnType<Date, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
 
 export interface Database {
-  repositories: RepositoriesTable
+  repositories: RepositoriesTable;
 }
 
 export interface RepositoriesTable {
-  id: string
-  org: string
-  name: string
-  created_at: Date
-  updated_at: Date
-  last_fetched_at: Date | null
+  id: ColumnType<string, never, never>;
+  org: string;
+  name: string;
+  created_at: CreatedAt;
+  updated_at: UpdatedAt;
+  last_fetched_at: Date | null;
 }
-
+export type RepositoryRow = Selectable<RepositoriesTable>;
+export type RepositoryInsert = Insertable<RepositoriesTable>;
+export type RepositoryUpdate = Updateable<RepositoriesTable>;
 
 export type TX = Transaction<Database>;

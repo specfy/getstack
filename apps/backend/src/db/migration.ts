@@ -16,7 +16,7 @@ const migrator = new Migrator({
 
 export async function migrate(): Promise<boolean> {
   const { error, results } = await migrator.migrateToLatest();
-  if (error) {
+  if (error !== undefined) {
     console.error('failed to migrate');
     console.error(error);
     return false;
