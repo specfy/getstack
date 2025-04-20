@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:16-alpine
     ports:
-      - "5432:5432"
+      - "5832:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -18,4 +18,4 @@ services:
       retries: 5
 
 volumes:
-  postgres_data: 
+  postgres_data:

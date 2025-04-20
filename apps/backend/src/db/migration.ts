@@ -3,10 +3,11 @@ import path from 'node:path';
 
 import { FileMigrationProvider, Migrator } from 'kysely';
 
-import { db } from './index.js';
+import { db } from './client';
+import { logger } from '../utils/logger';
 
 const migrator = new Migrator({
-  db,
+  db: db,
   provider: new FileMigrationProvider({
     fs,
     path,
@@ -17,17 +18,17 @@ const migrator = new Migrator({
 export async function migrate(): Promise<boolean> {
   const { error, results } = await migrator.migrateToLatest();
   if (error !== undefined) {
-    console.error('failed to migrate');
-    console.error(error);
+    logger.error('failed to migrate');
+    logger.error(error);
     return false;
   }
 
   if (results) {
     for (const it of results) {
       if (it.status === 'Success') {
-        console.log(`migration "${it.migrationName}" was executed successfully`);
+        logger.info(`migration "${it.migrationName}" was executed successfully`);
       } else if (it.status === 'Error') {
-        console.error(`failed to execute migration "${it.migrationName}"`);
+        logger.error(`failed to execute migration "${it.migrationName}"`);
       }
     }
   }

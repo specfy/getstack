@@ -1,20 +1,17 @@
 import { Kysely, PostgresDialect } from 'kysely';
 import pg from 'pg';
 
-import type { Database } from './types.js';
+import { envs } from '../utils/env';
+
+import type { Database } from './types';
 
 const { Pool } = pg;
 
-const url = new URL(process.env['DATABASE_URL']!);
+const url = new URL(envs.DATABASE_URL);
 
 const dialect = new PostgresDialect({
   pool: new Pool({
-    database: url.pathname.slice(1),
-    host: url.hostname,
-    user: url.username,
-    password: url.password,
-    port: Number.parseInt(url.port, 10),
-    max: 20,
+    connectionString: url.href,
   }),
 });
 

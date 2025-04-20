@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/max-params */
 import cors from '@fastify/cors';
 
 import { notFound, serverError } from './utils/apiErrors.js';

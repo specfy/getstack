@@ -1,26 +1,15 @@
-import { db } from '../db/kysely';
+import { db } from '../db/client.js';
 
-import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db';
-import type { RepositoriesTable } from '../db/kysely';
+import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db/types.js';
 
-export async function createRepository(input: RepositoryInsert): Promise<RepositoriesTable> {
-  return db
-    .insertInto('repositories')
-    .values({
-      id: input.id,
-      org: input.org,
-      name: input.name,
-      created_at: new Date(),
-      updated_at: new Date(),
-    })
-    .returningAll()
-    .executeTakeFirstOrThrow();
+export async function createRepository(input: RepositoryInsert): Promise<RepositoryRow> {
+  return await db.insertInto('repositories').values(input).returningAll().executeTakeFirstOrThrow();
 }
 
 export async function updateRepository(
   id: string,
   input: RepositoryUpdate
-): Promise<RepositoriesTable> {
+): Promise<RepositoryRow> {
   return await db
     .updateTable('repositories')
     .set({
@@ -32,14 +21,14 @@ export async function updateRepository(
     .executeTakeFirstOrThrow();
 }
 
-export async function findRepositoryById(id: string): Promise<RepositoriesTable | undefined> {
+export async function findRepositoryById(id: string): Promise<RepositoryRow | undefined> {
   return await db.selectFrom('repositories').selectAll().where('id', '=', id).executeTakeFirst();
 }
 
 export async function findRepositoryByOrgAndName(
   org: string,
   name: string
-): Promise<RepositoriesTable | undefined> {
+): Promise<RepositoryRow | undefined> {
   return await db
     .selectFrom('repositories')
     .selectAll()
@@ -48,19 +37,37 @@ export async function findRepositoryByOrgAndName(
     .executeTakeFirst();
 }
 
-export async function listRepositories(): Promise<RepositoriesTable[]> {
-  return await db.selectFrom('repositories').selectAll().orderBy('created_at', 'desc').execute();
+export async function getRepositoryToAnalyze({
+  beforeDate,
+}: {
+  beforeDate: Date;
+}): Promise<RepositoryRow | undefined> {
+  const q = db
+    .selectFrom('repositories')
+    .selectAll()
+    .where((eb) =>
+      eb.or([eb('last_fetched_at', 'is', null), eb('last_fetched_at', '<', beforeDate)])
+    )
+    .limit(1);
+
+  return await q.executeTakeFirst();
 }
 
-export async function batchUpsert(repositories: RepositoryRow[]): Promise<void> {
+export async function upsertRepository(repositories: RepositoryInsert): Promise<void> {
+  await batchUpsert([repositories]);
+}
+
+export async function batchUpsert(repositories: RepositoryInsert[]): Promise<void> {
   const query = db
     .insertInto('repositories')
     .values(repositories)
     .onConflict((oc) =>
-      oc.columns(['org', 'name']).doUpdateSet({
-        stars: (eb) => eb.ref('excluded.stars'),
-        url: (eb) => eb.ref('excluded.url'),
-        updated_at: new Date(),
+      oc.columns(['org', 'name']).doUpdateSet((eb) => {
+        return {
+          stars: eb.ref('excluded.stars'),
+          url: eb.ref('excluded.url'),
+          updated_at: new Date(),
+        };
       })
     );
 

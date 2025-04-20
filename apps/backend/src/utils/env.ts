@@ -5,8 +5,11 @@ const schema = z.object({
   PORT: z.string().default('3000'),
   NODE_ENV: z.enum(['production', 'development', 'test']).default('development'),
 
-  // API
-  API_HOSTNAME: z.string().min(1),
+  // DB
+  DATABASE_URL: z.string().url(),
+
+  // Github
+  GITHUB_TOKEN: z.string(),
 });
 
 export const envs = schema.parse(process.env);

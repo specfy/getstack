@@ -6,11 +6,14 @@ export type UpdatedAt = ColumnType<Date, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
 
 export interface RepositoriesTable {
-  id: ColumnType<string, string, never>;
+  id: ColumnType<string, never, never>;
+  github_id: string;
   org: string;
   name: string;
+  branch: string;
   stars: number;
   url: string;
+  ignored: boolean;
   created_at: CreatedAt;
   updated_at: UpdatedAt;
   last_fetched_at: Date | null;

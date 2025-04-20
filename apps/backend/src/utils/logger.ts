@@ -18,7 +18,7 @@ export const options: LoggerOptions = {
   level: 'info',
   timestamp: true,
   base: {
-    serviceContext: { service: 'specfy' },
+    svc: 'api',
   },
   formatters: isProd
     ? {
@@ -58,11 +58,8 @@ export const options: LoggerOptions = {
           final.message += m;
         } else if (typeof m === 'object' && m instanceof Error) {
           final['err'] = m.message;
-          // final.stack_trace = m.stack;
-        } else if (!m) {
-          final.message = '';
-        } else if (m['err'] !== undefined || m['error'] !== undefined) {
-          final['err'] = m['err'] ?? m['error'];
+          final['stack_trace'] = m.stack;
+          final['cause'] = m.cause;
         } else {
           final.data = { ...final.data, ...m };
         }
@@ -88,5 +85,5 @@ if (!isProd) {
   options.transport = pretty;
 }
 
-export const logger = pino(options).child({ svg: 'api' });
+export const logger = pino(options);
 export type Logger = typeof logger;

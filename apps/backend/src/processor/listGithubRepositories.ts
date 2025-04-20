@@ -1,80 +1,108 @@
 import { Octokit } from '@octokit/rest';
 
-import { batchUpsert } from '../models/repository';
-import { logger } from '../utils/logger';
+import { upsertRepository } from '../models/repository.js';
+import { envs } from '../utils/env.js';
+import { logger } from '../utils/logger.js';
+import { wait } from '../utils/wait.js';
 
-export interface RepositoryData {
-  id: string;
-  name: string;
-  org: string;
-  fullname: string;
-  stars: number;
-  url: string;
-}
+import type { RestEndpointMethodTypes } from '@octokit/rest';
 
-export async function listGithubRepositories(): Promise<RepositoryData[]> {
-  const octokit = new Octokit();
-  const repositories: RepositoryData[] = [];
+const MIN_STARS = 500;
+const PER_PAGE = 100;
+
+export async function listGithubRepositories(): Promise<void> {
+  const octokit = new Octokit({
+    auth: envs.GITHUB_TOKEN,
+  });
 
   try {
-    let page = 1;
-    const perPage = 100; // GitHub API allows up to 100 items per page
-    let hasMore = true;
+    const startDate = new Date('2025-04-20');
+    const endDate = new Date('2025-04-19');
+    let currentDate = new Date(startDate);
 
-    while (hasMore) {
-      const { data } = await octokit.rest.search.repos({
-        q: 'stars:>0',
-        sort: 'stars',
-        order: 'desc',
-        per_page: perPage,
-        page,
-      });
+    while (currentDate >= endDate) {
+      const nextDate = new Date(currentDate);
+      nextDate.setDate(currentDate.getDate() - 1);
 
-      if (data.items.length === 0) {
-        hasMore = false;
-        break;
-      }
+      logger.info({ currentDate, nextDate }, 'Searching repositories');
+      let page = 1;
+      let hasMore = true;
 
-      for (const repo of data.items) {
-        const [org, name] = repo.full_name.split('/') as [string, string];
-        repositories.push({
-          id: repo.id.toString(),
-          name,
-          org,
-          fullname: repo.full_name,
-          stars: repo.stargazers_count,
-          url: repo.html_url,
+      while (hasMore) {
+        const query = `created:${nextDate.toISOString().split('T')[0]}..${currentDate.toISOString().split('T')[0]} stars:>${MIN_STARS}`;
+        const response = await octokit.rest.search.repos({
+          q: query,
+          sort: 'stars',
+          order: 'desc',
+          per_page: PER_PAGE,
+          page,
         });
+
+        const { data, headers } = response;
+
+        // Handle rate limit
+        const remaining = Number.parseInt(headers['x-ratelimit-remaining'] || '1', 10);
+        const reset = Number.parseInt(headers['x-ratelimit-reset'] || '0', 10);
+        if (remaining === 0) {
+          const waitTime = Math.max(reset * 1000 - Date.now(), 0);
+          logger.warn(`Rate limit reached. Waiting for ${waitTime / 1000} seconds.`);
+          await wait(waitTime);
+        }
+
+        for (const repo of data.items) {
+          logger.info(`Processing ${repo.id} - ${repo.full_name}`);
+          if (filter(repo)) {
+            continue;
+          }
+
+          const [org, name] = repo.full_name.split('/') as [string, string];
+          await upsertRepository({
+            github_id: String(repo.id),
+            org,
+            name,
+            branch: repo.default_branch,
+            stars: repo.stargazers_count,
+            url: repo.html_url,
+            ignored: false,
+            last_fetched_at: null,
+            created_at: new Date(),
+            updated_at: new Date(),
+          });
+        }
+
+        hasMore = data.items.length === PER_PAGE;
+        page++;
+        await wait(1000);
       }
 
-      page++;
-      hasMore = data.items.length === perPage;
+      currentDate = nextDate;
     }
   } catch (err) {
     logger.error('Error fetching repositories from GitHub:', err);
   }
-
-  return repositories;
 }
 
-export async function batchUpsertRepositories(repositories: RepositoryData[]): Promise<void> {
-  const batchSize = 1000;
-
-  for (let i = 0; i < repositories.length; i += batchSize) {
-    const batch = repositories.slice(i, i + batchSize);
-    await batchUpsert(
-      batch.map((repo) => {
-        return {
-          id: repo.id,
-          name: repo.name,
-          org: repo.org,
-          stars: repo.stars,
-          url: repo.url,
-          last_fetched_at: null,
-          created_at: new Date(),
-          updated_at: new Date(),
-        };
-      })
-    );
+function filter(
+  repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
+): boolean {
+  if (repo.full_name.startsWith('awesome')) {
+    return true;
   }
+  if (repo.stargazers_count <= MIN_STARS) {
+    return true;
+  }
+  if (repo.private) {
+    return true;
+  }
+  if (repo.fork) {
+    return true;
+  }
+  if (repo.archived) {
+    return true;
+  }
+  if (repo.is_template) {
+    return true;
+  }
+
+  return false;
 }
