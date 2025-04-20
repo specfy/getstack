@@ -9,20 +9,24 @@ import { logger } from '../utils/logger';
 
 import type { RepositoryRow } from '../db/types';
 import type { Payload } from '@specfy/stack-analyser';
+import '@specfy/stack-analyser/dist/autoload';
 
 async function cloneRepository({
   fullName,
+  branch,
   dir,
 }: {
   fullName: string;
+  branch: string;
   dir: string;
 }): Promise<void> {
   try {
-    logger.info(`Cloning repository ${fullName}`);
+    logger.info(`Cloning repository to ${dir}`);
 
-    const emitter = degit(`${fullName}`, {
+    const emitter = degit(`${fullName}#${branch}`, {
+      mode: 'tar',
       cache: true,
-      force: true,
+      force: false,
       verbose: true,
     });
 
@@ -33,29 +37,33 @@ async function cloneRepository({
 }
 
 export async function analyze(repo: RepositoryRow): Promise<Payload> {
-  const fullName = `${repo.org}/${repo.name}#${repo.branch}`;
-  const dir = path.join(os.tmpdir(), 'stackhub', fullName);
+  const fullName = `${repo.org}/${repo.name}`;
+  const dir = path.join(os.tmpdir(), 'stackhub', repo.org, repo.name);
 
-  let dirCreated;
+  try {
+    await fs.rm(dir, { recursive: true, force: true });
+  } catch {
+    // Do nothing
+  }
+
   try {
     await fs.mkdir(dir, { recursive: true });
-    dirCreated = true;
+  } catch (err) {
+    throw new Error('Failed to create dir', { cause: err });
+  }
 
-    await cloneRepository({ fullName, dir });
+  try {
+    await cloneRepository({ fullName, dir, branch: repo.branch });
 
-    const stack = flatten(
-      await analyser({
-        provider: new FSProvider({
-          path: dir,
-          ignorePaths: [],
-        }),
-      })
-    );
+    const payload = await analyser({
+      provider: new FSProvider({
+        path: dir,
+      }),
+    });
+    const stack = flatten(payload);
 
     return stack;
   } finally {
-    if (dirCreated) {
-      await fs.rmdir(dir);
-    }
+    await fs.rm(dir, { recursive: true, force: true });
   }
 }

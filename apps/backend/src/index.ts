@@ -3,7 +3,7 @@ import closeWithGrace from 'close-with-grace';
 import Fastify from 'fastify';
 
 import createApp, { options } from './app.js';
-import { cronAnalyzeGithubRepositories, cronListGithubRepositories } from './processor/index.js';
+import { cronAnalyzeGithubRepositories } from './processor/index.js';
 import { envs } from './utils/env.js';
 import { logger } from './utils/logger.js';
 

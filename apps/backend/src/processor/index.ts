@@ -14,7 +14,6 @@ export async function cronAnalyzeGithubRepositories(): Promise<void> {
   const beforeDate = new Date();
   beforeDate.setDate(beforeDate.getDate() - 0);
 
-  console.log('prout');
   const repo = await getRepositoryToAnalyze({ beforeDate });
   if (!repo) {
     return;
@@ -24,7 +23,8 @@ export async function cronAnalyzeGithubRepositories(): Promise<void> {
 
   try {
     const res = await analyze(repo);
-    console.log(res);
+    // console.dir(res.childs.map((child) => child.tech).filter(Boolean), { depth: 1 });
+    console.log([...new Set(res.childs.flatMap((child) => [...child.techs.values()]))]);
   } catch (err) {
     logger.error(`Failed to analyze`, err);
   }
