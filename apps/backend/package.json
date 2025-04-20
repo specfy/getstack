@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@fastify/cors": "11.0.1",
+    "@octokit/rest": "21.1.1",
+    "close-with-grace": "2.2.0",
     "fastify": "5.3.2",
     "kysely": "0.28.1",
     "octokit": "4.1.3",

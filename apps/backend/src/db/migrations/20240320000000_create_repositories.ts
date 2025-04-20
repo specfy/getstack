@@ -9,6 +9,8 @@ export async function up(db: Kysely<Database>): Promise<void> {
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       org VARCHAR(255) NOT NULL,
       name VARCHAR(255) NOT NULL,
+      stars int8 NOT NULL DEFAULT 0,
+      url VARCHAR NOT NULL,
       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       last_fetched_at TIMESTAMP,
