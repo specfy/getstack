@@ -1,13 +1,14 @@
 import { Octokit } from '@octokit/rest';
 
-import { upsertRepository } from '../models/repository.js';
+import { formatToClickhouseDatetime } from '../db/utils.js';
+import { upsertRepository } from '../models/repositories.js';
 import { envs } from '../utils/env.js';
 import { logger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
 import type { RestEndpointMethodTypes } from '@octokit/rest';
 
-const MIN_STARS = 500;
+const MIN_STARS = 1000;
 const PER_PAGE = 100;
 
 export async function listGithubRepositories(): Promise<void> {
@@ -16,20 +17,21 @@ export async function listGithubRepositories(): Promise<void> {
   });
 
   try {
-    const startDate = new Date('2025-04-20');
-    const endDate = new Date('2025-04-19');
+    const startDate = new Date('2025-04-21');
+    const endDate = new Date('2025-04-10');
     let currentDate = new Date(startDate);
 
     while (currentDate >= endDate) {
       const nextDate = new Date(currentDate);
       nextDate.setDate(currentDate.getDate() - 1);
+      const dateString = nextDate.toISOString().split('T')[0];
 
       logger.info({ currentDate, nextDate }, 'Searching repositories');
       let page = 1;
       let hasMore = true;
 
       while (hasMore) {
-        const query = `created:${nextDate.toISOString().split('T')[0]}..${currentDate.toISOString().split('T')[0]} stars:>${MIN_STARS}`;
+        const query = `created:${dateString}..${dateString} stars:>${MIN_STARS}`;
         const response = await octokit.rest.search.repos({
           q: query,
           sort: 'stars',
@@ -64,7 +66,8 @@ export async function listGithubRepositories(): Promise<void> {
             stars: repo.stargazers_count,
             url: repo.html_url,
             ignored: false,
-            last_fetched_at: null,
+            errored: false,
+            last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
             created_at: new Date(),
             updated_at: new Date(),
           });
@@ -85,7 +88,7 @@ export async function listGithubRepositories(): Promise<void> {
 function filter(
   repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
 ): boolean {
-  if (repo.full_name.startsWith('awesome')) {
+  if (repo.name.startsWith('awesome')) {
     return true;
   }
   if (repo.stargazers_count <= MIN_STARS) {

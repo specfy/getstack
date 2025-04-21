@@ -3,7 +3,7 @@ import closeWithGrace from 'close-with-grace';
 import Fastify from 'fastify';
 
 import createApp, { options } from './app.js';
-import { cronAnalyzeGithubRepositories } from './processor/index.js';
+import { cronAnalyzeGithubRepositories, cronListGithubRepositories } from './processor/index.js';
 import { envs } from './utils/env.js';
 import { logger } from './utils/logger.js';
 
@@ -49,7 +49,7 @@ app.listen({ host: '0.0.0.0', port: Number.parseInt(envs.PORT, 10) }, (err) => {
 
   logger.info('Started');
 
-  // void cronListGithubRepositories();
+  void cronListGithubRepositories();
   void cronAnalyzeGithubRepositories();
 });
 

@@ -14,17 +14,31 @@ export interface RepositoriesTable {
   stars: number;
   url: string;
   ignored: boolean;
+  errored: boolean;
   created_at: CreatedAt;
   updated_at: UpdatedAt;
-  last_fetched_at: Date | null;
+  last_fetched_at: Date;
 }
 
 export type RepositoryRow = Selectable<RepositoriesTable>;
 export type RepositoryInsert = Insertable<RepositoriesTable>;
 export type RepositoryUpdate = Updateable<RepositoriesTable>;
 
+export interface TechnologiesTable {
+  id: ColumnType<string, never, never>;
+  org: string;
+  name: string;
+  tech: string;
+  date_week: Date;
+}
+
+export type TechnologyRow = Selectable<TechnologiesTable>;
+export type TechnologyInsert = Insertable<TechnologiesTable>;
+export type TechnologyUpdate = Updateable<TechnologiesTable>;
+
 export interface Database {
   repositories: RepositoriesTable;
+  technologies: TechnologiesTable;
 }
 
 export type TX = Transaction<Database>;

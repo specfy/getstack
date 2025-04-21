@@ -21,11 +21,9 @@ async function cloneRepository({
   dir: string;
 }): Promise<void> {
   try {
-    logger.info(`Cloning repository to ${dir}`);
-
     const emitter = degit(`${fullName}#${branch}`, {
       mode: 'tar',
-      cache: true,
+      cache: false,
       force: false,
       verbose: true,
     });
@@ -53,7 +51,11 @@ export async function analyze(repo: RepositoryRow): Promise<Payload> {
   }
 
   try {
+    logger.info(`Cloning repository to ${dir}`);
+
     await cloneRepository({ fullName, dir, branch: repo.branch });
+
+    logger.info(`Analyzing`);
 
     const payload = await analyser({
       provider: new FSProvider({
@@ -64,6 +66,6 @@ export async function analyze(repo: RepositoryRow): Promise<Payload> {
 
     return stack;
   } finally {
-    await fs.rm(dir, { recursive: true, force: true });
+    // await fs.rm(dir, { recursive: true, force: true });
   }
 }
