@@ -24,7 +24,7 @@ async function cloneRepository({
     const emitter = degit(`${fullName}#${branch}`, {
       mode: 'tar',
       cache: false,
-      force: false,
+      force: true,
       verbose: true,
     });
 
@@ -62,7 +62,7 @@ export async function analyze(repo: RepositoryRow): Promise<Payload> {
         path: dir,
       }),
     });
-    const stack = flatten(payload);
+    const stack = flatten(payload, { merge: true });
 
     return stack;
   } finally {

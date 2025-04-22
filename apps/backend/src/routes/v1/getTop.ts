@@ -1,0 +1,26 @@
+import { getTopTechnologies } from '../../models/technologies';
+
+import type { TechnologyWeeklyRow } from '../../db/types';
+import type { APIGetTop } from '../../types/endpoint';
+import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
+
+export const getTopRoute: FastifyPluginCallback = (fastify: FastifyInstance) => {
+  fastify.get<APIGetTop>('/top', async (_, reply) => {
+    const data = await getTopTechnologies();
+
+    const group: Record<string, TechnologyWeeklyRow[]> = {};
+    for (const item of data) {
+      if (group[item.category] === undefined) {
+        group[item.category] = [];
+      }
+      group[item.category]!.push(item);
+    }
+
+    reply.status(200).send({
+      success: true,
+      data: Object.entries(group).map((entry) => {
+        return { category: entry[0], rows: entry[1] };
+      }),
+    });
+  });
+};

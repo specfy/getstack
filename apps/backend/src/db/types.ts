@@ -13,8 +13,8 @@ export interface RepositoriesTable {
   branch: string;
   stars: number;
   url: string;
-  ignored: boolean;
-  errored: boolean;
+  ignored: number;
+  errored: number;
   created_at: CreatedAt;
   updated_at: UpdatedAt;
   last_fetched_at: Date;
@@ -29,6 +29,7 @@ export interface TechnologiesTable {
   org: string;
   name: string;
   tech: string;
+  category: string;
   date_week: Date;
 }
 
@@ -36,9 +37,18 @@ export type TechnologyRow = Selectable<TechnologiesTable>;
 export type TechnologyInsert = Insertable<TechnologiesTable>;
 export type TechnologyUpdate = Updateable<TechnologiesTable>;
 
+export interface TechnologiesWeeklyTable {
+  date_week: Date;
+  category: string;
+  tech: string;
+  hits: number;
+}
+export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;
+
 export interface Database {
   repositories: RepositoriesTable;
   technologies: TechnologiesTable;
+  technologies_weekly: TechnologiesWeeklyTable;
 }
 
 export type TX = Transaction<Database>;

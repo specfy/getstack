@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --require dotenv/config src/index.ts dotenv_config_path=./../../.env",
+    "dev": "tsx watch --env-file=../../.env src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "migrate": "tsx -r dotenv/config src/db/migrate.ts dotenv_config_path=./../../.env"
+    "migrate": "tsx --env-file=../../.env src/db/migrate.ts"
   },
   "dependencies": {
     "@clickhouse/client": "1.11.1",
     "@fastify/cors": "11.0.1",
     "@octokit/rest": "21.1.1",
-    "@specfy/stack-analyser": "1.9.0",
+    "@specfy/stack-analyser": "1.9.2",
     "@founderpath/kysely-clickhouse": "1.7.0",
     "close-with-grace": "2.2.0",
     "degit": "2.8.4",

@@ -1,13 +1,15 @@
+import { listIndexed } from '@specfy/stack-analyser/dist/register';
+
 import { analyze } from './analyzer';
 import { listGithubRepositories } from './listGithubRepositories';
-import { formatToClickhouseDatetime } from '../db/utils';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories';
 import { createTechnologies } from '../models/technologies';
+import { formatToClickhouseDatetime, formatToDate } from '../utils/date';
 import { logger } from '../utils/logger';
 import { wait } from '../utils/wait';
 
 import type { TechnologyInsert } from '../db/types';
-import type { Payload } from '@specfy/stack-analyser';
+import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 
 export async function cronListGithubRepositories(): Promise<void> {
   if ('true' === 'true') {
@@ -38,24 +40,35 @@ export async function cronAnalyzeGithubRepositories(): Promise<void> {
       res = await analyze(repo);
     } catch (err) {
       logger.error(`Failed to analyze`, err);
-      await updateRepository(repo.id, { errored: true });
+      await updateRepository(repo.id, { errored: 1 });
       continue;
     }
 
     try {
-      const techs = [...new Set(res.childs.flatMap((child) => [...child.techs.values()]))];
+      const techs = new Set<AllowedKeys>(res.techs);
+
+      for (const child of res.childs) {
+        for (const tech of child.techs) {
+          techs.add(tech);
+        }
+      }
+
+      techs.delete('css');
 
       const dateWeek = new Date();
       dateWeek.setDate(dateWeek.getDate() - dateWeek.getDay()); // Round to the nearest week start
 
-      const rows: TechnologyInsert[] = techs.map((tech) => {
-        return {
-          date_week: dateWeek.toISOString().split('T')[0] as unknown as Date,
+      const rows: TechnologyInsert[] = [];
+      for (const tech of techs) {
+        rows.push({
+          date_week: formatToDate(dateWeek) as unknown as Date,
           org: repo.org,
           name: repo.name,
+          category: listIndexed[tech].type,
           tech,
-        };
-      });
+        });
+      }
+
       if (rows.length > 0) {
         await createTechnologies(rows);
       } else {
@@ -67,7 +80,7 @@ export async function cronAnalyzeGithubRepositories(): Promise<void> {
       logger.info(`Done`);
     } catch (err) {
       logger.error(`Failed to save`, err);
-      await updateRepository(repo.id, { errored: true });
+      await updateRepository(repo.id, { errored: 1 });
     }
 
     await wait(1000);

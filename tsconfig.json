@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2023"
+      "es2024",
+      "ESNext"
     ],
     "module": "ES2022",
-    "target": "es2022",
+    "target": "es2024",
     "ignoreDeprecations": "5.0",
     "declaration": true,
     "sourceMap": true,

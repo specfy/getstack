@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
 
-import { formatToClickhouseDatetime } from '../db/utils.js';
 import { upsertRepository } from '../models/repositories.js';
+import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { logger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
@@ -17,8 +17,8 @@ export async function listGithubRepositories(): Promise<void> {
   });
 
   try {
-    const startDate = new Date('2025-04-21');
-    const endDate = new Date('2025-04-10');
+    const startDate = new Date('2025-04-18');
+    const endDate = new Date('2025-02-10');
     let currentDate = new Date(startDate);
 
     while (currentDate >= endDate) {
@@ -65,11 +65,9 @@ export async function listGithubRepositories(): Promise<void> {
             branch: repo.default_branch,
             stars: repo.stargazers_count,
             url: repo.html_url,
-            ignored: false,
-            errored: false,
+            ignored: 0,
+            errored: 0,
             last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
-            created_at: new Date(),
-            updated_at: new Date(),
           });
         }
 

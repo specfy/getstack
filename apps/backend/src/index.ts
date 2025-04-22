@@ -41,13 +41,13 @@ app.addHook('onClose', async (instance) => {
 });
 
 // Start listening.
-app.listen({ host: '0.0.0.0', port: Number.parseInt(envs.PORT, 10) }, (err) => {
+void app.listen({ host: '0.0.0.0', port: envs.PORT }, (err) => {
   if (err) {
     app.log.error(err);
     process.exit(1);
   }
 
-  logger.info('Started');
+  logger.info(`Started http://localhost:${envs.PORT}`);
 
   void cronListGithubRepositories();
   void cronAnalyzeGithubRepositories();

@@ -7,10 +7,11 @@ export async function up(db: Kysely<Database>): Promise<void> {
   await sql`
     CREATE TABLE technologies (
       id UUID DEFAULT generateUUIDv7(),
-      org LowCardinality(String) NOT NULL,
-      name LowCardinality(String) NOT NULL,
-      tech LowCardinality(String) NOT NULL,
-      date_week Date32 NOT NULL,
+      org LowCardinality(String),
+      name LowCardinality(String),
+      tech LowCardinality(String),
+      category LowCardinality(String)
+      date_week Date32,
       PRIMARY KEY (date_week, org, name)
     ) ENGINE = MergeTree()
     ORDER BY (date_week, org, name);

@@ -1,4 +1,5 @@
 import lint from '@h1fra/eslint-config';
+import globals from 'globals';
 
 export default [
   {
@@ -21,9 +22,26 @@ export default [
     },
   },
   {
-    files: ['**/*.tsx'],
+    files: ['apps/frontend/**/*.{tsx,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...Object.fromEntries(Object.entries(globals.node).map(([key]) => [key, 'off'])),
+      },
+
+      ecmaVersion: 2024,
+      sourceType: 'module',
+
+      parserOptions: {
+        ecmaFeatures: {
+          impliedStrict: true,
+          jsx: false,
+        },
+
+        project: 'apps/frontend/tsconfig.json',
+      },
+    },
     rules: {
-      'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
     },
   },

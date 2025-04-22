@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/max-params */
 import cors from '@fastify/cors';
 
+import { routes } from './routes/index.js';
 import { notFound, serverError } from './utils/apiErrors.js';
 import { logger } from './utils/logger.js';
 
-import type { FastifyInstance, FastifyServerOptions } from 'fastify';
+import type { FastifyInstance, FastifyPluginOptions, FastifyServerOptions } from 'fastify';
 
-export default async function createApp(f: FastifyInstance): Promise<void> {
+export default async function createApp(
+  f: FastifyInstance,
+  opts: FastifyPluginOptions
+): Promise<void> {
   f.addHook('onRequest', (req, _res, done) => {
     logger.info(`#${req.id} <- ${req.method} ${req.url}`);
     done();
@@ -18,14 +22,7 @@ export default async function createApp(f: FastifyInstance): Promise<void> {
 
   await f.register(cors, {
     // Important for cookies to work
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'https://localhost:5173',
-      'https://app.specfy.io',
-      'https://dev.specfy.io',
-      'https://vercel.specfy.io',
-    ],
+    origin: ['http://localhost:3000', 'http://localhost:5173', 'https://localhost:5173'],
     credentials: true,
     exposedHeaders: ['set-cookie'],
   });
@@ -54,7 +51,7 @@ export default async function createApp(f: FastifyInstance): Promise<void> {
     }
   );
 
-  // await routes(f, opts);
+  await routes(f, opts);
 }
 
 export const options: FastifyServerOptions = {

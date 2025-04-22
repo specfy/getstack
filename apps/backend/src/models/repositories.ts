@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { clickHouse, db } from '../db/client.js';
-import { formatToClickhouseDatetime } from '../db/utils.js';
+import { formatToClickhouseDatetime } from '../utils/date.js';
 
 import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db/types.js';
 
@@ -64,13 +65,20 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
     .executeTakeFirst();
 
   if (row) {
-    await db
-      .updateTable('repositories')
-      .set({
-        stars: repo.stars,
-        updated_at: new Date().toISOString() as unknown as Date,
-      })
-      .execute();
+    await clickHouse.exec({
+      query: `ALTER TABLE "repositories"
+      UPDATE
+        "stars" = ${repo.stars},
+        updated_at = '${formatToClickhouseDatetime(new Date())}'
+        WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
+    });
+    // const q = db.updateTable('repositories').set({
+    //   stars: repo.stars,
+    //   updated_at: formatToClickhouseDatetime(new Date()),
+    // });
+    // console.log(q.compile());
+
+    // await q.execute();
     return;
   }
 
