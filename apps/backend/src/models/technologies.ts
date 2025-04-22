@@ -1,5 +1,5 @@
 import { clickHouse, db } from '../db/client.js';
-import { formatToDate } from '../utils/date.js';
+import { formatToYearWeek } from '../utils/date.js';
 
 import type { TechnologyInsert, TechnologyWeeklyRow } from '../db/types.js';
 
@@ -9,8 +9,7 @@ export async function createTechnologies(input: TechnologyInsert[]): Promise<voi
 }
 
 export async function getTopTechnologies(): Promise<TechnologyWeeklyRow[]> {
-  const dateWeek = new Date();
-  dateWeek.setDate(dateWeek.getDate() - dateWeek.getDay());
+  const dateWeek = formatToYearWeek(new Date());
 
   const res = await clickHouse.query({
     query: `WITH ranked AS (
@@ -22,7 +21,7 @@ export async function getTopTechnologies(): Promise<TechnologyWeeklyRow[]> {
         row_number() OVER (PARTITION BY category ORDER BY hits DESC) AS rn
     FROM technologies_weekly_mv
     FINAL
-    WHERE date_week = '${formatToDate(dateWeek)}'
+    WHERE date_week = '${dateWeek}'
 )
 SELECT
     date_week,

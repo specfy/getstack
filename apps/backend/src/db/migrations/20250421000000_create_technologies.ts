@@ -10,8 +10,8 @@ export async function up(db: Kysely<Database>): Promise<void> {
       org LowCardinality(String),
       name LowCardinality(String),
       tech LowCardinality(String),
-      category LowCardinality(String)
-      date_week Date32,
+      category LowCardinality(String),
+      date_week LowCardinality(String),
       PRIMARY KEY (date_week, org, name)
     ) ENGINE = MergeTree()
     ORDER BY (date_week, org, name);

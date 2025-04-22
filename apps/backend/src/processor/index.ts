@@ -4,7 +4,7 @@ import { analyze } from './analyzer';
 import { listGithubRepositories } from './listGithubRepositories';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories';
 import { createTechnologies } from '../models/technologies';
-import { formatToClickhouseDatetime, formatToDate } from '../utils/date';
+import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date';
 import { logger } from '../utils/logger';
 import { wait } from '../utils/wait';
 
@@ -55,13 +55,12 @@ export async function cronAnalyzeGithubRepositories(): Promise<void> {
 
       techs.delete('css');
 
-      const dateWeek = new Date();
-      dateWeek.setDate(dateWeek.getDate() - dateWeek.getDay()); // Round to the nearest week start
+      const dateWeek = formatToYearWeek(new Date());
 
       const rows: TechnologyInsert[] = [];
       for (const tech of techs) {
         rows.push({
-          date_week: formatToDate(dateWeek) as unknown as Date,
+          date_week: dateWeek,
           org: repo.org,
           name: repo.name,
           category: listIndexed[tech].type,

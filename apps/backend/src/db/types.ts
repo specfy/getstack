@@ -30,7 +30,7 @@ export interface TechnologiesTable {
   name: string;
   tech: string;
   category: string;
-  date_week: Date;
+  date_week: string;
 }
 
 export type TechnologyRow = Selectable<TechnologiesTable>;
@@ -38,7 +38,7 @@ export type TechnologyInsert = Insertable<TechnologiesTable>;
 export type TechnologyUpdate = Updateable<TechnologiesTable>;
 
 export interface TechnologiesWeeklyTable {
-  date_week: Date;
+  date_week: string;
   category: string;
   tech: string;
   hits: number;

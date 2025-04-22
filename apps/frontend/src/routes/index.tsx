@@ -1,12 +1,57 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
+import { useMemo } from 'react';
 
 import { useTop } from '@/api/useTop';
 import { stackDefinition, supportedIndexed } from '@/lib/stack';
 
 import type { TechType } from '@specfy/stack-analyser';
 
+const stackOrder: TechType[] = [
+  // Popular
+  'language',
+  'db',
+  'ai',
+
+  // Tools
+  'framework',
+  'saas',
+  'tool',
+
+  // Store
+  'cloud',
+  'storage',
+  'hosting',
+
+  // Other SaaS+TOol
+  'auth',
+  'notification',
+  'queue',
+
+  // Events
+  'monitoring',
+  'analytics',
+  'messaging',
+
+  // Other
+  'ci',
+  'api',
+  'app',
+  'etl',
+  'network',
+];
+
 const Index: React.FC = () => {
   const { data, isLoading } = useTop();
+
+  const sorted = useMemo(() => {
+    if (!data?.data) {
+      return [];
+    }
+
+    return [...data.data].sort(
+      (a, b) => stackOrder.indexOf(a.category) - stackOrder.indexOf(b.category)
+    );
+  }, [data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -15,7 +60,7 @@ const Index: React.FC = () => {
   return (
     <div className="">
       <div className="grid grid-cols-3 gap-6">
-        {data?.data.map(({ category, rows }, index) => {
+        {sorted.map(({ category, rows }, index) => {
           const def = stackDefinition[category as TechType];
           const Icon = def.icon;
           return (

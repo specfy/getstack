@@ -7,7 +7,7 @@ export async function up(db: Kysely<Database>): Promise<void> {
   await sql`
         CREATE TABLE technologies_weekly
     (
-      date_week Date,
+      date_week LowCardinality(String),
       category LowCardinality(String),
       tech LowCardinality(String),
       hits UInt32
@@ -18,7 +18,7 @@ export async function up(db: Kysely<Database>): Promise<void> {
 
   await sql`
     CREATE MATERIALIZED VIEW technologies_weekly_mv TO technologies_weekly AS
-    SELECT toStartOfDay(date_week)::Date as date_week,
+    SELECT date_week,
           tech,
           category,
           COUNT(tech) as hits
