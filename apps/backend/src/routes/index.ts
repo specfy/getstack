@@ -1,5 +1,5 @@
-import { postCronTriggerList } from './v1/cron/postTriggerList';
-import { getTopRoute } from './v1/getTop';
+import { postCronTriggerList } from './v1/cron/postTriggerList.js';
+import { getTopRoute } from './v1/getTop.js';
 
 import type { FastifyPluginAsync } from 'fastify';
 

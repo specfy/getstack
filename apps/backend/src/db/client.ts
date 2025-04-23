@@ -3,7 +3,7 @@ import { ClickhouseDialect } from '@founderpath/kysely-clickhouse';
 import { Kysely } from 'kysely';
 // import pg from 'pg';
 
-import { envs } from '../utils/env';
+import { envs } from '../utils/env.js';
 
 import type { Database } from './types';
 

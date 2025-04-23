@@ -1,12 +1,14 @@
-import { listIndexed } from '@specfy/stack-analyser/dist/register';
+import '@specfy/stack-analyser/dist/autoload.js';
+
+import { listIndexed } from '@specfy/stack-analyser/dist/register.js';
 import { CronJob } from 'cron';
 
-import { analyze } from './analyzer';
-import { getRepositoryToAnalyze, updateRepository } from '../models/repositories';
-import { createTechnologies } from '../models/technologies';
-import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date';
-import { logger as defaultLogger } from '../utils/logger';
-import { wait } from '../utils/wait';
+import { analyze } from './analyzer.js';
+import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
+import { createTechnologies } from '../models/technologies.js';
+import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
+import { logger as defaultLogger } from '../utils/logger.js';
+import { wait } from '../utils/wait.js';
 
 import type { TechnologyInsert } from '../db/types';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';

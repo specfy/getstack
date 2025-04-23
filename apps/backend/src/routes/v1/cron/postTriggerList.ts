@@ -1,4 +1,4 @@
-import { cronListGithubRepositories } from '../../../processor/cronList';
+import { cronListGithubRepositories } from '../../../processor/cronList.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 

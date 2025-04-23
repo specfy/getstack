@@ -1,3 +1,5 @@
+import '@specfy/stack-analyser/dist/autoload.js';
+
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -7,7 +9,6 @@ import degit from 'degit';
 
 import type { RepositoryRow } from '../db/types';
 import type { Payload } from '@specfy/stack-analyser';
-import '@specfy/stack-analyser/dist/autoload';
 import type { Logger } from 'pino';
 
 async function cloneRepository({

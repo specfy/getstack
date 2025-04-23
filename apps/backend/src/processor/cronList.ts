@@ -1,7 +1,7 @@
 import { CronJob } from 'cron';
 
-import { listGithubRepositories } from './listGithubRepositories';
-import { logger as defaultLogger } from '../utils/logger';
+import { listGithubRepositories } from './listGithubRepositories.js';
+import { logger as defaultLogger } from '../utils/logger.js';
 
 const logger = defaultLogger.child({ svc: 'cron.analyze' });
 

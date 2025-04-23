@@ -1,6 +1,6 @@
-import { getTopTechnologiesWithTrend } from '../../models/technologies';
+import { getTopTechnologiesWithTrend } from '../../models/technologies.js';
 
-import type { APIGetTop, TechnologyByCategoryByWeekWithTrend } from '../../types/endpoint';
+import type { APIGetTop, TechnologyByCategoryByWeekWithTrend } from '../../types/endpoint.js';
 import type { TechType } from '@specfy/stack-analyser';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 

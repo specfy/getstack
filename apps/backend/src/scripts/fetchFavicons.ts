@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { extendedListTech } from '../utils/stacks';
+import { extendedListTech } from '../utils/stacks.js';
 
 const fetchFavicons = async () => {
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
