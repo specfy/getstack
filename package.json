@@ -6,17 +6,17 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=apps/backend & npm run dev --workspace=apps/frontend",
-    "dev:front": "npm run dev --workspace=apps/frontend",
-    "dev:back": "npm run dev --workspace=apps/backend",
-    "build:type": "tsc -b tsconfig.build.json -w",
+    "dev": "npm run dev --w=apps/backend & npm run dev --w=apps/frontend",
+    "dev:front": "npm run dev --w=apps/frontend",
+    "dev:back": "npm run dev --w=apps/backend",
+    "build:ts:watch": "tsc -b tsconfig.build.json -w",
+    "build:ts": "tsc -b tsconfig.build.json",
+    "build:back": "npm run build --w=apps/backend",
     "build": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:up": "docker compose up -d",
-    "db:down": "docker compose down",
-    "db:logs": "docker compose logs -f postgres",
-    "db:migrate": "npm run migrate --workspace=@stackhub/backend"
+    "db:migrate": "npm run migrate --w=apps/backend"
   },
   "devDependencies": {
     "@h1fra/eslint-config": "1.0.12",
