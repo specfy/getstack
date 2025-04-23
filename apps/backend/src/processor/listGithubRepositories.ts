@@ -17,8 +17,8 @@ export async function listGithubRepositories(): Promise<void> {
   });
 
   try {
-    const startDate = new Date('2025-04-18');
-    const endDate = new Date('2025-02-10');
+    const startDate = new Date('2025-02-18');
+    const endDate = new Date('2024-02-10');
     let currentDate = new Date(startDate);
 
     while (currentDate >= endDate) {

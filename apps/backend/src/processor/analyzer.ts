@@ -66,6 +66,6 @@ export async function analyze(repo: RepositoryRow): Promise<Payload> {
 
     return stack;
   } finally {
-    // await fs.rm(dir, { recursive: true, force: true });
+    await fs.rm(dir, { recursive: true, force: true });
   }
 }

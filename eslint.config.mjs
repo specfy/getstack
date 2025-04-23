@@ -51,4 +51,11 @@ export default [
       'unicorn/filename-case': 'off',
     },
   },
+  {
+    files: ['apps/frontend/src/components/ui/*.tsx'],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/naming-convention': 'off',
+    },
+  },
 ];
