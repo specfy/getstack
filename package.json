@@ -12,6 +12,7 @@
     "build:ts:watch": "tsc -b tsconfig.build.json -w",
     "build:ts": "tsc -b tsconfig.build.json",
     "build:back": "npm run build --w=apps/backend",
+    "ts-clean": "npx rimraf apps/*/tsconfig.tsbuildinfo packages/*/dist",
     "build": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@h1fra/eslint-config": "1.0.12",
+    "@types/node": "22.14.1",
     "dotenv": "16.5.0",
     "eslint": "9.25.0",
     "typescript": "5.8.3"
