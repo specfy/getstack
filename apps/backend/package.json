@@ -7,7 +7,8 @@
     "dev": "tsx watch --env-file=../../.env src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "migrate": "tsx --env-file=../../.env src/db/migrate.ts"
+    "migrate": "tsx --env-file=../../.env src/db/migrate.ts",
+    "prod:migrate": "node dist/db/migrate.ts"
   },
   "dependencies": {
     "@clickhouse/client": "1.11.1",
