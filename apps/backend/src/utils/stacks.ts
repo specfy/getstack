@@ -1,4 +1,4 @@
-import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated';
+import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 
 import type { AllowedKeys, TechItem } from '@specfy/stack-analyser';
 

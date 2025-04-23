@@ -10,7 +10,7 @@ import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
 import { logger as defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
-import type { TechnologyInsert } from '../db/types';
+import type { TechnologyInsert } from '../db/types.js';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 
 const logger = defaultLogger.child({ svc: 'cron.analyze' });

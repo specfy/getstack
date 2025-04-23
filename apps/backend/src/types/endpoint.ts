@@ -1,4 +1,4 @@
-import type { Endpoint } from './api';
+import type { Endpoint } from './api.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 
 export interface TechnologyByCategoryByWeekWithTrend {

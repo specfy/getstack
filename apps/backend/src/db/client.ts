@@ -5,7 +5,8 @@ import { Kysely } from 'kysely';
 
 import { envs } from '../utils/env.js';
 
-import type { Database } from './types';
+import type { Database } from './types.js';
+import type { Dialect } from 'kysely';
 
 // const { Pool } = pg;
 
@@ -22,7 +23,7 @@ export const db = new Kysely<Database>({
     options: {
       url: envs.DATABASE_URL,
     },
-  }),
+  }) as unknown as Dialect,
 });
 
 export const clickHouse = createClient({

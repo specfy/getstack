@@ -4,7 +4,7 @@
       "es2024",
       "ESNext"
     ],
-    "module": "ES2022",
+    "module": "NodeNext",
     "target": "es2024",
     "ignoreDeprecations": "5.0",
     "declaration": true,
@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": true,

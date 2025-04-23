@@ -1,4 +1,4 @@
-import type { ApiError } from '../types/api';
+import type { ApiError } from '../types/api.js';
 import type { FastifyReply } from 'fastify';
 
 export async function notFound(res: FastifyReply, message?: string): Promise<void> {

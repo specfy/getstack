@@ -7,7 +7,7 @@ import path from 'node:path';
 import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
 import degit from 'degit';
 
-import type { RepositoryRow } from '../db/types';
+import type { RepositoryRow } from '../db/types.js';
 import type { Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';
 
