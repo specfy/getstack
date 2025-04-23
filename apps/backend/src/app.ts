@@ -22,7 +22,7 @@ export default async function createApp(
 
   await f.register(cors, {
     // Important for cookies to work
-    origin: ['http://localhost:3000', 'http://localhost:5173', 'https://localhost:5173'],
+    origin: ['http://localhost:3000', 'http://localhost:5173', 'https://*.onrender.com'],
     credentials: true,
     exposedHeaders: ['set-cookie'],
   });
