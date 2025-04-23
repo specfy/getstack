@@ -98,12 +98,17 @@ const Index: React.FC = () => {
                   </div>
                   <h4 className="text-md font-semibold">{def.name}</h4>
                 </div>
-                <ul className="flex flex-col gap-2 ml-1">
+                <ul className="flex flex-col gap-3 ml-1">
                   {rows.map((row, rowIndex) => {
                     return (
                       <li key={rowIndex}>
                         <div className="flex justify-between text-xs">
-                          <div>{supportedIndexed[row.tech].name}</div>
+                          <div className="flex gap-2 items-center">
+                            <div className="w-4">
+                              <img src={`/favicons/${row.tech}.webp`} />
+                            </div>
+                            {supportedIndexed[row.tech].name}
+                          </div>
                           <div className="flex gap-1 items-center">
                             {row.previous_hits > 0 && (
                               <Badge

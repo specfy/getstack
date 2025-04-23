@@ -26,7 +26,7 @@ export async function cronListGithubRepositories(): Promise<void> {
 export async function cronAnalyzeGithubRepositories(): Promise<void> {
   while (true) {
     const beforeDate = new Date();
-    beforeDate.setDate(beforeDate.getDate() - 0);
+    beforeDate.setDate(beforeDate.getDate() - 6);
 
     const repo = await getRepositoryToAnalyze({ beforeDate });
     if (!repo) {
