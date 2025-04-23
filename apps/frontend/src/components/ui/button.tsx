@@ -47,6 +47,7 @@ function Button({
   const Comp = asChild ? Slot : 'button';
 
   return (
+    // @ts-expect-error incompatible react types
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}

@@ -35,14 +35,16 @@ const stackOrder: TechType[] = [
   // Events
   'monitoring',
   'analytics',
-  'messaging',
+  'api',
 
   // Other
   'ci',
-  'api',
   'app',
   'etl',
   'network',
+
+  // Deprecated
+  'messaging',
 ];
 
 const Index: React.FC = () => {

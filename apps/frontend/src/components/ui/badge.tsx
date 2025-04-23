@@ -34,6 +34,7 @@ function Badge({
   const Comp = asChild ? Slot : 'span';
 
   return (
+    // @ts-expect-error incompatible react types
     <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />
   );
 }

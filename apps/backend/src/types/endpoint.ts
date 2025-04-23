@@ -4,8 +4,8 @@ import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 export interface TechnologyByCategoryByWeekWithTrend {
   category: TechType;
   tech: AllowedKeys;
-  current_hits: string;
-  previous_hits: string;
+  current_hits: number;
+  previous_hits: number;
   trend: number;
   percent_change: number;
 }
