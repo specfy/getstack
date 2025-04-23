@@ -5,11 +5,10 @@ import path from 'node:path';
 import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
 import degit from 'degit';
 
-import { logger } from '../utils/logger';
-
 import type { RepositoryRow } from '../db/types';
 import type { Payload } from '@specfy/stack-analyser';
 import '@specfy/stack-analyser/dist/autoload';
+import type { Logger } from 'pino';
 
 async function cloneRepository({
   fullName,
@@ -34,7 +33,7 @@ async function cloneRepository({
   }
 }
 
-export async function analyze(repo: RepositoryRow): Promise<Payload> {
+export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payload> {
   const fullName = `${repo.org}/${repo.name}`;
   const dir = path.join(os.tmpdir(), 'stackhub', repo.org, repo.name);
 

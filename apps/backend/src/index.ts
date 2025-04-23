@@ -3,9 +3,11 @@ import closeWithGrace from 'close-with-grace';
 import Fastify from 'fastify';
 
 import createApp, { options } from './app.js';
-import { cronAnalyzeGithubRepositories, cronListGithubRepositories } from './processor/index.js';
 import { envs } from './utils/env.js';
 import { logger } from './utils/logger.js';
+
+import './processor/cronAnalyzer.js';
+import './processor/cronList.js';
 
 // Instantiate Fastify with some config
 const app = Fastify(options);
@@ -48,9 +50,6 @@ void app.listen({ host: '0.0.0.0', port: envs.PORT }, (err) => {
   }
 
   logger.info(`Started http://localhost:${envs.PORT}`);
-
-  void cronListGithubRepositories();
-  void cronAnalyzeGithubRepositories();
 });
 
 logger.info('Starting...');

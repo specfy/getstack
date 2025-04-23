@@ -3,7 +3,7 @@ import { ClickhouseDialect } from '@founderpath/kysely-clickhouse';
 import { Kysely } from 'kysely';
 // import pg from 'pg';
 
-// import { envs } from '../utils/env';
+import { envs } from '../utils/env';
 
 import type { Database } from './types';
 
@@ -20,11 +20,11 @@ import type { Database } from './types';
 export const db = new Kysely<Database>({
   dialect: new ClickhouseDialect({
     options: {
-      url: 'http://default:securepassword@localhost:8123',
+      url: envs.DATABASE_URL,
     },
   }),
 });
 
 export const clickHouse = createClient({
-  url: 'http://default:securepassword@localhost:8123',
+  url: envs.DATABASE_URL,
 });

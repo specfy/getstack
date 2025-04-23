@@ -3,22 +3,22 @@ import { Octokit } from '@octokit/rest';
 import { upsertRepository } from '../models/repositories.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
-import { logger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
 import type { RestEndpointMethodTypes } from '@octokit/rest';
+import type { Logger } from 'pino';
 
 const MIN_STARS = 1000;
 const PER_PAGE = 100;
 
-export async function listGithubRepositories(): Promise<void> {
+export async function listGithubRepositories(logger: Logger): Promise<void> {
   const octokit = new Octokit({
     auth: envs.GITHUB_TOKEN,
   });
 
   try {
-    const startDate = new Date('2025-02-18');
-    const endDate = new Date('2024-02-10');
+    const startDate = new Date();
+    const endDate = new Date('2010-01-01');
     let currentDate = new Date(startDate);
 
     while (currentDate >= endDate) {

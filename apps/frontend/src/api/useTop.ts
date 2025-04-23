@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { API_HOSTNAME } from './api';
+import { API_URL } from './api';
 
 import type { APIGetTop } from '../../../backend/src/types/endpoint';
 
@@ -9,7 +9,7 @@ export const useTop = () => {
   return useQuery<APIGetTop['Success'], Error>({
     queryKey: ['getTop'],
     queryFn: async () => {
-      const response = await fetch(`${API_HOSTNAME}/1/top`, {
+      const response = await fetch(`${API_URL}/1/top`, {
         method: 'GET',
       });
 
