@@ -7,7 +7,7 @@ const logger = defaultLogger.child({ svc: 'cron.analyze' });
 
 // TODO: kill this on exit
 export const cronListGithubRepositories = CronJob.from({
-  cronTime: '0 0 * * *',
+  cronTime: '0 * * * *',
   onTick: async () => {
     logger.info('Starting list cron...');
 

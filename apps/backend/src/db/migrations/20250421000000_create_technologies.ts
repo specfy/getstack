@@ -6,7 +6,6 @@ import type { Kysely } from 'kysely';
 export async function up(db: Kysely<Database>): Promise<void> {
   await sql`
     CREATE TABLE technologies (
-      id UUID DEFAULT generateUUIDv7(),
       org LowCardinality(String),
       name LowCardinality(String),
       tech LowCardinality(String),

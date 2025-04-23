@@ -25,7 +25,6 @@ export type RepositoryInsert = Insertable<RepositoriesTable>;
 export type RepositoryUpdate = Updateable<RepositoriesTable>;
 
 export interface TechnologiesTable {
-  id: ColumnType<string, never, never>;
   org: string;
   name: string;
   tech: string;
