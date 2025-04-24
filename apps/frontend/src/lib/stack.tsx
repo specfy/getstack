@@ -1,5 +1,6 @@
 import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated';
 import {
+  IconAppWindow,
   IconApps,
   IconBellRinging,
   IconBinaryTree2,
@@ -46,6 +47,8 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
   saas: { name: 'SaaS', icon: IconBrowser },
   storage: { name: 'Storage', icon: IconPackages },
   tool: { name: 'Tool', icon: IconTool },
+  test: { name: 'Test Library', icon: IconTestPipe },
+  ui: { name: 'UI Library', icon: IconAppWindow },
 };
 
 export const supportedArray = listTech;
