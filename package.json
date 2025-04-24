@@ -17,7 +17,8 @@
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:up": "docker compose up -d",
-    "db:migrate": "npm run migrate --w=apps/backend"
+    "db:migrate": "npm run migrate --w=apps/backend",
+    "prod:start": "node apps/backend/dist/db/migrate.js && node apps/backend/dist/index.js"
   },
   "devDependencies": {
     "@h1fra/eslint-config": "1.0.12",

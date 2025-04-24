@@ -1,0 +1,25 @@
+node_modules
+**/node_modules
+npm-debug.log
+
+# Private keys can be in there
+**/.env
+
+.git
+.github/
+.husky/
+docker-compose.yaml
+**/nango-data
+dev/
+docs-v2/
+**/tsconfig.tsbuildinfo
+integration-templates
+**/tests/
+assets/
+vite*.ts
+packages/cli/
+scripts/
+cliff.toml
+.DS_Store
+**/*.unit.test.ts
+**/*.integration.test.ts
