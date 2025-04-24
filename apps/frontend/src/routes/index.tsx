@@ -37,10 +37,14 @@ const stackOrder: TechType[] = [
   'analytics',
   'api',
 
-  // Other
+  // CI and UI
   'ci',
-  'app',
+  'test',
+  'ui',
+
+  // Other app
   'etl',
+  'app',
   'network',
 
   // Deprecated
