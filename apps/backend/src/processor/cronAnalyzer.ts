@@ -17,13 +17,14 @@ const logger = defaultLogger.child({ svc: 'cron.analyze' });
 
 // TODO: kill this on exit
 export const cronAnalyzeGithubRepositories = CronJob.from({
-  cronTime: '0 * * * *',
+  cronTime: '*/15 * * * *',
   start: true,
   onTick: async () => {
     logger.info('Starting analyze cron...');
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    while (true) {
+    const end = Date.now() + 14 * 60 * 1000;
+
+    while (Date.now() < end) {
       const beforeDate = new Date();
       beforeDate.setDate(beforeDate.getDate() - 6);
 

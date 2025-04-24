@@ -44,10 +44,17 @@ export interface TechnologiesWeeklyTable {
 }
 export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;
 
+export interface ProgressTable {
+  date_week: string;
+  progress: string;
+}
+export type ProgressTableRow = Selectable<ProgressTable>;
+
 export interface Database {
   repositories: RepositoriesTable;
   technologies: TechnologiesTable;
   technologies_weekly: TechnologiesWeeklyTable;
+  progress: ProgressTable;
 }
 
 export type TX = Transaction<Database>;

@@ -1,18 +1,16 @@
 import { pino } from 'pino';
 
-import { isProd } from './env.js';
-
-import type { Level, LoggerOptions } from 'pino';
+import type { LoggerOptions } from 'pino';
 
 // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#LogSeverity
-const levelToSeverity: Record<string, string> = {
-  trace: 'DEBUG',
-  debug: 'DEBUG',
-  info: 'INFO',
-  warn: 'WARNING',
-  error: 'ERROR',
-  fatal: 'CRITICAL',
-};
+// const levelToSeverity: Record<string, string> = {
+//   trace: 'DEBUG',
+//   debug: 'DEBUG',
+//   info: 'INFO',
+//   warn: 'WARNING',
+//   error: 'ERROR',
+//   fatal: 'CRITICAL',
+// };
 
 export const options: LoggerOptions = {
   level: 'info',
@@ -20,7 +18,7 @@ export const options: LoggerOptions = {
   base: {
     svc: 'api',
   },
-  formatters: isProd
+  /*isProd
     ? {
         level(label) {
           const pinoLevel = label as Level;
@@ -37,11 +35,12 @@ export const options: LoggerOptions = {
           return { severity, ...typeProp };
         },
       }
-    : {
-        level(label) {
-          return { level: label };
-        },
-      },
+    : */
+  formatters: {
+    level(label) {
+      return { level: label };
+    },
+  },
   hooks: {
     // By default pino does Sprintf instead we merge objects.
     logMethod(args, method) {
@@ -81,9 +80,9 @@ const pretty = {
     ignore: 'svc,serviceContext,message',
   },
 };
-if (!isProd) {
-  options.transport = pretty;
-}
+// if (!isProd) {
+options.transport = pretty;
+// }
 
 export const logger = pino(options);
 export type Logger = typeof logger;

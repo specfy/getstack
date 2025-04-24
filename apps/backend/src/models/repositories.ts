@@ -16,7 +16,7 @@ export async function updateRepository(id: string, input: RepositoryUpdate): Pro
       updated_at: formatToClickhouseDatetime(new Date()),
     })
     .where('id', '=', id)
-    .executeTakeFirstOrThrow();
+    .execute();
 }
 
 export async function findRepositoryById(id: string): Promise<RepositoryRow | undefined> {
@@ -45,15 +45,6 @@ export async function getRepositoryToAnalyze({
   });
   const json = await res.json();
   return json.data[0] as unknown as RepositoryRow | undefined;
-  // const q = sql`SELECT * FROM repositories`;
-  // const q = db
-  //   .selectFrom('repositories')
-  //   .selectAll()
-  //   .where('last_fetched_at', '<', beforeDate)
-  //   .limit(1);
-
-  // const res = await q.execute(db);
-  // return res.rows[0] === undefined ? undefined : (res.rows[0] as unknown as RepositoryRow);
 }
 
 export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
@@ -72,13 +63,7 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
         updated_at = '${formatToClickhouseDatetime(new Date())}'
         WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
     });
-    // const q = db.updateTable('repositories').set({
-    //   stars: repo.stars,
-    //   updated_at: formatToClickhouseDatetime(new Date()),
-    // });
-    // console.log(q.compile());
 
-    // await q.execute();
     return;
   }
 
