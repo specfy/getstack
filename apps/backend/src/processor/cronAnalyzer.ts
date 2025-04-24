@@ -19,6 +19,7 @@ const logger = defaultLogger.child({ svc: 'cron.analyze' });
 export const cronAnalyzeGithubRepositories = CronJob.from({
   cronTime: '*/15 * * * *',
   start: true,
+  waitForCompletion: true,
   onTick: async () => {
     logger.info('Starting analyze cron...');
 
@@ -89,5 +90,4 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
 
     logger.info('✅ done');
   },
-  waitForCompletion: true,
 });

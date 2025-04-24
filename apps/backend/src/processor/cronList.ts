@@ -10,7 +10,7 @@ import { wait } from '../utils/wait.js';
 
 import type { RestEndpointMethodTypes } from '@octokit/rest';
 
-const logger = defaultLogger.child({ svc: 'cron.analyze' });
+const logger = defaultLogger.child({ svc: 'cron.list' });
 
 const MIN_STARS = 1000;
 const PER_PAGE = 100;
@@ -18,6 +18,8 @@ const PER_PAGE = 100;
 // TODO: kill this on exit
 export const cronListGithubRepositories = CronJob.from({
   cronTime: '*/10 * * * *',
+  waitForCompletion: true,
+  start: true,
   onTick: async () => {
     logger.info('Starting list cron...');
 
@@ -53,9 +55,6 @@ export const cronListGithubRepositories = CronJob.from({
 
     logger.info('✅ done');
   },
-  waitForCompletion: true,
-  start: true,
-  runOnInit: true,
 });
 
 async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> {
