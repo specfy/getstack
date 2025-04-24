@@ -54,8 +54,6 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
           }
         }
 
-        techs.delete('css');
-
         const dateWeek = formatToYearWeek(new Date());
 
         const rows: TechnologyInsert[] = [];

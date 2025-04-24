@@ -556,6 +556,9 @@ const extendedInfo: Record<AllowedKeys, { website?: string; github?: string; ico
   infisical: { website: 'https://infisical.com/' },
   mintlify: { website: 'https://mintlify.com/' },
   vitest: { website: 'https://vitest.dev/' },
+  glsl: { website: 'https://www.khronos.org/opengl/wiki/Main_Page' },
+  radixui: { website: 'https://www.radix-ui.com/' },
+  tiptap: { website: 'https://tiptap.dev/' },
 };
 
 const extendedListTech = listTech.map((tech) => {
