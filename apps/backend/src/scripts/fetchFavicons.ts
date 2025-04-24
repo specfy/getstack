@@ -3,6 +3,9 @@ import path from 'node:path';
 
 import { extendedListTech } from '../utils/stacks.js';
 
+/**
+ * npx tsx apps/backend/src/scripts/fetchFavicons.ts
+ */
 const fetchFavicons = async () => {
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
 
@@ -15,6 +18,15 @@ const fetchFavicons = async () => {
     }
 
     try {
+      const fileName = `${tech.key}.webp`;
+      const filePath = path.join(outputDir, fileName);
+
+      try {
+        await fs.stat(filePath);
+        continue;
+      } catch {
+        // not exists
+      }
       const faviconUrl = new URL(
         `https://img.logo.dev/${new URL(tech.website).hostname}?token=pk_e8E7K3hvTQ-k3tccmMtKig&size=64&retina=true&format=webp`
       );
@@ -26,9 +38,6 @@ const fetchFavicons = async () => {
         console.error(`Failed to fetch favicon for ${tech.key}: HTTP ${response.status}`);
         continue;
       }
-
-      const fileName = `${tech.key}.webp`;
-      const filePath = path.join(outputDir, fileName);
 
       await fs.writeFile(filePath, Buffer.from(await response.arrayBuffer()));
       console.log(`Favicon saved for ${tech.key} at ${filePath}`);

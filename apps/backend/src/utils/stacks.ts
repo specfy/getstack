@@ -135,6 +135,7 @@ const extendedInfo: Record<AllowedKeys, { website?: string; github?: string; ico
   'cloudflare.workers': { website: 'https://workers.cloudflare.com/' },
   cloudflare: { website: 'https://www.cloudflare.com/' },
   cockroachdb: { website: 'https://www.cockroachlabs.com/', github: 'cockroachdb/cockroach' },
+  codeclimate: { website: 'https://codeclimate.com/' },
   codecov: { website: 'https://about.codecov.io/' },
   codesandboxci: { website: 'https://codesandbox.io/ci' },
   cohereai: { website: 'https://cohere.com/' },
@@ -239,6 +240,7 @@ const extendedInfo: Record<AllowedKeys, { website?: string; github?: string; ico
   'github.pages': { website: 'https://pages.github.com/', github: 'github/pages-gem' },
   github: { website: 'https://github.com/', github: 'github/roadmap' }, // Using roadmap as a placeholder public repo
   'gitlab.ci': { website: 'https://docs.gitlab.com/ee/ci/' },
+  'github.codeql': { website: 'https://codeql.github.com/' },
   gitlab: { website: 'https://about.gitlab.com/', github: 'gitlab-org/gitlab' },
   goacmelego: { website: 'https://go-acme.github.io/lego/', github: 'go-acme/lego' },
   golang: { website: 'https://go.dev/', github: 'golang/go' },
@@ -548,6 +550,12 @@ const extendedInfo: Record<AllowedKeys, { website?: string; github?: string; ico
   zookeeper: { website: 'https://zookeeper.apache.org/', github: 'apache/zookeeper' },
   zoom: { website: 'https://zoom.us/' },
   zuora: { website: 'https://www.zuora.com/' },
+
+  deepsource: { website: 'https://deepsource.com' },
+  depotdev: { website: 'https://depot.dev' },
+  infisical: { website: 'https://infisical.com/' },
+  mintlify: { website: 'https://mintlify.com/' },
+  vitest: { website: 'https://vitest.dev/' },
 };
 
 const extendedListTech = listTech.map((tech) => {

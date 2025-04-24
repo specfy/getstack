@@ -12,7 +12,7 @@
   "devDependencies": {
     "@radix-ui/react-navigation-menu": "1.2.9",
     "@radix-ui/react-slot": "1.2.0",
-    "@specfy/stack-analyser": "1.9.3",
+    "@specfy/stack-analyser": "1.10.1",
     "@tabler/icons-react": "3.31.0",
     "@tailwindcss/vite": "4.1.4",
     "@tanstack/react-query": "5.74.4",
