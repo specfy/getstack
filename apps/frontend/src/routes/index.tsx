@@ -27,20 +27,20 @@ const stackOrder: TechType[] = [
   'storage',
   'hosting',
 
-  // Other SaaS+TOol
+  // UI
   'auth',
-  'notification',
-  'queue',
-
-  // Events
-  'monitoring',
+  'ui',
   'analytics',
-  'api',
 
-  // CI and UI
+  // CI
   'ci',
   'test',
-  'ui',
+  'monitoring',
+
+  // Events
+  'notification',
+  'queue',
+  'api',
 
   // Other app
   'etl',
