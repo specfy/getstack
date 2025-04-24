@@ -9,15 +9,12 @@ npm-debug.log
 .github/
 .husky/
 docker-compose.yaml
-**/nango-data
 dev/
-docs-v2/
 **/tsconfig.tsbuildinfo
 integration-templates
 **/tests/
 assets/
 vite*.ts
-packages/cli/
 scripts/
 cliff.toml
 .DS_Store
