@@ -108,7 +108,8 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
 function filter(
   repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
 ): boolean {
-  if (repo.name.toLocaleLowerCase().startsWith('awesome')) {
+  const nameLower = repo.name.toLocaleLowerCase();
+  if (denylistName.some((deny) => nameLower.includes(deny))) {
     return true;
   }
   if (repo.stargazers_count <= MIN_STARS) {
@@ -135,3 +136,15 @@ function filter(
 
   return false;
 }
+
+const denylistName = [
+  'awesome',
+  '-notes',
+  'bootcamp',
+  'zoomcamp',
+  'tutorials',
+  'cheatsheet',
+  'interview-questions',
+  'guidelines',
+  '-guide',
+];
