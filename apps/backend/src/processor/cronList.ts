@@ -127,5 +127,11 @@ function filter(
     return true;
   }
 
+  const dateThreshold = new Date();
+  dateThreshold.setFullYear(dateThreshold.getFullYear() - 5);
+  if (new Date(repo.pushed_at).getTime() < dateThreshold.getTime()) {
+    return true;
+  }
+
   return false;
 }

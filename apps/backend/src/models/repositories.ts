@@ -8,6 +8,20 @@ export async function createRepository(input: RepositoryInsert): Promise<Reposit
   return await db.insertInto('repositories').values(input).returningAll().executeTakeFirstOrThrow();
 }
 
+export async function getRepository(repo: {
+  org: string;
+  name: string;
+}): Promise<RepositoryRow | undefined> {
+  const row = await db
+    .selectFrom('repositories')
+    .selectAll()
+    .where('org', '=', repo.org)
+    .where('name', '=', repo.name)
+    .executeTakeFirst();
+
+  return row;
+}
+
 export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {
   await db
     .updateTable('repositories')
@@ -48,19 +62,14 @@ export async function getRepositoryToAnalyze({
 }
 
 export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
-  const row = await db
-    .selectFrom('repositories')
-    .selectAll()
-    .where('org', '=', repo.org)
-    .where('name', '=', repo.name)
-    .executeTakeFirst();
+  const row = await getRepository(repo);
 
   if (row) {
     await clickHouse.exec({
       query: `ALTER TABLE "repositories"
       UPDATE
         "stars" = ${repo.stars},
-        "ignored" = ${repo.ignored},
+        "ignored" = ${row.ignored === 1 ? 1 : repo.ignored},
         updated_at = '${formatToClickhouseDatetime(new Date())}'
         WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
     });
