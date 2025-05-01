@@ -18,7 +18,7 @@
     "@founderpath/kysely-clickhouse": "1.7.0",
     "close-with-grace": "2.2.0",
     "cron": "4.3.0",
-    "degit": "2.8.4",
+    "execa": "9.5.2",
     "fastify": "5.3.2",
     "kysely": "0.28.1",
     "octokit": "4.1.3",

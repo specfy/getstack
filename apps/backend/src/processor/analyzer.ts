@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
 import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
-import degit from 'degit';
+import { $ } from 'execa';
 
 import { updateRepository } from '../models/repositories.js';
 import { createTechnologies } from '../models/technologies.js';
@@ -25,18 +25,12 @@ async function cloneRepository({
   branch: string;
   dir: string;
 }): Promise<void> {
-  try {
-    const emitter = degit(`${fullName}#${branch}`, {
-      mode: 'tar',
-      cache: false,
-      force: true,
-      verbose: true,
-    });
+  const res =
+    await $`git clone --branch ${branch} https://github.com/${fullName}.git --depth 2 ${dir}`;
 
-    await emitter.clone(dir);
-  } catch (err) {
-    console.error(err);
-    throw new Error(`Error cloning`, { cause: err });
+  if (res.exitCode !== 0) {
+    console.error(res.stderr);
+    throw new Error(`Error cloning`, { cause: res.stderr });
   }
 }
 
