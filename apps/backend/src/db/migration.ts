@@ -11,7 +11,7 @@ const migratorDB = new Migrator({
   provider: new FileMigrationProvider({
     fs,
     path,
-    migrationFolder: path.join(import.meta.dirname, './migrationsDB'),
+    migrationFolder: path.join(import.meta.dirname, './migrationsDb'),
   }),
 });
 const migratorClickhouse = new Migrator({
