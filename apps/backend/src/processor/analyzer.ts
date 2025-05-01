@@ -30,6 +30,7 @@ async function cloneRepository({
 
     await emitter.clone(dir);
   } catch (err) {
+    console.error(err);
     throw new Error(`Error cloning`, { cause: err });
   }
 }

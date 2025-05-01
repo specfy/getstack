@@ -10,6 +10,7 @@ const schema = z.object({
   // Global
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.enum(['production', 'development', 'test']).default('development'),
+  IS_GCP: bool,
 
   // DB
   DATABASE_URL: z.string().url(),
