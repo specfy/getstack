@@ -147,4 +147,7 @@ const denylistName = [
   'interview-questions',
   'guidelines',
   '-guide',
+  '100-days',
+  '101',
+  'questions',
 ];
