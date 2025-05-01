@@ -116,20 +116,25 @@ const Index: React.FC = () => {
                             {supportedIndexed[row.tech].name}
                           </div>
                           <div className="flex gap-1 items-center">
-                            {row.previous_hits > 0 && (
-                              <Badge
-                                variant="outline"
-                                className={cn(
-                                  'flex gap-1 rounded-lg text-tiny',
-                                  row.percent_change > 0
-                                    ? 'border-lime-600 text-lime-600'
-                                    : 'border-red-400 text-red-400'
-                                )}
-                              >
-                                {row.percent_change > 0 ? <IconTrendingUp /> : <IconTrendingDown />}{' '}
-                                {row.percent_change}%
-                              </Badge>
-                            )}
+                            {row.previous_hits > 0 &&
+                              (row.percent_change > 2 || row.percent_change < -2) && (
+                                <Badge
+                                  variant="outline"
+                                  className={cn(
+                                    'flex gap-1 rounded-lg text-tiny',
+                                    row.percent_change > 0
+                                      ? 'border-lime-600 text-lime-600'
+                                      : 'border-red-400 text-red-400'
+                                  )}
+                                >
+                                  {row.percent_change > 0 ? (
+                                    <IconTrendingUp />
+                                  ) : (
+                                    <IconTrendingDown />
+                                  )}{' '}
+                                  {row.percent_change}%
+                                </Badge>
+                              )}
                             <div className="font-semibold w-8 text-right">{row.current_hits}</div>
                           </div>
                         </div>
