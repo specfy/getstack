@@ -14,6 +14,7 @@ export interface RepositoriesTable {
   stars: number;
   url: string;
   ignored: number;
+  ignored_reason: string;
   errored: number;
   created_at: CreatedAt;
   updated_at: UpdatedAt;

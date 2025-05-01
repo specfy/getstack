@@ -86,6 +86,7 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
       logger.info(`Processing ${repo.id} - ${repo.full_name}`);
 
       const [org, name] = repo.full_name.split('/') as [string, string];
+      const filtered = filter(repo);
       await upsertRepository({
         github_id: String(repo.id),
         org,
@@ -93,7 +94,8 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
         branch: repo.default_branch,
         stars: repo.stargazers_count,
         url: repo.html_url,
-        ignored: filter(repo) ? 1 : 0,
+        ignored: filtered === false ? 0 : 1,
+        ignored_reason: filtered === false ? 'ok' : filtered,
         errored: 0,
         last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
       });
@@ -105,33 +107,37 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
   }
 }
 
+const oneGb = 1_000_000;
 function filter(
   repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
-): boolean {
+): false | string {
   const nameLower = repo.name.toLocaleLowerCase();
   if (denylistName.some((deny) => nameLower.includes(deny))) {
-    return true;
+    return 'deny';
   }
   if (repo.stargazers_count <= MIN_STARS) {
-    return true;
+    return 'not_popular';
   }
   if (repo.private) {
-    return true;
+    return 'private';
   }
   if (repo.fork) {
-    return true;
+    return 'fork';
   }
   if (repo.archived) {
-    return true;
+    return 'archived';
   }
   if (repo.is_template) {
-    return true;
+    return 'template';
+  }
+  if (repo.size >= oneGb) {
+    return 'too_big';
   }
 
   const dateThreshold = new Date();
   dateThreshold.setFullYear(dateThreshold.getFullYear() - 3);
   if (new Date(repo.pushed_at).getTime() < dateThreshold.getTime()) {
-    return true;
+    return 'too_old';
   }
 
   return false;
