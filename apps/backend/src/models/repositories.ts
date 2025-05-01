@@ -60,6 +60,7 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
       query: `ALTER TABLE "repositories"
       UPDATE
         "stars" = ${repo.stars},
+        "ignored" = ${repo.ignored},
         updated_at = '${formatToClickhouseDatetime(new Date())}'
         WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
     });

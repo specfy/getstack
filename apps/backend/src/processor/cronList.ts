@@ -19,7 +19,7 @@ const PER_PAGE = 100;
 export const cronListGithubRepositories = CronJob.from({
   cronTime: '*/10 * * * *',
   waitForCompletion: true,
-  start: true,
+  start: envs.CRON_LIST,
   onTick: async () => {
     logger.info('Starting list cron...');
 
@@ -84,9 +84,6 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
 
     for (const repo of data.items) {
       logger.info(`Processing ${repo.id} - ${repo.full_name}`);
-      if (filter(repo)) {
-        continue;
-      }
 
       const [org, name] = repo.full_name.split('/') as [string, string];
       await upsertRepository({
@@ -96,7 +93,7 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
         branch: repo.default_branch,
         stars: repo.stargazers_count,
         url: repo.html_url,
-        ignored: 0,
+        ignored: filter(repo) ? 1 : 0,
         errored: 0,
         last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
       });

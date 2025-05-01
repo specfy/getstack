@@ -7,6 +7,7 @@ import { analyze } from './analyzer.js';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
 import { createTechnologies } from '../models/technologies.js';
 import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
+import { envs } from '../utils/env.js';
 import { logger as defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
@@ -18,7 +19,7 @@ const logger = defaultLogger.child({ svc: 'cron.analyze' });
 // TODO: kill this on exit
 export const cronAnalyzeGithubRepositories = CronJob.from({
   cronTime: '*/15 * * * *',
-  start: true,
+  start: envs.CRON_ANALYZE,
   waitForCompletion: true,
   onTick: async () => {
     logger.info('Starting analyze cron...');
