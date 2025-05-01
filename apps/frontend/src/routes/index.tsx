@@ -1,4 +1,4 @@
-import { IconTrendingUp } from '@tabler/icons-react';
+import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
@@ -123,10 +123,11 @@ const Index: React.FC = () => {
                                   'flex gap-1 rounded-lg text-tiny',
                                   row.percent_change > 0
                                     ? 'border-lime-600 text-lime-600'
-                                    : 'border-red-400'
+                                    : 'border-red-400 text-red-400'
                                 )}
                               >
-                                <IconTrendingUp /> {row.percent_change}%
+                                {row.percent_change > 0 ? <IconTrendingUp /> : <IconTrendingDown />}{' '}
+                                {row.percent_change}%
                               </Badge>
                             )}
                             <div className="font-semibold w-8 text-right">{row.current_hits}</div>
