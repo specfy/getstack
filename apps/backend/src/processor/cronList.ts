@@ -5,7 +5,7 @@ import { getOrInsert, update } from '../models/progress.js';
 import { upsertRepository } from '../models/repositories.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
-import { logger as defaultLogger } from '../utils/logger.js';
+import { defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
 import type { RestEndpointMethodTypes } from '@octokit/rest';

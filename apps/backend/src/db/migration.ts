@@ -4,7 +4,7 @@ import path from 'node:path';
 import { FileMigrationProvider, Migrator } from 'kysely';
 
 import { db } from './client.js';
-import { logger } from '../utils/logger.js';
+import { defaultLogger as logger } from '../utils/logger.js';
 
 const migrator = new Migrator({
   db: db,

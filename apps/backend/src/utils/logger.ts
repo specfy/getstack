@@ -84,5 +84,5 @@ if (envs.IS_GCP && options.formatters) {
   options.transport = pretty;
 }
 
-export const logger = pino(options);
-export type Logger = typeof logger;
+export const defaultLogger = pino(options);
+export type Logger = typeof defaultLogger;

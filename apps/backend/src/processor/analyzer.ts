@@ -5,10 +5,15 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
+import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 import degit from 'degit';
 
-import type { RepositoryRow } from '../db/types.js';
-import type { Payload } from '@specfy/stack-analyser';
+import { updateRepository } from '../models/repositories.js';
+import { createTechnologies } from '../models/technologies.js';
+import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
+
+import type { RepositoryRow, TechnologyInsert } from '../db/types.js';
+import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';
 
 async function cloneRepository({
@@ -69,4 +74,41 @@ export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payl
   } finally {
     await fs.rm(dir, { recursive: true, force: true });
   }
+}
+
+export async function saveAnalysis({
+  repo,
+  res,
+}: {
+  repo: RepositoryRow;
+  res: Payload;
+}): Promise<void> {
+  const techs = new Set<AllowedKeys>(res.techs);
+
+  for (const child of res.childs) {
+    for (const tech of child.techs) {
+      techs.add(tech);
+    }
+  }
+
+  const dateWeek = formatToYearWeek(new Date());
+
+  const rows: TechnologyInsert[] = [];
+  for (const tech of techs) {
+    rows.push({
+      date_week: dateWeek,
+      org: repo.org,
+      name: repo.name,
+      category: listIndexed[tech].type,
+      tech,
+    });
+  }
+
+  if (rows.length > 0) {
+    await createTechnologies(rows);
+  }
+
+  await updateRepository(repo.id, {
+    last_fetched_at: formatToClickhouseDatetime(new Date()),
+  });
 }

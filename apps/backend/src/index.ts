@@ -4,7 +4,7 @@ import Fastify from 'fastify';
 
 import createApp, { options } from './app.js';
 import { envs } from './utils/env.js';
-import { logger } from './utils/logger.js';
+import { defaultLogger as logger } from './utils/logger.js';
 
 import './processor/cronAnalyzer.js';
 import './processor/cronList.js';

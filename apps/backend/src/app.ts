@@ -3,7 +3,7 @@ import cors from '@fastify/cors';
 
 import { routes } from './routes/index.js';
 import { notFound, serverError } from './utils/apiErrors.js';
-import { logger } from './utils/logger.js';
+import { defaultLogger as logger } from './utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginOptions, FastifyServerOptions } from 'fastify';
 
