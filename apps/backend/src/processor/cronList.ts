@@ -108,7 +108,7 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
 function filter(
   repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
 ): boolean {
-  if (repo.name.startsWith('awesome')) {
+  if (repo.name.toLocaleLowerCase().startsWith('awesome')) {
     return true;
   }
   if (repo.stargazers_count <= MIN_STARS) {
@@ -128,7 +128,7 @@ function filter(
   }
 
   const dateThreshold = new Date();
-  dateThreshold.setFullYear(dateThreshold.getFullYear() - 5);
+  dateThreshold.setFullYear(dateThreshold.getFullYear() - 3);
   if (new Date(repo.pushed_at).getTime() < dateThreshold.getTime()) {
     return true;
   }
