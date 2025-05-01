@@ -14,13 +14,13 @@ const logger = defaultLogger.child({ svc: 'cron.analyze' });
 
 // TODO: kill this on exit
 export const cronAnalyzeGithubRepositories = CronJob.from({
-  cronTime: '*/15 * * * *',
+  cronTime: '*/10 * * * *',
   start: envs.CRON_ANALYZE,
   waitForCompletion: true,
   onTick: async () => {
     logger.info('Starting analyze cron...');
 
-    const end = Date.now() + 14 * 60 * 1000;
+    const end = Date.now() + 9 * 60 * 1000;
 
     while (Date.now() < end) {
       const beforeDate = new Date();
@@ -37,8 +37,9 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
       try {
         res = await analyze(repo, logger);
       } catch (err) {
-        logger.error(`Failed to analyze`, err);
+        logger.error(err, `Failed to analyze`);
         await updateRepository(repo.id, { errored: 1 });
+        await wait(1000);
         continue;
       }
 
@@ -46,7 +47,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
         await saveAnalysis({ repo, res });
         logger.info(`Done`);
       } catch (err) {
-        logger.error(`Failed to save`, err);
+        logger.error(err, `Failed to save`);
         await updateRepository(repo.id, { errored: 1 });
       }
 
