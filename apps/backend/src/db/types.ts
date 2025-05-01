@@ -51,10 +51,13 @@ export interface ProgressTable {
 export type ProgressTableRow = Selectable<ProgressTable>;
 
 export interface Database {
+  progress: ProgressTable;
+}
+
+export interface Clickhouse {
   repositories: RepositoriesTable;
   technologies: TechnologiesTable;
   technologies_weekly: TechnologiesWeeklyTable;
-  progress: ProgressTable;
 }
 
 export type TX = Transaction<Database>;

@@ -14,6 +14,7 @@ const schema = z.object({
 
   // DB
   DATABASE_URL: z.string().url(),
+  CLICKHOUSE_DATABASE_URL: z.string().url(),
 
   // Github
   GITHUB_TOKEN: z.string(),

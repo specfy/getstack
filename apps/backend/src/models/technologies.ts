@@ -1,11 +1,11 @@
-import { clickHouse, db } from '../db/client.js';
+import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';
 
 import type { TechnologyInsert, TechnologyWeeklyRow } from '../db/types.js';
 import type { TechnologyByCategoryByWeekWithTrend } from '../types/endpoint.js';
 
 export async function createTechnologies(input: TechnologyInsert[]): Promise<void> {
-  const q = db.insertInto('technologies').values(input);
+  const q = kyselyClickhouse.insertInto('technologies').values(input);
   await q.execute();
 }
 

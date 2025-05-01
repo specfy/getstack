@@ -1,18 +1,22 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { clickHouse, db } from '../db/client.js';
+import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 
 import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db/types.js';
 
 export async function createRepository(input: RepositoryInsert): Promise<RepositoryRow> {
-  return await db.insertInto('repositories').values(input).returningAll().executeTakeFirstOrThrow();
+  return await kyselyClickhouse
+    .insertInto('repositories')
+    .values(input)
+    .returningAll()
+    .executeTakeFirstOrThrow();
 }
 
 export async function getRepository(repo: {
   org: string;
   name: string;
 }): Promise<RepositoryRow | undefined> {
-  const row = await db
+  const row = await kyselyClickhouse
     .selectFrom('repositories')
     .selectAll()
     .where('org', '=', repo.org)
@@ -23,7 +27,7 @@ export async function getRepository(repo: {
 }
 
 export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {
-  await db
+  await kyselyClickhouse
     .updateTable('repositories')
     .set({
       ...input,
@@ -34,14 +38,18 @@ export async function updateRepository(id: string, input: RepositoryUpdate): Pro
 }
 
 export async function findRepositoryById(id: string): Promise<RepositoryRow | undefined> {
-  return await db.selectFrom('repositories').selectAll().where('id', '=', id).executeTakeFirst();
+  return await kyselyClickhouse
+    .selectFrom('repositories')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirst();
 }
 
 export async function findRepositoryByOrgAndName(
   org: string,
   name: string
 ): Promise<RepositoryRow | undefined> {
-  return await db
+  return await kyselyClickhouse
     .selectFrom('repositories')
     .selectAll()
     .where('org', '=', org)
@@ -77,5 +85,5 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
     return;
   }
 
-  await db.insertInto('repositories').values(repo).execute();
+  await kyselyClickhouse.insertInto('repositories').values(repo).execute();
 }

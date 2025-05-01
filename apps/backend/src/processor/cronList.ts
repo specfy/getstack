@@ -150,4 +150,6 @@ const denylistName = [
   '100-days',
   '101',
   'questions',
+  '-course',
+  'exercises',
 ];

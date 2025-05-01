@@ -1,31 +1,31 @@
 import { createClient } from '@clickhouse/client';
 import { ClickhouseDialect } from '@founderpath/kysely-clickhouse';
-import { Kysely } from 'kysely';
-// import pg from 'pg';
+import { Kysely, PostgresDialect } from 'kysely';
+import pg from 'pg';
 
 import { envs } from '../utils/env.js';
 
-import type { Database } from './types.js';
+import type { Clickhouse, Database } from './types.js';
 import type { Dialect } from 'kysely';
 
-// const { Pool } = pg;
-
-// const url = new URL(envs.DATABASE_URL);
-
-// const _dialect = new PostgresDialect({
-//   pool: new Pool({
-//     connectionString: url.href,
-//   }),
-// });
+const Pool = pg.Pool;
 
 export const db = new Kysely<Database>({
+  dialect: new PostgresDialect({
+    pool: new Pool({
+      connectionString: envs.DATABASE_URL,
+    }),
+  }),
+});
+
+export const kyselyClickhouse = new Kysely<Clickhouse>({
   dialect: new ClickhouseDialect({
     options: {
-      url: envs.DATABASE_URL,
+      url: envs.CLICKHOUSE_DATABASE_URL,
     },
   }) as unknown as Dialect,
 });
 
 export const clickHouse = createClient({
-  url: envs.DATABASE_URL,
+  url: envs.CLICKHOUSE_DATABASE_URL,
 });
