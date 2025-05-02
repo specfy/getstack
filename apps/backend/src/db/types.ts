@@ -48,6 +48,8 @@ export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;
 export interface ProgressTable {
   date_week: string;
   progress: string;
+  type: 'analyze' | 'list';
+  done: boolean;
 }
 export type ProgressTableRow = Selectable<ProgressTable>;
 

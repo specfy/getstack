@@ -21,20 +21,23 @@ export const cronListGithubRepositories = CronJob.from({
   waitForCompletion: true,
   start: envs.CRON_LIST,
   onTick: async () => {
-    logger.info('Starting list cron...');
-
     const dateWeek = formatToYearWeek(new Date());
-    const progress = await getOrInsert(dateWeek);
+    const progress = await getOrInsert({ date_week: dateWeek, type: 'list' });
+    if (progress.done) {
+      logger.info('Already done...');
+      return;
+    }
 
+    logger.info('Starting list cron...');
     const octokit = new Octokit({
       auth: envs.GITHUB_TOKEN,
     });
 
     const end = Date.now() + 9 * 60 * 1000;
 
+    const startDate = new Date(progress.progress);
+    const endDate = new Date('2008-01-01');
     try {
-      const startDate = new Date(progress.progress);
-      const endDate = new Date('2010-01-01');
       let currentDate = new Date(startDate);
 
       while (currentDate >= endDate && Date.now() < end) {
@@ -47,12 +50,23 @@ export const cronListGithubRepositories = CronJob.from({
 
         currentDate = nextDate;
 
-        await update(progress.date_week, nextDate);
+        await update({
+          date_week: dateWeek,
+          progress: nextDate.toISOString(),
+          done: false,
+          type: 'list',
+        });
       }
     } catch (err) {
       logger.error('Error fetching repositories from GitHub:', err);
     }
 
+    await update({
+      date_week: dateWeek,
+      progress: endDate.toISOString(),
+      done: true,
+      type: 'list',
+    });
     logger.info('✅ done');
   },
 });
@@ -179,4 +193,7 @@ const denylistName = [
   'codecamp',
   'learn-',
   'handbook',
+  'cheat-sheet',
+  'resources',
+  'examples',
 ];

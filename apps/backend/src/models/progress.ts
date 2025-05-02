@@ -3,27 +3,40 @@ import { formatToDate } from '../utils/date.js';
 
 import type { ProgressTableRow } from '../db/types.js';
 
-export async function getOrInsert(dateWeek: string): Promise<ProgressTableRow> {
+export async function getOrInsert({
+  date_week,
+  type,
+}: Pick<ProgressTableRow, 'date_week' | 'type'>): Promise<ProgressTableRow> {
   const row = await db
     .selectFrom('progress')
     .selectAll()
-    .where('date_week', '=', dateWeek)
+    .where('date_week', '=', date_week)
+    .where('type', '=', type)
     .executeTakeFirst();
 
   if (row) {
     return row;
   }
 
-  const values = { date_week: dateWeek, progress: formatToDate(new Date()) };
-  await db.insertInto('progress').values(values).execute();
+  const res = await db
+    .insertInto('progress')
+    .values({
+      date_week: date_week,
+      progress: formatToDate(new Date()),
+      type,
+      done: false,
+    })
+    .returningAll()
+    .executeTakeFirstOrThrow();
 
-  return values;
+  return res;
 }
 
-export async function update(dateWeek: string, progress: Date): Promise<void> {
+export async function update(row: ProgressTableRow): Promise<void> {
   await db
     .updateTable('progress')
-    .set({ progress: progress.toISOString() })
-    .where('date_week', '=', dateWeek)
+    .set({ progress: row.progress, done: row.done })
+    .where('date_week', '=', row.date_week)
+    .where('type', '=', row.type)
     .execute();
 }

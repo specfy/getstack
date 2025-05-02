@@ -3,7 +3,9 @@ import '@specfy/stack-analyser/dist/autoload.js';
 import { CronJob } from 'cron';
 
 import { analyze, saveAnalysis } from './analyzer.js';
+import { getOrInsert, update } from '../models/progress.js';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
+import { formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
@@ -19,15 +21,21 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
   waitForCompletion: true,
   onTick: async () => {
     logger.info('Starting analyze cron...');
+    const dateWeek = formatToYearWeek(new Date());
+    const progress = await getOrInsert({ date_week: dateWeek, type: 'analyze' });
+    if (progress.done) {
+      logger.info('Already done...');
+      return;
+    }
 
     const end = Date.now() + 9 * 60 * 1000;
 
-    while (Date.now() < end) {
-      const beforeDate = new Date();
-      beforeDate.setDate(beforeDate.getDate() - 6);
+    const beforeDate = new Date(progress.progress);
 
+    while (Date.now() < end) {
       const repo = await getRepositoryToAnalyze({ beforeDate });
       if (!repo) {
+        await update({ ...progress, done: true });
         break;
       }
 
