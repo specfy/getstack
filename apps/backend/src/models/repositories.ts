@@ -63,7 +63,12 @@ export async function getRepositoryToAnalyze({
   beforeDate: Date;
 }): Promise<RepositoryRow | undefined> {
   const res = await clickHouse.query({
-    query: `SELECT * FROM repositories WHERE last_fetched_at < '${beforeDate.toISOString().split('T')[0]}' AND errored = 0 AND ignored = 0 LIMIT 1`,
+    query: `SELECT * FROM repositories
+    WHERE last_fetched_at < '${beforeDate.toISOString().split('T')[0]}'
+      AND errored = 0
+      AND ignored = 0
+      AND stars >= 3000
+      LIMIT 1`,
   });
   const json = await res.json();
   return json.data[0] as unknown as RepositoryRow | undefined;
