@@ -19,6 +19,7 @@ export interface RepositoriesTable {
   created_at: CreatedAt;
   updated_at: UpdatedAt;
   last_fetched_at: Date;
+  size: number;
 }
 
 export type RepositoryRow = Selectable<RepositoriesTable>;

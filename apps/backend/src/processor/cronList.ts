@@ -14,6 +14,7 @@ const logger = defaultLogger.child({ svc: 'cron.list' });
 
 const MIN_STARS = 1000;
 const PER_PAGE = 100;
+const MIN_YEAR = 2;
 
 // TODO: kill this on exit
 export const cronListGithubRepositories = CronJob.from({
@@ -112,6 +113,7 @@ async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> 
         ignored_reason: filtered === false ? 'ok' : filtered,
         errored: 0,
         last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
+        size: repo.size,
       });
     }
 
@@ -149,7 +151,7 @@ function filter(
   }
 
   const dateThreshold = new Date();
-  dateThreshold.setFullYear(dateThreshold.getFullYear() - 3);
+  dateThreshold.setFullYear(dateThreshold.getFullYear() - MIN_YEAR);
   if (new Date(repo.pushed_at).getTime() < dateThreshold.getTime()) {
     return 'too_old';
   }
@@ -196,4 +198,5 @@ const denylistName = [
   'cheat-sheet',
   'resources',
   'examples',
+  '-templates',
 ];

@@ -30,7 +30,7 @@ const stackOrder: TechType[] = [
   // UI
   'auth',
   'ui',
-  'analytics',
+  'payment',
 
   // CI
   'ci',
@@ -38,15 +38,16 @@ const stackOrder: TechType[] = [
   'monitoring',
 
   // Events
+  'analytics',
   'notification',
   'queue',
-  'api',
 
   // Other app
   'etl',
   'app',
-  'network',
+  'api',
 
+  'network',
   // Deprecated
   'messaging',
 ];

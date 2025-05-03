@@ -559,6 +559,22 @@ const extendedInfo: Record<AllowedKeys, { website?: string; github?: string; ico
   glsl: { website: 'https://www.khronos.org/opengl/wiki/Main_Page' },
   radixui: { website: 'https://www.radix-ui.com/' },
   tiptap: { website: 'https://tiptap.dev/' },
+
+  akamai: { website: 'https://www.akamai.com/' },
+  betterauth: { website: 'https://www.better-auth.com/' },
+  browerbase: { website: 'https://www.browserbase.com/' },
+  chargebee: { website: 'https://www.chargebee.com/' },
+  firecrawl: { website: 'https://firecrawl.dev/' },
+  hetzner: { website: 'https://www.hetzner.com/' },
+  hostinger: { website: 'https://www.hostinger.com/' },
+  inngest: { website: 'https://www.inngest.com/' },
+  logtoio: { website: 'https://logto.io/' },
+  metabase: { website: 'https://www.metabase.com/' },
+  n8n: { website: 'https://n8n.io/' },
+  paddle: { website: 'https://www.paddle.com/' },
+  pinecone: { website: 'https://www.pinecone.io/' },
+  pulumi: { website: 'https://www.pulumi.com/' },
+  twentycrm: { website: 'https://twenty.com/' },
 };
 
 const extendedListTech = listTech.map((tech) => {

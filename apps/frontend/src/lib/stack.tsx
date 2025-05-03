@@ -11,6 +11,7 @@ import {
   IconCloud,
   IconCloudDataConnection,
   IconCode,
+  IconCreditCard,
   IconDatabase,
   IconNetwork,
   IconPackages,
@@ -49,6 +50,7 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
   tool: { name: 'Tool', icon: IconTool },
   test: { name: 'Test Library', icon: IconTestPipe },
   ui: { name: 'UI Library', icon: IconAppWindow },
+  payment: { name: 'Payment', icon: IconCreditCard },
 };
 
 export const supportedArray = listTech;
