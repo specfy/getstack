@@ -203,7 +203,7 @@ ORDER BY date_week, position`,
     query_params: { category, week: formatToYearWeek(after) },
   });
 
-  const json = await res.json<TechnologyByCategoryByWeekWithTrend>();
+  const json = await res.json<TechnologyTopN>();
 
   return json.data;
 }

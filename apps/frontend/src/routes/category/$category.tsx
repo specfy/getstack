@@ -22,7 +22,7 @@ const Category: React.FC = () => {
       return [];
     }
 
-    const group: Record<string, BumpSerie<any, unknown>> = {};
+    const group: Record<string, BumpSerie<{ x: number | string; y: null | number }, {}>> = {};
     for (const row of data.data.top) {
       if (!(row.tech in group)) {
         group[row.tech] = { id: row.tech, data: [] };
