@@ -12,8 +12,10 @@ export const Route = createRootRoute({
   component: () => (
     <div className="p-2 flex justify-center">
       <div className="w-full max-w-screen-lg">
-        <div className="flex justify-between items-center">
-          <div className="h-8 flex items-center font-bold text-lg">Stackhub</div>
+        <div className="flex justify-between items-center  mb-10">
+          <Link className="h-8 flex items-center font-light text-lg text-gray-700" to="/">
+            Stackhub
+          </Link>
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>

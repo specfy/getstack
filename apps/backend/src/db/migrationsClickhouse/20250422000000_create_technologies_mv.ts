@@ -10,7 +10,7 @@ export async function up(db: Kysely<Database>): Promise<void> {
       date_week LowCardinality(String),
       category LowCardinality(String),
       tech LowCardinality(String),
-      hits UInt32
+      hits UInt64
     )
     ENGINE = SummingMergeTree
     ORDER BY (date_week, category, tech);

@@ -17,3 +17,18 @@ export type APIGetTop = Endpoint<{
     data: { category: TechType; rows: TechnologyByCategoryByWeekWithTrend[] }[];
   };
 }>;
+
+export interface TechnologyTopN {
+  date_week: string;
+  tech: AllowedKeys;
+  hits: number;
+  position: number;
+}
+export type APIGetCategory = Endpoint<{
+  Path: '/v1/categories/:category';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: { list: TechnologyByCategoryByWeekWithTrend[]; top: TechnologyTopN[] };
+  };
+}>;

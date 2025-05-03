@@ -96,7 +96,7 @@ const Index: React.FC = () => {
               key={index}
               to={`/category/$category`}
               params={{ category }}
-              className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[230px]"
+              className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[250px]"
             >
               <div className="bg-neutral-50 p-4 h-full">
                 <div className="flex items-center mb-6 gap-4">
@@ -109,7 +109,7 @@ const Index: React.FC = () => {
                   {rows.map((row, rowIndex) => {
                     return (
                       <li key={rowIndex}>
-                        <div className="flex justify-between text-xs">
+                        <div className="flex justify-between text-xs h-5">
                           <div className="flex gap-2 items-center">
                             <div className="w-4">
                               <img src={`/favicons/${row.tech}.webp`} />

@@ -12,6 +12,7 @@ export interface ValidationError {
 }
 
 export type ResDefaultErrors =
+  | ApiError<'400_invalid_params'>
   | ApiError<'404_not_found'>
   | ApiError<'500_server_error'>
   | ApiError<'forbidden'>;
