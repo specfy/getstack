@@ -38,9 +38,8 @@ export const cronListGithubRepositories = CronJob.from({
 
     const startDate = new Date(progress.progress);
     const endDate = new Date('2008-01-01');
+    let currentDate = new Date(startDate);
     try {
-      let currentDate = new Date(startDate);
-
       while (currentDate >= endDate && Date.now() < end) {
         const nextDate = new Date(currentDate);
         nextDate.setDate(currentDate.getDate() - 1);
@@ -62,12 +61,14 @@ export const cronListGithubRepositories = CronJob.from({
       logger.error('Error fetching repositories from GitHub:', err);
     }
 
-    await update({
-      date_week: dateWeek,
-      progress: endDate.toISOString(),
-      done: true,
-      type: 'list',
-    });
+    if (currentDate.getTime() <= endDate.getTime()) {
+      await update({
+        date_week: dateWeek,
+        progress: endDate.toISOString(),
+        done: true,
+        type: 'list',
+      });
+    }
     logger.info('✅ done');
   },
 });
