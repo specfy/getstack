@@ -38,7 +38,7 @@ export default [
           jsx: false,
         },
 
-        project: 'apps/frontend/tsconfig.json',
+        project: 'tsconfig.json',
       },
     },
     rules: {
@@ -56,6 +56,7 @@ export default [
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/naming-convention': 'off',
+      'unicorn/filename-case': 'off',
     },
   },
 ];

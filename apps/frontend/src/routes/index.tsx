@@ -6,7 +6,7 @@ import { useTop } from '@/api/useTop';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { stackDefinition, supportedIndexed } from '@/lib/stack';
+import { listIndexed, stackDefinition } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { TechType } from '@specfy/stack-analyser';
@@ -114,7 +114,7 @@ const Index: React.FC = () => {
                             <div className="w-4">
                               <img src={`/favicons/${row.tech}.webp`} />
                             </div>
-                            {supportedIndexed[row.tech].name}
+                            {listIndexed[row.tech].name}
                           </div>
                           <div className="flex gap-1 items-center">
                             {row.previous_hits > 0 &&

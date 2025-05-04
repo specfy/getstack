@@ -200,4 +200,7 @@ const denylistName = [
   'resources',
   'examples',
   '-templates',
+  '-tips',
+  '-tricks',
+  'chinese',
 ];

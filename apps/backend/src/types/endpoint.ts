@@ -21,8 +21,8 @@ export type APIGetTop = Endpoint<{
 export interface TechnologyTopN {
   date_week: string;
   tech: AllowedKeys;
-  hits: number;
-  position: number;
+  hits: string;
+  position: string;
 }
 export type APIGetCategory = Endpoint<{
   Path: '/v1/categories/:category';

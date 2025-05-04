@@ -1,4 +1,3 @@
-import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated';
 import {
   IconAppWindow,
   IconApps,
@@ -24,7 +23,7 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 
-import type { TechItem, TechType } from '@specfy/stack-analyser';
+import type { TechType } from '@specfy/stack-analyser';
 import type { Icon } from '@tabler/icons-react';
 
 export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
@@ -53,9 +52,4 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
   payment: { name: 'Payment', icon: IconCreditCard },
 };
 
-export const supportedArray = listTech;
-
-export const supportedIndexed: Record<string, TechItem> = {};
-for (const tech of Object.values(supportedArray)) {
-  supportedIndexed[tech.key] = tech;
-}
+export { listIndexed, listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
