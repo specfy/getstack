@@ -38,7 +38,7 @@ export default [
           jsx: false,
         },
 
-        project: 'tsconfig.json',
+        project: 'apps/frontend/tsconfig.json',
       },
     },
     rules: {
