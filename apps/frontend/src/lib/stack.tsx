@@ -1,3 +1,4 @@
+import { extendedListTech } from '@stackhub/backend/dist/utils/stacks.js';
 import {
   IconAppWindow,
   IconApps,
@@ -23,7 +24,8 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 
-import type { TechType } from '@specfy/stack-analyser';
+import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
+import type { ExtendedTechItem } from '@stackhub/backend/dist/utils/stacks.js';
 import type { Icon } from '@tabler/icons-react';
 
 export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
@@ -52,4 +54,9 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon }> = {
   payment: { name: 'Payment', icon: IconCreditCard },
 };
 
-export { listIndexed, listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
+export { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
+
+export const listIndexed = {} as Record<AllowedKeys, ExtendedTechItem & TechItem>;
+for (const tech of extendedListTech) {
+  listIndexed[tech.key] = tech;
+}

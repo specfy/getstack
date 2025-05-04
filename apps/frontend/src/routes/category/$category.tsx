@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { useCategory } from '@/api/useCategory';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { formatQuantity } from '@/lib/number';
 import { listIndexed, stackDefinition } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
@@ -26,23 +27,36 @@ const Category: React.FC = () => {
 
     const topN: Record<
       string,
-      AreaBumpSerie<{ x: number | string; y: number }, { tech: string }>
+      AreaBumpSerie<
+        { x: number | string; y: number; color: string },
+        { tech: string; color: string }
+      >
     > = {};
     for (const row of data.data.top) {
       if (!(row.tech in topN)) {
-        topN[row.tech] = { id: listIndexed[row.tech].name, tech: row.tech, data: [] };
+        const indexed = listIndexed[row.tech];
+        topN[row.tech] = { id: indexed.name, tech: row.tech, color: indexed.color, data: [] };
       }
       const week = Number.parseInt(row.date_week.split('-')[1], 10);
       const date = new Date();
       date.setMonth(0);
       date.setDate(1);
       date.setDate(date.getDate() + (week - 1) * 7);
-      topN[row.tech].data.push({ x: row.date_week, y: Number.parseInt(row.hits, 10) });
+      topN[row.tech].data.push({
+        x: row.date_week,
+        y: Number.parseInt(row.hits, 10),
+        color: topN[row.tech].color,
+      });
     }
 
-    const pie: { id: string; label: string; value: number }[] = [];
+    const pie: { id: string; value: number; color: string }[] = [];
     for (const row of data.data.list) {
-      pie.push({ id: row.tech, label: listIndexed[row.tech].name, value: row.current_hits });
+      const indexed = listIndexed[row.tech];
+      pie.push({
+        id: indexed.name,
+        value: row.current_hits,
+        color: indexed.color,
+      });
     }
 
     return [Object.values(topN), pie];
@@ -76,58 +90,19 @@ const Category: React.FC = () => {
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-4">Top 10 Over Weeks</h3>
+        <h3 className="text-lg font-semibold mb-4">Top 10 over time</h3>
         <Card style={{ height: 300 }}>
           <ResponsiveAreaBump
             data={topNData!}
-            margin={{ top: 20, right: 100, bottom: 20, left: 40 }}
-            spacing={8}
-            colors={{ scheme: 'nivo' }}
-            blendMode="multiply"
-            defs={[
-              {
-                id: 'dots',
-                type: 'patternDots',
-                background: 'inherit',
-                color: '#38bcb2',
-                size: 4,
-                padding: 1,
-                stagger: true,
-              },
-              {
-                id: 'lines',
-                type: 'patternLines',
-                background: 'inherit',
-                color: '#eed312',
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10,
-              },
-            ]}
-            fill={[
-              {
-                match: {
-                  id: 'CoffeeScript',
-                },
-                id: 'dots',
-              },
-              {
-                match: {
-                  id: 'TypeScript',
-                },
-                id: 'lines',
-              },
-            ]}
-            startLabel={false}
-            axisTop={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: '',
-              legendPosition: 'middle',
-              legendOffset: -36,
-              truncateTickAt: 0,
+            margin={{ top: 1, right: 100, bottom: 20, left: 40 }}
+            spacing={10}
+            colors={{ scheme: 'paired' }}
+            // colors={{ datum: 'data.color' }}
+            borderColor={{
+              from: 'color',
+              modifiers: [['darker', 0.2]],
             }}
+            startLabel={false}
             axisBottom={{
               tickSize: 5,
               tickPadding: 5,
@@ -147,6 +122,7 @@ const Category: React.FC = () => {
           <Card>
             <div className="flex flex-col gap-3 px-4">
               {data.data.list.map((row) => {
+                const formatted = formatQuantity(row.current_hits);
                 return (
                   <div className="flex justify-between text-xs h-5" key={row.tech}>
                     <div className="flex gap-2 items-center">
@@ -171,7 +147,7 @@ const Category: React.FC = () => {
                             {row.percent_change}%
                           </Badge>
                         )}
-                      <div className="font-semibold w-8 text-right">{row.current_hits}</div>
+                      <div className="font-semibold w-8 text-right">{formatted}</div>
                     </div>
                   </div>
                 );
@@ -188,11 +164,13 @@ const Category: React.FC = () => {
               innerRadius={0.5}
               padAngle={0.7}
               cornerRadius={3}
+              colors={{ scheme: 'paired' }}
+              // colors={{ datum: 'data.color' }}
               activeOuterRadiusOffset={8}
               borderWidth={1}
               borderColor={{
                 from: 'color',
-                modifiers: [['darker', 0.2]],
+                modifiers: [['darker', 0.1]],
               }}
               arcLinkLabelsSkipAngle={10}
               arcLinkLabelsTextColor="#333333"
@@ -201,7 +179,7 @@ const Category: React.FC = () => {
               arcLabelsSkipAngle={10}
               arcLabelsTextColor={{
                 from: 'color',
-                modifiers: [['darker', 2]],
+                modifiers: [['darker', 1]],
               }}
               defs={[
                 {

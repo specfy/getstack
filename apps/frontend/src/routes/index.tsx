@@ -6,6 +6,7 @@ import { useTop } from '@/api/useTop';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { formatQuantity } from '@/lib/number';
 import { listIndexed, stackDefinition } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
@@ -85,7 +86,7 @@ const Index: React.FC = () => {
         <Button variant={'default'}>Search</Button>
       </div>
       <div className="text-xs text-neutral-400 mb-2">
-        Most popular technology found per category
+        Most popular tech per category by number of repositories
       </div>
       <div className="grid grid-cols-3 gap-6">
         {sorted.map(({ category, rows }, index) => {
@@ -107,6 +108,7 @@ const Index: React.FC = () => {
                 </div>
                 <ul className="flex flex-col gap-3 ml-1">
                   {rows.map((row, rowIndex) => {
+                    const formatted = formatQuantity(row.current_hits);
                     return (
                       <li key={rowIndex}>
                         <div className="flex justify-between text-xs h-5">
@@ -136,7 +138,7 @@ const Index: React.FC = () => {
                                   {row.percent_change}%
                                 </Badge>
                               )}
-                            <div className="font-semibold w-8 text-right">{row.current_hits}</div>
+                            <div className="font-semibold w-8 text-right">{formatted}</div>
                           </div>
                         </div>
                       </li>

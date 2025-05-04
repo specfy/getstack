@@ -7,7 +7,7 @@ import type { APIGetCategory } from '../../../backend/src/types/endpoint';
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useCategory = ({ name }: { name: string }) => {
   return useQuery<APIGetCategory['Success'], Error>({
-    queryKey: ['getCategory'],
+    queryKey: ['getCategory', name],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/categories/${name}`, {
         method: 'GET',
