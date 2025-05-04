@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { getRepository } from '../../../models/repositories.js';
-import { analyze, saveAnalysis } from '../../../processor/analyzer.js';
+import { analyze, saveAnalysis, savePreviousIfStale } from '../../../processor/analyzer.js';
 import { defaultLogger } from '../../../utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -30,9 +30,12 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
     }
 
     try {
-      const res = await analyze(repo, logger);
-      await saveAnalysis({ repo, res });
-      logger.info(`Done`);
+      const withPrevious = await savePreviousIfStale(repo);
+      if (!withPrevious) {
+        const res = await analyze(repo, logger);
+        await saveAnalysis({ repo, res });
+        logger.info(`Done`);
+      }
     } catch (err) {
       logger.error(`Failed to process`, err);
       reply.status(500).send({ error: { code: 'failed_to_process' } });

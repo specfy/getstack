@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
+import { envs } from '../utils/env.js';
 
 import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db/types.js';
+
+export const ANALYZE_MIN_STARS = envs.ANALYZE_MIN_STARS;
 
 export async function createRepository(input: RepositoryInsert): Promise<RepositoryRow> {
   return await kyselyClickhouse
@@ -67,8 +70,10 @@ export async function getRepositoryToAnalyze({
     WHERE last_fetched_at < '${beforeDate.toISOString().split('T')[0]}'
       AND errored = 0
       AND ignored = 0
-      AND stars >= 3000
+      AND stars >= {stars: UInt8}
       LIMIT 1`,
+    query_params: { stars: ANALYZE_MIN_STARS },
+    format: 'JSON',
   });
   const json = await res.json();
   return json.data[0] as unknown as RepositoryRow | undefined;

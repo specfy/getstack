@@ -1,12 +1,38 @@
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';
 
-import type { TechnologyInsert, TechnologyWeeklyRow } from '../db/types.js';
+import type {
+  RepositoryRow,
+  TechnologyInsert,
+  TechnologyRow,
+  TechnologyWeeklyRow,
+} from '../db/types.js';
 import type { TechnologyByCategoryByWeekWithTrend, TechnologyTopN } from '../types/endpoint.js';
 
 export async function createTechnologies(input: TechnologyInsert[]): Promise<void> {
   const q = kyselyClickhouse.insertInto('technologies').values(input);
   await q.execute();
+}
+
+export async function getTopTechnologiesForARepo(repo: RepositoryRow): Promise<TechnologyRow[]> {
+  const res = await clickHouse.query({
+    query: `WITH latest_week AS (
+      SELECT MAX(date_week) AS max_week
+      FROM technologies
+      WHERE org = {org: String} AND name = {name: String}
+    )
+    SELECT *
+    FROM technologies
+    WHERE org = {org: String} AND name = {name: String} AND date_week = (SELECT max_week FROM latest_week)`,
+    query_params: {
+      org: repo.org,
+      name: repo.name,
+    },
+  });
+
+  const json = await res.json<TechnologyRow>();
+
+  return json.data;
 }
 
 export async function getTopTechnologies(): Promise<TechnologyWeeklyRow[]> {

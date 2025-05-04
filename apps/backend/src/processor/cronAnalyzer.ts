@@ -2,7 +2,7 @@ import '@specfy/stack-analyser/dist/autoload.js';
 
 import { CronJob } from 'cron';
 
-import { analyze, saveAnalysis } from './analyzer.js';
+import { analyze, saveAnalysis, savePreviousIfStale } from './analyzer.js';
 import { getOrInsert, update } from '../models/progress.js';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
 import { formatToYearWeek } from '../utils/date.js';
@@ -40,6 +40,13 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
       }
 
       logger.info(`Processing ${repo.url}`);
+
+      const withPrevious = await savePreviousIfStale(repo);
+      if (withPrevious) {
+        logger.info('No changes since last fetch');
+        await wait(500);
+        continue;
+      }
 
       let res: Payload;
       try {

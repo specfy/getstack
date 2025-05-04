@@ -9,10 +9,11 @@ import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.
 import { $ } from 'execa';
 
 import { updateRepository } from '../models/repositories.js';
-import { createTechnologies } from '../models/technologies.js';
+import { createTechnologies, getTopTechnologiesForARepo } from '../models/technologies.js';
 import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
+import { octokit } from '../utils/github.js';
 
-import type { RepositoryRow, TechnologyInsert } from '../db/types.js';
+import type { RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';
 
@@ -32,6 +33,18 @@ async function cloneRepository({
     console.error(res.stderr);
     throw new Error(`Error cloning`, { cause: res.stderr });
   }
+}
+
+export async function getPreviousAnalyzeIfStale(
+  repo: RepositoryRow
+): Promise<false | TechnologyRow[]> {
+  const githubInfo = await octokit.rest.repos.get({ owner: repo.org, repo: repo.name });
+  if (new Date(githubInfo.data.pushed_at).getTime() > new Date(repo.last_fetched_at).getTime()) {
+    return false;
+  }
+
+  const previous = await getTopTechnologiesForARepo(repo);
+  return previous;
 }
 
 export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payload> {
@@ -105,4 +118,20 @@ export async function saveAnalysis({
   await updateRepository(repo.id, {
     last_fetched_at: formatToClickhouseDatetime(new Date()),
   });
+}
+
+export async function savePreviousIfStale(repo: RepositoryRow): Promise<boolean> {
+  const previous = await getPreviousAnalyzeIfStale(repo);
+  if (!Array.isArray(previous) || previous.length === 0) {
+    return false;
+  }
+
+  if (previous.length > 0) {
+    await createTechnologies(previous);
+  }
+
+  await updateRepository(repo.id, {
+    last_fetched_at: formatToClickhouseDatetime(new Date()),
+  });
+  return true;
 }

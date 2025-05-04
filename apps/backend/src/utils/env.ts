@@ -20,8 +20,9 @@ const schema = z.object({
   GITHUB_TOKEN: z.string(),
 
   // CRON
-  CRON_ANALYZE: bool,
   CRON_LIST: bool,
+  CRON_ANALYZE: bool,
+  ANALYZE_MIN_STARS: z.coerce.number().default(3000),
 });
 
 export const envs = schema.parse(process.env);

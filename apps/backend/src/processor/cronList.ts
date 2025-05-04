@@ -1,10 +1,10 @@
 import { CronJob } from 'cron';
-import { Octokit } from 'octokit';
 
 import { getOrInsert, update } from '../models/progress.js';
 import { upsertRepository } from '../models/repositories.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
+import { octokit } from '../utils/github.js';
 import { defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
@@ -30,9 +30,6 @@ export const cronListGithubRepositories = CronJob.from({
     }
 
     logger.info('Starting list cron...');
-    const octokit = new Octokit({
-      auth: envs.GITHUB_TOKEN,
-    });
 
     const end = Date.now() + 9 * 60 * 1000;
 
@@ -46,7 +43,7 @@ export const cronListGithubRepositories = CronJob.from({
         const dateString = formatToDate(nextDate);
         logger.info({ currentDate, nextDate }, 'Searching repositories');
 
-        await fetchOneDay(dateString, octokit);
+        await fetchOneDay(dateString);
 
         currentDate = nextDate;
 
@@ -73,7 +70,7 @@ export const cronListGithubRepositories = CronJob.from({
   },
 });
 
-async function fetchOneDay(dateString: string, octokit: Octokit): Promise<void> {
+async function fetchOneDay(dateString: string): Promise<void> {
   let page = 1;
   let hasMore = true;
 

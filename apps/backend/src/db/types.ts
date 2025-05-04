@@ -1,8 +1,8 @@
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
-export type Timestamp = ColumnType<Date, Date, Date | string>;
-export type CreatedAt = ColumnType<Date, Date | undefined, never>;
-export type UpdatedAt = ColumnType<Date, Date | undefined, Date>;
+export type Timestamp = ColumnType<string, Date, Date | string>;
+export type CreatedAt = ColumnType<string, Date | undefined, never>;
+export type UpdatedAt = ColumnType<string, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
 
 export interface RepositoriesTable {
@@ -18,7 +18,7 @@ export interface RepositoriesTable {
   errored: number;
   created_at: CreatedAt;
   updated_at: UpdatedAt;
-  last_fetched_at: Date;
+  last_fetched_at: Timestamp;
   size: number;
 }
 
