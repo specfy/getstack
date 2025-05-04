@@ -70,9 +70,8 @@ export async function getRepositoryToAnalyze({
     WHERE last_fetched_at < '${beforeDate.toISOString().split('T')[0]}'
       AND errored = 0
       AND ignored = 0
-      AND stars >= {stars: UInt8}
+      AND stars >= ${ANALYZE_MIN_STARS}
       LIMIT 1`,
-    query_params: { stars: ANALYZE_MIN_STARS },
     format: 'JSON',
   });
   const json = await res.json();
