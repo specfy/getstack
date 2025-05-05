@@ -14,7 +14,7 @@
     "@clickhouse/client": "1.11.1",
     "@fastify/cors": "11.0.1",
     "@octokit/rest": "21.1.1",
-    "@specfy/stack-analyser": "1.12.1",
+    "@specfy/stack-analyser": "1.13.0",
     "@founderpath/kysely-clickhouse": "1.7.0",
     "close-with-grace": "2.2.0",
     "cron": "4.3.0",

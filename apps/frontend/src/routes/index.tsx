@@ -7,51 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatQuantity } from '@/lib/number';
-import { listIndexed, stackDefinition } from '@/lib/stack';
+import { listIndexed, stackDefinition, stackOrder } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { TechType } from '@specfy/stack-analyser';
-
-const stackOrder: TechType[] = [
-  // Popular
-  'language',
-  'db',
-  'ai',
-
-  // Tools
-  'framework',
-  'saas',
-  'tool',
-
-  // Store
-  'cloud',
-  'storage',
-  'hosting',
-
-  // UI
-  'auth',
-  'ui',
-  'payment',
-
-  // CI
-  'ci',
-  'test',
-  'monitoring',
-
-  // Events
-  'analytics',
-  'notification',
-  'queue',
-
-  // Other app
-  'etl',
-  'app',
-  'api',
-
-  'network',
-  // Deprecated
-  'messaging',
-];
 
 const Index: React.FC = () => {
   const { data, isLoading } = useTop();

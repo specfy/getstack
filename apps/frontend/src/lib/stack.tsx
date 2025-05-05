@@ -15,6 +15,7 @@ import {
   IconDatabase,
   IconNetwork,
   IconPackages,
+  IconScan,
   IconServer,
   IconSparkles,
   IconStack2,
@@ -133,7 +134,55 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       icon: IconCreditCard,
       description: 'Payment processing services and platforms.',
     },
+    linter: {
+      name: 'Linter',
+      icon: IconScan,
+      description: 'Code quality tools and linters.',
+    },
   };
+
+export const stackOrder: TechType[] = [
+  // Popular
+  'language',
+  'db',
+  'ai',
+
+  // Tools
+  'cloud',
+  'framework',
+  'queue',
+
+  // Store
+  'storage',
+  'hosting',
+  'monitoring',
+
+  // CI
+  'ci',
+  'test',
+  'linter',
+
+  // UI
+  'auth',
+  'ui',
+  'saas',
+
+  // Events
+  'analytics',
+  'notification',
+
+  // Other stuff
+  'payment',
+  'tool',
+  'etl',
+
+  'api',
+  'app',
+  'network',
+
+  // Deprecated
+  'messaging',
+];
 
 export { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 
