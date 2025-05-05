@@ -962,6 +962,14 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   concourseci: { website: 'https://concourse-ci.org/', color: colors[4] },
   readthedocs: { website: 'https://readthedocs.org/', color: colors[5] },
   stytch: { website: 'https://stytch.com/', color: colors[6] },
+  'aws.cognito': { website: 'https://aws.amazon.com/cognito/', color: colors[7] },
+  frontegg: { website: 'https://frontegg.com/', color: colors[8] },
+  fusionauth: { website: 'https://fusionauth.io/', color: colors[9] },
+  hanko: { website: 'https://www.hanko.io/', color: colors[0] },
+  kinde: { website: 'https://kinde.com/', color: colors[1] },
+  orysh: { website: 'https://ory.sh/', color: colors[2] },
+  supertokens: { website: 'https://supertokens.com/', color: colors[3] },
+  swifttype: { website: 'https://swifttype.com/', color: colors[4] },
 };
 
 const extendedListTech = listTech.map((tech) => {
