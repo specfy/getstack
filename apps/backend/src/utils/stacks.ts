@@ -953,6 +953,15 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   pinecone: { website: 'https://www.pinecone.io/', color: colors[7] },
   pulumi: { website: 'https://www.pulumi.com/', color: colors[9] },
   twentycrm: { website: 'https://twenty.com/', color: colors[0] },
+  'atlassian.bitbucketpipelines': {
+    website: 'https://bitbucket.org/product/features/pipelines',
+    color: colors[1],
+  },
+  'aws.codepipeline': { website: 'https://aws.amazon.com/codepipeline/', color: colors[2] },
+  biomejs: { website: 'https://www.biomejs.dev/', color: colors[3] },
+  concourseci: { website: 'https://concourse-ci.org/', color: colors[4] },
+  readthedocs: { website: 'https://readthedocs.org/', color: colors[5] },
+  stytch: { website: 'https://stytch.com/', color: colors[6] },
 };
 
 const extendedListTech = listTech.map((tech) => {
