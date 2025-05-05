@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as TechTechKeyImport } from './routes/tech/$techKey'
 import { Route as CategoryCategoryImport } from './routes/category/$category'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TechTechKeyRoute = TechTechKeyImport.update({
+  id: '/tech/$techKey',
+  path: '/tech/$techKey',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoryCategoryImport
       parentRoute: typeof rootRoute
     }
+    '/tech/$techKey': {
+      id: '/tech/$techKey'
+      path: '/tech/$techKey'
+      fullPath: '/tech/$techKey'
+      preLoaderRoute: typeof TechTechKeyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/tech/$techKey': typeof TechTechKeyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/tech/$techKey': typeof TechTechKeyRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/tech/$techKey': typeof TechTechKeyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/category/$category'
+  fullPaths: '/' | '/about' | '/category/$category' | '/tech/$techKey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/category/$category'
-  id: '__root__' | '/' | '/about' | '/category/$category'
+  to: '/' | '/about' | '/category/$category' | '/tech/$techKey'
+  id: '__root__' | '/' | '/about' | '/category/$category' | '/tech/$techKey'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
+  TechTechKeyRoute: typeof TechTechKeyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
+  TechTechKeyRoute: TechTechKeyRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/category/$category"
+        "/category/$category",
+        "/tech/$techKey"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/category/$category": {
       "filePath": "category/$category.tsx"
+    },
+    "/tech/$techKey": {
+      "filePath": "tech/$techKey.tsx"
     }
   }
 }

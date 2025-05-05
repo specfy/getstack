@@ -1,10 +1,11 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
-import { createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useCategory } from '@/api/useCategory';
+import { TechBadge } from '@/components/TechBadge';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
@@ -12,7 +13,8 @@ import { listIndexed, stackDefinition } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { AreaBumpSerie } from '@nivo/bump';
-import type { TechType } from '@specfy/stack-analyser';
+import type { TechItem, TechType } from '@specfy/stack-analyser';
+import type { ExtendedTechItem } from '@stackhub/backend/dist/utils/stacks';
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
@@ -20,9 +22,9 @@ const Category: React.FC = () => {
   const cat = stackDefinition[category as TechType];
   const { data, isLoading } = useCategory({ name: category });
 
-  const [topNData, pieData] = useMemo(() => {
+  const [topNData, pieData, nonFoundTech] = useMemo(() => {
     if (!data) {
-      return [[], []];
+      return [[], [], []];
     }
 
     const topN: Record<
@@ -32,6 +34,9 @@ const Category: React.FC = () => {
         { tech: string; color: string }
       >
     > = {};
+    const discoveredTech = new Set(data.data.list.map((row) => row.tech));
+    const nonFound: (ExtendedTechItem & TechItem)[] = [];
+
     for (const row of data.data.top) {
       if (!(row.tech in topN)) {
         const indexed = listIndexed[row.tech];
@@ -52,15 +57,18 @@ const Category: React.FC = () => {
     const pie: { id: string; value: number; color: string }[] = [];
     for (const row of data.data.list) {
       const indexed = listIndexed[row.tech];
-      pie.push({
-        id: indexed.name,
-        value: row.current_hits,
-        color: indexed.color,
-      });
+      pie.push({ id: indexed.name, value: row.current_hits, color: indexed.color });
     }
 
-    return [Object.values(topN), pie];
-  }, [data]);
+    // Identify undiscovered tech by diffing listIndexed for the category with discoveredTech
+    for (const item of Object.values(listIndexed)) {
+      if (item.type === category && !discoveredTech.has(item.key)) {
+        nonFound.push(item);
+      }
+    }
+
+    return [Object.values(topN), pie, nonFound];
+  }, [data, category]);
 
   if (!cat) {
     return (
@@ -80,13 +88,15 @@ const Category: React.FC = () => {
 
   return (
     <div>
-      <header className="mb-10">
+      <header className="mb-10 flex flex-col gap-2">
+        <div className="text-xs text-gray-400">Category</div>
         <h2 className="flex gap-4 text-2xl font-semibold">
           <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
             <cat.icon size={22} />
           </div>{' '}
           {cat.name}
         </h2>
+        <h3 className="text-lg text-neutral-500">{cat.description}</h3>
       </header>
 
       <div className="mt-10">
@@ -116,21 +126,19 @@ const Category: React.FC = () => {
         </Card>
       </div>
 
-      <div className="grid grid-cols-2 mt-10 gap-10">
-        <div>
-          <h3 className="text-lg font-semibold mb-4">All tracked</h3>
+      <div className="grid grid-cols-3 mt-10 gap-10">
+        <div className="col-span-1">
+          <h3 className="text-lg font-semibold mb-4">Leaderboard</h3>
+          <div className="text-xs text-neutral-400 mb-2">
+            Every {cat.name} by number of repositories
+          </div>
           <Card>
-            <div className="flex flex-col gap-3 px-4">
+            <div className="flex flex-col px-4">
               {data.data.list.map((row) => {
                 const formatted = formatQuantity(row.current_hits);
                 return (
-                  <div className="flex justify-between text-xs h-5" key={row.tech}>
-                    <div className="flex gap-2 items-center">
-                      <div className="w-4">
-                        <img src={`/favicons/${row.tech}.webp`} />
-                      </div>
-                      {listIndexed[row.tech].name}
-                    </div>
+                  <div className="flex justify-between items-center" key={row.tech}>
+                    <TechBadge tech={row.tech} />
                     <div className="flex gap-1 items-center">
                       {row.previous_hits > 0 &&
                         (row.percent_change > 2 || row.percent_change < -2) && (
@@ -147,20 +155,37 @@ const Category: React.FC = () => {
                             {row.percent_change}%
                           </Badge>
                         )}
-                      <div className="font-semibold w-8 text-right">{formatted}</div>
+                      <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
                     </div>
                   </div>
                 );
               })}
+              {nonFoundTech.length > 0 && (
+                <div className="border-t-1 pt-2">
+                  <div className="text-neutral-400 text-xs mb-2">Never found</div>
+                  {nonFoundTech.map((row) => (
+                    <div
+                      className="flex justify-between items-center text-xs text-gray-400"
+                      key={row.tech}
+                    >
+                      <TechBadge tech={row.key} />
+                      <div className="font-semibold w-8 text-right">0</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </Card>
         </div>
-        <div>
+        <div className="col-span-2">
           <h3 className="text-lg font-semibold mb-4">Repartition</h3>
+          <div className="text-xs text-neutral-400 mb-2">
+            Every {cat.name} by number of repositories
+          </div>
           <Card style={{ height: 350 }}>
             <ResponsivePie
               data={pieData}
-              margin={{ top: 10, right: 30, bottom: 30, left: 10 }}
+              margin={{ top: 20, right: 30, bottom: 30, left: 10 }}
               innerRadius={0.5}
               padAngle={0.7}
               cornerRadius={3}
