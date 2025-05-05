@@ -63,7 +63,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
       }
 
       try {
-        await saveAnalysis({ repo, res });
+        await saveAnalysis({ repo, res, dateWeek });
         logger.info(`Done`);
       } catch (err) {
         logger.error(err, `Failed to save`);

@@ -1,7 +1,7 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useCategory } from '@/api/useCategory';
@@ -166,7 +166,7 @@ const Category: React.FC = () => {
                   {nonFoundTech.map((row) => (
                     <div
                       className="flex justify-between items-center text-xs text-gray-400"
-                      key={row.tech}
+                      key={row.key}
                     >
                       <TechBadge tech={row.key} />
                       <div className="font-semibold w-8 text-right">0</div>

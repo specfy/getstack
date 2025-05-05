@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { getRepository } from '../../../models/repositories.js';
 import { analyze, saveAnalysis, savePreviousIfStale } from '../../../processor/analyzer.js';
+import { formatToYearWeek } from '../../../utils/date.js';
 import { defaultLogger } from '../../../utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -29,11 +30,12 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
       return reply.status(404).send({ error: { code: '404_not_found' } });
     }
 
+    const dateWeek = formatToYearWeek(new Date());
     try {
-      const withPrevious = await savePreviousIfStale(repo);
+      const withPrevious = await savePreviousIfStale(repo, dateWeek);
       if (!withPrevious) {
         const res = await analyze(repo, logger);
-        await saveAnalysis({ repo, res });
+        await saveAnalysis({ repo, res, dateWeek });
         logger.info(`Done`);
       }
     } catch (err) {

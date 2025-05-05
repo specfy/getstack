@@ -10,7 +10,7 @@ import { $ } from 'execa';
 
 import { updateRepository } from '../models/repositories.js';
 import { createTechnologies, getTopTechnologiesForARepo } from '../models/technologies.js';
-import { formatToClickhouseDatetime, formatToYearWeek } from '../utils/date.js';
+import { formatToClickhouseDatetime } from '../utils/date.js';
 import { octokit } from '../utils/github.js';
 
 import type { RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
@@ -86,9 +86,11 @@ export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payl
 export async function saveAnalysis({
   repo,
   res,
+  dateWeek,
 }: {
   repo: RepositoryRow;
   res: Payload;
+  dateWeek: string;
 }): Promise<void> {
   const techs = new Set<AllowedKeys>(res.techs);
 
@@ -97,8 +99,6 @@ export async function saveAnalysis({
       techs.add(tech);
     }
   }
-
-  const dateWeek = formatToYearWeek(new Date());
 
   const rows: TechnologyInsert[] = [];
   for (const tech of techs) {
