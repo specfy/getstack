@@ -33,7 +33,9 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
     const dateWeek = formatToYearWeek(new Date());
     try {
       const withPrevious = await savePreviousIfStale(repo, dateWeek);
-      if (!withPrevious) {
+      if (withPrevious) {
+        logger.info(`With previous`);
+      } else {
         const res = await analyze(repo, logger);
         await saveAnalysis({ repo, res, dateWeek });
         logger.info(`Done`);

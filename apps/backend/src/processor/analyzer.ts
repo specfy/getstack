@@ -126,13 +126,11 @@ export async function savePreviousIfStale(repo: RepositoryRow, dateWeek: string)
     return false;
   }
 
-  if (previous.length > 0) {
-    await createTechnologies(
-      previous.map((row) => {
-        return { ...row, date_week: dateWeek };
-      })
-    );
-  }
+  await createTechnologies(
+    previous.map((row) => {
+      return { ...row, date_week: dateWeek };
+    })
+  );
 
   await updateRepository(repo.id, {
     last_fetched_at: formatToClickhouseDatetime(new Date()),
