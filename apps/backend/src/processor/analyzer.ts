@@ -120,14 +120,18 @@ export async function saveAnalysis({
   });
 }
 
-export async function savePreviousIfStale(repo: RepositoryRow): Promise<boolean> {
+export async function savePreviousIfStale(repo: RepositoryRow, dateWeek: string): Promise<boolean> {
   const previous = await getPreviousAnalyzeIfStale(repo);
   if (!Array.isArray(previous) || previous.length === 0) {
     return false;
   }
 
   if (previous.length > 0) {
-    await createTechnologies(previous);
+    await createTechnologies(
+      previous.map((row) => {
+        return { ...row, date_week: dateWeek };
+      })
+    );
   }
 
   await updateRepository(repo.id, {

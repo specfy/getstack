@@ -42,7 +42,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
       logger.info(`Processing ${repo.url}`);
 
       try {
-        const withPrevious = await savePreviousIfStale(repo);
+        const withPrevious = await savePreviousIfStale(repo, dateWeek);
         if (withPrevious) {
           logger.info('No changes since last fetch');
           await wait(500);
