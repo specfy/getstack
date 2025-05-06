@@ -16,6 +16,7 @@ import {
   IconDatabaseEdit,
   IconMessage,
   IconNetwork,
+  IconPackage,
   IconPackages,
   IconScan,
   IconServer,
@@ -157,6 +158,11 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       icon: IconMessage,
       description: 'Communication services and platforms.',
     },
+    package_manager: {
+      name: 'Package Manager',
+      icon: IconPackage,
+      description: 'Package managers for managing dependencies and tools.',
+    },
   };
 
 export const stackOrder: TechType[] = [
@@ -195,11 +201,12 @@ export const stackOrder: TechType[] = [
   'etl',
   'orm',
 
-  'tool',
   'saas',
   'api',
-
   'app',
+
+  'tool',
+  'package_manager',
   'network',
 
   // Deprecated

@@ -975,6 +975,35 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   trayio: { website: 'https://tray.io/', color: colors[9] },
   useparagon: { website: 'https://useparagon.com/', color: colors[0] },
   kysely: { website: 'https://kysely.dev/', color: colors[1], github: 'kysely-org/kysely' },
+  asdf: { website: 'https://asdf-vm.com/', github: 'asdf-vm/asdf', color: colors[2] },
+  bundler: { website: 'https://bundler.io/', github: 'rubygems/bundler', color: colors[3] },
+  cargo: {
+    website: 'https://doc.rust-lang.org/cargo/',
+    github: 'rust-lang/cargo',
+    color: colors[4],
+  },
+  goenv: { website: 'https://github.com/syndbg/goenv', github: 'syndbg/goenv', color: colors[5] },
+  npm: { website: 'https://www.npmjs.com/', github: 'npm/cli', color: colors[5] },
+  poetry: {
+    website: 'https://python-poetry.org/',
+    github: 'python-poetry/poetry',
+    color: colors[8],
+  },
+  nuget: { website: 'https://www.nuget.org/', github: 'NuGet/NuGet.Client', color: colors[0] },
+  nvm: { website: 'https://github.com/nvm-sh/nvm', github: 'nvm-sh/nvm', color: colors[1] },
+  phpcomposer: {
+    website: 'https://getcomposer.org/',
+    github: 'composer/composer',
+    color: colors[2],
+  },
+  phpenv: {
+    website: 'https://github.com/phpenv/phpenv',
+    github: 'phpenv/phpenv',
+    color: colors[3],
+  },
+  pipenv: { website: 'https://pipenv.pypa.io/en/latest/', github: 'pypa/pipenv', color: colors[4] },
+  rubocop: { website: 'https://rubocop.org/', github: 'rubocop/rubocop', color: colors[5] },
+  rubyenv: { website: 'https://github.com/rbenv/rbenv', github: 'rbenv/rbenv', color: colors[6] },
 };
 
 const extendedListTech = listTech.map((tech) => {
