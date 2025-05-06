@@ -14,6 +14,7 @@ import {
   IconCreditCard,
   IconDatabase,
   IconDatabaseEdit,
+  IconMessage,
   IconNetwork,
   IconPackages,
   IconScan,
@@ -151,6 +152,11 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       icon: IconDatabaseEdit,
       description: 'ORM and database query builder tools.',
     },
+    communication: {
+      name: 'Communication',
+      icon: IconMessage,
+      description: 'Communication services and platforms.',
+    },
   };
 
 export const stackOrder: TechType[] = [
@@ -177,10 +183,11 @@ export const stackOrder: TechType[] = [
   // UI
   'auth',
   'ui',
+  'analytics',
 
   // Events
-  'analytics',
   'notification',
+  'communication',
   'collaboration',
 
   // Other stuff

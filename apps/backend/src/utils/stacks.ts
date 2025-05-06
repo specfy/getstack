@@ -970,7 +970,6 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   supertokens: { website: 'https://supertokens.com/', color: colors[3] },
   swiftype: { website: 'https://swiftype.com/', color: colors[4] },
   apideck: { website: 'https://apideck.com/', color: colors[5] },
-  elasticstack: { website: 'https://elastic.co/', color: colors[6] },
   integrationapp: { website: 'https://integration.app/', color: colors[7] },
   mergedev: { website: 'https://merge.dev/', color: colors[8] },
   trayio: { website: 'https://tray.io/', color: colors[9] },
