@@ -968,13 +968,14 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   kinde: { website: 'https://kinde.com/', color: colors[1] },
   orysh: { website: 'https://ory.sh/', color: colors[2] },
   supertokens: { website: 'https://supertokens.com/', color: colors[3] },
-  swifttype: { website: 'https://swifttype.com/', color: colors[4] },
+  swiftype: { website: 'https://swiftype.com/', color: colors[4] },
   apideck: { website: 'https://apideck.com/', color: colors[5] },
   elasticstack: { website: 'https://elastic.co/', color: colors[6] },
-  integrationapp: { website: 'https://integrationapp.com/', color: colors[7] },
-  mergedev: { website: 'https://mergedev.com/', color: colors[8] },
+  integrationapp: { website: 'https://integration.app/', color: colors[7] },
+  mergedev: { website: 'https://merge.dev/', color: colors[8] },
   trayio: { website: 'https://tray.io/', color: colors[9] },
   useparagon: { website: 'https://useparagon.com/', color: colors[0] },
+  kysely: { website: 'https://kysely.dev/', color: colors[1], github: 'kysely-org/kysely' },
 };
 
 const extendedListTech = listTech.map((tech) => {

@@ -13,6 +13,7 @@ import {
   IconCode,
   IconCreditCard,
   IconDatabase,
+  IconDatabaseEdit,
   IconNetwork,
   IconPackages,
   IconScan,
@@ -23,6 +24,7 @@ import {
   IconTool,
   IconTransform,
   IconUsers,
+  IconUsersGroup,
 } from '@tabler/icons-react';
 
 import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
@@ -139,6 +141,16 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       icon: IconScan,
       description: 'Code quality tools and linters.',
     },
+    collaboration: {
+      name: 'Collaboration',
+      icon: IconUsersGroup,
+      description: 'Collaboration tools and platforms.',
+    },
+    orm: {
+      name: 'ORM',
+      icon: IconDatabaseEdit,
+      description: 'ORM and database query builder tools.',
+    },
   };
 
 export const stackOrder: TechType[] = [
@@ -165,18 +177,21 @@ export const stackOrder: TechType[] = [
   // UI
   'auth',
   'ui',
-  'saas',
 
   // Events
   'analytics',
   'notification',
+  'collaboration',
 
   // Other stuff
   'payment',
-  'tool',
   'etl',
+  'orm',
 
+  'tool',
+  'saas',
   'api',
+
   'app',
   'network',
 
