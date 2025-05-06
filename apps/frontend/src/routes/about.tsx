@@ -29,7 +29,7 @@ const About: React.FC = () => {
       <ol>
         <li>No private repo, not archived, no templates, no fork.</li>
         <li>
-          Have more than <strong>+2000 stars</strong>
+          Have more than <strong>+1500 stars</strong>
         </li>
         <li>Active in the last 2 years</li>
         <li>Less than 1Gb in disk size </li>

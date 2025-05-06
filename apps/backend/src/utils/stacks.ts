@@ -319,7 +319,6 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'elastic/elasticsearch',
     color: colors[1],
   },
-  elasticstack: { website: 'https://www.elastic.co/elastic-stack/', color: colors[2] },
   electron: {
     website: 'https://www.electronjs.org/',
     github: 'electron/electron',
@@ -340,7 +339,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   fastly: { website: 'https://www.fastly.com/', color: colors[6] },
   figma: { website: 'https://www.figma.com/', color: colors[7] },
   'firebase.firestore': {
-    website: 'https://firebase.google.com/docs/firestore',
+    website: 'https://firebase.google.com/',
     color: colors[7],
   },
   firebase: { website: 'https://firebase.google.com/', color: colors[9] },
@@ -958,7 +957,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     color: colors[1],
   },
   'aws.codepipeline': { website: 'https://aws.amazon.com/codepipeline/', color: colors[2] },
-  biomejs: { website: 'https://www.biomejs.dev/', color: colors[3] },
+  biomejs: { website: 'https://www.biomejs.dev/', color: colors[3], github: 'biomejs/biome' },
   concourseci: { website: 'https://concourse-ci.org/', color: colors[4] },
   readthedocs: { website: 'https://readthedocs.org/', color: colors[5] },
   stytch: { website: 'https://stytch.com/', color: colors[6] },
@@ -970,6 +969,12 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   orysh: { website: 'https://ory.sh/', color: colors[2] },
   supertokens: { website: 'https://supertokens.com/', color: colors[3] },
   swifttype: { website: 'https://swifttype.com/', color: colors[4] },
+  apideck: { website: 'https://apideck.com/', color: colors[5] },
+  elasticstack: { website: 'https://elastic.co/', color: colors[6] },
+  integrationapp: { website: 'https://integrationapp.com/', color: colors[7] },
+  mergedev: { website: 'https://mergedev.com/', color: colors[8] },
+  trayio: { website: 'https://tray.io/', color: colors[9] },
+  useparagon: { website: 'https://useparagon.com/', color: colors[0] },
 };
 
 const extendedListTech = listTech.map((tech) => {
