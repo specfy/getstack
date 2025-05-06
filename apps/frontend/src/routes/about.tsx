@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 
 const About: React.FC = () => {
   return (
