@@ -18,6 +18,7 @@
     "@specfy/stack-analyser": "1.13.1",
     "@stackhub/backend": "file:../backend",
     "@tabler/icons-react": "3.31.0",
+    "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.4",
     "@tanstack/react-query": "5.74.4",
     "@tanstack/react-router": "1.116.0",
