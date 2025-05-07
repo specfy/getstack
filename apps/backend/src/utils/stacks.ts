@@ -1004,6 +1004,15 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   pipenv: { website: 'https://pipenv.pypa.io/en/latest/', github: 'pypa/pipenv', color: colors[4] },
   rubocop: { website: 'https://rubocop.org/', github: 'rubocop/rubocop', color: colors[5] },
   rubyenv: { website: 'https://github.com/rbenv/rbenv', github: 'rbenv/rbenv', color: colors[6] },
+  withorb: { website: 'https://withorb.com', color: colors[7] },
+  dieselrs: { website: 'https://diesel.rs/', github: 'diesel-rs/diesel', color: colors[8] },
+  django: { website: 'https://www.djangoproject.com/', color: colors[9] },
+  goent: { website: 'https://github.com/ent/ent', github: 'ent/ent', color: colors[0] },
+  gorm: { website: 'https://gorm.io/', github: 'go-gorm/gorm', color: colors[1] },
+  rails: { website: 'https://rubyonrails.org/', color: colors[2] },
+  sequelruby: { website: 'https://sequel.jeremyevans.net/', github: 'sequelize/sequelize', color: colors[3] },
+  sqlalchemy: { website: 'https://www.sqlalchemy.org/', color: colors[4] },
+  typeorm: { website: 'https://typeorm.io/', github: 'typeorm/typeorm', color: colors[5] },
 };
 
 const extendedListTech = listTech.map((tech) => {

@@ -4,6 +4,7 @@ import {
   IconApps,
   IconBellRinging,
   IconBinaryTree2,
+  IconBlockquote,
   IconBroadcast,
   IconBrowser,
   IconBug,
@@ -20,6 +21,7 @@ import {
   IconPackages,
   IconScan,
   IconServer,
+  IconShield,
   IconSparkles,
   IconStack2,
   IconTestPipe,
@@ -116,7 +118,11 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       description: 'Services for sending notifications.',
     },
     queue: { name: 'Queue', icon: IconBinaryTree2, description: 'Message queue systems.' },
-    saas: { name: 'SaaS', icon: IconBrowser, description: 'Software as a Service platforms.' },
+    saas: {
+      name: 'SaaS',
+      icon: IconBrowser,
+      description: 'Generic category for all others SaaS platforms.',
+    },
     storage: {
       name: 'Storage',
       icon: IconPackages,
@@ -163,6 +169,21 @@ export const stackDefinition: Record<TechType, { name: string; icon: Icon; descr
       icon: IconPackage,
       description: 'Package managers for managing dependencies and tools.',
     },
+    cms: {
+      name: 'CMS',
+      icon: IconBlockquote,
+      description: 'Content Management Systems services and platforms.',
+    },
+    crm: {
+      name: 'CRM',
+      icon: IconUsers,
+      description: 'Customer Relationship Management tools and platforms.',
+    },
+    security: {
+      name: 'Security',
+      icon: IconShield,
+      description: 'Security tools and platforms.',
+    },
   };
 
 export const stackOrder: TechType[] = [
@@ -196,17 +217,24 @@ export const stackOrder: TechType[] = [
   'communication',
   'collaboration',
 
-  // Other stuff
-  'payment',
-  'etl',
+  // Dev tools
   'orm',
-
-  'saas',
-  'api',
-  'app',
-
   'tool',
   'package_manager',
+
+  // Saas but well known
+  'cms',
+  'payment',
+  'etl',
+
+  // Saas but broader
+  'saas',
+  'crm',
+  'security',
+
+  // Everything else
+  'api',
+  'app',
   'network',
 
   // Deprecated

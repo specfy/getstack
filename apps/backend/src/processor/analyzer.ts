@@ -102,6 +102,11 @@ export async function saveAnalysis({
 
   const rows: TechnologyInsert[] = [];
   for (const tech of techs) {
+    if (tech === 'github') {
+      // Too noisy
+      continue;
+    }
+
     rows.push({
       date_week: dateWeek,
       org: repo.org,
