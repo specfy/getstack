@@ -259,7 +259,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   cohereai: { website: 'https://cohere.com/', color: colors[3] },
   commercetools: { website: 'https://commercetools.com/', color: colors[4] },
   consul: { website: 'https://www.consul.io/', github: 'hashicorp/consul', color: colors[5] },
-  contenful: { website: 'https://www.contentful.com/', color: colors[6] },
+  contentful: { website: 'https://www.contentful.com/', color: colors[6] },
   convexdb: { website: 'https://www.convex.dev/', github: 'get-convex/convex', color: colors[7] },
   couchbase: { website: 'https://www.couchbase.com/', color: colors[7] },
   coveralls: { website: 'https://coveralls.io/', color: colors[9] },
@@ -1010,7 +1010,11 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   goent: { website: 'https://github.com/ent/ent', github: 'ent/ent', color: colors[0] },
   gorm: { website: 'https://gorm.io/', github: 'go-gorm/gorm', color: colors[1] },
   rails: { website: 'https://rubyonrails.org/', color: colors[2] },
-  sequelruby: { website: 'https://sequel.jeremyevans.net/', github: 'sequelize/sequelize', color: colors[3] },
+  sequelruby: {
+    website: 'https://sequel.jeremyevans.net/',
+    github: 'sequelize/sequelize',
+    color: colors[3],
+  },
   sqlalchemy: { website: 'https://www.sqlalchemy.org/', color: colors[4] },
   typeorm: { website: 'https://typeorm.io/', github: 'typeorm/typeorm', color: colors[5] },
 };
