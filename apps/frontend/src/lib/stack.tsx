@@ -229,13 +229,13 @@ export const stackOrder: TechType[] = [
 
   // Saas but broader
   'saas',
-  'crm',
-  'security',
-
-  // Everything else
   'api',
   'app',
+
+  // Everything else
   'network',
+  'crm',
+  'security',
 
   // Deprecated
   'messaging',

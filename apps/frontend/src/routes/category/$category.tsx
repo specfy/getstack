@@ -1,16 +1,14 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useCategory } from '@/api/useCategory';
 import { TechBadge } from '@/components/TechBadge';
-import { Badge } from '@/components/ui/badge';
+import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
 import { listIndexed, stackDefinition } from '@/lib/stack';
-import { cn } from '@/lib/utils';
 
 import type { AreaBumpSerie } from '@nivo/bump';
 import type { TechItem, TechType } from '@specfy/stack-analyser';
@@ -143,19 +141,8 @@ const Category: React.FC = () => {
                     <TechBadge tech={row.tech} />
                     <div className="flex gap-1 items-center">
                       {row.previous_hits > 0 &&
-                        (row.percent_change > 2 || row.percent_change < -2) && (
-                          <Badge
-                            variant="outline"
-                            className={cn(
-                              'flex gap-1 rounded-lg text-tiny',
-                              row.percent_change > 0
-                                ? 'border-lime-600 text-lime-600'
-                                : 'border-red-400 text-red-400'
-                            )}
-                          >
-                            {row.percent_change > 0 ? <IconTrendingUp /> : <IconTrendingDown />}{' '}
-                            {row.percent_change}%
-                          </Badge>
+                        (row.percent_change > 0.5 || row.percent_change < -0.5) && (
+                          <TrendsBadge row={row} />
                         )}
                       <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
                     </div>
@@ -163,7 +150,7 @@ const Category: React.FC = () => {
                 );
               })}
               {nonFoundTech.length > 0 && (
-                <div className="border-t-1 pt-2">
+                <div className="border-t-1 pt-2 mt-2">
                   <div className="text-neutral-400 text-xs mb-2">Never found</div>
                   {nonFoundTech.map((row) => (
                     <div

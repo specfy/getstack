@@ -1,14 +1,13 @@
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useTop } from '@/api/useTop';
-import { Badge } from '@/components/ui/badge';
+import { TechBadge } from '@/components/TechBadge';
+import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatQuantity } from '@/lib/number';
-import { listIndexed, stackDefinition, stackOrder } from '@/lib/stack';
-import { cn } from '@/lib/utils';
+import { stackDefinition, stackOrder } from '@/lib/stack';
 
 import type { TechType } from '@specfy/stack-analyser';
 
@@ -70,32 +69,12 @@ const Index: React.FC = () => {
                     const formatted = formatQuantity(row.current_hits);
                     return (
                       <li key={rowIndex}>
-                        <div className="flex justify-between text-xs h-5">
-                          <div className="flex gap-2 items-center">
-                            <div className="w-4">
-                              <img src={`/favicons/${row.tech}.webp`} />
-                            </div>
-                            {listIndexed[row.tech].name}
-                          </div>
+                        <div className="flex items-center justify-between text-xs h-5">
+                          <TechBadge tech={row.tech} />
                           <div className="flex gap-1 items-center">
                             {row.previous_hits > 0 &&
-                              (row.percent_change > 2 || row.percent_change < -2) && (
-                                <Badge
-                                  variant="outline"
-                                  className={cn(
-                                    'flex gap-1 rounded-lg text-tiny',
-                                    row.percent_change > 0
-                                      ? 'border-lime-600 text-lime-600'
-                                      : 'border-red-400 text-red-400'
-                                  )}
-                                >
-                                  {row.percent_change > 0 ? (
-                                    <IconTrendingUp />
-                                  ) : (
-                                    <IconTrendingDown />
-                                  )}{' '}
-                                  {row.percent_change}%
-                                </Badge>
+                              (row.percent_change > 0.5 || row.percent_change < -0.5) && (
+                                <TrendsBadge row={row} />
                               )}
                             <div className="font-semibold w-8 text-right">{formatted}</div>
                           </div>
