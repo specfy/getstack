@@ -47,7 +47,7 @@ export async function getPreviousAnalyzeIfStale(
   if (pushedRecently) {
     return false;
   }
-  if (analyzedRecently) {
+  if (!analyzedRecently) {
     return false;
   }
 
