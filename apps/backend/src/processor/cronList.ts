@@ -55,7 +55,7 @@ export const cronListGithubRepositories = CronJob.from({
         });
       }
     } catch (err) {
-      logger.error('Error fetching repositories from GitHub:', err);
+      logger.error(err, 'Error fetching repositories from GitHub:');
     }
 
     if (currentDate.getTime() <= endDate.getTime()) {
