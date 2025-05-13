@@ -39,7 +39,15 @@ export async function getPreviousAnalyzeIfStale(
   repo: RepositoryRow
 ): Promise<false | TechnologyRow[]> {
   const githubInfo = await octokit.rest.repos.get({ owner: repo.org, repo: repo.name });
-  if (new Date(githubInfo.data.pushed_at).getTime() > new Date(repo.last_fetched_at).getTime()) {
+  const pushedRecently =
+    new Date(githubInfo.data.pushed_at).getTime() > new Date(repo.last_fetched_at).getTime();
+  const analyzedRecently =
+    new Date(repo.last_analyzed_at).getTime() > Date.now() - 86_400 * 30 * 1000;
+
+  if (pushedRecently) {
+    return false;
+  }
+  if (analyzedRecently) {
     return false;
   }
 
@@ -122,6 +130,7 @@ export async function saveAnalysis({
 
   await updateRepository(repo.id, {
     last_fetched_at: formatToClickhouseDatetime(new Date()),
+    last_analyzed_at: formatToClickhouseDatetime(new Date()),
   });
 }
 

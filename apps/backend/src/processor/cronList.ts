@@ -111,6 +111,7 @@ async function fetchOneDay(dateString: string): Promise<void> {
         ignored_reason: filtered === false ? 'ok' : filtered,
         errored: 0,
         last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
+        last_analyzed_at: formatToClickhouseDatetime(new Date()),
         size: repo.size,
       });
     }
