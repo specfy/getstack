@@ -279,3 +279,24 @@ export async function getTechnologyVolumePerWeek(tech: string): Promise<Technolo
 
   return json.data;
 }
+
+export async function getTechnologyCumulatedStars(tech: string): Promise<number> {
+  const dateWeek = formatToYearWeek(new Date());
+  const res = await clickHouse.query({
+    query: `SELECT
+    SUM(stars) as stars
+FROM
+    repositories AS r
+INNER JOIN
+    technologies AS t
+ON
+    r.org = t.org AND r.name = t.name
+WHERE
+    t.tech = {tech: String} AND date_week = {week: String}`,
+    query_params: { tech, week: dateWeek },
+  });
+
+  const json = await res.json<{ stars: string }>();
+
+  return json.data.length > 0 ? Number.parseInt(json.data[0]!.stars, 10) : 0;
+}

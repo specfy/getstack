@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import {
+  getTechnologyCumulatedStars,
   getTechnologyVolumePerWeek,
   getTopRepositoriesForTechnology,
 } from '../../../../models/technologies.js';
@@ -26,10 +27,12 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const topRepos = await getTopRepositoriesForTechnology(params.name);
     const volume = await getTechnologyVolumePerWeek(params.name);
+    const cumulatedStars = await getTechnologyCumulatedStars(params.name);
 
     reply.status(200).send({
       success: true,
       data: {
+        cumulatedStars,
         topRepos: topRepos.map((row) => {
           return {
             name: row.name,

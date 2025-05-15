@@ -7,7 +7,15 @@ import { routeTree } from './routeTree.gen';
 
 import './index.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      staleTime: 15 * 60 * 1000,
+    },
+  },
+});
 
 const router = createRouter({ routeTree });
 

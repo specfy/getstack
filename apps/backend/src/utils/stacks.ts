@@ -2,8 +2,6 @@ import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js'
 
 import type { AllowedKeys, TechItem } from '@specfy/stack-analyser';
 
-export type TechItemExtended = { website: string } & TechItem;
-
 export const colors: [
   string,
   string,
@@ -38,6 +36,8 @@ export interface ExtendedTechItem {
   iconURL?: string;
   color: string;
 }
+
+export type TechItemWithExtended = ExtendedTechItem & TechItem;
 
 // Hardcode the website URL for each entry
 const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
@@ -1019,7 +1019,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   typeorm: { website: 'https://typeorm.io/', github: 'typeorm/typeorm', color: colors[5] },
 };
 
-const extendedListTech = listTech.map((tech) => {
+const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
   const extended = extendedInfo[tech.key]!;
 
   return {

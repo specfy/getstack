@@ -1,26 +1,34 @@
 import { ResponsiveLine } from '@nivo/line';
-import { IconStar, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
+import {
+  IconBrandGithub,
+  IconStar,
+  IconTrendingDown,
+  IconTrendingUp,
+  IconWorld,
+} from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
+import { useCategoryLeaderboard } from '@/api/useCategory';
 import { useTechnology } from '@/api/useTechnology';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
-import { listIndexed } from '@/lib/stack';
+import { listIndexed, stackDefinition } from '@/lib/stack';
 
 import type { LineSeries } from '@nivo/line';
 import type { AllowedKeys } from '@specfy/stack-analyser';
-import type { TechItemExtended } from '@stackhub/backend/dist/utils/stacks';
+import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
 import type { RepositoryTop, TechnologyWeeklyVolume } from '@stackhub/backend/src/types/endpoint';
 
 const Tech: React.FC = () => {
   const { techKey } = Route.useParams();
 
-  const tech = listIndexed[techKey as AllowedKeys] as TechItemExtended | undefined;
+  const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
   const { data, isLoading } = useTechnology({ name: tech?.key });
+  const { data: leaderboard } = useCategoryLeaderboard({ name: tech?.type });
 
   const [current, trend, diff] = useMemo(() => {
     if (!data || data.data.volume.length <= 0) {
@@ -36,16 +44,16 @@ const Tech: React.FC = () => {
     const pct = (crr.hits * 100) / lastWeek.hits - 100;
     return [
       crr,
-      pct > 0.5 || pct < -0.05 ? Number.parseFloat(pct.toFixed(1)) : null,
+      pct > 0.5 || pct < -0.5 ? Number.parseFloat(pct.toFixed(1)) : null,
       Math.abs(crr.hits - lastWeek.hits),
     ];
   }, [data]);
 
-  const repoCount = useMemo(() => {
+  const [repoCount, stars] = useMemo(() => {
     if (!current) {
-      return '0';
+      return ['0', '0'];
     }
-    return formatQuantity(current.hits);
+    return [formatQuantity(current.hits), formatQuantity(data!.data.cumulatedStars)];
   }, [current]);
 
   const chartData = useMemo<LineSeries[]>(() => {
@@ -66,6 +74,13 @@ const Tech: React.FC = () => {
     ];
   }, [data]);
 
+  const position = useMemo(() => {
+    if (!leaderboard) {
+      return 0;
+    }
+    return leaderboard.data.findIndex((v) => v.tech === techKey)! + 1;
+  }, [leaderboard]);
+
   if (!tech) {
     return (
       <div>
@@ -82,8 +97,8 @@ const Tech: React.FC = () => {
 
   return (
     <div>
-      <header className="mb-10 flex flex-col gap-2">
-        <h2 className="flex gap-4 ">
+      <header className="mb-10 flex gap-2 justify-between">
+        <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             <img src={`/favicons/${tech.key}.webp`} />
           </div>{' '}
@@ -92,6 +107,17 @@ const Tech: React.FC = () => {
             <div className="text-2xl font-semibold">{tech.name}</div>
           </div>
         </h2>
+        <div>
+          <div className="text-[10px] text-right text-gray-500">
+            <Link to="/category/$category" params={{ category: tech.type }}>
+              {stackDefinition[tech.type].name}
+            </Link>
+          </div>
+          <div className="text-4xl text-right font-semibold text-gray-400">
+            <span className="font-normal text-gray-400">#</span>
+            {position}
+          </div>
+        </div>
       </header>
       <div className="grid grid-cols-4 gap-4">
         <Card>
@@ -109,7 +135,7 @@ const Tech: React.FC = () => {
           </CardHeader>
           {trend === null ? (
             <CardFooter className="flex-col items-start gap-1 text-sm">
-              No change in usage since last week
+              No noticeable change in usage since last week
             </CardFooter>
           ) : (
             <CardFooter className="flex-col items-start gap-1 text-sm">
@@ -174,19 +200,63 @@ const Tech: React.FC = () => {
           />
         </Card>
       </div>
-      <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
+      <div className="grid grid-cols-10 gap-10">
+        <div className="col-span-7">
+          <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
+        </div>
+        <div className="col-span-3 mt-20 flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            {tech.github && (
+              <a href={`https://github.com/${tech.github}?ref=stackhub.dev`} target="_blank">
+                <Button variant="outline" className="cursor-pointer w-full">
+                  <IconBrandGithub stroke={1} /> GitHub
+                </Button>
+              </a>
+            )}
+            <a href={`${tech.website}?ref=stackhub.dev`} target="_blank">
+              <Button variant="outline" className="cursor-pointer w-full">
+                <IconWorld stroke={1} /> Website
+              </Button>
+            </a>
+          </div>
+          <Card>
+            <CardHeader className="relative">
+              <CardDescription className="flex gap-2 items-center">
+                <IconStar stroke={2} size={18} />
+                Cumulated Stars
+              </CardDescription>
+              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
+                {stars}
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          <div className="border-t pt-4 mt-4">
+            <h3 className=" text-gray-500">
+              Category{' '}
+              <Link
+                to="/category/$category"
+                params={{ category: tech.type }}
+                className="font-semibold text-gray-800"
+              >
+                {stackDefinition[tech.type].name}
+              </Link>
+            </h3>
+            <div className="text-sm"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-const topN = 10;
+const topN = 9;
 const topMore = 20;
 const topTotal = topN + topMore;
 
 export const TopRepositories: React.FC<{
   topRepos: RepositoryTop[];
   volume: null | TechnologyWeeklyVolume;
-  tech: TechItemExtended;
+  tech: TechItemWithExtended;
 }> = ({ topRepos, volume, tech }) => {
   const [top10, rest] = useMemo(() => {
     const copy = [...topRepos];
@@ -212,7 +282,7 @@ export const TopRepositories: React.FC<{
   return (
     <div className="mt-10">
       <h3 className="text-lg font-semibold mb-4">Top repositories using {tech.name}</h3>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {top10.map((repo) => {
           return (
             <Link

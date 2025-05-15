@@ -30,7 +30,15 @@ export type APIGetCategory = Endpoint<{
   Method: 'GET';
   Success: {
     success: true;
-    data: { list: TechnologyByCategoryByWeekWithTrend[]; top: TechnologyTopN[] };
+    data: { top: TechnologyTopN[] };
+  };
+}>;
+export type APIGetCategoryLeaderboard = Endpoint<{
+  Path: '/v1/categories/:name/leaderboard';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: TechnologyByCategoryByWeekWithTrend[];
   };
 }>;
 
@@ -41,6 +49,6 @@ export type APIGetTechnology = Endpoint<{
   Method: 'GET';
   Success: {
     success: true;
-    data: { topRepos: RepositoryTop[]; volume: TechnologyWeeklyVolume[] };
+    data: { cumulatedStars: number; topRepos: RepositoryTop[]; volume: TechnologyWeeklyVolume[] };
   };
 }>;

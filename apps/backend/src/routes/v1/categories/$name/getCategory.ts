@@ -1,9 +1,6 @@
 import { z } from 'zod';
 
-import {
-  getTop10TechnologiesByCategoryForNWeeks,
-  getTopTechnologiesWithTrendByCategory,
-} from '../../../../models/technologies.js';
+import { getTop10TechnologiesByCategoryForNWeeks } from '../../../../models/technologies.js';
 
 import type { APIGetCategory } from '../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -21,12 +18,11 @@ export const getCategory: FastifyPluginCallback = (fastify: FastifyInstance) => 
 
     const params = valParams.data;
 
-    const data = await getTopTechnologiesWithTrendByCategory(params.name);
     const top = await getTop10TechnologiesByCategoryForNWeeks(params.name, 4);
 
     reply.status(200).send({
       success: true,
-      data: { list: data, top },
+      data: { top },
     });
   });
 };

@@ -3,11 +3,12 @@ import { ResponsivePie } from '@nivo/pie';
 import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
-import { useCategory } from '@/api/useCategory';
+import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
+import type { CategoryDefinition } from '@/lib/stack';
 import { listIndexed, stackDefinition } from '@/lib/stack';
 
 import type { AreaBumpSerie } from '@nivo/bump';
@@ -17,12 +18,13 @@ import type { ExtendedTechItem } from '@stackhub/backend/dist/utils/stacks';
 const Category: React.FC = () => {
   const { category } = Route.useParams();
 
-  const cat = stackDefinition[category as TechType];
+  const cat = stackDefinition[category as TechType] as CategoryDefinition | undefined;
   const { data, isLoading } = useCategory({ name: category });
+  const { data: leaderboard } = useCategoryLeaderboard({ name: category });
 
-  const [topNData, pieData, nonFoundTech] = useMemo(() => {
+  const topNData = useMemo(() => {
     if (!data) {
-      return [[], [], []];
+      return [];
     }
 
     const topN: Record<
@@ -32,8 +34,6 @@ const Category: React.FC = () => {
         { tech: string; color: string }
       >
     > = {};
-    const discoveredTech = new Set(data.data.list.map((row) => row.tech));
-    const nonFound: (ExtendedTechItem & TechItem)[] = [];
 
     for (const row of data.data.top) {
       if (!(row.tech in topN)) {
@@ -52,8 +52,19 @@ const Category: React.FC = () => {
       });
     }
 
+    return Object.values(topN);
+  }, [data, category]);
+
+  const [pieData, nonFoundTech] = useMemo(() => {
+    if (!leaderboard) {
+      return [[], []];
+    }
+
+    const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
+    const nonFound: (ExtendedTechItem & TechItem)[] = [];
+
     const pie: { id: string; value: number; color: string }[] = [];
-    for (const row of data.data.list) {
+    for (const row of leaderboard.data) {
       const indexed = listIndexed[row.tech];
       pie.push({ id: indexed.name, value: row.current_hits, color: indexed.color });
     }
@@ -65,8 +76,8 @@ const Category: React.FC = () => {
       }
     }
 
-    return [Object.values(topN), pie, nonFound];
-  }, [data, category]);
+    return [pie, nonFound];
+  }, [leaderboard, category]);
 
   if (!cat) {
     return (
@@ -134,7 +145,7 @@ const Category: React.FC = () => {
           </div>
           <Card>
             <div className="flex flex-col px-4">
-              {data.data.list.map((row) => {
+              {leaderboard?.data.map((row) => {
                 const formatted = formatQuantity(row.current_hits);
                 return (
                   <div className="flex justify-between items-center" key={row.tech}>
