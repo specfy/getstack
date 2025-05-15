@@ -436,8 +436,9 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   'azure.ci': {
     website: 'https://azure.microsoft.com/en-us/products/devops/pipelines/',
-    description: 'Cloud service for building, testing, and deploying code with CI/CD.',
-  }, // Assuming Azure Pipelines
+    description:
+      'Cloud service by Azure DevOps for building, testing, and deploying code with CI/CD, also known as Azure Pipelines.',
+  },
   'azure.cosmosdb': {
     website: 'https://azure.microsoft.com/en-us/products/cosmos-db/',
     description: 'Globally distributed, multi-model database service.',
@@ -520,9 +521,8 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   brevo: {
     website: 'https://www.brevo.com/',
-    description:
-      'All-in-one CRM suite for marketing, sales, and customer communication (formerly Sendinblue).',
-  }, // Formerly Sendinblue
+    description: 'All-in-one CRM suite for marketing, sales, and customer communication.',
+  },
   browserstack: {
     website: 'https://www.browserstack.com/',
     description: 'Cloud web and mobile testing platform.',
@@ -551,7 +551,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://www.checkov.io/',
     github: 'bridgecrewio/checkov',
     description:
-      'Static code analysis tool for scanning infrastructure as code (IaC) files for misconfigurations.',
+      'Static code analysis tool for scanning infrastructure as code files for misconfigurations.',
   },
   chef: {
     website: 'https://www.chef.io/',
@@ -888,7 +888,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'expo/expo',
     description:
       'Open-source platform for making universal native apps with React that run on Android, iOS, and the web.',
-  }, // Same as expodev
+  },
   express: {
     website: 'https://expressjs.com/',
     github: 'expressjs/express',
@@ -900,7 +900,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'fabric/fabric',
     description:
       'Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks.',
-  }, // Python deployment tool
+  },
   facebook: {
     website: 'https://about.facebook.com/',
     description:
@@ -952,8 +952,8 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   'gcp.aiplatform': {
     website: 'https://cloud.google.com/vertex-ai',
     description:
-      'Unified machine learning platform by Google Cloud for building, deploying, and managing ML models (formerly Vertex AI).',
-  }, // Renamed to Vertex AI
+      'Unified machine learning platform by Google Cloud for building, deploying, and managing ML models.',
+  },
   'gcp.appengine': {
     website: 'https://cloud.google.com/appengine',
     description:
@@ -1022,17 +1022,17 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   'gcp.gce': {
     website: 'https://cloud.google.com/compute',
     description:
-      "Virtual machines running in Google Cloud's data centers, providing scalable compute power (Google Compute Engine).",
+      "Virtual machines running in Google Cloud's data centers, providing scalable compute power.",
   },
   'gcp.gcs': {
     website: 'https://cloud.google.com/storage',
     description:
-      'Unified object storage service by Google Cloud for storing and accessing data from anywhere (Google Cloud Storage).',
+      'Unified object storage service by Google Cloud for storing and accessing data from anywhere.',
   },
   'gcp.gke': {
     website: 'https://cloud.google.com/kubernetes-engine',
     description:
-      'Managed Kubernetes service by Google Cloud for deploying, managing, and scaling containerized applications (Google Kubernetes Engine).',
+      'Managed Kubernetes service by Google Cloud for deploying, managing, and scaling containerized applications.',
   },
   'gcp.kms': {
     website: 'https://cloud.google.com/kms',
@@ -1379,10 +1379,10 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Smaller, more expressive, and more robust foundation for web applications and APIs, built by the Express team.',
   },
   koalaanalytics: {
-    website: 'https://koala.io/',
+    website: 'https://getkoala.com/',
     description:
-      'Analytics platform (assuming koala.io based on name), likely for web or product insights.',
-  }, // Assuming koala.io
+      'Sales intelligence platform using AI to identify buyer intent, qualify accounts, and manage engagement.',
+  },
   kong: {
     website: 'https://konghq.com/',
     github: 'Kong/kong',
@@ -2165,8 +2165,8 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://sass-lang.com/',
     github: 'sass/sass',
     description:
-      'CSS preprocessor (Sass) that adds features like variables, nesting, and mixins to standard CSS.',
-  }, // Sass is the parent technology
+      'CSS preprocessor that adds features like variables, nesting, and mixins to standard CSS.',
+  },
   selenium: {
     website: 'https://www.selenium.dev/',
     github: 'SeleniumHQ/selenium',
@@ -2278,12 +2278,12 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'sqlite/sqlite',
     description:
       'C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.',
-  }, // Mirror, main is Fossil
+  },
   sqreen: {
     website: 'https://www.datadoghq.com/product/application-security-monitoring/',
     description:
-      'Application security monitoring and protection platform, focusing on runtime protection (acquired by Datadog).',
-  }, // Acquired by Datadog
+      'Application security monitoring and protection platform, focusing on runtime protection.',
+  },
   squarespace: {
     website: 'https://www.squarespace.com/',
     description:
@@ -2487,8 +2487,8 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://turso.tech/',
     github: 'tursodatabase/libsql',
     description:
-      'Edge-hosted, distributed database based on libSQL (an SQLite fork), offering low-latency global data access.',
-  }, // Same as libsql
+      'Edge-hosted, distributed database based on libSQL, offering low-latency global data access.',
+  },
   twigphp: {
     website: 'https://twig.symfony.com/',
     github: 'twigphp/Twig',
@@ -2765,7 +2765,9 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   betterauth: {
     website: 'https://www.better-auth.com/',
-    description: 'Authentication platform (assuming from name, specific service details may vary).',
+    github: 'better-auth/better-auth',
+    description:
+      'Comprehensive and framework-agnostic authentication framework for TypeScript, offering features like email/password, social sign-on, 2FA, and multi-tenancy.',
   },
   browerbase: {
     website: 'https://www.browserbase.com/',
@@ -3011,7 +3013,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://github.com/rbenv/rbenv',
     github: 'rbenv/rbenv',
     description:
-      'Version manager for Ruby (similar to rbenv), allowing easy installation and management of Ruby versions.',
+      'Version manager for Ruby, allowing easy installation and management of Ruby versions.',
   },
   withorb: {
     website: 'https://withorb.com',
