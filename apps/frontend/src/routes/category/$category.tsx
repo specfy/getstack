@@ -29,16 +29,13 @@ const Category: React.FC = () => {
 
     const topN: Record<
       string,
-      AreaBumpSerie<
-        { x: number | string; y: number; color: string },
-        { tech: string; color: string }
-      >
+      AreaBumpSerie<{ x: number | string; y: number }, { tech: string }>
     > = {};
 
     for (const row of data.data.top) {
       if (!(row.tech in topN)) {
         const indexed = listIndexed[row.tech];
-        topN[row.tech] = { id: indexed.name, tech: row.tech, color: indexed.color, data: [] };
+        topN[row.tech] = { id: indexed.name, tech: row.tech, data: [] };
       }
       const week = Number.parseInt(row.date_week.split('-')[1], 10);
       const date = new Date();
@@ -48,7 +45,6 @@ const Category: React.FC = () => {
       topN[row.tech].data.push({
         x: row.date_week,
         y: Number.parseInt(row.hits, 10),
-        color: topN[row.tech].color,
       });
     }
 
@@ -63,10 +59,10 @@ const Category: React.FC = () => {
     const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
     const nonFound: (ExtendedTechItem & TechItem)[] = [];
 
-    const pie: { id: string; value: number; color: string }[] = [];
+    const pie: { id: string; value: number }[] = [];
     for (const row of leaderboard.data) {
       const indexed = listIndexed[row.tech];
-      pie.push({ id: indexed.name, value: row.current_hits, color: indexed.color });
+      pie.push({ id: indexed.name, value: row.current_hits });
     }
 
     // Identify undiscovered tech by diffing listIndexed for the category with discoveredTech
@@ -107,7 +103,7 @@ const Category: React.FC = () => {
             <div className="text-2xl font-semibold">{cat.name}</div>
           </div>
         </h2>
-        <h3 className="text-lg text-neutral-500">{cat.description}</h3>
+        <h3 className="mt-2 text-gray-600 text-sm w-2/4">{cat.description}</h3>
       </header>
 
       <div className="mt-10">

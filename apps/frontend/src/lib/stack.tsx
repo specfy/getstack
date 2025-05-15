@@ -44,149 +44,182 @@ export const stackDefinition: Record<TechType, CategoryDefinition> = {
   ai: {
     name: 'AI',
     icon: IconSparkles,
-    description: 'AI and machine learning tools and services.',
+    description: 'Artificial Intelligence and Machine Learning services, libraries, and platforms.',
   },
   analytics: {
     name: 'Analytics',
     icon: IconChartHistogram,
-    description: 'Tools for data analysis and business intelligence.',
+    description:
+      'Tools and platforms for data collection, processing, and visualization to derive insights.',
   },
   api: {
     name: 'API',
     icon: IconCloudDataConnection,
-    description: 'Services and tools for building and managing APIs.',
+    description:
+      'Technologies and services for designing, building, and managing Application Programming Interfaces.',
   },
   app: {
     name: 'Software',
     icon: IconApps,
-    description: 'General software applications and platforms.',
+    description: 'General-purpose software applications, platforms, and utilities.',
   },
   auth: {
     name: 'Auth',
     icon: IconUsers,
-    description: 'Authentication and authorization services.',
+    description:
+      'Services and libraries for implementing user authentication and authorization securely.',
   },
   ci: {
     name: 'CI',
     icon: IconTestPipe,
-    description: 'Continuous Integration and Continuous Deployment tools.',
+    description:
+      'Continuous Integration and Deployment tools for automating software build, test, and release pipelines.',
   },
   cloud: {
     name: 'Cloud',
     icon: IconCloud,
-    description: 'Cloud computing platforms and services.',
+    description:
+      'Cloud computing platforms providing scalable infrastructure, storage, and various managed services.',
   },
   db: {
     name: 'Database',
     icon: IconDatabase,
-    description: 'Databases and data storage solutions.',
+    description:
+      'Relational, NoSQL, and other database systems for data storage, retrieval, and management.',
   },
   etl: {
     name: 'ETL',
     icon: IconTransform,
-    description: 'Extract, Transform, Load processes and tools.',
+    description:
+      'Tools and processes for Extracting, Transforming, and Loading data between systems.',
   },
   framework: {
     name: 'Framework',
     icon: IconStack2,
-    description: 'Software frameworks for application development.',
+    description:
+      'Software libraries and architectures providing a foundation for application development.',
   },
   hosting: {
     name: 'Hosting',
     icon: IconServer,
-    description: 'Web and application hosting services.',
+    description:
+      'Services for hosting websites, applications, and backend infrastructure on servers.',
   },
   language: {
     name: 'Language',
     icon: IconCode,
-    description: 'Programming languages used in the stack.',
+    description: 'Programming languages used to write the codebase and associated tooling.',
   },
   messaging: {
     name: 'Messaging',
     icon: IconBroadcast,
-    description: 'Messaging systems and services.',
+    description:
+      "Legacy or general messaging systems; consider 'Queue' or 'Notification' for specifics.",
   },
   monitoring: {
     name: 'Monitoring',
     icon: IconBug,
-    description: 'Application and infrastructure monitoring tools.',
+    description:
+      'Tools for observing application performance, infrastructure health, and system logs.',
   },
   network: {
     name: 'Network',
     icon: IconNetwork,
-    description: 'Networking components and services.',
+    description: 'Networking infrastructure, protocols, and services like CDNs or load balancers.',
   },
   notification: {
     name: 'Notification',
     icon: IconBellRinging,
-    description: 'Services for sending notifications.',
+    description:
+      'Services and platforms for dispatching alerts and notifications across various channels.',
   },
-  queue: { name: 'Queue', icon: IconBinaryTree2, description: 'Message queue systems.' },
+  queue: {
+    name: 'Queue',
+    icon: IconBinaryTree2,
+    description: 'Message queuing systems for asynchronous task processing and communication.',
+  },
   saas: {
     name: 'SaaS',
     icon: IconBrowser,
-    description: 'Generic category for all others SaaS platforms.',
+    description:
+      'General Software-as-a-Service platforms not fitting into more specific categories.',
   },
   storage: {
     name: 'Storage',
     icon: IconPackages,
-    description: 'Data storage solutions like object storage.',
+    description:
+      'Solutions for data persistence, including object storage, block storage, and file systems.',
   },
-  tool: { name: 'Tool', icon: IconTool, description: 'Development tools and utilities.' },
+  tool: {
+    name: 'Tool',
+    icon: IconTool,
+    description: 'Development utilities, SDKs, and other auxiliary tools for software engineering.',
+  },
   test: {
     name: 'Test Library',
     icon: IconTestPipe,
-    description: 'Libraries and frameworks for testing software.',
+    description:
+      'Libraries, frameworks, and tools specifically for writing and running software tests.',
   },
   ui: {
     name: 'UI Library',
     icon: IconAppWindow,
-    description: 'User Interface libraries and frameworks.',
+    description:
+      'Frameworks and component libraries for building user interfaces and frontend experiences.',
   },
   payment: {
     name: 'Payment',
     icon: IconCreditCard,
-    description: 'Payment processing services and platforms.',
+    description:
+      'Services and gateways for processing online payments and managing financial transactions.',
   },
   linter: {
     name: 'Linter',
     icon: IconScan,
-    description: 'Code quality tools and linters.',
+    description:
+      'Static analysis tools for enforcing code style, identifying errors, and improving code quality.',
   },
   collaboration: {
     name: 'Collaboration',
     icon: IconUsersGroup,
-    description: 'Collaboration tools and platforms.',
+    description:
+      'Platforms and tools facilitating teamwork, communication, and project management.',
   },
   orm: {
     name: 'ORM',
     icon: IconDatabaseEdit,
-    description: 'ORM and database query builder tools.',
+    description:
+      'Object-Relational Mapping tools and query builders for database interaction in applications.',
   },
   communication: {
     name: 'Communication',
     icon: IconMessage,
-    description: 'Communication services and platforms.',
+    description:
+      'Services and platforms for real-time or asynchronous communication, like chat or email APIs.',
   },
   package_manager: {
     name: 'Package Manager',
     icon: IconPackage,
-    description: 'Package managers for managing dependencies and tools.',
+    description:
+      'Tools for managing software dependencies, libraries, and project packages efficiently.',
   },
   cms: {
     name: 'CMS',
     icon: IconBlockquote,
-    description: 'Content Management Systems services and platforms.',
+    description:
+      'Content Management Systems for creating, managing, and modifying digital content for websites.',
   },
   crm: {
     name: 'CRM',
     icon: IconUsers,
-    description: 'Customer Relationship Management tools and platforms.',
+    description:
+      'Customer Relationship Management platforms for managing interactions and data with customers.',
   },
   security: {
     name: 'Security',
     icon: IconShield,
-    description: 'Security tools and platforms.',
+    description:
+      'Tools, services, and platforms focused on application security, vulnerability scanning, and threat detection.',
   },
 };
 

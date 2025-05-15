@@ -97,29 +97,34 @@ const Tech: React.FC = () => {
 
   return (
     <div>
-      <header className="mb-10 flex gap-2 justify-between">
+      <header className="flex gap-2 justify-between">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             <img src={`/favicons/${tech.key}.webp`} />
           </div>{' '}
-          <div>
-            <div className="text-xs text-gray-400">Technology</div>
-            <div className="text-2xl font-semibold">{tech.name}</div>
+          <div className="flex flex-col gap-1">
+            <Link
+              to="/category/$category"
+              params={{ category: tech.type }}
+              className="text-xs text-gray-400 leading-3"
+            >
+              {stackDefinition[tech.type].name}
+            </Link>
+            <div className="text-2xl font-semibold  leading-6">{tech.name}</div>
           </div>
         </h2>
         <div>
-          <div className="text-[10px] text-right text-gray-500">
-            <Link to="/category/$category" params={{ category: tech.type }}>
-              {stackDefinition[tech.type].name}
-            </Link>
-          </div>
+          <div className="text-[10px] text-right text-gray-500">in category</div>
           <div className="text-4xl text-right font-semibold text-gray-400">
             <span className="font-normal text-gray-400">#</span>
             {position}
           </div>
         </div>
       </header>
-      <div className="grid grid-cols-4 gap-4">
+      {tech.description && (
+        <div className="mt-2 text-gray-600 text-sm w-2/4">{tech.description}</div>
+      )}
+      <div className="grid grid-cols-4 gap-4 mt-10 ">
         <Card>
           <CardHeader className="relative">
             <CardDescription>Repositories</CardDescription>
