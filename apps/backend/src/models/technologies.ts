@@ -144,7 +144,7 @@ export async function getTopTechnologiesWithTrendByCategory(
             coalesce(raw_current_hits, 0) AS current_hits,
             coalesce(raw_previous_hits, 0) AS previous_hits,
             toUInt32((coalesce(raw_current_hits, 0) - coalesce(raw_previous_hits, 0))) AS trend,
-            round(((coalesce(raw_current_hits, 0) - coalesce(raw_previous_hits, 0)) / (coalesce(raw_previous_hits, 0) + 1)) * 100, 1) AS percent_change,
+            round((coalesce(raw_current_hits, 0) * 100) / coalesce(raw_previous_hits, 0) - 100, 1) AS percent_change,
             row_number() OVER (PARTITION BY category ORDER BY coalesce(raw_current_hits, 0) DESC) AS rn
         FROM base_data
     )

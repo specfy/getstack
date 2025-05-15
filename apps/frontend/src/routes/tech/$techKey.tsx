@@ -1,11 +1,11 @@
 import { ResponsiveLine } from '@nivo/line';
 import { IconStar, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
+import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { useTechnology } from '@/api/useTechnology';
 import { TrendsBadge } from '@/components/TrendsBadge';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
@@ -33,7 +33,7 @@ const Tech: React.FC = () => {
     }
 
     const lastWeek = data.data.volume.at(-2)!;
-    const pct = ((crr.hits - lastWeek.hits) / lastWeek.hits) * 100;
+    const pct = (crr.hits * 100) / lastWeek.hits - 100;
     return [
       crr,
       pct > 0.5 || pct < -0.05 ? Number.parseFloat(pct.toFixed(1)) : null,
@@ -56,7 +56,11 @@ const Tech: React.FC = () => {
       {
         id: 'volume',
         data: data.data.volume.map((r) => {
-          return { y: r.hits, x: r.date_week };
+          // Parse YYYY-WW into a valid date
+          const [year, week] = r.date_week.split('-').map(Number);
+          const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
+          const formattedDate = format(parsedDate, 'MMM dd');
+          return { y: r.hits, x: formattedDate };
         }),
       },
     ];
@@ -149,10 +153,10 @@ const Tech: React.FC = () => {
             enableTouchCrosshair={true}
             useMesh={true}
             role="application"
-            curve="cardinal"
+            curve="monotoneX"
             yScale={{
               type: 'linear',
-              min: 'auto',
+              min: 0,
               max: 'auto',
               stacked: true,
               reverse: false,
@@ -166,7 +170,7 @@ const Tech: React.FC = () => {
               legendPosition: 'middle',
               truncateTickAt: 0,
             }}
-            axisLeft={false}
+            axisLeft={null}
           />
         </Card>
       </div>
