@@ -5,17 +5,19 @@ import { cn } from '@/lib/utils';
 
 import type { TechnologyByCategoryByWeekWithTrend } from '@stackhub/backend/src/types/endpoint';
 
-export const TrendsBadge: React.FC<{ row: TechnologyByCategoryByWeekWithTrend }> = ({ row }) => {
+export const TrendsBadge: React.FC<{
+  pct: TechnologyByCategoryByWeekWithTrend['percent_change'];
+}> = ({ pct }) => {
   return (
     <Badge
       variant="outline"
       className={cn(
         'flex gap-1 rounded-lg text-tiny',
-        row.percent_change > 0 ? ' text-lime-600' : ' text-red-400'
+        pct > 0 ? ' text-lime-600' : ' text-red-400'
       )}
     >
-      {row.percent_change > 0 ? <IconTrendingUp /> : <IconTrendingDown />}
-      {row.percent_change > 9 ? Math.round(row.percent_change) : row.percent_change}%
+      {pct > 0 ? <IconTrendingUp /> : <IconTrendingDown />}
+      {pct > 9 ? Math.round(pct) : pct}%
     </Badge>
   );
 };

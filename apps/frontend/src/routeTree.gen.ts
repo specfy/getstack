@@ -15,6 +15,7 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as TechTechKeyImport } from './routes/tech/$techKey'
 import { Route as CategoryCategoryImport } from './routes/category/$category'
+import { Route as OrgNameImport } from './routes/$org/$name'
 
 // Create/Update Routes
 
@@ -42,6 +43,12 @@ const CategoryCategoryRoute = CategoryCategoryImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const OrgNameRoute = OrgNameImport.update({
+  id: '/$org/$name',
+  path: '/$org/$name',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,6 +65,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/$org/$name': {
+      id: '/$org/$name'
+      path: '/$org/$name'
+      fullPath: '/$org/$name'
+      preLoaderRoute: typeof OrgNameImport
       parentRoute: typeof rootRoute
     }
     '/category/$category': {
@@ -82,6 +96,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/tech/$techKey': typeof TechTechKeyRoute
 }
@@ -89,6 +104,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/tech/$techKey': typeof TechTechKeyRoute
 }
@@ -97,22 +113,35 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/tech/$techKey': typeof TechTechKeyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/category/$category' | '/tech/$techKey'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/$org/$name'
+    | '/category/$category'
+    | '/tech/$techKey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/category/$category' | '/tech/$techKey'
-  id: '__root__' | '/' | '/about' | '/category/$category' | '/tech/$techKey'
+  to: '/' | '/about' | '/$org/$name' | '/category/$category' | '/tech/$techKey'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/$org/$name'
+    | '/category/$category'
+    | '/tech/$techKey'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  OrgNameRoute: typeof OrgNameRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
   TechTechKeyRoute: typeof TechTechKeyRoute
 }
@@ -120,6 +149,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  OrgNameRoute: OrgNameRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
   TechTechKeyRoute: TechTechKeyRoute,
 }
@@ -136,6 +166,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/$org/$name",
         "/category/$category",
         "/tech/$techKey"
       ]
@@ -145,6 +176,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/$org/$name": {
+      "filePath": "$org/$name.tsx"
     },
     "/category/$category": {
       "filePath": "category/$category.tsx"

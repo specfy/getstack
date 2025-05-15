@@ -52,7 +52,7 @@ export default [
     },
   },
   {
-    files: ['apps/frontend/src/components/ui/*.tsx'],
+    files: ['apps/frontend/src/components/*.tsx'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/naming-convention': 'off',

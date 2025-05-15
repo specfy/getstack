@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { getRepository } from '../../../models/repositories.js';
-import { analyze, saveAnalysis, savePreviousIfStale } from '../../../processor/analyzer.js';
-import { formatToYearWeek } from '../../../utils/date.js';
-import { defaultLogger } from '../../../utils/logger.js';
+import { getRepository } from '../../../../../models/repositories.js';
+import { analyze, saveAnalysis, savePreviousIfStale } from '../../../../../processor/analyzer.js';
+import { formatToYearWeek } from '../../../../../utils/date.js';
+import { defaultLogger } from '../../../../../utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 

@@ -7,7 +7,11 @@ import type {
   TechnologyRow,
   TechnologyWeeklyRow,
 } from '../db/types.js';
-import type { TechnologyByCategoryByWeekWithTrend, TechnologyTopN } from '../types/endpoint.js';
+import type {
+  TechnologyByCategoryByWeekWithTrend,
+  TechnologyTopN,
+  TechnologyWeeklyVolume,
+} from '../types/endpoint.js';
 
 export async function createTechnologies(input: TechnologyInsert[]): Promise<void> {
   const q = kyselyClickhouse.insertInto('technologies').values(input);
@@ -230,6 +234,48 @@ ORDER BY date_week, position`,
   });
 
   const json = await res.json<TechnologyTopN>();
+
+  return json.data;
+}
+
+export async function getTopRepositoriesForTechnology(tech: string): Promise<RepositoryRow[]> {
+  const dateWeek = formatToYearWeek(new Date());
+
+  const res = await clickHouse.query({
+    query: `SELECT
+    r.*
+FROM
+    repositories AS r
+INNER JOIN
+    technologies AS t
+ON
+    r.org = t.org AND r.name = t.name
+WHERE
+    t.tech = {tech: String} AND date_week = {week: String}
+ORDER BY
+    r.stars DESC
+LIMIT 30;`,
+    query_params: { tech, week: dateWeek },
+  });
+
+  const json = await res.json<RepositoryRow>();
+
+  return json.data;
+}
+
+export async function getTechnologyVolumePerWeek(tech: string): Promise<TechnologyWeeklyVolume[]> {
+  const res = await clickHouse.query({
+    query: `SELECT
+      date_week,
+      SUM(hits) AS hits
+    FROM technologies_weekly_mv
+    WHERE tech = {tech: String}
+    GROUP BY date_week
+    ORDER BY date_week`,
+    query_params: { tech },
+  });
+
+  const json = await res.json<TechnologyWeeklyVolume>();
 
   return json.data;
 }

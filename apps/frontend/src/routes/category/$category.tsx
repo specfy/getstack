@@ -142,7 +142,7 @@ const Category: React.FC = () => {
                     <div className="flex gap-1 items-center">
                       {row.previous_hits > 0 &&
                         (row.percent_change > 0.5 || row.percent_change < -0.5) && (
-                          <TrendsBadge row={row} />
+                          <TrendsBadge pct={row.percent_change} />
                         )}
                       <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
                     </div>

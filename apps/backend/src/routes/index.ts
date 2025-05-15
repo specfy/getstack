@@ -1,14 +1,16 @@
-import { getCategory } from './v1/categories/getCategory.js';
+import { getCategory } from './v1/categories/$name/getCategory.js';
 import { postCronTriggerAnalyze } from './v1/cron/postTriggerAnalyze.js';
 import { postCronTriggerList } from './v1/cron/postTriggerList.js';
 import { getRoot } from './v1/getRoot.js';
 import { getTopRoute } from './v1/getTop.js';
-import { postAnalyzeOne } from './v1/repositories/postAnalyzeOne.js';
+import { postAnalyzeOne } from './v1/repositories/$org/$name/postAnalyzeOne.js';
+import { getTechnology } from './v1/technologies/$name/getTechnology.js';
 
 import type { FastifyPluginAsync } from 'fastify';
 
 export const routes: FastifyPluginAsync = async (f) => {
   await f.register(postAnalyzeOne, { prefix: '/1' });
+  await f.register(getTechnology, { prefix: '/1' });
 
   await f.register(getCategory, { prefix: '/1' });
   await f.register(getTopRoute, { prefix: '/1' });

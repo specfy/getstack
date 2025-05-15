@@ -3,9 +3,9 @@ import { z } from 'zod';
 import {
   getTop10TechnologiesByCategoryForNWeeks,
   getTopTechnologiesWithTrendByCategory,
-} from '../../../models/technologies.js';
+} from '../../../../models/technologies.js';
 
-import type { APIGetCategory } from '../../../types/endpoint.js';
+import type { APIGetCategory } from '../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 const schemaParams = z.object({
