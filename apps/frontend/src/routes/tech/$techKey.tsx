@@ -140,98 +140,102 @@ const Tech: React.FC = () => {
             <div className="text-2xl font-semibold  leading-6">{tech.name}</div>
           </div>
         </h2>
-        <div>
-          <div className="text-[10px] text-right text-gray-500">position in category</div>
-          <div className="text-4xl text-right font-semibold text-gray-400">
-            <span className="font-normal text-gray-400">#</span>
-            {position}
+        {position > 0 && (
+          <div>
+            <div className="text-[10px] text-right text-gray-500">position in category</div>
+            <div className="text-4xl text-right font-semibold text-gray-400">
+              <span className="font-normal text-gray-400">#</span>
+              {position}
+            </div>
           </div>
-        </div>
+        )}
       </header>
       {tech.description && (
         <div className="mt-2 text-gray-600 text-sm w-2/4">{tech.description}</div>
       )}
-      <div className="grid grid-cols-4 gap-4 mt-10 ">
-        <Card>
-          <CardHeader className="relative">
-            <CardDescription>Repositories</CardDescription>
-            <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-              {repoCount}
-            </CardTitle>
+      {position > 0 && (
+        <div className="grid grid-cols-4 gap-4 mt-10 ">
+          <Card>
+            <CardHeader className="relative">
+              <CardDescription>Repositories</CardDescription>
+              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                {repoCount}
+              </CardTitle>
 
-            {trend !== null && (
-              <div className="absolute right-4 top-0">
-                <TrendsBadge pct={trend} />
-              </div>
-            )}
-          </CardHeader>
-          {trend === null ? (
-            <CardFooter className="flex-col items-start gap-1 text-sm">
-              No noticeable change in usage since last week
-            </CardFooter>
-          ) : (
-            <CardFooter className="flex-col items-start gap-1 text-sm">
-              {trend > 0 ? (
-                <>
-                  <div className="line-clamp-1 flex gap-2 font-medium">
-                    Trending up this week <IconTrendingUp className="size-4" />
-                  </div>
-                  <div className="text-muted-foreground">
-                    Found in {diff} more repo{diff > 1 && 's'}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="line-clamp-1 flex gap-2 font-medium">
-                    Trending down this week <IconTrendingDown className="size-4" />
-                  </div>
-                  <div className="text-muted-foreground">
-                    Removed in {diff} repo{diff > 1 && 's'}
-                  </div>
-                </>
+              {trend !== null && (
+                <div className="absolute right-4 top-0">
+                  <TrendsBadge pct={trend} />
+                </div>
               )}
-            </CardFooter>
-          )}
-        </Card>
-        <Card style={{ height: 176 }} className="py-0 col-span-3">
-          <ResponsiveLine
-            data={chartData}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            xScale={{ type: 'point' }}
-            enableArea={true}
-            axisTop={null}
-            axisRight={null}
-            enableGridX={false}
-            enableGridY={false}
-            pointSize={5}
-            pointColor={{ theme: 'background' }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: 'seriesColor' }}
-            pointLabelYOffset={-12}
-            enableTouchCrosshair={true}
-            useMesh={true}
-            role="application"
-            curve="monotoneX"
-            yScale={{
-              type: 'linear',
-              min: 0,
-              max: 'auto',
-              stacked: true,
-              reverse: false,
-            }}
-            axisBottom={{
-              tickSize: 1,
-              tickPadding: 6,
-              tickRotation: 0,
-              legend: '',
-              legendOffset: 11,
-              legendPosition: 'middle',
-              truncateTickAt: 0,
-            }}
-            axisLeft={null}
-          />
-        </Card>
-      </div>
+            </CardHeader>
+            {trend === null ? (
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                No noticeable change in usage since last week
+              </CardFooter>
+            ) : (
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                {trend > 0 ? (
+                  <>
+                    <div className="line-clamp-1 flex gap-2 font-medium">
+                      Trending up this week <IconTrendingUp className="size-4" />
+                    </div>
+                    <div className="text-muted-foreground">
+                      Found in {diff} more repo{diff > 1 && 's'}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="line-clamp-1 flex gap-2 font-medium">
+                      Trending down this week <IconTrendingDown className="size-4" />
+                    </div>
+                    <div className="text-muted-foreground">
+                      Removed in {diff} repo{diff > 1 && 's'}
+                    </div>
+                  </>
+                )}
+              </CardFooter>
+            )}
+          </Card>
+          <Card style={{ height: 176 }} className="py-0 col-span-3">
+            <ResponsiveLine
+              data={chartData}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              xScale={{ type: 'point' }}
+              enableArea={true}
+              axisTop={null}
+              axisRight={null}
+              enableGridX={false}
+              enableGridY={false}
+              pointSize={5}
+              pointColor={{ theme: 'background' }}
+              pointBorderWidth={2}
+              pointBorderColor={{ from: 'seriesColor' }}
+              pointLabelYOffset={-12}
+              enableTouchCrosshair={true}
+              useMesh={true}
+              role="application"
+              curve="monotoneX"
+              yScale={{
+                type: 'linear',
+                min: 0,
+                max: 'auto',
+                stacked: true,
+                reverse: false,
+              }}
+              axisBottom={{
+                tickSize: 1,
+                tickPadding: 6,
+                tickRotation: 0,
+                legend: '',
+                legendOffset: 11,
+                legendPosition: 'middle',
+                truncateTickAt: 0,
+              }}
+              axisLeft={null}
+            />
+          </Card>
+        </div>
+      )}
       <div className="grid grid-cols-10 gap-10">
         <div className="col-span-7">
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
@@ -251,17 +255,19 @@ const Tech: React.FC = () => {
               </Button>
             </a>
           </div>
-          <Card>
-            <CardHeader className="relative">
-              <CardDescription className="flex gap-2 items-center">
-                <IconStar stroke={2} size={18} />
-                Cumulated Stars
-              </CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
-                {stars}
-              </CardTitle>
-            </CardHeader>
-          </Card>
+          {position > 0 && (
+            <Card>
+              <CardHeader className="relative">
+                <CardDescription className="flex gap-2 items-center">
+                  <IconStar stroke={2} size={18} />
+                  Cumulated Stars
+                </CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
+                  {stars}
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          )}
           <div className="border-t pt-4 mt-4">
             <h3 className="text-sm text-gray-500">
               More in{' '}
@@ -395,7 +401,7 @@ export const TopRepositories: React.FC<{
 
       {topRepos.length === 0 && (
         <div className="text-gray-400 italic">
-          No open-source repositories is using {tech.name} yet.
+          No open-source repositories are using {tech.name} yet.
         </div>
       )}
     </div>
