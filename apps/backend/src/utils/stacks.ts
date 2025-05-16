@@ -2,34 +2,6 @@ import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js'
 
 import type { AllowedKeys, TechItem } from '@specfy/stack-analyser';
 
-export const colors: [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-] = [
-  'hsl(200.66deg 52.14% 77.06%)',
-  'hsl(204.16deg 70.62% 41.37%)',
-  'hsl(91.76deg 57.05% 70.78%)',
-  'hsl(116.38deg 56.86% 40%)',
-  'hsl(0.61deg 92.45% 79.22%)',
-  'hsl(359.4deg 79.45% 49.61%)',
-  'hsl(33.8deg 97.26% 71.37%)',
-  'hsl(29.88deg 100% 50%)',
-  'hsl(280deg 30.51% 76.86%)',
-  'hsl(269.03deg 43.26% 42.16%)',
-  'hsl(60deg 100% 80%)',
-  'hsl(21.46deg 63.13% 42.55%)',
-];
-
 export interface ExtendedTechItem {
   website?: string;
   github?: string;
@@ -2757,7 +2729,6 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Headless, framework-agnostic rich text editor, providing a flexible foundation for building custom text editors.',
   },
-
   akamai: {
     website: 'https://www.akamai.com/',
     description:

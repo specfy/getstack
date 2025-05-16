@@ -1,6 +1,7 @@
 import { ResponsiveLine } from '@nivo/line';
 import {
   IconBrandGithub,
+  IconDots,
   IconStar,
   IconTrendingDown,
   IconTrendingUp,
@@ -12,16 +13,22 @@ import { useMemo } from 'react';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
 import { useTechnology } from '@/api/useTechnology';
+import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
 import { listIndexed, stackDefinition } from '@/lib/stack';
+import { cn } from '@/lib/utils';
 
 import type { LineSeries } from '@nivo/line';
 import type { AllowedKeys } from '@specfy/stack-analyser';
 import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
-import type { RepositoryTop, TechnologyWeeklyVolume } from '@stackhub/backend/src/types/endpoint';
+import type {
+  RepositoryTop,
+  TechnologyByCategoryByWeekWithTrend,
+  TechnologyWeeklyVolume,
+} from '@stackhub/backend/src/types/endpoint';
 
 const Tech: React.FC = () => {
   const { techKey } = Route.useParams();
@@ -74,12 +81,32 @@ const Tech: React.FC = () => {
     ];
   }, [data]);
 
-  const position = useMemo(() => {
+  const [position, inCategory] = useMemo<
+    [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]
+  >(() => {
     if (!leaderboard) {
-      return 0;
+      return [0, []];
     }
-    return leaderboard.data.findIndex((v) => v.tech === techKey)! + 1;
-  }, [leaderboard]);
+
+    const tmp = leaderboard.data.findIndex((v) => v.tech === techKey);
+    if (tmp === -1) {
+      return [
+        0,
+        leaderboard.data.slice(0, 4).map((item, index) => {
+          return { ...item, position: index + 1 };
+        }),
+      ];
+    }
+
+    const start = Math.max(0, tmp - 2);
+    const end = Math.min(leaderboard.data.length, tmp === 0 ? 4 : tmp + 3);
+
+    const surroundingTechs = leaderboard.data.slice(start, end).map((item, index) => {
+      return { ...item, position: start + index + 1 };
+    });
+
+    return [tmp + 1, surroundingTechs];
+  }, [leaderboard, techKey]);
 
   if (!tech) {
     return (
@@ -114,7 +141,7 @@ const Tech: React.FC = () => {
           </div>
         </h2>
         <div>
-          <div className="text-[10px] text-right text-gray-500">in category</div>
+          <div className="text-[10px] text-right text-gray-500">position in category</div>
           <div className="text-4xl text-right font-semibold text-gray-400">
             <span className="font-normal text-gray-400">#</span>
             {position}
@@ -236,8 +263,8 @@ const Tech: React.FC = () => {
             </CardHeader>
           </Card>
           <div className="border-t pt-4 mt-4">
-            <h3 className=" text-gray-500">
-              Category{' '}
+            <h3 className="text-sm text-gray-500">
+              More in{' '}
               <Link
                 to="/category/$category"
                 params={{ category: tech.type }}
@@ -246,7 +273,40 @@ const Tech: React.FC = () => {
                 {stackDefinition[tech.type].name}
               </Link>
             </h3>
-            <div className="text-sm"></div>
+            <div className="text-sm ml-1 mt-3">
+              {position > 3 && (
+                <div className=" text-xs text-gray-400">
+                  <IconDots stroke={1} size={18} />
+                </div>
+              )}
+              {inCategory.map((row) => {
+                const is = row.tech === techKey;
+                return (
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={cn(
+                        'text-gray-400 font-semibold text-xs',
+                        is && 'text-md text-gray-600'
+                      )}
+                    >
+                      #{row.position}
+                    </div>
+                    <TechBadge
+                      tech={row.tech}
+                      className={cn(is && ' text-gray-900')}
+                      size={is ? 'l' : 'md'}
+                    />
+                  </div>
+                );
+              })}
+              {leaderboard &&
+                leaderboard.data.length > 4 &&
+                leaderboard.data.length > position + 2 && (
+                  <div className=" text-xs text-gray-400">
+                    <IconDots stroke={1} size={18} />
+                  </div>
+                )}
+            </div>
           </div>
         </div>
       </div>
@@ -330,6 +390,12 @@ export const TopRepositories: React.FC<{
           {volume && volume.hits > topTotal && (
             <div className="text-xs text-gray-400">{howMuch} more...</div>
           )}
+        </div>
+      )}
+
+      {topRepos.length === 0 && (
+        <div className="text-gray-400 italic">
+          No open-source repositories is using {tech.name} yet.
         </div>
       )}
     </div>
