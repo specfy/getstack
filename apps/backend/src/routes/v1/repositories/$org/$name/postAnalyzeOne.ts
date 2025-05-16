@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { getRepository } from '../../../../../models/repositories.js';
 import { analyze, saveAnalysis, savePreviousIfStale } from '../../../../../processor/analyzer.js';
+import { notFound } from '../../../../../utils/apiErrors.js';
 import { formatToYearWeek } from '../../../../../utils/date.js';
 import { defaultLogger } from '../../../../../utils/logger.js';
 
@@ -18,7 +19,7 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
   fastify.post('/repositories/:org/:name', async (req, reply) => {
     const valParams = schemaParams.safeParse(req.params);
     if (valParams.error) {
-      return reply.status(400).send({ error: { code: 'invalid_params' } });
+      return reply.status(400).send({ error: { code: 'invalid_params', status: 400 } });
     }
 
     const params = valParams.data;
@@ -27,7 +28,7 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
 
     const repo = await getRepository(params);
     if (!repo) {
-      return reply.status(404).send({ error: { code: '404_not_found' } });
+      return notFound(reply);
     }
 
     const dateWeek = formatToYearWeek(new Date());
@@ -42,7 +43,7 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
       }
     } catch (err) {
       logger.error(`Failed to process`, err);
-      reply.status(500).send({ error: { code: 'failed_to_process' } });
+      reply.status(500).send({ error: { code: 'failed_to_process', status: 500 } });
       return;
     }
 

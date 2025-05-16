@@ -20,7 +20,7 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
   fastify.get<APIGetTechnology>('/technologies/:name', async (req, reply) => {
     const valParams = schemaParams.safeParse(req.params);
     if (valParams.error) {
-      return reply.status(400).send({ error: { code: '400_invalid_params' } });
+      return reply.status(400).send({ error: { code: '400_invalid_params', status: 400 } });
     }
 
     const params = valParams.data;

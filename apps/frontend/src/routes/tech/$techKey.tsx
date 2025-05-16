@@ -12,17 +12,19 @@ import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
-import { useTechnology } from '@/api/useTechnology';
+import { useRelatedTechnology, useTechnology } from '@/api/useTechnology';
+import { NotFound } from '@/components/NotFound';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
-import { listIndexed, stackDefinition } from '@/lib/stack';
+import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { LineSeries } from '@nivo/line';
-import type { AllowedKeys } from '@specfy/stack-analyser';
+import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
 import type {
   RepositoryTop,
@@ -109,11 +111,7 @@ const Tech: React.FC = () => {
   }, [leaderboard, techKey]);
 
   if (!tech) {
-    return (
-      <div>
-        <h2 className="text-2xl">Not found</h2>
-      </div>
-    );
+    return <NotFound />;
   }
   if (isLoading) {
     return <>Loading</>;
@@ -124,7 +122,7 @@ const Tech: React.FC = () => {
 
   return (
     <div>
-      <header className="flex gap-2 justify-between">
+      <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             <img src={`/favicons/${tech.key}.webp`} />
@@ -135,7 +133,7 @@ const Tech: React.FC = () => {
               params={{ category: tech.type }}
               className="text-xs text-gray-400 leading-3"
             >
-              {stackDefinition[tech.type].name}
+              {categories[tech.type].name}
             </Link>
             <div className="text-2xl font-semibold  leading-6">{tech.name}</div>
           </div>
@@ -236,39 +234,42 @@ const Tech: React.FC = () => {
           </Card>
         </div>
       )}
-      <div className="grid grid-cols-10 gap-10">
-        <div className="col-span-7">
+      <div className="grid grid-cols-10 gap-14 mt-14">
+        <div className="col-span-7 flex flex-col gap-14">
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
+          <Related tech={tech} />
         </div>
-        <div className="col-span-3 mt-20 flex flex-col gap-4">
+        <div className="col-span-3 mt-0 flex flex-col gap-5">
           <div className="grid grid-cols-2 gap-4">
             {tech.github && (
-              <a href={`https://github.com/${tech.github}?ref=stackhub.dev`} target="_blank">
+              <a href={`https://github.com/${tech.github}?ref=usestack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
                   <IconBrandGithub stroke={1} /> GitHub
                 </Button>
               </a>
             )}
-            <a href={`${tech.website}?ref=stackhub.dev`} target="_blank">
+            <a href={`${tech.website}?ref=usestack.dev`} target="_blank">
               <Button variant="outline" className="cursor-pointer w-full">
                 <IconWorld stroke={1} /> Website
               </Button>
             </a>
           </div>
           {position > 0 && (
-            <Card>
-              <CardHeader className="relative">
-                <CardDescription className="flex gap-2 items-center">
-                  <IconStar stroke={2} size={18} />
-                  Cumulated Stars
-                </CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
-                  {stars}
-                </CardTitle>
-              </CardHeader>
-            </Card>
+            <div className="border-t pt-5">
+              <Card>
+                <CardHeader className="relative">
+                  <CardDescription className="flex gap-2 items-center">
+                    <IconStar stroke={2} size={18} />
+                    Cumulated Stars
+                  </CardDescription>
+                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
+                    {stars}
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+            </div>
           )}
-          <div className="border-t pt-4 mt-4">
+          <div className="border-t pt-5 mt-1">
             <h3 className="text-sm text-gray-500">
               More in{' '}
               <Link
@@ -276,7 +277,7 @@ const Tech: React.FC = () => {
                 params={{ category: tech.type }}
                 className="font-semibold text-gray-800"
               >
-                {stackDefinition[tech.type].name}
+                {categories[tech.type].name}
               </Link>
             </h3>
             <div className="text-sm ml-1 mt-3">
@@ -320,8 +321,8 @@ const Tech: React.FC = () => {
   );
 };
 
-const topN = 9;
-const topMore = 20;
+const topN = 8;
+const topMore = 12;
 const topTotal = topN + topMore;
 
 export const TopRepositories: React.FC<{
@@ -337,7 +338,7 @@ export const TopRepositories: React.FC<{
       sliced.map((row) => {
         return { ...row, stars: formatQuantity(row.stars) };
       }),
-      copy.map((row) => {
+      copy.splice(0, topMore).map((row) => {
         return { ...row, stars: formatQuantity(row.stars) };
       }),
     ];
@@ -351,14 +352,14 @@ export const TopRepositories: React.FC<{
   }, [volume]);
 
   return (
-    <div className="mt-10">
+    <div>
       <h3 className="text-lg font-semibold mb-4">Top repositories using {tech.name}</h3>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         {top10.map((repo) => {
           return (
             <Link
               key={repo.url}
-              className="py-1 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-100 hover:bg-gray-50 transition-colors"
+              className="py-2 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-100 hover:bg-gray-50 transition-colors"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
             >
@@ -394,7 +395,7 @@ export const TopRepositories: React.FC<{
             );
           })}
           {volume && volume.hits > topTotal && (
-            <div className="text-xs text-gray-400">{howMuch} more...</div>
+            <div className="text-xs text-gray-400 px-2">{howMuch} more...</div>
           )}
         </div>
       )}
@@ -404,6 +405,55 @@ export const TopRepositories: React.FC<{
           No open-source repositories are using {tech.name} yet.
         </div>
       )}
+    </div>
+  );
+};
+
+const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
+  const { data, isLoading } = useRelatedTechnology({ name: tech.key });
+
+  const groups = useMemo<[TechType, AllowedKeys[]][]>(() => {
+    if (!data) {
+      return [];
+    }
+
+    const tmp: Record<string, AllowedKeys[]> = {};
+    for (const row of data.data) {
+      if (row.category === tech.type) {
+        continue;
+      }
+      if (!(row.category in tmp)) {
+        tmp[row.category] = [];
+      }
+      tmp[row.category].push(row.tech);
+    }
+
+    return Object.entries(tmp) as unknown as [TechType, AllowedKeys[]][];
+  }, [data]);
+
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-4">Along {tech.name} they also use</h3>
+      {isLoading && (
+        <>
+          <Skeleton className="w-[100px] h-[20px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+        </>
+      )}
+      <div className="grid grid-cols-4 gap-4 items-start">
+        {groups.length > 0 &&
+          groups.map(([cat, keys]) => {
+            return (
+              <div className="flex flex-col">
+                <div className="text-xs text-gray-400">{categories[cat].name}</div>
+                {keys.map((row) => {
+                  return <TechBadge tech={row} key={row} />;
+                })}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ export async function notFound(res: FastifyReply, message?: string): Promise<voi
   const err: ApiError<'404_not_found'> = {
     error: {
       code: '404_not_found',
+      status: 404,
       reason: message,
     },
   };
@@ -15,6 +16,7 @@ export async function serverError(res: FastifyReply): Promise<void> {
   const err: ApiError<'500_server_error'> = {
     error: {
       code: '500_server_error',
+      status: 500,
     },
   };
   return res.status(500).send(err);

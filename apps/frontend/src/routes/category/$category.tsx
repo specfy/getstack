@@ -4,12 +4,13 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
+import { NotFound } from '@/components/NotFound';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card } from '@/components/ui/card';
 import { formatQuantity } from '@/lib/number';
 import type { CategoryDefinition } from '@/lib/stack';
-import { listIndexed, stackDefinition } from '@/lib/stack';
+import { categories, listIndexed } from '@/lib/stack';
 
 import type { AreaBumpSerie } from '@nivo/bump';
 import type { TechItem, TechType } from '@specfy/stack-analyser';
@@ -18,7 +19,7 @@ import type { ExtendedTechItem } from '@stackhub/backend/dist/utils/stacks';
 const Category: React.FC = () => {
   const { category } = Route.useParams();
 
-  const cat = stackDefinition[category as TechType] as CategoryDefinition | undefined;
+  const cat = categories[category as TechType] as CategoryDefinition | undefined;
   const { data, isLoading } = useCategory({ name: category });
   const { data: leaderboard } = useCategoryLeaderboard({ name: category });
 
@@ -76,11 +77,7 @@ const Category: React.FC = () => {
   }, [leaderboard, category]);
 
   if (!cat) {
-    return (
-      <div>
-        <h2 className="text-2xl">Not found</h2>
-      </div>
-    );
+    return <NotFound />;
   }
 
   if (isLoading) {
@@ -93,7 +90,7 @@ const Category: React.FC = () => {
 
   return (
     <div>
-      <header className="mb-10 flex flex-col gap-2">
+      <header className="mb-10 flex flex-col gap-2 mt-10">
         <h2 className="flex gap-4 ">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             <cat.icon size={39} />

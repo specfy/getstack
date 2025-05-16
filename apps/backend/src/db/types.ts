@@ -1,3 +1,4 @@
+import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
 export type Timestamp = ColumnType<string, Date, Date | string>;
@@ -30,8 +31,8 @@ export type RepositoryUpdate = Updateable<RepositoriesTable>;
 export interface TechnologiesTable {
   org: string;
   name: string;
-  tech: string;
-  category: string;
+  tech: AllowedKeys;
+  category: TechType;
   date_week: string;
 }
 
@@ -41,8 +42,8 @@ export type TechnologyUpdate = Updateable<TechnologiesTable>;
 
 export interface TechnologiesWeeklyTable {
   date_week: string;
-  category: string;
-  tech: string;
+  category: TechType;
+  tech: AllowedKeys;
   hits: number;
 }
 export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;

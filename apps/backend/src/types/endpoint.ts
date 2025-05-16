@@ -1,5 +1,10 @@
 import type { Endpoint } from './api.js';
-import type { RepositoryRow, TechnologiesWeeklyTable } from '../db/types.js';
+import type {
+  RepositoryRow,
+  TechnologiesWeeklyTable,
+  TechnologyRow,
+  TechnologyWeeklyRow,
+} from '../db/types.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 
 export interface TechnologyByCategoryByWeekWithTrend {
@@ -33,6 +38,7 @@ export type APIGetCategory = Endpoint<{
     data: { top: TechnologyTopN[] };
   };
 }>;
+
 export type APIGetCategoryLeaderboard = Endpoint<{
   Path: '/v1/categories/:name/leaderboard';
   Method: 'GET';
@@ -50,5 +56,24 @@ export type APIGetTechnology = Endpoint<{
   Success: {
     success: true;
     data: { cumulatedStars: number; topRepos: RepositoryTop[]; volume: TechnologyWeeklyVolume[] };
+  };
+}>;
+
+export type RelatedTechnology = Pick<TechnologyWeeklyRow, 'category' | 'hits' | 'tech'>;
+export type APIGetTopRelatedTechnology = Endpoint<{
+  Path: '/v1/technologies/:name/related';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: RelatedTechnology[];
+  };
+}>;
+
+export type APIGetRepository = Endpoint<{
+  Path: '/v1/repositories/:org/:name';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: { repo: RepositoryRow; techs: TechnologyRow[] };
   };
 }>;

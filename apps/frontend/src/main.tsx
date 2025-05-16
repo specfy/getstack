@@ -3,6 +3,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { ApiResError } from './api/api';
 import { routeTree } from './routeTree.gen';
 
 import './index.css';
@@ -13,6 +14,16 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       staleTime: 15 * 60 * 1000,
+      retry: (failure, err) => {
+        if (failure >= 3) {
+          return false;
+        }
+
+        if (err instanceof ApiResError && err.json.status > 500) {
+          return true;
+        }
+        return false;
+      },
     },
   },
 });

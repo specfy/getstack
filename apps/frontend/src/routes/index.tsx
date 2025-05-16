@@ -7,7 +7,7 @@ import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatQuantity } from '@/lib/number';
-import { stackDefinition, stackOrder } from '@/lib/stack';
+import { categories, categoryOrder } from '@/lib/stack';
 
 import type { TechType } from '@specfy/stack-analyser';
 
@@ -20,7 +20,7 @@ const Index: React.FC = () => {
     }
 
     return [...data.data].sort(
-      (a, b) => stackOrder.indexOf(a.category) - stackOrder.indexOf(b.category)
+      (a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category)
     );
   }, [data]);
 
@@ -48,7 +48,7 @@ const Index: React.FC = () => {
       </div>
       <div className="grid grid-cols-3 gap-6">
         {sorted.map(({ category, rows }, index) => {
-          const def = stackDefinition[category as TechType];
+          const def = categories[category as TechType];
           const Icon = def.icon;
           return (
             <Link

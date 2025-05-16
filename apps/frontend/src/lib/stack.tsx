@@ -40,7 +40,7 @@ export interface CategoryDefinition {
   icon: Icon;
   description: string;
 }
-export const stackDefinition: Record<TechType, CategoryDefinition> = {
+export const categories: Record<TechType, CategoryDefinition> = {
   ai: {
     name: 'AI',
     icon: IconSparkles,
@@ -223,7 +223,7 @@ export const stackDefinition: Record<TechType, CategoryDefinition> = {
   },
 };
 
-export const stackOrder: TechType[] = [
+export const categoryOrder: TechType[] = [
   // Popular
   'language',
   'db',

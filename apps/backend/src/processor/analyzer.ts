@@ -9,7 +9,7 @@ import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.
 import { $ } from 'execa';
 
 import { updateRepository } from '../models/repositories.js';
-import { createTechnologies, getTopTechnologiesForARepo } from '../models/technologies.js';
+import { createTechnologies, getTechnologiesByRepo } from '../models/technologies.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { octokit } from '../utils/github.js';
 
@@ -51,7 +51,7 @@ export async function getPreviousAnalyzeIfStale(
     return false;
   }
 
-  const previous = await getTopTechnologiesForARepo(repo);
+  const previous = await getTechnologiesByRepo(repo);
   return previous;
 }
 

@@ -8,6 +8,7 @@ import type {
   TechnologyWeeklyRow,
 } from '../db/types.js';
 import type {
+  RelatedTechnology,
   TechnologyByCategoryByWeekWithTrend,
   TechnologyTopN,
   TechnologyWeeklyVolume,
@@ -18,7 +19,7 @@ export async function createTechnologies(input: TechnologyInsert[]): Promise<voi
   await q.execute();
 }
 
-export async function getTopTechnologiesForARepo(repo: RepositoryRow): Promise<TechnologyRow[]> {
+export async function getTechnologiesByRepo(repo: RepositoryRow): Promise<TechnologyRow[]> {
   const res = await clickHouse.query({
     query: `WITH latest_week AS (
       SELECT MAX(date_week) AS max_week
@@ -299,4 +300,55 @@ WHERE
   const json = await res.json<{ stars: string }>();
 
   return json.data.length > 0 ? Number.parseInt(json.data[0]!.stars, 10) : 0;
+}
+
+export async function getTopRelatedTechnology(tech: string): Promise<RelatedTechnology[]> {
+  const dateWeek = formatToYearWeek(new Date());
+  const res = await clickHouse.query({
+    query: `WITH
+	base_data AS (
+		SELECT
+			t2.tech as tech,
+			t2.category as category,
+			COUNT(*) AS hits
+		FROM
+			technologies AS t1
+			JOIN technologies AS t2 ON t1.org = t2.org
+			AND t1.tech != t2.tech
+		WHERE
+			t1.tech = {tech: String} AND date_week = {week: String}
+		GROUP BY
+			t2.category, t2.tech
+	),
+	ranked AS (
+		SELECT
+			tech,
+			category,
+			hits,
+			row_number() OVER (
+				PARTITION BY
+					category
+				ORDER BY
+					hits DESC
+			) AS rn
+		FROM
+			base_data
+	)
+SELECT
+	category,
+	tech,
+	hits
+FROM
+	ranked
+WHERE
+	rn <= 1
+ORDER BY
+	category,
+	hits DESC;`,
+    query_params: { tech, week: dateWeek },
+  });
+
+  const json = await res.json<RelatedTechnology>();
+
+  return json.data;
 }

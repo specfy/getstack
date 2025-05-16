@@ -1,6 +1,7 @@
 export interface ApiError<TCode extends string, TErrors = unknown> {
   error: {
     code: TCode;
+    status: number;
     reason?: string | undefined;
     errors?: TErrors;
   };
