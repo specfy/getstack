@@ -1,12 +1,15 @@
-import { IconBrandGithub } from '@tabler/icons-react';
+import { IconBrandGithub, IconClock, IconStar, IconWorld } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
 
 import { useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
 import { TechBadge } from '@/components/TechBadge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { formatQuantity } from '@/lib/number';
 import { categories, categoryOrder } from '@/lib/stack';
 
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
@@ -33,6 +36,13 @@ const Repo: React.FC = () => {
     return tmp2.sort((a, b) => categoryOrder.indexOf(a[0]) - categoryOrder.indexOf(b[0]));
   }, [data]);
 
+  const lastAnalyzed = useMemo(() => {
+    if (!data) {
+      return '';
+    }
+    return formatDistanceToNowStrict(data.data.repo.last_analyzed_at);
+  }, [data]);
+
   if (isLoading) {
     return (
       <div className="flex flex-col gap-2 mt-10">
@@ -57,38 +67,86 @@ const Repo: React.FC = () => {
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
-            <img src={`/favicons/github.webp`} />
+            {repo.avatar_url ? (
+              <img src={repo.avatar_url} />
+            ) : (
+              <img src={`/favicons/github.webp`} />
+            )}
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-xs text-gray-400 leading-3">GitHub repository</div>
-            <div className="text-2xl font-semibold  leading-6">
-              {repo.org}/{repo.name}
+            <div className="text-2xl font-semibold leading-6">
+              <span className="text-gray-500 text-xl">{repo.org} /</span> {repo.name}
             </div>
           </div>
         </h2>
-        <div>
-          <a href={`${repo.url}?ref=usestack.dev`} target="_blank">
-            <Button variant="outline" className="cursor-pointer w-full">
-              <IconBrandGithub stroke={1} /> GitHub
-            </Button>
-          </a>
-        </div>
       </header>
-      <main className="mt-14">
-        <div className="w-2/3 flex flex-col gap-4 items-start">
-          {groups.length > 0 &&
-            groups.map(([cat, keys]) => {
-              return (
-                <div className="flex flex-wrap items-center border-b w-full pb-4">
-                  <div className="text-xs text-gray-400 w-1/7">{categories[cat].name}</div>
-                  <div className="flex gap-4 flex-wrap ">
-                    {keys.map((row) => {
-                      return <TechBadge tech={row} key={row} />;
-                    })}
+      {repo.description && (
+        <div className="mt-4 max-w-2xl text-pretty text-gray-600 md:text-lg">
+          {repo.description}
+        </div>
+      )}
+      <main className="mt-14 grid grid-cols-6 gap-10">
+        <div className="col-span-4 ">
+          <h3 className="text-lg font-semibold mb-4">Technologies</h3>
+          <div className="flex flex-col gap-1 items-start">
+            {groups.length > 0 &&
+              groups.map(([cat, keys]) => {
+                return (
+                  <div className="grid grid-cols-12 items-start border-t pt-4 w-full pb-4">
+                    <div className="col-span-3 text-xs text-gray-400">{categories[cat].name}</div>
+                    <div className="col-span-9 flex gap-x-2 gap-y-2 flex-wrap">
+                      {keys.map((row) => {
+                        return <TechBadge tech={row} key={row} size="l" border />;
+                      })}
+                    </div>
                   </div>
+                );
+              })}
+          </div>
+        </div>
+        <div className="col-span-2">
+          <div className="flex gap-4 mb-4">
+            <a href={`${repo.url}?ref=usestack.dev`} target="_blank" className="grow w-full">
+              <Button variant="outline" className="cursor-pointer w-full">
+                <IconBrandGithub stroke={1} /> GitHub
+              </Button>
+            </a>
+            {repo.homepage_url && (
+              <a
+                href={`${repo.homepage_url}?ref=usestack.dev`}
+                target="_blank"
+                className="grow w-full"
+              >
+                <Button variant="outline" className="cursor-pointer w-full">
+                  <IconWorld stroke={1} /> Homepage
+                </Button>
+              </a>
+            )}
+          </div>
+          <Card>
+            {/* <CardHeader>About</CardHeader> */}
+            <CardContent>
+              <div>
+                <div className="flex items-center gap-3 py-1">
+                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                    <IconStar size={18} />
+                    Stars
+                  </p>
+                  <hr className="flex-1" />
+                  <span className="text-sm font-semibold">{formatQuantity(repo.stars)}</span>
                 </div>
-              );
-            })}
+                <div className="flex items-center gap-3 py-1">
+                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                    <IconClock size={18} />
+                    Last Fetched
+                  </p>
+                  <hr className="flex-1" />
+                  <span className="text-sm font-semibold">{lastAnalyzed}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>

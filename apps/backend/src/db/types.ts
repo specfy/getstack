@@ -22,6 +22,9 @@ export interface RepositoriesTable {
   last_fetched_at: Timestamp;
   size: number;
   last_analyzed_at: Timestamp;
+  avatar_url: string;
+  homepage_url: string;
+  description: string;
 }
 
 export type RepositoryRow = Selectable<RepositoriesTable>;

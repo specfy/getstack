@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
@@ -82,17 +81,32 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
   const row = await getRepository(repo);
 
   if (row) {
-    await clickHouse.exec({
-      query: `ALTER TABLE "repositories"
-      UPDATE
-        "stars" = ${repo.stars},
-        "branch" = '${repo.branch}',
-        "size" = ${repo.size},
-        "ignored" = ${row.ignored === 1 ? 1 : repo.ignored},
-        "ignored_reason" = '${repo.ignored_reason}',
-        updated_at = '${formatToClickhouseDatetime(new Date())}'
-        WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
-    });
+    await kyselyClickhouse
+      .updateTable('repositories')
+      .set({
+        avatar_url: repo.avatar_url,
+        branch: repo.branch,
+        stars: repo.stars,
+        size: repo.size,
+        ignored: row.ignored === 1 ? 1 : repo.ignored,
+        description: repo.description,
+        homepage_url: repo.homepage_url,
+        updated_at: formatToClickhouseDatetime(new Date()),
+      })
+      .where('org', '=', repo.org)
+      .where('name', '=', repo.name)
+      .execute();
+    // await clickHouse.exec({
+    //   query: `ALTER TABLE "repositories"
+    //   UPDATE
+    //     "stars" = ${repo.stars},
+    //     "branch" = '${repo.branch}',
+    //     "size" = ${repo.size},
+    //     "ignored" = ${row.ignored === 1 ? 1 : repo.ignored},
+    //     "ignored_reason" = '${repo.ignored_reason}',
+    //     updated_at = '${formatToClickhouseDatetime(new Date())}'
+    //     WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
+    // });
 
     return;
   }

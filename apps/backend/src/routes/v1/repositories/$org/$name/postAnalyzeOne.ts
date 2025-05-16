@@ -16,7 +16,7 @@ const schemaParams = z.object({
 });
 
 export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) => {
-  fastify.post('/repositories/:org/:name', async (req, reply) => {
+  fastify.post('/repositories/:org/:name/analyze', async (req, reply) => {
     const valParams = schemaParams.safeParse(req.params);
     if (valParams.error) {
       return reply.status(400).send({ error: { code: 'invalid_params', status: 400 } });

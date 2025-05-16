@@ -97,23 +97,7 @@ async function fetchOneDay(dateString: string): Promise<void> {
 
     for (const repo of data.items) {
       logger.info(`Processing ${repo.id} - ${repo.full_name}`);
-
-      const [org, name] = repo.full_name.split('/') as [string, string];
-      const filtered = filter(repo);
-      await upsertRepository({
-        github_id: String(repo.id),
-        org,
-        name,
-        branch: repo.default_branch,
-        stars: repo.stargazers_count,
-        url: repo.html_url,
-        ignored: filtered === false ? 0 : 1,
-        ignored_reason: filtered === false ? 'ok' : filtered,
-        errored: 0,
-        last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
-        last_analyzed_at: formatToClickhouseDatetime(new Date()),
-        size: repo.size,
-      });
+      await refreshOne(repo);
     }
 
     hasMore = data.items.length === PER_PAGE;
@@ -122,9 +106,37 @@ async function fetchOneDay(dateString: string): Promise<void> {
   }
 }
 
+export async function refreshOne(
+  repo:
+    | RestEndpointMethodTypes['repos']['get']['response']['data']
+    | RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
+): Promise<void> {
+  const [org, name] = repo.full_name.split('/') as [string, string];
+  const filtered = filter(repo);
+  await upsertRepository({
+    github_id: String(repo.id),
+    org,
+    name,
+    branch: repo.default_branch,
+    stars: repo.stargazers_count,
+    url: repo.html_url,
+    ignored: filtered === false ? 0 : 1,
+    ignored_reason: filtered === false ? 'ok' : filtered,
+    errored: 0,
+    last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
+    last_analyzed_at: formatToClickhouseDatetime(new Date()),
+    size: repo.size,
+    avatar_url: repo.owner?.avatar_url || '',
+    homepage_url: repo.homepage || '',
+    description: repo.description || '',
+  });
+}
+
 const oneGb = 1_000_000;
 function filter(
-  repo: RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
+  repo:
+    | RestEndpointMethodTypes['repos']['get']['response']['data']
+    | RestEndpointMethodTypes['search']['repos']['response']['data']['items'][0]
 ): false | string {
   const nameLower = repo.name.toLocaleLowerCase();
   if (denylistName.some((deny) => nameLower.includes(deny))) {

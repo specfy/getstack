@@ -135,7 +135,7 @@ const Tech: React.FC = () => {
             >
               {categories[tech.type].name}
             </Link>
-            <div className="text-2xl font-semibold  leading-6">{tech.name}</div>
+            <div className="text-2xl font-semibold leading-6">{tech.name}</div>
           </div>
         </h2>
         {position > 0 && (
@@ -149,7 +149,9 @@ const Tech: React.FC = () => {
         )}
       </header>
       {tech.description && (
-        <div className="mt-2 text-gray-600 text-sm w-2/4">{tech.description}</div>
+        <div className="mt-4 max-w-2xl text-pretty text-gray-600 md:text-lg">
+          {tech.description}
+        </div>
       )}
       {position > 0 && (
         <div className="grid grid-cols-4 gap-4 mt-10 ">
@@ -301,7 +303,7 @@ const Tech: React.FC = () => {
                     <TechBadge
                       tech={row.tech}
                       className={cn(is && ' text-gray-900')}
-                      size={is ? 'l' : 'md'}
+                      size={is ? 'xl' : 'md'}
                     />
                   </div>
                 );
@@ -433,7 +435,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Along {tech.name} they also use</h3>
+      <h3 className="text-lg font-semibold mb-4">Most popular with</h3>
       {isLoading && (
         <>
           <Skeleton className="w-[100px] h-[20px]" />
@@ -445,10 +447,10 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
         {groups.length > 0 &&
           groups.map(([cat, keys]) => {
             return (
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-0.5">
                 <div className="text-xs text-gray-400">{categories[cat].name}</div>
                 {keys.map((row) => {
-                  return <TechBadge tech={row} key={row} />;
+                  return <TechBadge size="l" tech={row} key={row} border />;
                 })}
               </div>
             );

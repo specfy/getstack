@@ -8,24 +8,26 @@ import type { ClassValue } from 'clsx';
 
 export const TechBadge: React.FC<{
   tech: AllowedKeys;
-  size?: 'l' | 'md';
+  size?: 'l' | 'md' | 'xl';
   className?: ClassValue;
-}> = ({ tech, className, size }) => {
-  const l = size === 'l';
+  border?: boolean;
+}> = ({ tech, className, size, border }) => {
   return (
     <Link
       className={cn(
-        'flex gap-2 items-center text-gray-700 hover:text-gray-900 hover:text-shadow-xs h-7 text-xs',
-        l && 'text-md h-9 text-gray-950 hover:text-shadow-none font-semibold',
+        'inline-flex gap-1.5 items-center text-gray-700 hover:text-gray-900 hover:text-shadow-xs h-7 text-xs',
+        size === 'l' && 'text-[13px] h-9 text-gray-950 hover:text-shadow-none',
+        size === 'xl' && 'text-md h-9 text-gray-950 hover:text-shadow-none font-semibold',
+        border && 'border rounded-md px-2',
         className
       )}
       to={`/tech/$techKey`}
       params={{ techKey: tech }}
     >
-      <div className={cn('w-4', l && 'w-5')}>
+      <div className={cn('w-4', size === 'xl' && 'w-5')}>
         <img src={`/favicons/${tech}.webp`} />
       </div>
-      {listIndexed[tech].name}
+      <div className="truncate text-ellipsis">{listIndexed[tech].name}</div>
     </Link>
   );
 };
