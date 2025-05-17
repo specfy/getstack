@@ -1,8 +1,11 @@
-import { IconAt, IconBrandGithub, IconStack2 } from '@tabler/icons-react';
+import { IconAt, IconBrandGithub, IconSearch, IconStack2 } from '@tabler/icons-react';
 import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { useState } from 'react';
 
+import { Search } from '@/components/Search';
 import { Button } from '@/components/ui/button';
+import { CommandDialog } from '@/components/ui/command';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -26,6 +29,8 @@ export const Route = createRootRoute({
 });
 
 export const Header: React.FC = () => {
+  const [open, setOpen] = useState<boolean>(true);
+
   return (
     <header className="flex justify-between items-center mt-1 mb-1 px-4 md:p-0">
       <Link className="h-8 flex gap-2 items-center font-light text-lg text-gray-700" to="/">
@@ -33,6 +38,13 @@ export const Header: React.FC = () => {
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Button variant={'ghost'} size="icon" onClick={() => setOpen(true)}>
+                <IconSearch />
+              </Button>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink href="/" asChild>
               <Link to="/">Home</Link>
@@ -45,6 +57,9 @@ export const Header: React.FC = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <Search onPick={() => setOpen(false)}></Search>
+      </CommandDialog>
     </header>
   );
 };
