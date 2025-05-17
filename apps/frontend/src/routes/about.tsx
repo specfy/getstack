@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 const About: React.FC = () => {
   return (
-    <div className="md:w-1/2 prose mt-10">
+    <div className="md:w-2/3 prose mt-10">
       <h2 className="text-3xl font-semibold mb-2">About</h2>
       <p>
         StackHub is a powerful tool that provides comprehensive, and trending insights into the open

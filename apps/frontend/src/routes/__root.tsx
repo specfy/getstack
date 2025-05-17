@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <header className="flex justify-between items-center mt-1 mb-1 px-4 md:p-0">
+    <header className="flex justify-between items-center mt-1 mb-1 px-4">
       <Link className="h-8 flex gap-2 items-center font-light text-lg text-gray-700" to="/">
         <IconStack2 /> useStack
       </Link>

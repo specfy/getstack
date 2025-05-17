@@ -15,6 +15,7 @@ import {
   IconCreditCard,
   IconDatabase,
   IconDatabaseEdit,
+  IconFrame,
   IconMessage,
   IconNetwork,
   IconPackage,
@@ -23,7 +24,6 @@ import {
   IconServer,
   IconShield,
   IconSparkles,
-  IconStack2,
   IconTestPipe,
   IconTool,
   IconTransform,
@@ -105,7 +105,7 @@ export const categories: Record<TechType, CategoryDefinition> = {
   },
   framework: {
     name: 'Framework',
-    icon: IconStack2,
+    icon: IconFrame,
     description:
       'Software libraries and architectures providing a foundation for application development.',
     keyword: 'framework library',
