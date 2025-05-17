@@ -22,6 +22,7 @@ const schema = z.object({
   // CRON
   CRON_LIST: bool,
   CRON_ANALYZE: bool,
+  ANALYZE_DLC: z.coerce.date(),
   ANALYZE_MIN_STARS: z.coerce.number().default(3000),
 });
 

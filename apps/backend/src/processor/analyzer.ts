@@ -11,6 +11,7 @@ import { $ } from 'execa';
 import { updateRepository } from '../models/repositories.js';
 import { createTechnologies, getTechnologiesByRepo } from '../models/technologies.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
+import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
 
 import type { RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
@@ -39,15 +40,19 @@ export async function getPreviousAnalyzeIfStale(
   repo: RepositoryRow
 ): Promise<false | TechnologyRow[]> {
   const githubInfo = await octokit.rest.repos.get({ owner: repo.org, repo: repo.name });
+
+  const lastAnalyzedAt = new Date(repo.last_analyzed_at).getTime();
   const pushedRecently =
     new Date(githubInfo.data.pushed_at).getTime() > new Date(repo.last_fetched_at).getTime();
-  const analyzedRecently =
-    new Date(repo.last_analyzed_at).getTime() > Date.now() - 86_400 * 30 * 1000;
+  const analyzedRecently = lastAnalyzedAt > Date.now() - 86_400 * 30 * 1000;
 
   if (pushedRecently) {
     return false;
   }
   if (!analyzedRecently) {
+    return false;
+  }
+  if (envs.ANALYZE_DLC.getTime() > lastAnalyzedAt) {
     return false;
   }
 
