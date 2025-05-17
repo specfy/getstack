@@ -3036,6 +3036,30 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'ORM for TypeScript and JavaScript, supporting multiple databases and enabling Active Record and Data Mapper patterns.',
   },
+  browseruse: {
+    website: 'https://browser-use.com/',
+    description:
+      'Headless browser automation platform providing APIs for web scraping, testing, and data extraction tasks.',
+    github: 'browser-use/browser-use',
+  },
+  bunsh: {
+    website: 'https://bun.sh/',
+    description:
+      'Fast, modern, and secure JavaScript runtime for building server-side applications.',
+    github: 'oven-sh/bun',
+  },
+  chromadb: {
+    website: 'https://www.trychroma.com/',
+    description:
+      'Open-source vector database for storing and querying large-scale embeddings, useful for AI applications.',
+    github: 'chroma-core/chroma',
+  },
+  ollama: {
+    website: 'https://ollama.ai/',
+    description:
+      'Open-source, lightweight, and fast model server for running large language models (LLMs) on your own hardware.',
+    github: 'ollama/ollama',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
