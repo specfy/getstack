@@ -38,14 +38,15 @@ const Index: React.FC = () => {
           Explore the most popular technologies and repositories, refreshed every week
         </p>
       </div>
-      <div className="flex justify-center items-center mb-14 gap-4">
+      <div className="flex justify-center items-center gap-4">
         <Search onPick={() => null} inline />
         <Button variant={'default'}>Search</Button>
       </div>
-      <div className="text-xs text-neutral-400 mb-2 text-pretty">
+      <Try />
+      <div className="text-xs text-neutral-400 mt-14 text-pretty">
         Most popular tech per category by number of repositories
       </div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-2 grid grid-cols-1 gap-6 md:grid-cols-3">
         {isLoading && (
           <>
             <Skeleton className="h-20" />
@@ -101,6 +102,54 @@ const Index: React.FC = () => {
   );
 };
 
+const Try: React.FC = () => {
+  return (
+    <div className="flex justify-center mt-8 items-center gap-4">
+      <div className="text-gray-600 font-serif text-sm">Try</div>
+      <div className="flex gap-2">
+        <Button
+          variant={'ghost'}
+          size={'sm'}
+          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
+          asChild
+        >
+          <Link to={`/$org/$name`} params={{ org: 'n8n-io', name: 'n8n' }}>
+            <div className={'w-4'}>
+              <img src={`/favicons/n8n.webp`} className="rounded-xs overflow-hidden" />
+            </div>
+            <div className="truncate text-ellipsis">n8n</div>
+          </Link>
+        </Button>
+        <Button
+          variant={'ghost'}
+          size={'sm'}
+          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
+          asChild
+        >
+          <Link to={`/tech/$techKey`} params={{ techKey: 'vite' }}>
+            <div className={'w-4'}>
+              <img src={`/favicons/vite.webp`} className="rounded-xs overflow-hidden" />
+            </div>
+            <div className="truncate text-ellipsis">Vite</div>
+          </Link>
+        </Button>
+        <Button
+          variant={'ghost'}
+          size={'sm'}
+          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
+          asChild
+        >
+          <Link to={`/tech/$techKey`} params={{ techKey: 'clickhouse' }}>
+            <div className={'w-4'}>
+              <img src={`/favicons/clickhouse.webp`} className="rounded-xs overflow-hidden" />
+            </div>
+            <div className="truncate text-ellipsis">Clickhouse</div>
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+};
 export const Route = createFileRoute('/')({
   component: Index,
 });

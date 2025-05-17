@@ -154,8 +154,8 @@ const Tech: React.FC = () => {
       </Helmet>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
-            <img src={`/favicons/${tech.key}.webp`} />
+          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center">
+            <img src={`/favicons/${tech.key}.webp`} className="rounded-md overflow-hidden" />
           </div>{' '}
           <div className="flex flex-col gap-1">
             <Link
@@ -433,15 +433,16 @@ export const TopRepositories: React.FC<{
         <div className="flex flex-wrap gap-1 mt-4 items-center ml-1">
           {rest.map((repo) => {
             return (
-              <Link key={repo.url} to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
-                <Button
-                  variant={'ghost'}
-                  size={'sm'}
-                  className="px-2 py-0 h-6 font-normal cursor-pointer text-xs text-gray-600 hover:text-gray-900"
-                >
+              <Button
+                variant={'ghost'}
+                size={'sm'}
+                className="px-2 py-0 h-6 font-normal cursor-pointer text-xs text-gray-600 hover:text-gray-900"
+                asChild
+              >
+                <Link key={repo.url} to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
                   {repo.org}/{repo.name}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             );
           })}
           {volume && volume.hits > topTotal && (
