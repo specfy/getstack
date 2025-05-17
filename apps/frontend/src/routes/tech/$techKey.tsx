@@ -14,6 +14,7 @@ import { useMemo } from 'react';
 import { useCategoryLeaderboard } from '@/api/useCategory';
 import { useRelatedTechnology, useTechnology } from '@/api/useTechnology';
 import { NotFound } from '@/components/NotFound';
+import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
@@ -266,10 +267,12 @@ const Tech: React.FC = () => {
         </div>
       )}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
-        <div className="md:col-span-7 flex flex-col gap-14">
+        <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
+
+          <Related tech={tech} />
         </div>
-        <div className="md:col-span-3 mt-0 flex flex-col gap-5">
+        <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
           <div className="grid gap-2 grid-cols-2 md:gap-4">
             {tech.github && (
               <a href={`https://github.com/${tech.github}?ref=usestack.dev`} target="_blank">
@@ -347,10 +350,11 @@ const Tech: React.FC = () => {
                 )}
             </div>
           </div>
+
+          <div className="border-t pt-5 mt-1">
+            <Report />
+          </div>
         </div>
-      </div>
-      <div className="mt-10 md:w-4/6">
-        <Related tech={tech} />
       </div>
     </div>
   );

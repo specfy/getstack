@@ -88,7 +88,8 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
         branch: repo.branch,
         stars: repo.stars,
         size: repo.size,
-        ignored: row.ignored === 1 ? 1 : repo.ignored,
+        // Keep manual otherwise update (in case conditions has changed)
+        ignored: row.ignored === 1 && row.ignored_reason === 'manual' ? 1 : repo.ignored,
         description: repo.description,
         homepage_url: repo.homepage_url,
         updated_at: formatToClickhouseDatetime(new Date()),

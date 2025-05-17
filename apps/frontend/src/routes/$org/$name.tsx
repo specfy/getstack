@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 
 import { useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
+import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -105,21 +106,33 @@ const Repo: React.FC = () => {
       <main className="mt-14 flex flex-col-reverse flex-col md:flex-row gap-10">
         <div className="md:w-4/6">
           <h3 className="text-lg font-semibold mb-4">Technologies</h3>
-          <div className="flex flex-col gap-1 items-start">
-            {groups.length > 0 &&
-              groups.map(([cat, keys]) => {
-                return (
-                  <div className="grid grid-cols-12 items-start border-t pt-4 w-full pb-4">
-                    <div className="col-span-3 text-xs text-gray-400">{categories[cat].name}</div>
-                    <div className="col-span-9 flex gap-x-2 gap-y-2 flex-wrap">
-                      {keys.map((row) => {
-                        return <TechBadge tech={row} key={row} size="l" border />;
-                      })}
+          {repo.ignored ? (
+            <div className="text-gray-600 italic ">
+              This repository has been excluded from our automatic analysis{' '}
+              <span className="text-gray-400 text-xs">({repo.ignored_reason})</span>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-1 items-start">
+              {groups.length > 0 &&
+                groups.map(([cat, keys]) => {
+                  return (
+                    <div className="grid grid-cols-12 items-start border-t pt-4 w-full pb-4">
+                      <div className="col-span-3 text-xs text-gray-400">{categories[cat].name}</div>
+                      <div className="col-span-9 flex gap-x-2 gap-y-2 flex-wrap">
+                        {keys.map((row) => {
+                          return <TechBadge tech={row} key={row} size="l" border />;
+                        })}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-          </div>
+                  );
+                })}
+              {groups.length <= 0 && (
+                <div className="text-gray-600 italic ">
+                  No technologies were found in this repository.
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="md:w-2/6">
           <div className="flex gap-4 mb-4">
@@ -163,6 +176,9 @@ const Repo: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+          <div className="mt-10">
+            <Report />
+          </div>
         </div>
       </main>
     </div>

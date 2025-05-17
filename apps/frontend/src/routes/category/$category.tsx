@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 
 import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
 import { NotFound } from '@/components/NotFound';
+import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card } from '@/components/ui/card';
@@ -276,6 +277,9 @@ const Category: React.FC = () => {
               ]}
             />
           </Card>
+          <div className="mt-10">
+            <Report />
+          </div>
         </div>
       </div>
     </div>
