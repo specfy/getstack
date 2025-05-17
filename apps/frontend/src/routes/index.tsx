@@ -2,10 +2,10 @@ import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useTop } from '@/api/useTop';
+import { Search } from '@/components/Search';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
 import { categories, categoryOrder } from '@/lib/stack';
@@ -34,10 +34,7 @@ const Index: React.FC = () => {
         </p>
       </div>
       <div className="flex justify-center items-center mb-14 gap-4">
-        <Input
-          placeholder="Search technology, repository..."
-          className="w-full md:w-2/3 p-4 text-lg border rounded-l-md"
-        />
+        <Search onPick={() => null} inline />
         <Button variant={'default'}>Search</Button>
       </div>
       <div className="text-xs text-neutral-400 mb-2 text-pretty">

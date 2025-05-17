@@ -326,8 +326,8 @@ const Tech: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <div
                       className={cn(
-                        'text-gray-400 font-semibold text-xs',
-                        is && 'text-md text-gray-600'
+                        'text-gray-400 font-semibold text-md w-4',
+                        is && 'text-lg text-gray-600'
                       )}
                     >
                       #{row.position}
@@ -454,7 +454,7 @@ export const TopRepositories: React.FC<{
 };
 
 const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
-  const { data, isLoading } = useRelatedTechnology({ name: tech.key });
+  const { data, isFetching } = useRelatedTechnology({ name: tech.key });
 
   if (!data || data.data.length <= 0) {
     return null;
@@ -463,7 +463,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
-      {isLoading && (
+      {isFetching && (
         <>
           <Skeleton className="w-[100px] h-[20px]" />
           <Skeleton className="w-[100px] h-[20px]" />

@@ -85,7 +85,7 @@ const Repo: React.FC = () => {
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             {repo.avatar_url ? (
-              <img src={repo.avatar_url} />
+              <img src={repo.avatar_url} className="rounded-md overflow-hidden" />
             ) : (
               <img src={`/favicons/github.webp`} />
             )}
