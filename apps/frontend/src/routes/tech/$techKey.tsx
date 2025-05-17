@@ -10,6 +10,7 @@ import {
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
 import { useRelatedTechnology, useTechnology } from '@/api/useTechnology';
@@ -146,6 +147,11 @@ const Tech: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{tech.name} - useStack</title>
+        <meta name="description" content={tech.description} />
+        <link rel="canonical" href={`/tech/${tech.key}`} />
+      </Helmet>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">

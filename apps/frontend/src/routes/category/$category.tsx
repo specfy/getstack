@@ -2,6 +2,7 @@ import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
 import { NotFound } from '@/components/NotFound';
@@ -121,6 +122,10 @@ const Category: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{cat.name} - useStack</title>
+        <link rel="canonical" href={`/category/${category}`} />
+      </Helmet>
       <header className="mb-10 flex flex-col gap-2 mt-10">
         <h2 className="flex gap-4 ">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">

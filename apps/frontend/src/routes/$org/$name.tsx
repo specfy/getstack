@@ -2,6 +2,7 @@ import { IconBrandGithub, IconClock, IconStar, IconWorld } from '@tabler/icons-r
 import { createFileRoute } from '@tanstack/react-router';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import { useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
@@ -81,6 +82,12 @@ const Repo: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>
+          {org}/{name} - useStack
+        </title>
+        <link rel="canonical" href={`/${org}/${name}`} />
+      </Helmet>
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">

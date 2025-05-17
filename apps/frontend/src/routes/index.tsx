@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import { useTop } from '@/api/useTop';
 import { Search } from '@/components/Search';
@@ -27,6 +28,10 @@ const Index: React.FC = () => {
 
   return (
     <div className="">
+      <Helmet>
+        <title>useStack</title>
+        <link rel="canonical" href="/" />
+      </Helmet>
       <div className="text-center mb-14 mt-14">
         <h1 className="text-4xl font-bold">Discover Open Source Trends</h1>
         <p className="text-lg text-gray-600">
