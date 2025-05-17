@@ -447,6 +447,10 @@ export const TopRepositories: React.FC<{
 const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
   const { data, isLoading } = useRelatedTechnology({ name: tech.key });
 
+  if (!data || data.data.length <= 0) {
+    return null;
+  }
+
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
@@ -458,7 +462,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
         </>
       )}
       <div className="flex flex-wrap w-full gap-2 items-start">
-        {data?.data.map((row) => {
+        {data.data.map((row) => {
           return <TechBadge size="md" tech={row.tech} key={row.tech} border />;
         })}
       </div>
