@@ -29,7 +29,7 @@ export const Route = createRootRoute({
 });
 
 export const Header: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <header className="flex justify-between items-center mt-1 mb-1 px-4 md:p-0">

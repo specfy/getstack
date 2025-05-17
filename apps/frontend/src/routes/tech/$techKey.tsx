@@ -270,7 +270,7 @@ const Tech: React.FC = () => {
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
         </div>
         <div className="md:col-span-3 mt-0 flex flex-col gap-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+          <div className="grid gap-2 grid-cols-2 md:gap-4">
             {tech.github && (
               <a href={`https://github.com/${tech.github}?ref=usestack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
@@ -356,7 +356,7 @@ const Tech: React.FC = () => {
   );
 };
 
-const topN = 8;
+const topN = 9;
 const topMore = 12;
 const topTotal = topN + topMore;
 
@@ -389,18 +389,23 @@ export const TopRepositories: React.FC<{
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Top repositories using {tech.name}</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {top10.map((repo) => {
           return (
             <Link
               key={repo.url}
-              className="py-2 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-100 hover:bg-gray-50 transition-colors"
+              className="py-2 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
             >
-              <header>
-                <div className="font-semibold text-sm truncate">{repo.name}</div>
-                <div className="text-[10px] text-gray-400">{repo.org}</div>
+              <header className="flex gap-2">
+                <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center shrink-0">
+                  <img src={repo.avatar_url} className="w-6 h-6 rounded-md overflow-hidden" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="font-semibold text-sm truncate text-ellipsis">{repo.name}</div>
+                  <div className="text-[10px] text-gray-400 truncate text-ellipsis">{repo.org}</div>
+                </div>
               </header>
               <div className="text-xs text-gray-500">
                 <div className="flex justify-between items-center">

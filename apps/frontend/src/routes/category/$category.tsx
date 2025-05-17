@@ -134,7 +134,7 @@ const Category: React.FC = () => {
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-1">Top 10 over time</h3>
+        <h3 className="text-lg font-semibold mb-1">Top 10</h3>
         <div className="grid md:grid-cols-6 gap-10">
           <div className="md:col-span-2">
             <div className="text-xs text-neutral-400 mb-4">

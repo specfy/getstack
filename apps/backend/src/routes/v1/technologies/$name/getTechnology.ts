@@ -39,6 +39,7 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
             org: row.org,
             stars: row.stars,
             url: row.url,
+            avatar_url: row.avatar_url,
           };
         }),
         volume,
