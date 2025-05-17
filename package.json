@@ -11,6 +11,7 @@
     "dev:back": "npm run dev --w=apps/backend",
     "build:ts:watch": "tsc -b tsconfig.build.json -w",
     "build:ts": "tsc -b tsconfig.build.json",
+    "build:front": "npm run build --w=apps/frontend",
     "build:back": "npm run build --w=apps/backend",
     "ts-clean": "npx rimraf apps/*/tsconfig.tsbuildinfo packages/*/dist",
     "build": "npm run build --workspaces",
