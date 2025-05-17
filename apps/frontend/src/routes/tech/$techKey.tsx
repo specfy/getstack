@@ -24,7 +24,7 @@ import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { LineSeries } from '@nivo/line';
-import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
+import type { AllowedKeys } from '@specfy/stack-analyser';
 import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
 import type {
   RepositoryTop,
@@ -311,7 +311,7 @@ const Tech: React.FC = () => {
                 {categories[tech.type].name}
               </Link>
             </h3>
-            <div className="text-sm ml-1 mt-3">
+            <div className="text-sm ml-1 mt-3 flex flex-col gap-1">
               {position > 3 && (
                 <div className=" text-xs text-gray-400">
                   <IconDots stroke={1} size={18} />
@@ -333,6 +333,7 @@ const Tech: React.FC = () => {
                       tech={row.tech}
                       className={cn(is && ' text-gray-900')}
                       size={is ? 'xl' : 'md'}
+                      border
                     />
                   </div>
                 );
@@ -348,7 +349,7 @@ const Tech: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10">
+      <div className="mt-10 md:w-4/6">
         <Related tech={tech} />
       </div>
     </div>
@@ -446,25 +447,6 @@ export const TopRepositories: React.FC<{
 const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
   const { data, isLoading } = useRelatedTechnology({ name: tech.key });
 
-  const groups = useMemo<[TechType, AllowedKeys[]][]>(() => {
-    if (!data) {
-      return [];
-    }
-
-    const tmp: Record<string, AllowedKeys[]> = {};
-    for (const row of data.data) {
-      if (row.category === tech.type) {
-        continue;
-      }
-      if (!(row.category in tmp)) {
-        tmp[row.category] = [];
-      }
-      tmp[row.category].push(row.tech);
-    }
-
-    return Object.entries(tmp) as unknown as [TechType, AllowedKeys[]][];
-  }, [data]);
-
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
@@ -475,22 +457,65 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
           <Skeleton className="w-[100px] h-[20px]" />
         </>
       )}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-start">
-        {groups.length > 0 &&
-          groups.map(([cat, keys]) => {
-            return (
-              <div className="flex flex-col gap-0.5">
-                <div className="text-xs text-gray-400">{categories[cat].name}</div>
-                {keys.map((row) => {
-                  return <TechBadge size="l" tech={row} key={row} border />;
-                })}
-              </div>
-            );
-          })}
+      <div className="flex flex-wrap w-full gap-2 items-start">
+        {data?.data.map((row) => {
+          return <TechBadge size="md" tech={row.tech} key={row.tech} border />;
+        })}
       </div>
     </div>
   );
 };
+
+// const RelatedByCategory: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
+//   const { data, isLoading } = useRelatedTechnology({ name: tech.key });
+
+//   const groups = useMemo<[TechType, AllowedKeys[]][]>(() => {
+//     if (!data) {
+//       return [];
+//     }
+
+//     const tmp: Record<string, AllowedKeys[]> = {};
+//     for (const row of data.data) {
+//       if (row.category === tech.type) {
+//         continue;
+//       }
+//       if (!(row.category in tmp)) {
+//         tmp[row.category] = [];
+//       }
+//       tmp[row.category].push(row.tech);
+//     }
+
+//     return Object.entries(tmp) as unknown as [TechType, AllowedKeys[]][];
+//   }, [data]);
+
+//   return (
+//     <div>
+//       <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
+//       {isLoading && (
+//         <>
+//           <Skeleton className="w-[100px] h-[20px]" />
+//           <Skeleton className="w-[100px] h-[20px]" />
+//           <Skeleton className="w-[100px] h-[20px]" />
+//         </>
+//       )}
+//       <div className="flex flex-col w-full gap-4 items-start">
+//         {groups.length > 0 &&
+//           groups.map(([cat, keys]) => {
+//             return (
+//               <div className="flex w-full gap-2">
+//                 <div className="text-xs text-gray-400 w-1/6">{categories[cat].name}</div>
+//                 <div className="w-4/6 flex gap-2">
+//                   {keys.map((row) => {
+//                     return <TechBadge size="l" tech={row} key={row} border />;
+//                   })}
+//                 </div>
+//               </div>
+//             );
+//           })}
+//       </div>
+//     </div>
+//   );
+// };
 
 export const Route = createFileRoute('/tech/$techKey')({
   component: Tech,

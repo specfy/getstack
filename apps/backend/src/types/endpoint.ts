@@ -59,7 +59,8 @@ export type APIGetTechnology = Endpoint<{
   };
 }>;
 
-export type RelatedTechnology = Pick<TechnologyWeeklyRow, 'category' | 'hits' | 'tech'>;
+export type RelatedTechnologyByCategory = Pick<TechnologyWeeklyRow, 'category' | 'hits' | 'tech'>;
+export type RelatedTechnology = Pick<TechnologyWeeklyRow, 'hits' | 'tech'>;
 export type APIGetTopRelatedTechnology = Endpoint<{
   Path: '/v1/technologies/:name/related';
   Method: 'GET';

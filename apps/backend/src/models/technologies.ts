@@ -9,6 +9,7 @@ import type {
 } from '../db/types.js';
 import type {
   RelatedTechnology,
+  RelatedTechnologyByCategory,
   TechnologyByCategoryByWeekWithTrend,
   TechnologyTopN,
   TechnologyWeeklyVolume,
@@ -302,7 +303,9 @@ WHERE
   return json.data.length > 0 ? Number.parseInt(json.data[0]!.stars, 10) : 0;
 }
 
-export async function getTopRelatedTechnology(tech: string): Promise<RelatedTechnology[]> {
+export async function getTopRelatedTechnologyByCategory(
+  tech: string
+): Promise<RelatedTechnologyByCategory[]> {
   const dateWeek = formatToYearWeek(new Date());
   const res = await clickHouse.query({
     query: `WITH
@@ -341,10 +344,42 @@ SELECT
 FROM
 	ranked
 WHERE
-	rn <= 1
+	rn <= 3
 ORDER BY
 	category,
 	hits DESC;`,
+    query_params: { tech, week: dateWeek },
+  });
+
+  const json = await res.json<RelatedTechnologyByCategory>();
+
+  return json.data;
+}
+
+export async function getTopRelatedTechnology(tech: string): Promise<RelatedTechnology[]> {
+  const dateWeek = formatToYearWeek(new Date());
+  const res = await clickHouse.query({
+    query: `WITH
+	base_data AS (
+		SELECT
+			t2.tech as tech,
+			COUNT(*) AS hits
+		FROM
+			technologies AS t1
+			JOIN technologies AS t2 ON t1.org = t2.org
+			AND t1.tech != t2.tech
+		WHERE
+			t1.tech = {tech: String} AND date_week = {week: String}
+		GROUP BY
+			t2.tech
+	)
+SELECT
+	tech, hits
+FROM
+	base_data
+ORDER BY
+	hits DESC
+LIMIT 20;`,
     query_params: { tech, week: dateWeek },
   });
 
