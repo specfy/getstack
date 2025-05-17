@@ -28,7 +28,7 @@ const fetchFavicons = async () => {
         // not exists
       }
       const faviconUrl = new URL(
-        `https://img.logo.dev/${new URL(tech.website).hostname}?token=pk_e8E7K3hvTQ-k3tccmMtKig&size=64&retina=true&format=webp`
+        `https://img.logo.dev/${new URL(tech.website).hostname}?token=${process.env['LOGODEV_KEY']}&size=64&retina=true&format=webp`
       );
       const response = await fetch(faviconUrl, {
         method: 'GET',

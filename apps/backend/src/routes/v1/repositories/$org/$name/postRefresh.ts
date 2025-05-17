@@ -28,7 +28,6 @@ export const postRefreshOne: FastifyPluginCallback = (fastify: FastifyInstance) 
 
     try {
       const res = await octokit.rest.repos.get({ owner: repo.org, repo: repo.name });
-      console.log(res.data);
       await refreshOne(res.data);
     } catch (err) {
       console.error(err);

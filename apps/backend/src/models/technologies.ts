@@ -64,7 +64,6 @@ SELECT
 FROM ranked
 WHERE rn <= 5`,
   });
-  // console.log(res);
 
   const json = await res.json<TechnologyWeeklyRow>();
 
