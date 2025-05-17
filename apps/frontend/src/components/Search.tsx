@@ -1,7 +1,9 @@
+import { IconLoader, IconStar } from '@tabler/icons-react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useMemo, useRef, useState } from 'react';
-import { useKey } from 'react-use';
+import { useDebounce, useKey } from 'react-use';
 
+import { useRepositorySearch } from '@/api/useRepository';
 import {
   Command,
   CommandEmpty,
@@ -10,6 +12,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { formatQuantity } from '@/lib/number';
 import { categories, listCategories, listTech } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
@@ -21,8 +24,18 @@ export const Search: React.FC<{
   const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
+  const [debounced, setDebounced] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useDebounce(
+    () => {
+      setDebounced(search);
+    },
+    200,
+    [search]
+  );
+  const { data, isLoading } = useRepositorySearch({ search: debounced });
 
   useKey(
     'Escape',
@@ -45,7 +58,7 @@ export const Search: React.FC<{
     const val = search;
     return listTech
       .filter((v) => v.name.includes(val) || v.key.includes(val) || v.type.includes(val))
-      .slice(0, 50);
+      .slice(0, 25);
   }, [search]);
 
   const showList = !inline || isFocused || search.trim().length > 0;
@@ -62,6 +75,7 @@ export const Search: React.FC<{
           onBlur={() => {
             setTimeout(() => setIsFocused(false), 100);
           }}
+          icon={isLoading && <IconLoader className="animate-spin" />}
         />
         {showList && (
           <CommandEmpty
@@ -136,6 +150,43 @@ export const Search: React.FC<{
                           <span>{row.name}</span>
                         </div>
                         <div className="text-gray-500 text-xs">{categories[row.type].name}</div>
+                      </Link>
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+            )}
+            {data && data.data.length > 0 && (
+              <CommandGroup heading="Repositories">
+                {data.data.map((row) => {
+                  return (
+                    <CommandItem
+                      key={row.id}
+                      className="flex justify-between cursor-pointer"
+                      asChild
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      onSelect={() => {
+                        void navigate({
+                          to: '/$org/$name',
+                          params: { org: row.org, name: row.name },
+                        });
+                        onPick();
+                      }}
+                    >
+                      <Link to="/$org/$name" params={{ org: row.org, name: row.name }}>
+                        <div className="flex gap-2 items-center">
+                          <div className={'w-4'}>
+                            <img src={row.avatar_url} />
+                          </div>
+                          <span>{row.name}</span>
+                        </div>
+                        <div className="text-gray-500 text-xs flex gap-1 items-center">
+                          <IconStar />
+                          {formatQuantity(row.stars)}
+                        </div>
                       </Link>
                     </CommandItem>
                   );

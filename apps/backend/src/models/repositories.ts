@@ -59,6 +59,21 @@ export async function findRepositoryByOrgAndName(
     .executeTakeFirst();
 }
 
+export async function searchRepository(search: string): Promise<RepositoryRow[]> {
+  const res = await clickHouse.query({
+    query: `SELECT * FROM repositories
+    WHERE (org ILIKE {search: String} OR name ILIKE {search: String})
+      AND ignored = 0
+      AND stars >= ${ANALYZE_MIN_STARS}
+      ORDER BY stars DESC
+      LIMIT 10`,
+    format: 'JSON',
+    query_params: { search: `%${search}%` },
+  });
+  const json = await res.json<RepositoryRow>();
+  return json.data;
+}
+
 export async function getRepositoryToAnalyze({
   beforeDate,
 }: {

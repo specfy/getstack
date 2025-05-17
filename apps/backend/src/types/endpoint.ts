@@ -70,6 +70,15 @@ export type APIGetTopRelatedTechnology = Endpoint<{
   };
 }>;
 
+export type APIPostRepositorySearch = Endpoint<{
+  Path: '/v1/repositories/search';
+  Method: 'POST';
+  Success: {
+    success: true;
+    data: RepositoryRow[];
+  };
+}>;
+
 export type APIGetRepository = Endpoint<{
   Path: '/v1/repositories/:org/:name';
   Method: 'GET';
