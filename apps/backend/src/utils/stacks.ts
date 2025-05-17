@@ -726,7 +726,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Distributed system for running JavaScript, TypeScript, and WebAssembly at the edge, close to users.',
   },
   dependabot: {
-    website: 'https://github.com/dependabot',
+    website: 'https://github.com/dependabot/dependabot-core',
     github: 'dependabot/dependabot-core',
     description:
       'Automated dependency updating tool integrated into GitHub, helping keep projects secure and up-to-date.',
@@ -1999,7 +1999,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Cloud platform for building and running applications and websites with free TLS, global CDN, and auto-deploys from Git.',
   },
   renovate: {
-    website: 'https://github.com/renovatebot/renovate',
+    website: 'https://www.mend.io/renovate/',
     github: 'renovatebot/renovate',
     description:
       'Automated dependency update tool for software projects, keeping dependencies current and secure.',
@@ -2515,7 +2515,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Platform offering serverless data solutions, including Redis, Kafka, and QStash, for modern applications.',
   },
   uptimekuma: {
-    website: 'https://github.com/louislam/uptime-kuma',
+    website: 'https://uptime.kuma.pet/',
     github: 'louislam/uptime-kuma',
     description:
       'Self-hosted, open-source uptime monitoring tool with a user-friendly interface and various notification options.',
@@ -2927,8 +2927,8 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Package manager and build system for Rust projects, handling dependencies, compilation, and testing.',
   },
   goenv: {
-    website: 'https://github.com/syndbg/goenv',
-    github: 'syndbg/goenv',
+    website: 'https://github.com/go-nv/goenv',
+    github: 'go-nv/goenv',
     description:
       'Version manager for Go, allowing easy installation and switching between multiple Go versions.',
   },
@@ -2981,7 +2981,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Static code analyzer (linter) for Ruby, enforcing community style guidelines and detecting code issues.',
   },
   rubyenv: {
-    website: 'https://github.com/rbenv/rbenv',
+    website: 'https://rbenv.org/',
     github: 'rbenv/rbenv',
     description:
       'Version manager for Ruby, allowing easy installation and management of Ruby versions.',
@@ -3003,7 +3003,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'High-level Python web framework encouraging rapid development and clean, pragmatic design.',
   },
   goent: {
-    website: 'https://github.com/ent/ent',
+    website: 'https://entgo.io/',
     github: 'ent/ent',
     description:
       'Simple, yet powerful entity framework for Go, featuring schema definition as code and query generation.',
@@ -3071,7 +3071,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'JavaScript test framework for Node.js, enabling asynchronous testing with a focus on simplicity and flexibility.',
     github: 'mochajs/mocha',
-  }
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
