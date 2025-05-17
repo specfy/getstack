@@ -15,7 +15,7 @@ export const Route = createRootRoute({
     <div className="min-h-screen flex justify-center">
       <div className="flex flex-col w-full max-w-screen-lg">
         <Header />
-        <div className="h-full">
+        <div className="h-full px-4">
           <Outlet />
         </div>
         <Footer />
@@ -27,7 +27,7 @@ export const Route = createRootRoute({
 
 export const Header: React.FC = () => {
   return (
-    <header className="flex justify-between items-center mt-1 mb-1">
+    <header className="flex justify-between items-center mt-1 mb-1 px-4 md:p-0">
       <Link className="h-8 flex gap-2 items-center font-light text-lg text-gray-700" to="/">
         <IconStack2 /> useStack
       </Link>
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="mt-20 border-t pt-10 pb-10 flex justify-between items-end">
+    <footer className="mt-20 border-t pt-10 pb-10 flex justify-between items-end px-4">
       <div>
         <div className="flex mb-2 gap-2">
           <a href="mailto:contact@usestack.dev">
@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
           </a>
         </div>
       </div>
-      <div className="text-sm flex flex-col items-end">
+      <div className="text-xs flex flex-col gap-1.5 items-end">
         <Link to="/about" className="text-gray-700 transition-colors hover:text-gray-950">
           About
         </Link>

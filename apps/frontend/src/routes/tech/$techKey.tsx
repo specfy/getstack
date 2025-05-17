@@ -37,7 +37,9 @@ const Tech: React.FC = () => {
 
   const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
   const { data, isLoading } = useTechnology({ name: tech?.key });
-  const { data: leaderboard } = useCategoryLeaderboard({ name: tech?.type });
+  const { data: leaderboard, isLoading: isLoadingLeaderboard } = useCategoryLeaderboard({
+    name: tech?.type,
+  });
 
   const [current, trend, diff] = useMemo(() => {
     if (!data || data.data.volume.length <= 0) {
@@ -114,7 +116,28 @@ const Tech: React.FC = () => {
     return <NotFound />;
   }
   if (isLoading) {
-    return <>Loading</>;
+    return (
+      <div>
+        <header className="flex gap-2 justify-between mt-10">
+          <h2 className="flex gap-4 items-center">
+            <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
+              <Skeleton className="h-full w-full" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <Skeleton className="h-2 w-10" />
+              <div className="text-2xl font-semibold leading-6">
+                <Skeleton className="h-10 w-50 max-w-2xl" />
+              </div>
+            </div>
+          </h2>
+        </header>
+        <Skeleton className="h-10 w-full mt-4" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
+          <Skeleton className="h-20 w-full " />
+          <Skeleton className="h-20 w-full " />
+        </div>
+      </div>
+    );
   }
   if (!data) {
     return null;
@@ -153,8 +176,14 @@ const Tech: React.FC = () => {
           {tech.description}
         </div>
       )}
+      {isLoadingLeaderboard && (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
+          <Skeleton className="h-20 w-full " />
+          <Skeleton className="h-20 w-full " />
+        </div>
+      )}
       {position > 0 && (
-        <div className="grid grid-cols-4 gap-4 mt-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
           <Card>
             <CardHeader className="relative">
               <CardDescription>Repositories</CardDescription>
@@ -236,13 +265,12 @@ const Tech: React.FC = () => {
           </Card>
         </div>
       )}
-      <div className="grid grid-cols-10 gap-14 mt-14">
-        <div className="col-span-7 flex flex-col gap-14">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
+        <div className="md:col-span-7 flex flex-col gap-14">
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
-          <Related tech={tech} />
         </div>
-        <div className="col-span-3 mt-0 flex flex-col gap-5">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="md:col-span-3 mt-0 flex flex-col gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
             {tech.github && (
               <a href={`https://github.com/${tech.github}?ref=usestack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
@@ -256,6 +284,7 @@ const Tech: React.FC = () => {
               </Button>
             </a>
           </div>
+          {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
             <div className="border-t pt-5">
               <Card>
@@ -319,6 +348,9 @@ const Tech: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className="mt-10">
+        <Related tech={tech} />
+      </div>
     </div>
   );
 };
@@ -356,7 +388,7 @@ export const TopRepositories: React.FC<{
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Top repositories using {tech.name}</h3>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {top10.map((repo) => {
           return (
             <Link
@@ -435,7 +467,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Most popular with</h3>
+      <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
       {isLoading && (
         <>
           <Skeleton className="w-[100px] h-[20px]" />
@@ -443,7 +475,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
           <Skeleton className="w-[100px] h-[20px]" />
         </>
       )}
-      <div className="grid grid-cols-4 gap-4 items-start">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-start">
         {groups.length > 0 &&
           groups.map(([cat, keys]) => {
             return (

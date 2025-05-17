@@ -1,7 +1,7 @@
 import { CronJob } from 'cron';
 
 import { getOrInsert, update } from '../models/progress.js';
-import { upsertRepository } from '../models/repositories.js';
+import { ANALYZE_MIN_STARS, upsertRepository } from '../models/repositories.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
@@ -142,7 +142,7 @@ function filter(
   if (denylistName.some((deny) => nameLower.includes(deny))) {
     return 'deny';
   }
-  if (repo.stargazers_count <= MIN_STARS) {
+  if (repo.stargazers_count <= MIN_STARS || repo.stargazers_count < ANALYZE_MIN_STARS) {
     return 'not_popular';
   }
   if (repo.private) {

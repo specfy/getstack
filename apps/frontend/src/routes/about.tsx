@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 const About: React.FC = () => {
   return (
-    <div className="w-1/2 prose">
+    <div className="md:w-1/2 prose mt-10">
       <h2 className="text-3xl font-semibold mb-2">About</h2>
       <p>
         StackHub is a powerful tool that provides comprehensive, and trending insights into the open
@@ -27,7 +27,7 @@ const About: React.FC = () => {
       <h3>Which repositories are tracked?</h3>
       <p>Each week we parse all the repositories following this set of conditions:</p>
       <ol>
-        <li>No private repo, not archived, no templates, no fork.</li>
+        <li>No private repos, no templates, no forks, and not archived.</li>
         <li>
           Have more than <strong>+1500 stars</strong>
         </li>
@@ -47,12 +47,10 @@ const About: React.FC = () => {
       <a
         href="https://github.com/specfy/stack-analyser"
         target="_blank"
-        className="transition-colors font-semibold no-underline border px-2 py-2 inline-flex gap-2 items-center h-8 rounded-sm hover:bg-neutral-100"
+        className="transition-colors font-semibold no-underline border px-2 py-2 h-10 inline-flex gap-2 items-center rounded-sm hover:bg-neutral-100"
       >
-        <div>
-          <img src={`/favicons/github.webp`} className="w-5 h-5" />
-        </div>{' '}
-        Contributes to @specfy/stack-analyzer
+        <img src={`/favicons/github.webp`} className="w-5 h-5" />
+        Contribute to @specfy/stack-analyzer
       </a>
     </div>
   );

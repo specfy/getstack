@@ -12,8 +12,8 @@ export const TrendsBadge: React.FC<{
     <Badge
       variant="outline"
       className={cn(
-        'flex gap-1 rounded-lg text-tiny',
-        pct > 0 ? ' text-lime-600' : ' text-red-400'
+        'flex gap-1 rounded-lg text-tiny border-transparent',
+        pct > 0 ? ' text-emerald-600 bg-emerald-50' : ' text-red-400 bg-red-50'
       )}
     >
       {pct > 0 ? <IconTrendingUp /> : <IconTrendingDown />}

@@ -45,9 +45,25 @@ const Repo: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-2 mt-10">
-        <Skeleton className="h-[30px] w-1/2" />
-        <Skeleton className="h-[20px] w-full" />
+      <div>
+        <header className="flex gap-2 justify-between mt-10">
+          <h2 className="flex gap-4 items-center">
+            <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
+              <Skeleton className="h-full w-full" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <Skeleton className="h-2 w-10" />
+              <div className="text-2xl font-semibold leading-6">
+                <Skeleton className="h-10 w-50 max-w-2xl" />
+              </div>
+            </div>
+          </h2>
+        </header>
+        <Skeleton className="h-10 w-full mt-4" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
+          <Skeleton className="h-20 w-full " />
+          <Skeleton className="h-20 w-full " />
+        </div>
       </div>
     );
   }
@@ -86,8 +102,8 @@ const Repo: React.FC = () => {
           {repo.description}
         </div>
       )}
-      <main className="mt-14 grid grid-cols-6 gap-10">
-        <div className="col-span-4 ">
+      <main className="mt-14 flex flex-col-reverse flex-col md:flex-row gap-10">
+        <div className="md:w-4/6">
           <h3 className="text-lg font-semibold mb-4">Technologies</h3>
           <div className="flex flex-col gap-1 items-start">
             {groups.length > 0 &&
@@ -105,7 +121,7 @@ const Repo: React.FC = () => {
               })}
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="md:w-2/6">
           <div className="flex gap-4 mb-4">
             <a href={`${repo.url}?ref=usestack.dev`} target="_blank" className="grow w-full">
               <Button variant="outline" className="cursor-pointer w-full">
