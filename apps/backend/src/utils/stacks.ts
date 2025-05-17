@@ -3060,6 +3060,18 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Open-source, lightweight, and fast model server for running large language models (LLMs) on your own hardware.',
     github: 'ollama/ollama',
   },
+  clojure: {
+    website: 'https://clojure.org/',
+    description:
+      'Functional programming language that runs on the JVM, emphasizing immutability and concurrency.',
+    github: 'clojure/clojure',
+  },
+  mochajs: {
+    website: 'https://mochajs.org/',
+    description:
+      'JavaScript test framework for Node.js, enabling asynchronous testing with a focus on simplicity and flexibility.',
+    github: 'mochajs/mocha',
+  }
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
