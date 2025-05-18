@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { getActiveWeek } from '../../../../../models/progress.js';
 import { getTopRelatedTechnology } from '../../../../../models/technologies.js';
 
 import type { APIGetTopRelatedTechnology } from '../../../../../types/endpoint.js';
@@ -21,7 +22,8 @@ export const getTechnologyRelated: FastifyPluginCallback = (fastify: FastifyInst
 
     const params = valParams.data;
 
-    const data = await getTopRelatedTechnology(params.name);
+    const { currentWeek } = await getActiveWeek();
+    const data = await getTopRelatedTechnology({ tech: params.name, currentWeek });
 
     reply.status(200).send({ success: true, data });
   });

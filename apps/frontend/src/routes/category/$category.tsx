@@ -1,7 +1,8 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
+import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
@@ -9,7 +10,7 @@ import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
-import { Card } from '@/components/ui/card';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
 import type { CategoryDefinition } from '@/lib/stack';
@@ -17,8 +18,9 @@ import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 import type { AreaBumpSerie } from '@nivo/bump';
-import type { TechItem, TechType } from '@specfy/stack-analyser';
-import type { ExtendedTechItem } from '@stackhub/backend/dist/utils/stacks';
+import type { TechType } from '@specfy/stack-analyser';
+import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
+import type { TechnologyByCategoryByWeekWithTrend } from '@stackhub/backend/src/types/endpoint';
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
@@ -26,6 +28,12 @@ const Category: React.FC = () => {
   const cat = categories[category as TechType] as CategoryDefinition | undefined;
   const { data, isLoading } = useCategory({ name: category });
   const { data: leaderboard } = useCategoryLeaderboard({ name: category });
+  const [pie, setPie] = useState<{ id: string; value: number }[]>([]);
+  const [nonFoundTech, setNonFoundTech] = useState<TechItemWithExtended[]>([]);
+  const [top10, setTop10] = useState<TechnologyByCategoryByWeekWithTrend[]>([]);
+  const [rest, setRest] = useState<TechnologyByCategoryByWeekWithTrend[]>([]);
+  const [winner, setWinner] = useState<TechnologyByCategoryByWeekWithTrend>();
+  const [looser, setLooser] = useState<TechnologyByCategoryByWeekWithTrend>();
 
   const topNData = useMemo(() => {
     if (!data) {
@@ -56,35 +64,39 @@ const Category: React.FC = () => {
     return Object.values(topN);
   }, [data, category]);
 
-  const [pieData, nonFoundTech] = useMemo(() => {
+  useEffect(() => {
     if (!leaderboard) {
-      return [[], []];
+      return;
     }
 
-    const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
-    const nonFound: (ExtendedTechItem & TechItem)[] = [];
-
-    const pie: { id: string; value: number }[] = [];
+    const tmp: { id: string; value: number }[] = [];
+    let up: TechnologyByCategoryByWeekWithTrend | undefined;
+    let down: TechnologyByCategoryByWeekWithTrend | undefined;
     for (const row of leaderboard.data) {
       const indexed = listIndexed[row.tech];
-      pie.push({ id: indexed.name, value: row.current_hits });
+      tmp.push({ id: indexed.name, value: row.current_hits });
+      if ((!up || row.percent_change > up.percent_change) && row.percent_change > 0.1) {
+        up = row;
+      } else if ((!down || row.percent_change < down.percent_change) && row.percent_change < -0.1) {
+        down = row;
+      }
     }
+    setPie(tmp);
+    setWinner(up);
+    setLooser(down);
 
     // Identify undiscovered tech by diffing listIndexed for the category with discoveredTech
+    const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
+    const nonFound: TechItemWithExtended[] = [];
     for (const item of Object.values(listIndexed)) {
       if (item.type === category && !discoveredTech.has(item.key)) {
         nonFound.push(item);
       }
     }
+    setNonFoundTech(nonFound);
 
-    return [pie, nonFound];
-  }, [leaderboard, category]);
-
-  const [top10, rest] = useMemo(() => {
-    if (!leaderboard) {
-      return [[], []];
-    }
-    return [leaderboard.data.slice(0, 10), leaderboard.data.slice(10)];
+    setTop10(leaderboard.data.slice(0, 10));
+    setRest(leaderboard.data.slice(10));
   }, [leaderboard]);
 
   if (!cat) {
@@ -141,7 +153,7 @@ const Category: React.FC = () => {
 
       <div className="mt-10">
         <h3 className="text-lg font-semibold mb-1">Top 10</h3>
-        <div className="grid md:grid-cols-6 gap-10">
+        <div className="grid md:grid-cols-6 gap-14">
           <div className="md:col-span-2">
             <div className="text-xs text-neutral-400 mb-4">
               Every {cat.name} by number of repositories
@@ -194,7 +206,7 @@ const Category: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-y-10 md:gap-x-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-y-10 md:gap-x-14">
         <div className="md:col-span-1">
           <hr />
 
@@ -235,10 +247,56 @@ const Category: React.FC = () => {
           )}
         </div>
         <div className="col-span-2">
-          <h3 className="text-lg font-semibold mb-4">Full Repartition</h3>
+          <div className="grid grid-cols-2 gap-6">
+            {winner && (
+              <Card>
+                <CardHeader className="relative">
+                  <CardDescription>Best</CardDescription>
+                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                    <TechBadge tech={winner.tech} size="xl" />
+                  </CardTitle>
+                  <div className="absolute right-4 top-0">
+                    <TrendsBadge pct={winner.percent_change} />
+                  </div>
+                </CardHeader>
+
+                <CardFooter className="flex-col items-start gap-1 text-sm">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    Trending up this week <IconTrendingUp className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground">
+                    Found in {winner.trend} more repo{winner.trend > 1 && 's'}
+                  </div>
+                </CardFooter>
+              </Card>
+            )}
+            {looser && (
+              <Card>
+                <CardHeader className="relative">
+                  <CardDescription>Worst</CardDescription>
+                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                    <TechBadge tech={looser.tech} size="xl" />
+                  </CardTitle>
+                  <div className="absolute right-4 top-0">
+                    <TrendsBadge pct={looser.percent_change} />
+                  </div>
+                </CardHeader>
+
+                <CardFooter className="flex-col items-start gap-1 text-sm">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    Trending down this week <IconTrendingDown className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground">
+                    Found in {looser.trend} less repo{looser.trend > 1 && 's'}
+                  </div>
+                </CardFooter>
+              </Card>
+            )}
+          </div>
+          <h3 className="text-lg font-semibold mb-4 mt-6">Full Repartition</h3>
           <Card style={{ height: 350 }}>
             <ResponsivePie
-              data={pieData}
+              data={pie}
               margin={{ top: 20, right: 30, bottom: 30, left: 10 }}
               innerRadius={0.5}
               padAngle={0.7}

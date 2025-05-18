@@ -3,6 +3,18 @@ import { formatToDate } from '../utils/date.js';
 
 import type { ProgressTableRow } from '../db/types.js';
 
+export async function getActiveWeek(): Promise<{ currentWeek: string; previousWeek: string }> {
+  const row = await db
+    .selectFrom('progress')
+    .selectAll()
+    .where('type', '=', 'analyze')
+    .where('done', '=', true)
+    .orderBy('date_week', 'desc')
+    .limit(2)
+    .execute();
+  return { currentWeek: row[0]!.date_week, previousWeek: row[1]!.date_week };
+}
+
 export async function getOrInsert({
   date_week,
   type,

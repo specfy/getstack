@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { getActiveWeek } from '../../../../models/progress.js';
 import {
   getTechnologyCumulatedStars,
   getTechnologyVolumePerWeek,
@@ -25,9 +26,11 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const params = valParams.data;
 
-    const topRepos = await getTopRepositoriesForTechnology(params.name);
-    const volume = await getTechnologyVolumePerWeek(params.name);
-    const cumulatedStars = await getTechnologyCumulatedStars(params.name);
+    const { currentWeek } = await getActiveWeek();
+
+    const topRepos = await getTopRepositoriesForTechnology({ tech: params.name, currentWeek });
+    const volume = await getTechnologyVolumePerWeek({ tech: params.name, currentWeek });
+    const cumulatedStars = await getTechnologyCumulatedStars({ tech: params.name, currentWeek });
 
     reply.status(200).send({
       success: true,

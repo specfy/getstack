@@ -112,17 +112,6 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
       .where('org', '=', repo.org)
       .where('name', '=', repo.name)
       .execute();
-    // await clickHouse.exec({
-    //   query: `ALTER TABLE "repositories"
-    //   UPDATE
-    //     "stars" = ${repo.stars},
-    //     "branch" = '${repo.branch}',
-    //     "size" = ${repo.size},
-    //     "ignored" = ${row.ignored === 1 ? 1 : repo.ignored},
-    //     "ignored_reason" = '${repo.ignored_reason}',
-    //     updated_at = '${formatToClickhouseDatetime(new Date())}'
-    //     WHERE "org" = '${repo.org}' AND "name" = '${repo.name}'`,
-    // });
 
     return;
   }
