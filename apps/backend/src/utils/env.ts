@@ -24,6 +24,10 @@ const schema = z.object({
   CRON_ANALYZE: bool,
   ANALYZE_DLC: z.coerce.date(),
   ANALYZE_MIN_STARS: z.coerce.number().default(3000),
+
+  // Newsletter
+  BEEHIIV_PUBLICATION_ID: z.string().optional(),
+  BEEHIIV_API_KEY: z.string().optional(),
 });
 
 export const envs = schema.parse(process.env);

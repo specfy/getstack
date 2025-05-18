@@ -16,7 +16,7 @@ export interface TechnologyByCategoryByWeekWithTrend {
   percent_change: number;
 }
 export type APIGetTop = Endpoint<{
-  Path: '/v1/top';
+  Path: '/1/top';
   Method: 'GET';
   Success: {
     success: true;
@@ -31,7 +31,7 @@ export interface TechnologyTopN {
   position: string;
 }
 export type APIGetCategory = Endpoint<{
-  Path: '/v1/categories/:name';
+  Path: '/1/categories/:name';
   Method: 'GET';
   Success: {
     success: true;
@@ -40,7 +40,7 @@ export type APIGetCategory = Endpoint<{
 }>;
 
 export type APIGetCategoryLeaderboard = Endpoint<{
-  Path: '/v1/categories/:name/leaderboard';
+  Path: '/1/categories/:name/leaderboard';
   Method: 'GET';
   Success: {
     success: true;
@@ -51,7 +51,7 @@ export type APIGetCategoryLeaderboard = Endpoint<{
 export type RepositoryTop = Pick<RepositoryRow, 'avatar_url' | 'name' | 'org' | 'stars' | 'url'>;
 export type TechnologyWeeklyVolume = Pick<TechnologiesWeeklyTable, 'date_week' | 'hits'>;
 export type APIGetTechnology = Endpoint<{
-  Path: '/v1/technologies/:name';
+  Path: '/1/technologies/:name';
   Method: 'GET';
   Success: {
     success: true;
@@ -61,7 +61,7 @@ export type APIGetTechnology = Endpoint<{
 
 export type RelatedTechnology = Pick<TechnologyWeeklyRow, 'hits' | 'tech'>;
 export type APIGetTopRelatedTechnology = Endpoint<{
-  Path: '/v1/technologies/:name/related';
+  Path: '/1/technologies/:name/related';
   Method: 'GET';
   Success: {
     success: true;
@@ -70,8 +70,9 @@ export type APIGetTopRelatedTechnology = Endpoint<{
 }>;
 
 export type APIPostRepositorySearch = Endpoint<{
-  Path: '/v1/repositories/search';
+  Path: '/1/repositories/search';
   Method: 'POST';
+  Body: { search: string };
   Success: {
     success: true;
     data: RepositoryRow[];
@@ -79,10 +80,20 @@ export type APIPostRepositorySearch = Endpoint<{
 }>;
 
 export type APIGetRepository = Endpoint<{
-  Path: '/v1/repositories/:org/:name';
+  Path: '/1/repositories/:org/:name';
   Method: 'GET';
   Success: {
     success: true;
     data: { repo: RepositoryRow; techs: TechnologyRow[] };
+  };
+}>;
+
+export type APIPostSubscribe = Endpoint<{
+  Path: '/1/newsletter';
+  Method: 'POST';
+  Body: { email: string };
+  Success: {
+    success: true;
+    message: string;
   };
 }>;

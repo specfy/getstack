@@ -3,6 +3,7 @@ import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { useState } from 'react';
 
+import { Newsletter } from '@/components/Newsletter';
 import { Search } from '@/components/Search';
 import { Button } from '@/components/ui/button';
 import { CommandDialog } from '@/components/ui/command';
@@ -66,16 +67,19 @@ export const Header: React.FC = () => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="mt-20 border-t pt-10 pb-10 flex justify-between items-end px-4">
+    <footer className="mt-20 border-t pt-10 pb-10 flex justify-between items-start px-4">
       <div>
+        <div className="md:w-80 mb-4">
+          <Newsletter />
+        </div>
         <div className="flex mb-2 gap-2">
           <a href="mailto:contact@usestack.dev">
-            <Button variant={'outline'} size={'sm'} className="rounded-full">
+            <Button variant={'outline'} size={'sm'}>
               <IconAt />
             </Button>
           </a>
           <a href="https://github.com/specfy/stack-analyser?ref=usestack.dev" target="_blank">
-            <Button variant={'outline'} size={'sm'} className="rounded-full">
+            <Button variant={'outline'} size={'sm'}>
               <IconBrandGithub />
             </Button>
           </a>
@@ -87,7 +91,7 @@ export const Footer: React.FC = () => {
           </a>
         </div>
       </div>
-      <div className="text-xs flex flex-col gap-1.5 items-end">
+      <div className="text-sm flex flex-col gap-1.5 items-end">
         <Link to="/about" className="text-gray-700 transition-colors hover:text-gray-950">
           About
         </Link>

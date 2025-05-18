@@ -31,7 +31,7 @@ export const useRepository = ({ org, name }: { org: string; name: string }) => {
 export const useRepositorySearch = ({ search }: { search: string }) => {
   return useQuery<APIPostRepositorySearch['Success'], Error>({
     enabled: Boolean(search),
-    queryKey: ['getRepositorySearch', search],
+    queryKey: ['postRepositorySearch', search],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/repositories/search`, {
         method: 'POST',
