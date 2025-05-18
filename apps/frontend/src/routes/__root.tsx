@@ -53,7 +53,7 @@ export const Header: React.FC = () => {
               </Button>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="hidden md:inline-block">
             <NavigationMenuLink href="/" asChild>
               <Link to="/">Home</Link>
             </NavigationMenuLink>
