@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import path from 'node:path';
 
 import { extendedListTech } from '../utils/stacks.js';
 
@@ -39,7 +39,7 @@ async function generateSitemap(): Promise<void> {
   sitemap += '\n</urlset>';
 
   // Write the sitemap to a file
-  const outputPath = join(
+  const outputPath = path.join(
     import.meta.dirname,
     '..',
     '..',
