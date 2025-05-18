@@ -6,7 +6,7 @@ export interface ExtendedTechItem {
   website?: string;
   github?: string;
   iconURL?: string;
-  description?: string;
+  description: string;
 }
 
 export type TechItemWithExtended = ExtendedTechItem & TechItem;
@@ -3071,6 +3071,62 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'JavaScript test framework for Node.js, enabling asynchronous testing with a focus on simplicity and flexibility.',
     github: 'mochajs/mocha',
+  },
+  aircall: {
+    website: 'https://aircall.io/',
+    description:
+      'Cloud-based phone system for businesses, offering call routing, voicemail, and team collaboration features.',
+  },
+  asana: {
+    website: 'https://asana.com/',
+    description:
+      'Project management platform for teams, offering task management, collaboration, and workflow automation features.',
+  },
+  bugsnag: {
+    website: 'https://www.bugsnag.com/',
+    description:
+      'Error monitoring and crash reporting platform for web and mobile applications, providing insights into application stability and performance.',
+  },
+  calcom: {
+    website: 'https://cal.com/',
+    description:
+      'Open-source scheduling platform for teams, offering a simple way to schedule meetings and appointments.',
+    github: 'calcom/cal.com',
+  },
+  calendly: {
+    website: 'https://calendly.com/',
+    description:
+      'Online scheduling platform for businesses, allowing customers to book meetings with ease.',
+  },
+  clickup: {
+    website: 'https://clickup.com/',
+    description:
+      'Project management platform for teams, offering task management, collaboration, and workflow automation features.',
+  },
+  datadome: {
+    website: 'https://datadome.co/',
+    description:
+      'Real-time bot detection and prevention platform for web applications, protecting against automated attacks and abuse.',
+  },
+  freshdesk: {
+    website: 'https://www.freshworks.com/freshdesk/',
+    description:
+      'Customer support platform for businesses, offering ticketing, knowledge base, and automation features.',
+  },
+  miro: {
+    website: 'https://miro.com/',
+    description:
+      'Collaborative whiteboard platform for teams, offering a range of features for visual collaboration and brainstorming.',
+  },
+  segment: {
+    website: 'https://segment.com/',
+    description:
+      'Customer data platform for businesses, offering a range of features for data collection, analysis, and segmentation.',
+  },
+  monday: {
+    website: 'https://monday.com/',
+    description:
+      'Project management platform for teams, offering task management, collaboration, and workflow automation features.',
   },
 };
 

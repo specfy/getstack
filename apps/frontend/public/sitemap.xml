@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/aircall</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/airtable</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -147,6 +152,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/appveyor</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/asana</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -571,6 +581,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/bugsnag</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/bundler</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -592,6 +607,16 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/caddy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/calcom</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/calendly</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -647,6 +672,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/clicksend</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/clickup</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -787,6 +817,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/datadog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/datadome</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1012,6 +1047,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/flyway</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/freshdesk</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1646,6 +1686,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/miro</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/mistralai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1662,6 +1707,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/mochajs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/monday</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2311,6 +2361,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/segment</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/selenium</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2901,6 +2956,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/category/communication</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/category/collaboration</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2996,22 +3056,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/category/security</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/category/orm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/communication</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getstack.dev/category/network</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/category/security</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
