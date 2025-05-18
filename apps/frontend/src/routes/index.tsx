@@ -64,7 +64,7 @@ const Index: React.FC = () => {
           return (
             <>
               {index === 12 && (
-                <div className="flex flex-col justify-center items-center px-4 py-10 col-span-3">
+                <div className="flex flex-col justify-center items-center px-4 py-10 md:col-span-3">
                   <Newsletter />
                 </div>
               )}
@@ -151,7 +151,7 @@ const Try: React.FC = () => {
             <div className={'w-4'}>
               <img src={`/favicons/clickhouse.webp`} className="rounded-xs overflow-hidden" />
             </div>
-            <div className="truncate text-ellipsis">Clickhouse</div>
+            <div className="truncate text-ellipsis">ClickHouse</div>
           </Link>
         </Button>
       </div>

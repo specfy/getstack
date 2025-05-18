@@ -404,7 +404,7 @@ export const TopRepositories: React.FC<{
           return (
             <Link
               key={repo.url}
-              className="py-2 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
+              className="py-4 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
             >

@@ -52,12 +52,24 @@ const About: React.FC = () => {
         configuration for the technology you are looking for. If that's so, you can make a feature
         request or a pull request directly in our GitHub repository.
       </p>
-      <Button variant={'outline'} asChild>
-        <a href="https://github.com/specfy/stack-analyser" target="_blank" className="no-underline">
-          <img src={`/favicons/github.webp`} className="w-5 h-5" />
-          Contribute to @specfy/stack-analyzer
-        </a>
-      </Button>
+      <div className="flex gap-2">
+        <Button variant={'outline'} asChild>
+          <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
+            <img src={`/favicons/github.webp`} className="w-5 h-5" />
+            @specfy/getstack
+          </a>
+        </Button>
+        <Button variant={'outline'} asChild>
+          <a
+            href="https://github.com/specfy/stack-analyser"
+            target="_blank"
+            className="no-underline"
+          >
+            <img src={`/favicons/github.webp`} className="w-5 h-5" />
+            @specfy/stack-analyzer
+          </a>
+        </Button>
+      </div>
     </div>
   );
 };
