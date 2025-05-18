@@ -52,6 +52,11 @@ export const Header: React.FC = () => {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
+            <NavigationMenuLink href="/private" asChild>
+              <Link to="/private">Private Repo</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
             <NavigationMenuLink href="/about" asChild>
               <Link to="/about">About</Link>
             </NavigationMenuLink>
@@ -95,7 +100,9 @@ export const Footer: React.FC = () => {
         <Link to="/about" className="text-gray-700 transition-colors hover:text-gray-950">
           About
         </Link>
-
+        <Link to="/private" className="text-gray-700 transition-colors hover:text-gray-950">
+          Analyze my repo
+        </Link>
         <a
           href="https://github.com/specfy/stack-analyser/issues?ref=usestack.dev"
           target="_blank"

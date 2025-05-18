@@ -43,13 +43,13 @@ export const postSubscribe: FastifyPluginCallback = (fastify: FastifyInstance) =
       if (json.data.status === 'pending') {
         return reply.status(200).send({
           success: true,
-          message: "You've been subscribed to the newsletter, please check your email.",
+          message: 'Thanks for subscribing, please check your email to validate.',
         });
       }
 
       return reply.status(200).send({
         success: true,
-        message: 'You are now subscribed to the newsletter.',
+        message: 'Thanks for subscribing',
       });
     } catch (err) {
       console.error(err);
