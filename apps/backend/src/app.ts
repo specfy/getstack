@@ -21,14 +21,8 @@ export default async function createApp(
   });
 
   await f.register(cors, {
-    // Important for cookies to work
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      /\.run\.app$/,
-      /\.pages\.dev$/,
-      'https://getstack.dev',
-    ],
+    origin: ['http://localhost:3000', 'http://localhost:5173', 'https://getstack.dev'],
+    maxAge: 600,
     credentials: true,
     exposedHeaders: ['set-cookie'],
   });
