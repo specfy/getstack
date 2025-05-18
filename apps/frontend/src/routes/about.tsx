@@ -7,12 +7,12 @@ const About: React.FC = () => {
   return (
     <div className="md:w-2/3 prose mt-10">
       <Helmet>
-        <title>About - useStack</title>
+        <title>About - getStack</title>
         <link rel="canonical" href="/about" />
       </Helmet>
       <h2 className="text-3xl font-semibold mb-2">About</h2>
       <p>
-        useStack is a powerful tool that provides comprehensive, and trending insights into the open
+        getStack is a powerful tool that provides comprehensive, and trending insights into the open
         source world by analyzing <strong className="font-semibold">+20K open repositories</strong>{' '}
         from GitHub.
       </p>

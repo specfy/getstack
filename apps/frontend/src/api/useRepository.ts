@@ -5,7 +5,7 @@ import { API_URL, ApiResError } from './api.js';
 import type {
   APIGetRepository,
   APIPostRepositorySearch,
-} from '@usestack/backend/src/types/endpoint.js';
+} from '@getstack/backend/src/types/endpoint.js';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useRepository = ({ org, name }: { org: string; name: string }) => {

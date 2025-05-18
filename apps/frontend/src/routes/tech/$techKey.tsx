@@ -25,14 +25,14 @@ import { formatQuantity } from '@/lib/number';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
-import type { LineSeries } from '@nivo/line';
-import type { AllowedKeys } from '@specfy/stack-analyser';
-import type { TechItemWithExtended } from '@usestack/backend/dist/utils/stacks';
+import type { TechItemWithExtended } from '@getstack/backend/dist/utils/stacks';
 import type {
   RepositoryTop,
   TechnologyByCategoryByWeekWithTrend,
   TechnologyWeeklyVolume,
-} from '@usestack/backend/src/types/endpoint';
+} from '@getstack/backend/src/types/endpoint';
+import type { LineSeries } from '@nivo/line';
+import type { AllowedKeys } from '@specfy/stack-analyser';
 
 const Tech: React.FC = () => {
   const { techKey } = Route.useParams();
@@ -148,7 +148,7 @@ const Tech: React.FC = () => {
   return (
     <div>
       <Helmet>
-        <title>{tech.name} - useStack</title>
+        <title>{tech.name} - getStack</title>
         <meta name="description" content={tech.description} />
         <link rel="canonical" href={`/tech/${tech.key}`} />
       </Helmet>
@@ -281,13 +281,13 @@ const Tech: React.FC = () => {
         <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
           <div className="grid gap-2 grid-cols-2 md:gap-4">
             {tech.github && (
-              <a href={`https://github.com/${tech.github}?ref=usestack.dev`} target="_blank">
+              <a href={`https://github.com/${tech.github}?ref=getstack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
                   <IconBrandGithub stroke={1} /> GitHub
                 </Button>
               </a>
             )}
-            <a href={`${tech.website}?ref=usestack.dev`} target="_blank">
+            <a href={`${tech.website}?ref=getstack.dev`} target="_blank">
               <Button variant="outline" className="cursor-pointer w-full">
                 <IconWorld stroke={1} /> Website
               </Button>

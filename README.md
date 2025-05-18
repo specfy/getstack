@@ -1,17 +1,17 @@
-![useStack](/screenshot.jpg)
+![getStack](/screenshot.jpg)
 
 <p align="center">
   Discover Open Source Trends
   <br />
-  <a href="https://usestack.dev"><strong>Learn more »</strong></a>
+  <a href="https://getstack.dev"><strong>Learn more »</strong></a>
   <br />
   <br />
-  <a href="https://usestack.dev">Website</a>
+  <a href="https://getstack.dev">Website</a>
   ·
-  <a href="https://github.com/specfy/usestack/issues">Issues</a>
+  <a href="https://github.com/specfy/getstack/issues">Issues</a>
 </p>
 
-useStack is a powerful tool that provides comprehensive, and trending insights into the open source world by analyzing +20K open repositories from GitHub.
+getStack is a powerful tool that provides comprehensive, and trending insights into the open source world by analyzing +20K open repositories from GitHub.
 
 ## How it works?
 

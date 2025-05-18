@@ -1,3 +1,4 @@
+import { extendedListTech } from '@getstack/backend/dist/utils/stacks.js';
 import {
   IconAppWindow,
   IconApps,
@@ -29,11 +30,10 @@ import {
   IconUsers,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import { extendedListTech } from '@usestack/backend/dist/utils/stacks.js';
 
+import type { ExtendedTechItem } from '@getstack/backend/dist/utils/stacks.js';
 import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
 import type { Icon } from '@tabler/icons-react';
-import type { ExtendedTechItem } from '@usestack/backend/dist/utils/stacks.js';
 
 export interface CategoryDefinition {
   name: string;

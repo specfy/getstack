@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
   return (
     <header className="flex justify-between items-center mt-2 mb-1 px-4">
       <Link className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700" to="/">
-        <IconStack2 /> <span className="font-medium tracking-tighter">useStack</span>
+        <IconStack2 /> <span className="font-medium tracking-tighter">getStack</span>
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
@@ -78,12 +78,12 @@ export const Footer: React.FC = () => {
           <Newsletter />
         </div>
         <div className="flex mb-2 gap-2">
-          <a href="mailto:contact@usestack.dev">
+          <a href="mailto:contact@getstack.dev">
             <Button variant={'outline'} size={'sm'}>
               <IconAt />
             </Button>
           </a>
-          <a href="https://github.com/specfy/stack-analyser?ref=usestack.dev" target="_blank">
+          <a href="https://github.com/specfy/stack-analyser?ref=getstack.dev" target="_blank">
             <Button variant={'outline'} size={'sm'}>
               <IconBrandGithub />
             </Button>
@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
           Analyze my repo
         </Link>
         <a
-          href="https://github.com/specfy/stack-analyser/issues?ref=usestack.dev"
+          href="https://github.com/specfy/stack-analyser/issues?ref=getstack.dev"
           target="_blank"
           className="text-gray-700 transition-colors hover:text-gray-950"
         >

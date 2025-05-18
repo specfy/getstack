@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: usestack
+      POSTGRES_DB: getstack
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

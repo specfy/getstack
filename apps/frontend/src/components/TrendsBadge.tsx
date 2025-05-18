@@ -3,7 +3,7 @@ import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-import type { TechnologyByCategoryByWeekWithTrend } from '@usestack/backend/src/types/endpoint';
+import type { TechnologyByCategoryByWeekWithTrend } from '@getstack/backend/src/types/endpoint';
 
 export const TrendsBadge: React.FC<{
   pct: TechnologyByCategoryByWeekWithTrend['percent_change'];

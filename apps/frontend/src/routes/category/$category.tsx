@@ -17,10 +17,10 @@ import type { CategoryDefinition } from '@/lib/stack';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
+import type { TechItemWithExtended } from '@getstack/backend/dist/utils/stacks';
+import type { TechnologyByCategoryByWeekWithTrend } from '@getstack/backend/src/types/endpoint';
 import type { AreaBumpSerie } from '@nivo/bump';
 import type { TechType } from '@specfy/stack-analyser';
-import type { TechItemWithExtended } from '@usestack/backend/dist/utils/stacks';
-import type { TechnologyByCategoryByWeekWithTrend } from '@usestack/backend/src/types/endpoint';
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
@@ -135,7 +135,7 @@ const Category: React.FC = () => {
   return (
     <div>
       <Helmet>
-        <title>{cat.name} - useStack</title>
+        <title>{cat.name} - getStack</title>
         <link rel="canonical" href={`/category/${category}`} />
       </Helmet>
       <header className="mb-10 flex flex-col gap-2 mt-10">
