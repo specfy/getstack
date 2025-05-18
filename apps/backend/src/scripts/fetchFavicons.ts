@@ -6,7 +6,7 @@ import { extendedListTech } from '../utils/stacks.js';
 /**
  * npx tsx apps/backend/src/scripts/fetchFavicons.ts
  */
-const fetchFavicons = async () => {
+const fetchFavicons = async (): Promise<void> => {
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
 
   // Ensure the output directory exists
