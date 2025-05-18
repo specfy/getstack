@@ -62,7 +62,7 @@ export async function getPreviousAnalyzeIfStale(
 
 export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payload> {
   const fullName = `${repo.org}/${repo.name}`;
-  const dir = path.join(os.tmpdir(), 'stackhub', repo.org, repo.name);
+  const dir = path.join(os.tmpdir(), 'usestack', repo.org, repo.name);
 
   try {
     await fs.rm(dir, { recursive: true, force: true });

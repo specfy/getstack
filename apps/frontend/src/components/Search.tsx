@@ -68,14 +68,14 @@ export const Search: React.FC<{
       <Command shouldFilter={false} className="w-full">
         <CommandInput
           ref={inputRef}
-          placeholder="Search for category or technology..."
+          placeholder="Search for repository, category or technology..."
           value={search}
           onValueChange={setSearch}
           onFocus={() => setIsFocused(true)}
           onBlur={() => {
             setTimeout(() => setIsFocused(false), 100);
           }}
-          icon={isLoading && <IconLoader className="animate-spin" />}
+          icon={isLoading && <IconLoader className="animate-spin size-4" />}
         />
         {showList && (
           <CommandEmpty

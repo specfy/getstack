@@ -27,12 +27,12 @@ import { cn } from '@/lib/utils';
 
 import type { LineSeries } from '@nivo/line';
 import type { AllowedKeys } from '@specfy/stack-analyser';
-import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
+import type { TechItemWithExtended } from '@usestack/backend/dist/utils/stacks';
 import type {
   RepositoryTop,
   TechnologyByCategoryByWeekWithTrend,
   TechnologyWeeklyVolume,
-} from '@stackhub/backend/src/types/endpoint';
+} from '@usestack/backend/src/types/endpoint';
 
 const Tech: React.FC = () => {
   const { techKey } = Route.useParams();

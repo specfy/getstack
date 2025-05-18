@@ -33,9 +33,9 @@ export const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <header className="flex justify-between items-center mt-1 mb-1 px-4">
-      <Link className="h-8 flex gap-2 items-center font-light text-lg text-gray-700" to="/">
-        <IconStack2 /> useStack
+    <header className="flex justify-between items-center mt-2 mb-1 px-4">
+      <Link className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700" to="/">
+        <IconStack2 /> <span className="font-medium tracking-tighter">useStack</span>
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
@@ -53,7 +53,7 @@ export const Header: React.FC = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink href="/private" asChild>
-              <Link to="/private">Private Repo</Link>
+              <Link to="/private">My Repo</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>

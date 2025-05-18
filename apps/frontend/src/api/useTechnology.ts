@@ -5,7 +5,7 @@ import { API_URL } from './api.js';
 import type {
   APIGetTechnology,
   APIGetTopRelatedTechnology,
-} from '@stackhub/backend/src/types/endpoint.js';
+} from '@usestack/backend/src/types/endpoint.js';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useTechnology = ({ name }: { name?: string | undefined }) => {

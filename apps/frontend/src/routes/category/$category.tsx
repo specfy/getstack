@@ -19,8 +19,8 @@ import { cn } from '@/lib/utils';
 
 import type { AreaBumpSerie } from '@nivo/bump';
 import type { TechType } from '@specfy/stack-analyser';
-import type { TechItemWithExtended } from '@stackhub/backend/dist/utils/stacks';
-import type { TechnologyByCategoryByWeekWithTrend } from '@stackhub/backend/src/types/endpoint';
+import type { TechItemWithExtended } from '@usestack/backend/dist/utils/stacks';
+import type { TechnologyByCategoryByWeekWithTrend } from '@usestack/backend/src/types/endpoint';
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
