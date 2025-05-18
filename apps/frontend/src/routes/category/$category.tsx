@@ -153,7 +153,7 @@ const Category: React.FC = () => {
 
       <div className="mt-10">
         <h3 className="text-lg font-semibold mb-1">Top 10</h3>
-        <div className="grid md:grid-cols-6 gap-14">
+        <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
             <div className="text-xs text-neutral-400 mb-4">
               Every {cat.name} by number of repositories
@@ -247,7 +247,7 @@ const Category: React.FC = () => {
           )}
         </div>
         <div className="col-span-2">
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {winner && (
               <Card>
                 <CardHeader className="relative">
@@ -297,7 +297,7 @@ const Category: React.FC = () => {
           <Card style={{ height: 350 }}>
             <ResponsivePie
               data={pie}
-              margin={{ top: 20, right: 30, bottom: 30, left: 10 }}
+              margin={{ top: 20, right: 100, bottom: 30, left: 100 }}
               innerRadius={0.5}
               padAngle={0.7}
               cornerRadius={3}
