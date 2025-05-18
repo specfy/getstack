@@ -1,31 +1,18 @@
 # StackHub
 
-A platform for analyzing GitHub repositories using the specfy/stack-analyser.
+<p align="center">
+  Discover Open Source Trends
+  <br />
+  <a href="https://usestack.dev"><strong>Learn more »</strong></a>
+  <br />
+  <br />
+  <a href="https://usestack.dev">Website</a>
+  ·
+  <a href="https://github.com/specfy/usestack/issues">Issues</a>
+</p>
 
-## Getting Started
+StackHub is a powerful tool that provides comprehensive, and trending insights into the open source world by analyzing +20K open repositories from GitHub.
 
-1. Install dependencies:
+## How it works?
 
-   ```bash
-   npm install
-   ```
-
-2. Set up the database:
-
-   ```bash
-   # Start PostgreSQL
-   npm run db:up
-
-   # Run migrations
-   npm run db:migrate
-   ```
-
-3. Set up environment variables:
-   - Copy `.env.example` to `.env` in both `apps/backend` and `apps/frontend`
-   - Fill in the required environment variables
-
-4. Start the development servers:
-
-   ```bash
-   npm run dev
-   ```
+ This project is powered by [@specfy/stack-analyzer](https://github.com/specfy/stack-analyser), an open-source library that parse any git repository and detects technologies from dependencies, files, folders and lockfile. We have a list of more than <strong>+600 technologies and native support for a dozen of languages</strong>. The list is manually crafted and you can contribute.
