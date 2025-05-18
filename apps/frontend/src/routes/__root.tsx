@@ -20,20 +20,24 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { usePageTracking } from '@/lib/ga';
 
 export const Route = createRootRoute({
-  component: () => (
-    <div className="min-h-screen flex justify-center">
-      <div className="flex flex-col w-full max-w-screen-lg">
-        <Header />
-        <div className="h-full px-4">
-          <Outlet />
+  component: () => {
+    usePageTracking();
+    return (
+      <div className="min-h-screen flex justify-center">
+        <div className="flex flex-col w-full max-w-screen-lg">
+          <Header />
+          <div className="h-full px-4">
+            <Outlet />
+          </div>
+          <Footer />
+          <TanStackRouterDevtools />
         </div>
-        <Footer />
-        <TanStackRouterDevtools />
       </div>
-    </div>
-  ),
+    );
+  },
 });
 
 export const Header: React.FC = () => {
