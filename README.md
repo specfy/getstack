@@ -1,4 +1,4 @@
-# StackHub
+![useStack](/screenshot.jpg)
 
 <p align="center">
   Discover Open Source Trends
@@ -11,7 +11,7 @@
   <a href="https://github.com/specfy/usestack/issues">Issues</a>
 </p>
 
-StackHub is a powerful tool that provides comprehensive, and trending insights into the open source world by analyzing +20K open repositories from GitHub.
+useStack is a powerful tool that provides comprehensive, and trending insights into the open source world by analyzing +20K open repositories from GitHub.
 
 ## How it works?
 

@@ -12,7 +12,7 @@ const About: React.FC = () => {
       </Helmet>
       <h2 className="text-3xl font-semibold mb-2">About</h2>
       <p>
-        StackHub is a powerful tool that provides comprehensive, and trending insights into the open
+        useStack is a powerful tool that provides comprehensive, and trending insights into the open
         source world by analyzing <strong className="font-semibold">+20K open repositories</strong>{' '}
         from GitHub.
       </p>
