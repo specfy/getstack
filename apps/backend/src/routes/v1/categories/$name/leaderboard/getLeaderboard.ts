@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { getActiveWeek } from '../../../../../models/progress.js';
 import { getTopTechnologiesWithTrendByCategory } from '../../../../../models/technologies.js';
+import { getOrCache } from '../../../../../utils/cache.js';
 
 import type { APIGetCategoryLeaderboard } from '../../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -20,7 +21,10 @@ export const getCategoryLeaderboard: FastifyPluginCallback = (fastify: FastifyIn
     const params = valParams.data;
 
     const weeks = await getActiveWeek();
-    const data = await getTopTechnologiesWithTrendByCategory({ category: params.name, ...weeks });
+    const data = await getOrCache(
+      ['getTopTechnologiesWithTrendByCategory', params.name, weeks.currentWeek, weeks.previousWeek],
+      () => getTopTechnologiesWithTrendByCategory({ category: params.name, ...weeks })
+    );
 
     reply.status(200).send({
       success: true,

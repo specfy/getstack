@@ -8,6 +8,7 @@ import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
 import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 import { $ } from 'execa';
 
+import { getActiveWeek } from '../models/progress.js';
 import { updateRepository } from '../models/repositories.js';
 import { createTechnologies, getTechnologiesByRepo } from '../models/technologies.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
@@ -56,7 +57,8 @@ export async function getPreviousAnalyzeIfStale(
     return false;
   }
 
-  const previous = await getTechnologiesByRepo(repo);
+  const { previousWeek } = await getActiveWeek();
+  const previous = await getTechnologiesByRepo(repo, previousWeek);
   return previous;
 }
 

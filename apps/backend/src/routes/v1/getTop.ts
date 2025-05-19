@@ -1,5 +1,6 @@
 import { getActiveWeek } from '../../models/progress.js';
 import { getTopTechnologiesWithTrend } from '../../models/technologies.js';
+import { getOrCache } from '../../utils/cache.js';
 
 import type { APIGetTop, TechnologyByCategoryByWeekWithTrend } from '../../types/endpoint.js';
 import type { TechType } from '@specfy/stack-analyser';
@@ -8,7 +9,10 @@ import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 export const getTopRoute: FastifyPluginCallback = (fastify: FastifyInstance) => {
   fastify.get<APIGetTop>('/top', async (_, reply) => {
     const weeks = await getActiveWeek();
-    const data = await getTopTechnologiesWithTrend(weeks);
+    const data = await getOrCache(
+      ['getTopTechnologiesWithTrend', weeks.currentWeek, weeks.previousWeek],
+      () => getTopTechnologiesWithTrend(weeks)
+    );
 
     const group: Record<string, TechnologyByCategoryByWeekWithTrend[]> = {};
     for (const item of data) {

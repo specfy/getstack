@@ -86,6 +86,7 @@ const Tech: React.FC = () => {
       },
     ];
   }, [data]);
+  console.log(chartData);
 
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]

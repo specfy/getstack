@@ -6,6 +6,7 @@ import {
   getTechnologyVolumePerWeek,
   getTopRepositoriesForTechnology,
 } from '../../../../models/technologies.js';
+import { getOrCache } from '../../../../utils/cache.js';
 
 import type { APIGetTechnology } from '../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -28,9 +29,17 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const { currentWeek } = await getActiveWeek();
 
-    const topRepos = await getTopRepositoriesForTechnology({ tech: params.name, currentWeek });
-    const volume = await getTechnologyVolumePerWeek({ tech: params.name, currentWeek });
-    const cumulatedStars = await getTechnologyCumulatedStars({ tech: params.name, currentWeek });
+    const topRepos = await getOrCache(
+      ['getTopRepositoriesForTechnology', params.name, currentWeek],
+      () => getTopRepositoriesForTechnology({ tech: params.name, currentWeek })
+    );
+    const volume = await getOrCache(['getTechnologyVolumePerWeek', params.name, currentWeek], () =>
+      getTechnologyVolumePerWeek({ tech: params.name, currentWeek })
+    );
+    const cumulatedStars = await getOrCache(
+      ['getTechnologyCumulatedStars', params.name, currentWeek],
+      () => getTechnologyCumulatedStars({ tech: params.name, currentWeek })
+    );
 
     reply.status(200).send({
       success: true,

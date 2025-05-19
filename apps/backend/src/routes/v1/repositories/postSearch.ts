@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { searchRepository } from '../../../models/repositories.js';
+import { getOrCache } from '../../../utils/cache.js';
 
 import type { APIPostRepositorySearch } from '../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -17,7 +18,9 @@ export const postSearchRepository: FastifyPluginCallback = (fastify: FastifyInst
     }
 
     const body = valBody.data;
-    const res = await searchRepository(body.search);
+    const res = await getOrCache(['searchRepository', body.search], () =>
+      searchRepository(body.search)
+    );
 
     reply.status(200).send({
       success: true,

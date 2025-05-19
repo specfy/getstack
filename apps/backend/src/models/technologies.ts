@@ -16,19 +16,18 @@ export async function createTechnologies(input: TechnologyInsert[]): Promise<voi
   await q.execute();
 }
 
-export async function getTechnologiesByRepo(repo: RepositoryRow): Promise<TechnologyRow[]> {
+export async function getTechnologiesByRepo(
+  repo: RepositoryRow,
+  currentWeek: string
+): Promise<TechnologyRow[]> {
   const res = await clickHouse.query({
-    query: `WITH latest_week AS (
-      SELECT MAX(date_week) AS max_week
-      FROM technologies
-      WHERE org = {org: String} AND name = {name: String}
-    )
-    SELECT *
+    query: `SELECT *
     FROM technologies
-    WHERE org = {org: String} AND name = {name: String} AND date_week = (SELECT max_week FROM latest_week)`,
+    WHERE org = {org: String} AND name = {name: String} AND date_week = {currentWeek: String}`,
     query_params: {
       org: repo.org,
       name: repo.name,
+      currentWeek,
     },
   });
 
