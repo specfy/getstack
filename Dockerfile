@@ -1,6 +1,10 @@
 # Use the official Node.js 22 image as the base image
 FROM node:22.15.0-bookworm-slim AS compilation
 
+# for Sharp
+RUN apt-get update && apt-get install -y libvips \
+  && rm -rf /var/lib/apt/lists/*
+
 # Set the working directory in the container
 WORKDIR /app
 
