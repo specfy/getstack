@@ -4,14 +4,6 @@ FROM node:22.15.0-bookworm-slim AS compilation
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for sharp
-RUN apt-get update && apt-get install -y \
-  python3 \
-  make \
-  g++ \
-  libvips \
-  && rm -rf /var/lib/apt/lists/*
-
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 COPY apps/backend/package.json ./apps/backend/package.json
@@ -41,7 +33,11 @@ ENV NODE_ENV=production
 # - OpenSSL is here to handle HTTPS + git clone requests correctly
 # - Git is to be able to clone repositories
 RUN true \
-  && apt update && apt-get install -y bash openssl git ca-certificates libvips \
+  && apt update && apt-get install -y bash \
+  openssl \
+  git \
+  ca-certificates \
+  libvips \
   && update-ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
@@ -53,6 +49,8 @@ WORKDIR /app
 
 # Code
 COPY --from=compilation --chown=node:node /app /app
+
+RUN npm install sharp
 
 # Expose the port the backend service runs on
 EXPOSE 3000
