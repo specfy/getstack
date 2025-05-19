@@ -30,7 +30,7 @@ ENV NODE_ENV=production
 # - OpenSSL is here to handle HTTPS + git clone requests correctly
 # - Git is to be able to clone repositories
 RUN true \
-  && apt update && apt-get install -y bash openssl git ca-certificates \
+  && apt update && apt-get install -y bash openssl git ca-certificates libvips \
   && update-ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false

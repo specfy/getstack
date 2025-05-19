@@ -83,12 +83,14 @@ const Repo: React.FC = () => {
   const url = `https://getstack.dev/${org}/${name}`;
   const title = `${org}/${name} < Repository - getStack`;
   const desc = `Technology analysis for the GitHub repository ${org}/${name}`;
+  const image = `http://localhost:3000/1/repositories/${org}/${name}/image`;
   return (
     <div>
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={desc} />
         <link rel="canonical" href={url} />
+        <meta itemProp="image" content={image} />
 
         <meta property="og:url" content={url} />
         <meta property="twitter:url" content={url} />
@@ -96,7 +98,10 @@ const Repo: React.FC = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
         <meta property="twitter:description" content={desc} />
+        <meta property="og:image" content={image} />
+        <meta property="twitter:image" content={image} />
       </Helmet>
+
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
