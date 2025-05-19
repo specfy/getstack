@@ -145,12 +145,21 @@ const Tech: React.FC = () => {
     return null;
   }
 
+  const url = `https://getstack.dev/tech/${tech.key}`;
+  const title = `${tech.name} - getStack`;
   return (
     <div>
       <Helmet>
-        <title>{tech.name} - getStack</title>
+        <title>{title}</title>
         <meta name="description" content={tech.description} />
-        <link rel="canonical" href={`/tech/${tech.key}`} />
+        <link rel="canonical" href={url} />
+
+        <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={tech.description} />
+        <meta property="twitter:description" content={tech.description} />
       </Helmet>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">

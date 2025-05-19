@@ -80,13 +80,22 @@ const Repo: React.FC = () => {
 
   const repo = data.data.repo;
 
+  const url = `https://getstack.dev/${org}/${name}`;
+  const title = `${org}/${name} < Repository - getStack`;
+  const desc = `Technology analysis for the GitHub repository ${org}/${name}`;
   return (
     <div>
       <Helmet>
-        <title>
-          {org}/{name} - getStack
-        </title>
-        <link rel="canonical" href={`/${org}/${name}`} />
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <link rel="canonical" href={url} />
+
+        <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta property="twitter:description" content={desc} />
       </Helmet>
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">

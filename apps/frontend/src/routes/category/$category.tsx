@@ -132,11 +132,21 @@ const Category: React.FC = () => {
     return null;
   }
 
+  const url = `https://getstack.dev/category/${category}`;
+  const title = `${cat.name} - getStack`;
   return (
     <div>
       <Helmet>
-        <title>{cat.name} - getStack</title>
-        <link rel="canonical" href={`/category/${category}`} />
+        <title>{title}</title>
+        <meta name="description" content={cat.description} />
+        <link rel="canonical" href={url} />
+
+        <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={cat.description} />
+        <meta property="twitter:description" content={cat.description} />
       </Helmet>
       <header className="mb-10 flex flex-col gap-2 mt-10">
         <h2 className="flex gap-4 ">

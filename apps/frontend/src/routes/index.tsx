@@ -30,7 +30,7 @@ const Index: React.FC = () => {
   return (
     <div className="">
       <Helmet>
-        <title>getStack</title>
+        <title>getStack - Open Source Tech Trends</title>
         <link rel="canonical" href="/" />
       </Helmet>
       <div className="text-center mb-14 mt-14">

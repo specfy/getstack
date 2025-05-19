@@ -8,7 +8,15 @@ const About: React.FC = () => {
     <div className="md:w-2/3 prose mt-10">
       <Helmet>
         <title>About - getStack</title>
+        <meta name="description" content="About getStack" />
         <link rel="canonical" href="/about" />
+
+        <meta property="og:url" content="https://getstack.dev/about" />
+        <meta property="twitter:url" content="https://getstack.dev/about" />
+        <meta name="twitter:title" content="getStack" />
+        <meta property="og:title" content="getStack" />
+        <meta property="og:description" content="About getStack" />
+        <meta property="twitter:description" content="About getStack" />
       </Helmet>
       <h2 className="text-3xl font-semibold mb-2">About</h2>
       <p>
