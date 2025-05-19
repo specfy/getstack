@@ -132,7 +132,7 @@ export async function refreshOne(
   });
 }
 
-const oneGb = 1_000_000;
+const oneGb = 950_000;
 function filter(
   repo:
     | RestEndpointMethodTypes['repos']['get']['response']['data']
