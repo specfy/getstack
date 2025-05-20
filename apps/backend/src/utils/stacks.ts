@@ -3128,6 +3128,12 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Project management platform for teams, offering task management, collaboration, and workflow automation features.',
   },
+  builtwithfern: {
+    website: 'https://buildwithfern.com/',
+    description:
+      'Platform for creating and maintaining beautiful, interactive documentation and SDKs',
+    github: 'fern-api/fern',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
