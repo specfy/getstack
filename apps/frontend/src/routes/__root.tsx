@@ -2,6 +2,7 @@ import {
   IconAt,
   IconBrandGithub,
   IconBrandLinkedin,
+  IconBrandTwitter,
   IconSearch,
   IconStack2,
 } from '@tabler/icons-react';
@@ -98,7 +99,12 @@ export const Footer: React.FC = () => {
           <Newsletter />
         </div>
         <div className="flex mb-2 gap-2">
-          <a href="mailto:contact@getstack.dev">
+          <a href="https://x.com/samdotb" target="_blank">
+            <Button variant={'outline'} size={'sm'}>
+              <IconBrandTwitter />
+            </Button>
+          </a>
+          <a href="mailto:contact@getstack.dev" target="_blank">
             <Button variant={'outline'} size={'sm'}>
               <IconAt />
             </Button>
@@ -139,7 +145,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="text-xs text-gray-600">
           Made by{' '}
-          <a href="https://x.com/samdotb" className="font-semibold">
+          <a href="https://x.com/samdotb" className="font-semibold" target="_blank">
             Samuel Bodin
           </a>
         </div>
@@ -152,7 +158,7 @@ export const Footer: React.FC = () => {
           Analyze my repo
         </Link>
         <a
-          href="https://github.com/specfy/stack-analyser/issues?ref=getstack.dev"
+          href="https://github.com/specfy/stack-analyser?ref=getstack.dev"
           target="_blank"
           className="text-gray-700 transition-colors hover:text-gray-950"
         >
