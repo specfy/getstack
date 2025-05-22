@@ -86,7 +86,6 @@ const Tech: React.FC = () => {
       },
     ];
   }, [data]);
-  console.log(chartData);
 
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]
@@ -282,6 +281,9 @@ const Tech: React.FC = () => {
           </Card>
         </div>
       )}
+      <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
+        Number of open-source repositories in GitHub using this technology
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} />
@@ -321,7 +323,7 @@ const Tech: React.FC = () => {
           )}
           <div className="border-t pt-5 mt-1">
             <h3 className="text-sm text-gray-500">
-              More in{' '}
+              More alternatives in{' '}
               <Link
                 to="/category/$category"
                 params={{ category: tech.type }}
@@ -376,10 +378,6 @@ const Tech: React.FC = () => {
   );
 };
 
-const topN = 9;
-const topMore = 12;
-const topTotal = topN + topMore;
-
 export const TopRepositories: React.FC<{
   topRepos: RepositoryTop[];
   volume: null | TechnologyWeeklyVolume;
@@ -387,6 +385,9 @@ export const TopRepositories: React.FC<{
 }> = ({ topRepos, volume, tech }) => {
   const [top10, rest] = useMemo(() => {
     const copy = [...topRepos];
+
+    const topN = window.outerWidth < 768 ? 8 : 9;
+    const topMore = window.outerWidth < 768 ? 6 : 12;
     const sliced = copy.splice(0, topN);
 
     return [
@@ -403,12 +404,15 @@ export const TopRepositories: React.FC<{
     if (!volume) {
       return '0';
     }
-    return formatQuantity(volume.hits - topMore);
+    return formatQuantity(Math.max(0, volume.hits - (window.outerWidth < 768 ? 14 : 21)));
   }, [volume]);
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Top repositories using {tech.name}</h3>
+      <h3 className="text-lg font-semibold">Top repositories using {tech.name}</h3>
+      <div className="text-xs text-neutral-400 mb-4">
+        Most popular GitHub repositories that import or use this technology
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {top10.map((repo) => {
           return (
@@ -455,7 +459,7 @@ export const TopRepositories: React.FC<{
               </Button>
             );
           })}
-          {volume && volume.hits > topTotal && (
+          {volume && howMuch !== '0' && (
             <div className="text-xs text-gray-400 px-2">{howMuch} more...</div>
           )}
         </div>
@@ -479,7 +483,10 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Most likely to be used with</h3>
+      <h3 className="text-lg font-semibold">Most likely to be used with</h3>{' '}
+      <div className="text-xs text-neutral-400 mb-4">
+        Project using this technology also uses those, ordered by popularity
+      </div>
       {isFetching && (
         <>
           <Skeleton className="w-[100px] h-[20px]" />

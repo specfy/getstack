@@ -126,7 +126,11 @@ const Repo: React.FC = () => {
       )}
       <main className="mt-14 flex flex-col-reverse flex-col md:flex-row gap-10">
         <div className="md:w-4/6">
-          <h3 className="text-lg font-semibold mb-4">Technologies</h3>
+          <h3 className="text-lg font-semibold">Technologies</h3>{' '}
+          <div className="text-xs text-neutral-400 mb-4">
+            List of all the technologies this repository is using, automatically extracted every
+            week.
+          </div>
           {repo.ignored ? (
             <div className="text-gray-600 italic ">
               This repository has been excluded from our automatic analysis{' '}
@@ -189,7 +193,7 @@ const Repo: React.FC = () => {
                 <div className="flex items-center gap-3 py-1">
                   <p className="flex items-center gap-1.5 text-gray-500 text-sm">
                     <IconClock size={18} />
-                    Last Fetched
+                    Last Analyzed
                   </p>
                   <hr className="flex-1" />
                   <span className="text-sm font-semibold">{lastAnalyzed}</span>

@@ -134,19 +134,20 @@ const Category: React.FC = () => {
 
   const url = `https://getstack.dev/category/${category}`;
   const title = `${cat.name} - getStack`;
+  const desc = `Discover the most used ${cat.name}, find ${cat.name} alternatives in the open-source world.`;
   return (
     <div>
       <Helmet>
         <title>{title}</title>
-        <meta name="description" content={cat.description} />
+        <meta name="description" content={desc} />
         <link rel="canonical" href={url} />
 
         <meta property="og:url" content={url} />
         <meta property="twitter:url" content={url} />
         <meta name="twitter:title" content={title} />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={cat.description} />
-        <meta property="twitter:description" content={cat.description} />
+        <meta property="og:description" content={desc} />
+        <meta property="twitter:description" content={desc} />
       </Helmet>
       <header className="mb-10 flex flex-col gap-2 mt-10">
         <h2 className="flex gap-4 ">
@@ -165,9 +166,7 @@ const Category: React.FC = () => {
         <h3 className="text-lg font-semibold mb-1">Top 10</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
-            <div className="text-xs text-neutral-400 mb-4">
-              Every {cat.name} by number of repositories
-            </div>
+            <div className="text-xs text-neutral-400 mb-4">By number of repositories in GitHub</div>
             <Card className="border-transparent p-0">
               <div className="flex flex-col gap-1 ">
                 {top10.map((row) => {
@@ -188,7 +187,8 @@ const Category: React.FC = () => {
               </div>
             </Card>
           </div>
-          <div className="md:col-span-4 pt-8">
+          <div className="md:col-span-4">
+            <div className="text-xs text-neutral-400 mb-4">Top {top10.length} over time</div>
             <Card style={{ height: top10.length * 40 }}>
               <ResponsiveAreaBump
                 data={topNData!}
@@ -303,7 +303,10 @@ const Category: React.FC = () => {
               </Card>
             )}
           </div>
-          <h3 className="text-lg font-semibold mb-4 mt-6">Full Repartition</h3>
+          <h3 className="text-lg font-semibold mt-10">Full Repartition</h3>
+          <div className="text-xs text-neutral-400 mb-4">
+            Every {cat.name} by number of repositories using this technology in GitHub
+          </div>
           <Card style={{ height: 350 }}>
             <ResponsivePie
               data={pie}
