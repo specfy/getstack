@@ -110,54 +110,77 @@ const Index: React.FC = () => {
   );
 };
 
+type Highlight =
+  | { type: 'repo'; org: string; name: string }
+  | { type: 'tech'; name: string; displayName: string };
+
+const highlights: Highlight[] = [
+  { type: 'repo', org: 'n8n-io', name: 'n8n' },
+  { type: 'repo', org: 'NangoHQ', name: 'nango' },
+  { type: 'tech', name: 'mistralai', displayName: 'Mistral AI' },
+  { type: 'tech', name: 'vite', displayName: 'Vite' },
+  { type: 'tech', name: 'clickhouse', displayName: 'ClickHouse' },
+];
+
+function getRandomSample<T>(arr: T[], n: number): T[] {
+  // Shuffle a copy and slice the first n elements for unique random sample
+  return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+}
+
 const Try: React.FC = () => {
+  const randomHighlights = useMemo(() => getRandomSample(highlights, 3), []);
   return (
     <div className="flex justify-center mt-8 items-center gap-4">
       <div className="text-gray-600 font-serif text-sm">Try</div>
       <div className="flex gap-2">
-        <Button
-          variant={'ghost'}
-          size={'sm'}
-          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
-          asChild
-        >
-          <Link to={`/$org/$name`} params={{ org: 'n8n-io', name: 'n8n' }}>
-            <div className={'w-4'}>
-              <img src={`/favicons/n8n.webp`} className="rounded-xs overflow-hidden" />
-            </div>
-            <div className="truncate text-ellipsis">n8n</div>
-          </Link>
-        </Button>
-        <Button
-          variant={'ghost'}
-          size={'sm'}
-          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
-          asChild
-        >
-          <Link to={`/tech/$techKey`} params={{ techKey: 'vite' }}>
-            <div className={'w-4'}>
-              <img src={`/favicons/vite.webp`} className="rounded-xs overflow-hidden" />
-            </div>
-            <div className="truncate text-ellipsis">Vite</div>
-          </Link>
-        </Button>
-        <Button
-          variant={'ghost'}
-          size={'sm'}
-          className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
-          asChild
-        >
-          <Link to={`/tech/$techKey`} params={{ techKey: 'clickhouse' }}>
-            <div className={'w-4'}>
-              <img src={`/favicons/clickhouse.webp`} className="rounded-xs overflow-hidden" />
-            </div>
-            <div className="truncate text-ellipsis">ClickHouse</div>
-          </Link>
-        </Button>
+        {randomHighlights.map((item) => {
+          if (item.type === 'repo') {
+            return (
+              <Button
+                key={item.org + item.name}
+                variant={'ghost'}
+                size={'sm'}
+                className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
+                asChild
+              >
+                <Link to={`/$org/$name`} params={{ org: item.org, name: item.name }}>
+                  <div className={'w-4'}>
+                    <img
+                      src={`/favicons/${item.name.toLowerCase()}.webp`}
+                      className="rounded-xs overflow-hidden"
+                    />
+                  </div>
+                  <div className="truncate text-ellipsis">{item.name}</div>
+                </Link>
+              </Button>
+            );
+          } else {
+            return (
+              <Button
+                key={item.name}
+                variant={'ghost'}
+                size={'sm'}
+                className="opacity-50 grayscale-100 hover:grayscale-0 focus:grayscale-100 hover:opacity-100 focus:opacity-100 transition-all"
+                asChild
+              >
+                <Link to={`/tech/$techKey`} params={{ techKey: item.name }}>
+                  <div className={'w-4'}>
+                    <img
+                      src={`/favicons/${item.name.toLowerCase()}.webp`}
+                      className="rounded-xs overflow-hidden"
+                    />
+                  </div>
+                  <div className="truncate text-ellipsis">{item.displayName}</div>
+                </Link>
+              </Button>
+            );
+          }
+        })}
       </div>
     </div>
   );
 };
+
 export const Route = createFileRoute('/')({
   component: Index,
 });
