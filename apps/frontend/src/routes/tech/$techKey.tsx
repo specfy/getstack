@@ -174,13 +174,13 @@ const Tech: React.FC = () => {
             >
               {categories[tech.type].name}
             </Link>
-            <div className="text-2xl font-semibold leading-6">{tech.name}</div>
+            <div className="text-2xl font-semibold leading-6 font-serif">{tech.name}</div>
           </div>
         </h2>
         {position > 0 && (
           <div>
             <div className="text-[10px] text-right text-gray-500">position in category</div>
-            <div className="text-4xl text-right font-semibold text-gray-400">
+            <div className="text-4xl text-right font-semibold text-gray-400 font-serif">
               <span className="font-normal text-gray-400">#</span>
               {position}
             </div>
@@ -188,7 +188,7 @@ const Tech: React.FC = () => {
         )}
       </header>
       {tech.description && (
-        <div className="mt-4 max-w-2xl text-pretty text-gray-600 md:text-lg">
+        <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
           {tech.description}
         </div>
       )}
@@ -203,7 +203,7 @@ const Tech: React.FC = () => {
           <Card>
             <CardHeader className="relative">
               <CardDescription>Repositories</CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
                 {repoCount}
               </CardTitle>
 
@@ -314,7 +314,7 @@ const Tech: React.FC = () => {
                     <IconStar stroke={2} size={18} />
                     Cumulated Stars
                   </CardDescription>
-                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center">
+                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center font-serif">
                     {stars}
                   </CardTitle>
                 </CardHeader>
@@ -409,7 +409,7 @@ export const TopRepositories: React.FC<{
 
   return (
     <div>
-      <h3 className="text-lg font-semibold">Top repositories using {tech.name}</h3>
+      <h3 className="text-lg font-semibold font-serif">Top repositories using {tech.name}</h3>
       <div className="text-xs text-neutral-400 mb-4">
         Most popular GitHub repositories that import or use this technology
       </div>
@@ -483,7 +483,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold">Most likely to be used with</h3>{' '}
+      <h3 className="text-lg font-semibold font-serif">Most likely to be used with</h3>{' '}
       <div className="text-xs text-neutral-400 mb-4">
         Project using this technology also uses those, ordered by popularity
       </div>

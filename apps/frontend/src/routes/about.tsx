@@ -18,13 +18,13 @@ const About: React.FC = () => {
         <meta property="og:description" content="About getStack" />
         <meta property="twitter:description" content="About getStack" />
       </Helmet>
-      <h2 className="text-3xl font-semibold mb-2">About</h2>
+      <h2 className="text-3xl font-semibold mb-2 font-serif">About</h2>
       <p>
         getStack is a powerful tool that provides comprehensive, and trending insights into the open
         source world by analyzing <strong className="font-semibold">+20K open repositories</strong>{' '}
         from GitHub.
       </p>
-      <h3>Which technologies are tracked?</h3>
+      <h3 className="font-serif">Which technologies are tracked?</h3>
       <p>
         This website is powered by{' '}
         <a
@@ -39,7 +39,7 @@ const About: React.FC = () => {
         <strong>+600 technologies and native support for a dozen of languages</strong>. The list is
         manually crafted and you can contribute.
       </p>
-      <h3>Which repositories are tracked?</h3>
+      <h3 className="font-serif">Which repositories are tracked?</h3>
       <p>Each week we parse all the repositories following this set of conditions:</p>
       <ol>
         <li>No private repos, no templates, no forks, and not archived.</li>
@@ -53,7 +53,7 @@ const About: React.FC = () => {
           etc.)
         </li>
       </ol>
-      <h3>I don't see [well-known] in the list</h3>
+      <h3 className="font-serif">I don't see [well-known] in the list</h3>
       <p>
         Since we can only parse open-source repository some technologies never makes the cut (e.g:
         infrastructure, security, some databases, etc.). However sometimes we just don't have a

@@ -34,8 +34,8 @@ const Index: React.FC = () => {
         <link rel="canonical" href="/" />
       </Helmet>
       <div className="text-center mb-14 mt-14">
-        <h1 className="text-4xl font-bold">Discover Open Source Trends</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-4xl font-semibold font-serif">Discover Open Source Trends</h1>
+        <p className="text-lg font-light text-gray-600">
           Explore the most popular technologies and repositories, refreshed every week
         </p>
       </div>
@@ -79,7 +79,7 @@ const Index: React.FC = () => {
                     <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
                       <Icon size={22} />
                     </div>
-                    <h4 className="text-md font-semibold">{def.name}</h4>
+                    <h4 className="text-md font-semibold font-serif">{def.name}</h4>
                   </div>
                   <ul className="flex flex-col gap-3">
                     {rows.map((row, rowIndex) => {

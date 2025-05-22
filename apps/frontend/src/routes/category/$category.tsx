@@ -156,14 +156,16 @@ const Category: React.FC = () => {
           </div>{' '}
           <div>
             <div className="text-xs text-gray-400">Category</div>
-            <div className="text-2xl font-semibold">{cat.name}</div>
+            <div className="text-2xl font-semibold font-serif">{cat.name}</div>
           </div>
         </h2>
-        <h3 className="mt-4 max-w-2xl text-pretty text-gray-600 md:text-lg">{cat.description}</h3>
+        <h3 className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
+          {cat.description}
+        </h3>
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-1">Top 10</h3>
+        <h3 className="text-lg font-semibold mb-1 font-serif">Top 10</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
             <div className="text-xs text-neutral-400 mb-4">By number of repositories in GitHub</div>
@@ -303,7 +305,7 @@ const Category: React.FC = () => {
               </Card>
             )}
           </div>
-          <h3 className="text-lg font-semibold mt-10">Full Repartition</h3>
+          <h3 className="text-lg font-semibold mt-10 font-serif">Full Repartition</h3>
           <div className="text-xs text-neutral-400 mb-4">
             Every {cat.name} by number of repositories using this technology in GitHub
           </div>

@@ -6,6 +6,7 @@
 
 @theme inline {
   --font-sans: "Inter", "sans-serif";
+  --font-serif: "Space Grotesk", 'serif';
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
