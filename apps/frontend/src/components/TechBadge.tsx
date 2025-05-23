@@ -18,7 +18,7 @@ export const TechBadge: React.FC<{
         'inline-flex gap-1.5 items-center text-gray-700 hover:text-gray-900 hover:text-shadow-xs h-7 text-xs',
         size === 'l' && 'text-[13px] h-9 text-gray-950 hover:text-shadow-none',
         size === 'xl' && 'text-sm h-9 text-gray-950 hover:text-shadow-none',
-        border && 'border rounded-md px-2',
+        border && 'border rounded-sm px-2',
         className
       )}
       to={`/tech/$techKey`}

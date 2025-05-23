@@ -39,20 +39,6 @@ const Index: React.FC = () => {
           Explore the most popular technologies and repositories, refreshed every week
         </p>
       </div>
-      <div className="flex w-full justify-center -mt-8 mb-4">
-        <a
-          href="https://www.producthunt.com/posts/getstack?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-getstack"
-          target="_blank"
-        >
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=967695&theme=light&t=1747952659480"
-            alt="getStack - The&#0032;Pulse&#0032;of&#0032;Open&#0032;Source&#0032;&#0045;&#0032;GitHub&#0032;Technology&#0032;Trends | Product Hunt"
-            style={{ width: '250px', height: '40px' }}
-            width="250"
-            height="40"
-          />
-        </a>
-      </div>
       <div className="flex justify-center items-center gap-4">
         <Search onPick={() => null} inline />
         <Button variant={'default'}>Search</Button>

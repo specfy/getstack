@@ -164,7 +164,7 @@ const Tech: React.FC = () => {
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center">
-            <img src={`/favicons/${tech.key}.webp`} className="rounded-md overflow-hidden" />
+            <img src={`/favicons/${tech.key}.webp`} className="rounded-sm overflow-hidden" />
           </div>{' '}
           <div className="flex flex-col gap-1">
             <Link
@@ -423,8 +423,8 @@ export const TopRepositories: React.FC<{
               params={{ org: repo.org, name: repo.name }}
             >
               <header className="flex gap-2">
-                <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center shrink-0">
-                  <img src={repo.avatar_url} className="w-6 h-6 rounded-md overflow-hidden" />
+                <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center justify-center shrink-0">
+                  <img src={repo.avatar_url} className="w-6 h-6 rounded-sm overflow-hidden" />
                 </div>
                 <div className="flex flex-col">
                   <div className="font-semibold text-sm truncate text-ellipsis">{repo.name}</div>
