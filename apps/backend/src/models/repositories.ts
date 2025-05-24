@@ -63,8 +63,6 @@ export async function searchRepository(search: string): Promise<RepositoryRow[]>
   const res = await clickHouse.query({
     query: `SELECT * FROM repositories
     WHERE (org ILIKE {search: String} OR name ILIKE {search: String})
-      AND ignored = 0
-      AND stars >= ${ANALYZE_MIN_STARS}
       ORDER BY stars DESC
       LIMIT 10`,
     format: 'JSON',
