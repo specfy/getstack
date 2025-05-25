@@ -10,11 +10,7 @@ export default defineConfig({
     appDirectory: 'src',
   },
   server: {
-    // prerender: {
-    //   routes: ['/'],
-    //   crawlLinks: true,
-    // },
-    preset: 'cloudflare-pages',
+    preset: 'cloudflare-module',
     unenv: cloudflare,
   },
   vite: {
