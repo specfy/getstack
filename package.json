@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "license": "GPL-3.0-only",
+  "workspaces": [
+    "apps/backend"
+  ],
   "scripts": {
     "dev": "npm run dev:front && npm run dev:back",
     "dev:front": "cd apps/frontend && npm run dev",

@@ -1,7 +1,9 @@
-import { defineConfig } from '@tanstack/react-start/config'
-import tsConfigPaths from 'vite-tsconfig-paths'
+import path from 'node:path';
+
 import tailwindcss from '@tailwindcss/vite';
-import path from 'node:path'
+import { defineConfig } from '@tanstack/react-start/config';
+import { cloudflare } from 'unenv';
+import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   tsr: {
@@ -12,6 +14,8 @@ export default defineConfig({
       routes: ['/'],
       crawlLinks: true,
     },
+    preset: 'cloudflare-pages',
+    unenv: cloudflare,
   },
   vite: {
     plugins: [
@@ -32,4 +36,4 @@ export default defineConfig({
       },
     },
   },
-})
+});
