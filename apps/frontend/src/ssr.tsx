@@ -10,6 +10,7 @@ const handler = createStartHandler({
 })(defaultStreamHandler);
 
 export default async function wrappedHandler(request: Request) {
+  // @ts-expect-error don't care
   const response = await handler(request);
   (response as Response).headers.set('Cache-Control', 'public, max-age=3600');
   return response;
