@@ -51,6 +51,7 @@
     "@types/react-dom": "19.1.2",
     "autoprefixer": "10.4.21",
     "typescript": "5.8.3",
-    "vite-tsconfig-paths": "5.1.4"
+    "vite-tsconfig-paths": "5.1.4",
+    "wrangler": "4.16.1"
   }
 }
