@@ -10,7 +10,6 @@ import { API_URL } from '@/api/api';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import indexCss from '@/index.css?url';
-import { usePageTracking } from '@/lib/ga';
 import { queryClient } from '@/lib/query';
 import { APP_URL, seo } from '@/lib/seo';
 
@@ -84,10 +83,26 @@ function Providers({ children }: { children: React.ReactNode }) {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  usePageTracking();
   return (
     <html>
       <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}
+        ></script>
+        {import.meta.env.VITE_GA_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${import.meta.env.VITE_GA_ID}');
+            `,
+            }}
+          />
+        )}
         <HeadContent />
       </head>
       <body>
