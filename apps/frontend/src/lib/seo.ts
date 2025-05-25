@@ -20,6 +20,7 @@ export const seo = ({
     { name: 'twitter:creator', content: '@samdotb' },
     { name: 'twitter:site', content: '@samdotb' },
     { name: 'twitter:url', content: url },
+    { name: 'twitter:card', content: 'summary_large_image' },
 
     { name: 'og:type', content: 'website' },
     { name: 'og:title', content: title },
