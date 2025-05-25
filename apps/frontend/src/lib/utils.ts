@@ -3,6 +3,9 @@ import { extendTailwindMerge } from 'tailwind-merge';
 
 import type { ClassValue } from 'clsx';
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+export const isSSR = globalThis.window === undefined;
+
 const customTwMerge = extendTailwindMerge({
   extend: {
     theme: {

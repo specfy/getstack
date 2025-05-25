@@ -52,7 +52,7 @@ function CommandInput({
   className,
   icon,
   ...props
-}: { icon?: false | JSX.Element | undefined } & React.ComponentProps<
+}: { icon?: false | React.JSX.Element | undefined } & React.ComponentProps<
   typeof CommandPrimitive.Input
 >) {
   return (

@@ -2,9 +2,8 @@ import { IconBrandGithub, IconClock, IconStar, IconWorld } from '@tabler/icons-r
 import { createFileRoute } from '@tanstack/react-router';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
 
-import { useRepository } from '@/api/useRepository';
+import { optionsGetRepository, useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -12,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
+import { APP_URL, seo } from '@/lib/seo';
 import { categories, categoryOrder } from '@/lib/stack';
 
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
@@ -80,28 +80,8 @@ const Repo: React.FC = () => {
 
   const repo = data.data.repo;
 
-  const url = `https://getstack.dev/${org}/${name}`;
-  const title = `${org}/${name} < Repository - getStack`;
-  const desc = `Technology analysis for the GitHub repository ${org}/${name}`;
-  const image = `http://localhost:3000/1/repositories/${org}/${name}/image`;
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={desc} />
-        <link rel="canonical" href={url} />
-        <meta itemProp="image" content={image} />
-
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
-        <meta name="twitter:title" content={title} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={desc} />
-        <meta property="twitter:description" content={desc} />
-        <meta property="og:image" content={image} />
-        <meta property="twitter:image" content={image} />
-      </Helmet>
-
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
@@ -211,5 +191,27 @@ const Repo: React.FC = () => {
 };
 
 export const Route = createFileRoute('/$org/$name')({
+  loader: async ({ params, context }) => {
+    const data = await context.queryClient.ensureQueryData(optionsGetRepository(params));
+    return data;
+  },
+  head: (ctx) => {
+    const repo = ctx.loaderData?.data;
+    if (!repo) {
+      return {};
+    }
+
+    const url = `${APP_URL}/${ctx.params.org}/${ctx.params.name}`;
+    return {
+      meta: [
+        ...seo({
+          title: `${ctx.params.org}/${ctx.params.name} on GitHub - getStack`,
+          description: `Discover ${ctx.params.org}/${ctx.params.name}'s technology stack`,
+          url,
+        }),
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    };
+  },
   component: Repo,
 });

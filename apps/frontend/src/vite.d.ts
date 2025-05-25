@@ -8,6 +8,7 @@ interface ViteTypeOptions {
 
 interface ImportMetaEnv {
   readonly VITE_API_URL?: string | undefined;
+  readonly VITE_URL?: string | undefined;
   readonly VITE_GA_ID?: string | undefined;
 }
 

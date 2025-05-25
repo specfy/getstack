@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 
 export const Search: React.FC<{
   inline?: boolean;
-  children?: JSX.Element;
+  children?: React.ReactNode;
   onPick: () => void;
 }> = ({ inline, onPick }) => {
   const navigate = useNavigate();
