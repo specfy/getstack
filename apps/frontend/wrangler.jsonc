@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "getstack-worker",
-  "main": ".output/server/index.mjs",
+  // "main": ".output/server/index.mjs",
   // "pages_build_output_dir": "./dist",
   "compatibility_date": "2024-11-13",
   "compatibility_flags": [
