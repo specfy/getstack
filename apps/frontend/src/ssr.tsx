@@ -4,7 +4,13 @@ import { createStartHandler, defaultStreamHandler } from '@tanstack/react-start/
 
 import { createRouter } from './router';
 
-export default createStartHandler({
+const handler = createStartHandler({
   createRouter,
   getRouterManifest,
 })(defaultStreamHandler);
+
+export default async function wrappedHandler(request: Request) {
+  const response = await handler(request);
+  (response as Response).headers.set('Cache-Control', 'public, max-age=3600');
+  return response;
+}
