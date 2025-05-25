@@ -10,6 +10,7 @@ import { API_URL } from '@/api/api';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import indexCss from '@/index.css?url';
+import { usePageTracking } from '@/lib/ga';
 import { queryClient } from '@/lib/query';
 import { APP_URL, seo } from '@/lib/seo';
 
@@ -79,14 +80,11 @@ function RootComponent() {
 }
 
 function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </React.StrictMode>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  usePageTracking();
   return (
     <html>
       <head>
@@ -94,7 +92,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Providers>
-          {' '}
           <div className="min-h-screen flex justify-center">
             <div className="flex flex-col w-full max-w-screen-lg">
               <Header />
