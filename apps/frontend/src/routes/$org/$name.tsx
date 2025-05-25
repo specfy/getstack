@@ -100,7 +100,6 @@ const Repo: React.FC = () => {
           </div>
         </h2>
       </header>
-      <img src={`${API_URL}/1/repositories/${org}/${name}/image`} />
       {repo.description && (
         <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">
           {repo.description}
