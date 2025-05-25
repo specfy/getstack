@@ -28,7 +28,7 @@ export const Route = createRootRouteWithContext<{
           name: 'viewport',
           content: 'width=device-width, initial-scale=1',
         },
-        { itemProp: 'image', content: '/screenshot.jpg' },
+        { itemProp: 'image', content: `${APP_URL}/screenshot.jpg` },
         ...seo({
           title: 'getStack - Open Source Tech Trends',
           description: `Explore the most popular technologies and repositories, refreshed every week from GitHub`,
