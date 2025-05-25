@@ -12,7 +12,7 @@
     "dev:back": "cd apps/backend && npm run dev",
     "build:ts:watch": "tsc -b tsconfig.build.json -w",
     "build:ts": "tsc -b tsconfig.build.json",
-    "build:front": "npm run build --w=apps/frontend",
+    "build:front": "cd apps/frontend && npm run build",
     "build:back": "npm run build --w=apps/backend",
     "ts-clean": "npx rimraf apps/*/tsconfig.tsbuildinfo packages/*/dist",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
