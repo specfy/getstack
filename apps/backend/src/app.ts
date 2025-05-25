@@ -21,7 +21,13 @@ export default async function createApp(
   });
 
   await f.register(cors, {
-    origin: ['http://localhost:3000', 'http://localhost:5173', 'https://getstack.dev'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://getstack.dev',
+      /\.workers\.dev$/,
+      /\.pages\.dev$/,
+    ],
     maxAge: 600,
     credentials: true,
     exposedHeaders: ['set-cookie'],
