@@ -6,6 +6,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 // eslint-disable-next-line import-x/default
 import React from 'react';
 
+import { API_URL } from '@/api/api';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import indexCss from '@/index.css?url';
@@ -37,6 +38,7 @@ export const Route = createRootRouteWithContext<{
       links: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+        { rel: 'preconnect', href: API_URL },
         { rel: 'canonical', href: APP_URL },
         {
           rel: 'stylesheet',
