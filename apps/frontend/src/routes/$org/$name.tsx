@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
 
+import { API_URL } from '@/api/api';
 import { optionsGetRepository, useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
@@ -99,6 +100,7 @@ const Repo: React.FC = () => {
           </div>
         </h2>
       </header>
+      <img src={`${API_URL}/1/repositories/${org}/${name}/image`} />
       {repo.description && (
         <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">
           {repo.description}
@@ -202,12 +204,14 @@ export const Route = createFileRoute('/$org/$name')({
     }
 
     const url = `${APP_URL}/${ctx.params.org}/${ctx.params.name}`;
+    const image = `${API_URL}/1/repositories/${ctx.params.org}/${ctx.params.name}/image`;
     return {
       meta: [
         ...seo({
           title: `${ctx.params.org}/${ctx.params.name} on GitHub - getStack`,
           description: `Discover ${ctx.params.org}/${ctx.params.name}'s technology stack`,
           url,
+          image,
         }),
       ],
       links: [{ rel: 'canonical', href: url }],

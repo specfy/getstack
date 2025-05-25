@@ -1,3 +1,4 @@
+import { listIndexed } from '@specfy/stack-analyser/dist/register.js';
 import sharp from 'sharp';
 import { z } from 'zod';
 
@@ -32,11 +33,12 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
     }
 
     const weeks = await getActiveWeek();
-    await getOrCache(['getTechnologiesByRepo', repo.id, weeks.currentWeek], () =>
+    const tech = await getOrCache(['getTechnologiesByRepo', repo.id, weeks.currentWeek], () =>
       getTechnologiesByRepo(repo, weeks.currentWeek)
     );
 
     const stars = formatQuantity(repo.stars);
+    const starsLen = 60 + stars.length * 20;
     const svgText = `
   <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <style>
@@ -49,22 +51,26 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
   <rect width="100%" height="100%" fill="white" />
 
   <!-- Logo Box -->
-  <g transform="scale(3 3) translate(100 30)" fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+  <g transform="scale(3 3) translate(110 30)" fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
     <path d="M12 4l-8 4l8 4l8 -4l-8 -4" />
     <path d="M4 12l8 4l8 -4" /><path d="M4 16l8 4l8 -4" />
   </g>
-  <text x="400" y="150" class="logo" fill="#24292f">getStack</text>
+  <text x="420" y="150" class="logo" fill="#24292f">getStack</text>
+  <text x="200" y="200" class="subtitle">Analyze any repository and discover their tech stack</text>
 
   <!-- Title -->
-  <text x="60" y="360" class="title" fill="#6a737d">${repo.org}/<tspan font-weight="bold" fill="#24292f">${repo.name}</tspan></text>
+  <text x="60" y="360" class="title"><tspan font-size="50px" fill="#6a737d">${repo.org}</tspan>/<tspan font-weight="bold" fill="#24292f">${repo.name}</tspan></text>
 
   <!-- Subtitle -->
-  <text x="60" y="420" class="subtitle">${repo.description}</text>
+  <text x="60" y="420" class="subtitle">Using: ${tech
+    .slice(0, 8)
+    .map((t) => listIndexed[t.tech].name)
+    .join(', ')}, ...</text>
 
   <!-- Stats -->
   <text x="60" y="550" class="stat">${stars}</text>
-  <text x="${60 + stars.length * 20}" y="550" class="label">Stars</text>
+  <text x="${starsLen}" y="550" class="label">Stars</text>
 
   <!-- Footer bar -->
   <rect y="610" width="100%" height="20" fill="#333"/>
