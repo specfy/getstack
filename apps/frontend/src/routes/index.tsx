@@ -1,6 +1,5 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 import { useTop } from '@/api/useTop';
 import { Newsletter } from '@/components/Newsletter';
@@ -29,10 +28,6 @@ const Index: React.FC = () => {
 
   return (
     <div className="">
-      <Helmet>
-        <title>getStack - Open Source Tech Trends</title>
-        <link rel="canonical" href="/" />
-      </Helmet>
       <div className="text-center mb-14 mt-14">
         <h1 className="text-4xl font-semibold font-serif">Discover Open Source Trends</h1>
         <p className="text-lg font-light text-gray-600">

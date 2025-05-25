@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { API_URL } from './api';
 
@@ -7,9 +8,13 @@ import type {
   APIGetCategoryLeaderboard,
 } from '../../../backend/src/types/endpoint';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useCategory = ({ name }: { name: string }) => {
-  return useQuery<APIGetCategory['Success'], Error>({
+export const useCategory = (options: { name?: string }) => {
+  return useQuery<APIGetCategory['Success'], Error>(optionsGetCategory(options));
+};
+
+export const optionsGetCategory = ({ name }: { name?: string }) => {
+  return queryOptions<APIGetCategory['Success'], Error>({
+    enabled: Boolean(name),
     queryKey: ['getCategory', name],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/categories/${name}`, {
@@ -30,7 +35,6 @@ export const useCategory = ({ name }: { name: string }) => {
   });
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useCategoryLeaderboard = ({ name }: { name?: string | undefined }) => {
   return useQuery<APIGetCategoryLeaderboard['Success'], Error>({
     enabled: Boolean(name),

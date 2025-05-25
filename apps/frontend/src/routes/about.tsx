@@ -1,23 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Helmet } from 'react-helmet-async';
 
 import { Button } from '@/components/ui/button';
+import { APP_URL, seo } from '@/lib/seo';
 
 const About: React.FC = () => {
   return (
     <div className="md:w-2/3 prose mt-10">
-      <Helmet>
-        <title>About - getStack</title>
-        <meta name="description" content="About getStack" />
-        <link rel="canonical" href="/about" />
-
-        <meta property="og:url" content="https://getstack.dev/about" />
-        <meta property="twitter:url" content="https://getstack.dev/about" />
-        <meta name="twitter:title" content="getStack" />
-        <meta property="og:title" content="getStack" />
-        <meta property="og:description" content="About getStack" />
-        <meta property="twitter:description" content="About getStack" />
-      </Helmet>
       <h2 className="text-3xl font-semibold mb-2 font-serif">About</h2>
       <p>
         getStack is a powerful tool that provides comprehensive, and trending insights into the open
@@ -83,5 +71,18 @@ const About: React.FC = () => {
 };
 
 export const Route = createFileRoute('/about')({
+  head: () => {
+    const url = `${APP_URL}/about`;
+    return {
+      meta: [
+        ...seo({
+          title: `About - getStack`,
+          description: `About getstack.dev`,
+          url,
+        }),
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    };
+  },
   component: About,
 });

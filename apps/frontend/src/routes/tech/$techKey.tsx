@@ -7,13 +7,12 @@ import {
   IconTrendingUp,
   IconWorld,
 } from '@tabler/icons-react';
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute, notFound } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
-import { useRelatedTechnology, useTechnology } from '@/api/useTechnology';
+import { optionsGetTechnology, useRelatedTechnology, useTechnology } from '@/api/useTechnology';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -22,8 +21,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
+import { APP_URL, seo } from '@/lib/seo';
 import { categories, listIndexed } from '@/lib/stack';
-import { cn } from '@/lib/utils';
+import { cn, isSSR } from '@/lib/utils';
 
 import type { TechItemWithExtended } from '@getstack/backend/dist/utils/stacks';
 import type {
@@ -145,22 +145,8 @@ const Tech: React.FC = () => {
     return null;
   }
 
-  const url = `https://getstack.dev/tech/${tech.key}`;
-  const title = `${tech.name} - getStack`;
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={tech.description} />
-        <link rel="canonical" href={url} />
-
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
-        <meta name="twitter:title" content={title} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={tech.description} />
-        <meta property="twitter:description" content={tech.description} />
-      </Helmet>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center">
@@ -386,8 +372,8 @@ export const TopRepositories: React.FC<{
   const [top10, rest] = useMemo(() => {
     const copy = [...topRepos];
 
-    const topN = window.outerWidth < 768 ? 8 : 9;
-    const topMore = window.outerWidth < 768 ? 6 : 12;
+    const topN = !isSSR && window.outerWidth < 768 ? 8 : 9;
+    const topMore = !isSSR && window.outerWidth < 768 ? 6 : 12;
     const sliced = copy.splice(0, topN);
 
     return [
@@ -404,7 +390,7 @@ export const TopRepositories: React.FC<{
     if (!volume) {
       return '0';
     }
-    return formatQuantity(Math.max(0, volume.hits - (window.outerWidth < 768 ? 14 : 21)));
+    return formatQuantity(Math.max(0, volume.hits - (!isSSR && window.outerWidth < 768 ? 14 : 21)));
   }, [volume]);
 
   return (
@@ -555,5 +541,35 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 // };
 
 export const Route = createFileRoute('/tech/$techKey')({
+  loader: async ({ params: { techKey }, context }) => {
+    const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
+    if (!tech) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw notFound();
+    }
+
+    const data = await context.queryClient.ensureQueryData(
+      optionsGetTechnology({ name: tech.key })
+    );
+    return data;
+  },
+  head: (ctx) => {
+    const tech = listIndexed[ctx.params.techKey as AllowedKeys] as TechItemWithExtended | undefined;
+    const url = `${APP_URL}/tech/${tech?.key}`;
+    if (!tech) {
+      return {};
+    }
+
+    return {
+      meta: [
+        ...seo({
+          title: `${tech.name} trends - getStack`,
+          description: `Discover ${tech.name} usage and alternatives across the most popular open-source GitHub repositories`,
+          url,
+        }),
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    };
+  },
   component: Tech,
 });

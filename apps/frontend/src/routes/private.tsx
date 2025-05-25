@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Newsletter } from '@/components/Newsletter';
+import { APP_URL, seo } from '@/lib/seo';
 
 const RouteComponent: React.FC = () => {
   return (
@@ -15,5 +16,18 @@ const RouteComponent: React.FC = () => {
 };
 
 export const Route = createFileRoute('/private')({
+  head: () => {
+    const url = `${APP_URL}/private`;
+    return {
+      meta: [
+        ...seo({
+          title: `Analyze your repository - getStack`,
+          description: `Get the tech stack of any GitHub repository`,
+          url,
+        }),
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    };
+  },
   component: RouteComponent,
 });

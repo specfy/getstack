@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { API_URL } from './api.js';
 
@@ -7,9 +8,12 @@ import type {
   APIGetTopRelatedTechnology,
 } from '@getstack/backend/src/types/endpoint.js';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useTechnology = ({ name }: { name?: string | undefined }) => {
-  return useQuery<APIGetTechnology['Success'], Error>({
+export const useTechnology = (options: { name?: string | undefined }) => {
+  return useQuery<APIGetTechnology['Success'], Error>(optionsGetTechnology(options));
+};
+
+export const optionsGetTechnology = ({ name }: { name?: string | undefined }) => {
+  return queryOptions<APIGetTechnology['Success'], Error>({
     enabled: Boolean(name),
     queryKey: ['getTechnology', name],
     queryFn: async () => {
@@ -31,7 +35,6 @@ export const useTechnology = ({ name }: { name?: string | undefined }) => {
   });
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useRelatedTechnology = ({ name }: { name?: string | undefined }) => {
   return useQuery<APIGetTopRelatedTechnology['Success'], Error>({
     enabled: Boolean(name),

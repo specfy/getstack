@@ -1,11 +1,10 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 
-import { useCategory, useCategoryLeaderboard } from '@/api/useCategory';
+import { optionsGetCategory, useCategory, useCategoryLeaderboard } from '@/api/useCategory';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -13,6 +12,7 @@ import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
+import { APP_URL, seo } from '@/lib/seo';
 import type { CategoryDefinition } from '@/lib/stack';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
@@ -132,23 +132,8 @@ const Category: React.FC = () => {
     return null;
   }
 
-  const url = `https://getstack.dev/category/${category}`;
-  const title = `${cat.name} - getStack`;
-  const desc = `Discover the most used ${cat.name}, find ${cat.name} alternatives in the open-source world.`;
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={desc} />
-        <link rel="canonical" href={url} />
-
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
-        <meta name="twitter:title" content={title} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={desc} />
-        <meta property="twitter:description" content={desc} />
-      </Helmet>
       <header className="mb-10 flex flex-col gap-2 mt-10">
         <h2 className="flex gap-4 ">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
@@ -365,5 +350,34 @@ const Category: React.FC = () => {
 };
 
 export const Route = createFileRoute('/category/$category')({
+  loader: async ({ params: { category }, context }) => {
+    const cat = categories[category as TechType] as CategoryDefinition | undefined;
+
+    if (!cat) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw notFound();
+    }
+
+    const data = await context.queryClient.ensureQueryData(optionsGetCategory({ name: cat.name }));
+    return data;
+  },
+  head: (ctx) => {
+    const cat = categories[ctx.params.category as TechType] as CategoryDefinition | undefined;
+    if (!cat) {
+      return {};
+    }
+
+    const url = `${APP_URL}/category/${ctx.params.category}`;
+    return {
+      meta: [
+        ...seo({
+          title: `${cat.name} trends - getStack`,
+          description: `Discover most popular ${cat.name} and alternatives across open-source GitHub repositories`,
+          url,
+        }),
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    };
+  },
   component: Category,
 });
