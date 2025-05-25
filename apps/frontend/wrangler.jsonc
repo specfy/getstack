@@ -2,8 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "getstack-worker",
   "main": "./.output/server/index.mjs",
-  "site": {
-    "bucket": ".output/public"
+  "assets": {
+    "directory": ".output/public"
+  },
+  "observability": {
+    "enabled": true
   },
   "compatibility_date": "2025-04-14",
   "compatibility_flags": [
