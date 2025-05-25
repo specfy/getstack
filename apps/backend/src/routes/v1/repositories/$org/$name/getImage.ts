@@ -7,7 +7,6 @@ import { getRepository } from '../../../../../models/repositories.js';
 import { getTechnologiesByRepo } from '../../../../../models/technologies.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
 import { getOrCache } from '../../../../../utils/cache.js';
-import { formatQuantity } from '../../../../../utils/number.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
@@ -15,6 +14,71 @@ const schemaParams = z.object({
   org: z.string().max(255),
   name: z.string().max(255),
 });
+
+// Helper to layout tech names as SVG pills
+function layoutTechPills(
+  techNames: string[],
+  options: Partial<{
+    startX: number;
+    startY: number;
+    maxWidth: number;
+    pillHeight: number;
+    pillPaddingX: number;
+    pillPaddingY: number;
+    pillGapX: number;
+    pillGapY: number;
+    fontSize: number;
+    fontFamily: string;
+    borderRadius: number;
+    pillFill: string;
+    pillStroke: string;
+    textColor: string;
+  }> = {}
+): string {
+  const {
+    startX = 60,
+    startY = 420,
+    maxWidth = 1080,
+    pillHeight = 32,
+    pillPaddingX = 24,
+    pillPaddingY = 10,
+    pillGapX = 16,
+    pillGapY = 16,
+    fontSize = 20,
+    fontFamily = 'Helvetica, sans-serif',
+    borderRadius = 10,
+    pillStroke = '#d1d5da',
+    textColor = '#24292f',
+  } = options;
+
+  function estimateWidth(text: string): number {
+    return Math.round(fontSize * 0.6 * text.length + pillPaddingX * 2);
+  }
+
+  let x = startX;
+  let y = startY;
+  let svg = '';
+
+  for (const label of techNames) {
+    const pillWidth = estimateWidth(label);
+
+    if (x + pillWidth > maxWidth) {
+      x = startX;
+      y += pillHeight + pillGapY;
+    }
+
+    svg += `
+        <g>
+            <rect x="${x}" y="${y - pillHeight + pillPaddingY}" rx="${borderRadius}" ry="${borderRadius}" width="${pillWidth}" height="${pillHeight}" stroke="${pillStroke}" fill="none" />
+            <text x="${x + pillWidth / 2}" y="${y}" text-anchor="middle" alignment-baseline="middle" font-size="${fontSize}" font-family="${fontFamily}" fill="${textColor}">${label}</text>
+        </g>
+        `;
+
+    x += pillWidth + pillGapX;
+  }
+
+  return svg;
+}
 
 export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstance) => {
   fastify.get('/repositories/:org/:name/image', async (req, reply) => {
@@ -37,16 +101,21 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
       getTechnologiesByRepo(repo, weeks.currentWeek)
     );
 
-    const stars = formatQuantity(repo.stars);
-    const starsLen = 60 + stars.length * 20;
+    // const stars = formatQuantity(repo.stars);
+    // const starsLen = 60 + stars.length * 17;
+    const techNames = tech
+      .slice(0, 25)
+      .map((t) => listIndexed[t.tech].name)
+      .filter(Boolean) as string[]; // up to 20 for wrapping, filter out undefined
+    const techPillsSvg = layoutTechPills(techNames);
     const svgText = `
   <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <style>
     .logo { font: bold 80px "Helvetica", sans-serif; }
     .title { font: 64px "Helvetica", sans-serif; }
     .subtitle { font: 32px "Helvetica", sans-serif; fill: #6a737d; }
-    .stat { font: 34px "Helvetica", sans-serif; fill: #586069; }
-    .label { font: 30px "Helvetica", sans-serif; fill: #6a737d; }
+    .stat { font: 30px "Helvetica", sans-serif; fill: #586069; }
+    .label { font: 25px "Helvetica", sans-serif; fill: #6a737d; }
   </style>
   <rect width="100%" height="100%" fill="white" />
 
@@ -59,18 +128,13 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
   <text x="420" y="150" class="logo" fill="#24292f">getStack</text>
   <text x="200" y="200" class="subtitle">Analyze any repository and discover their tech stack</text>
 
+
   <!-- Title -->
   <text x="60" y="360" class="title"><tspan font-size="50px" fill="#6a737d">${repo.org}</tspan>/<tspan font-weight="bold" fill="#24292f">${repo.name}</tspan></text>
 
-  <!-- Subtitle -->
-  <text x="60" y="420" class="subtitle">Using: ${tech
-    .slice(0, 8)
-    .map((t) => listIndexed[t.tech].name)
-    .join(', ')}, ...</text>
+  <!-- Tech list as pills -->
+  ${techPillsSvg}
 
-  <!-- Stats -->
-  <text x="60" y="550" class="stat">${stars}</text>
-  <text x="${starsLen}" y="550" class="label">Stars</text>
 
   <!-- Footer bar -->
   <rect y="610" width="100%" height="20" fill="#333"/>
