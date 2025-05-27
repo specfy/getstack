@@ -102,7 +102,7 @@ async function fetchOneDay(dateString: string): Promise<void> {
 
     hasMore = data.items.length === PER_PAGE;
     page++;
-    await wait(1000);
+    await wait(250);
   }
 }
 
