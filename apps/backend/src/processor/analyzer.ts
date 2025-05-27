@@ -57,8 +57,8 @@ export async function getPreviousAnalyzeIfStale(
     return false;
   }
 
-  const { previousWeek } = await getActiveWeek();
-  const previous = await getTechnologiesByRepo(repo, previousWeek);
+  const { currentWeek } = await getActiveWeek();
+  const previous = await getTechnologiesByRepo(repo, currentWeek);
   return previous;
 }
 
