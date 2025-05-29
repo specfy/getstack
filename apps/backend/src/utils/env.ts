@@ -24,6 +24,7 @@ const schema = z.object({
   CRON_ANALYZE: bool,
   ANALYZE_DLC: z.coerce.date(),
   ANALYZE_MIN_STARS: z.coerce.number().default(3000),
+  ANALYZE_MAX_SIZE: z.coerce.number().default(950_000),
 
   // Newsletter
   BEEHIIV_PUBLICATION_ID: z.string().optional(),

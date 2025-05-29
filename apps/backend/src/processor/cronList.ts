@@ -132,7 +132,6 @@ export async function refreshOne(
   });
 }
 
-const oneGb = 950_000;
 function filter(
   repo:
     | RestEndpointMethodTypes['repos']['get']['response']['data']
@@ -157,7 +156,7 @@ function filter(
   if (repo.is_template) {
     return 'template';
   }
-  if (repo.size >= oneGb) {
+  if (repo.size >= envs.ANALYZE_MAX_SIZE) {
     return 'too_big';
   }
 
