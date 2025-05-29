@@ -3134,6 +3134,36 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Platform for creating and maintaining beautiful, interactive documentation and SDKs',
     github: 'fern-api/fern',
   },
+  'aws.comprehend': {
+    website: 'https://aws.amazon.com/comprehend/',
+    description:
+      'Fully managed natural language processing service by AWS for extracting insights from text.',
+  },
+  'aws.transcribe': {
+    website: 'https://aws.amazon.com/transcribe/',
+    description: 'Fully managed speech-to-text service by AWS for converting audio to text.',
+  },
+  'cloudflare.r2': {
+    website: 'https://developers.cloudflare.com/r2/',
+    description: 'Object storage service by Cloudflare for storing and retrieving data.',
+  },
+  'gcp.vertex': {
+    website: 'https://cloud.google.com/vertex-ai',
+    description:
+      'Fully managed machine learning service by GCP for building and deploying AI models.',
+  },
+  propelauth: {
+    website: 'https://www.propelauth.com/',
+    description: 'Authentication and authorization service for building secure web applications.',
+  },
+  reddit: {
+    website: 'https://www.reddit.com/',
+    description: 'Social media platform for sharing and discussing content.',
+  },
+  twitch: {
+    website: 'https://www.twitch.tv/',
+    description: 'Live streaming platform for video game content and other content.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {

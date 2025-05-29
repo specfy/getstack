@@ -18,7 +18,7 @@
     "@radix-ui/react-navigation-menu": "1.2.13",
     "@radix-ui/react-popover": "1.1.14",
     "@radix-ui/react-slot": "1.2.3",
-    "@specfy/stack-analyser": "1.21.3",
+    "@specfy/stack-analyser": "1.22.0",
     "@tabler/icons-react": "3.31.0",
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.4",

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { extendedListTech } from '../utils/stacks.js';
 
 /**
- * npx tsx apps/backend/src/scripts/fetchFavicons.ts
+ * LOGODEV_KEY=KEY npx tsx apps/backend/src/scripts/fetchFavicons.ts
  */
 const fetchFavicons = async (): Promise<void> => {
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');

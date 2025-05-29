@@ -281,6 +281,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/aws.comprehend</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/aws.documentdb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -442,6 +447,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/aws.timestream</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/aws.transcribe</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -707,6 +717,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/cloudflare.pages</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/cloudflare.r2</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1222,6 +1237,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/gcp.translate</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/gcp.vertex</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2091,6 +2111,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/propelauth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/pulumi</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2187,6 +2212,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/readthedocs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/reddit</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2712,6 +2742,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/twilio</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/twitch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
