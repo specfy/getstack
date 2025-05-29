@@ -20,7 +20,7 @@ const schemaParams = z.object({
     .max(25),
 });
 
-export const getLIcense: FastifyPluginCallback = (fastify: FastifyInstance) => {
+export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) => {
   fastify.get<APIGetLicense>('/licenses/:key', async (req, reply) => {
     const valParams = schemaParams.safeParse(req.params);
     if (valParams.error) {

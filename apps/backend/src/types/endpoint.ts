@@ -8,6 +8,7 @@ import type {
   TechnologyWeeklyRow,
 } from '../db/types.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
+import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 
 export interface TechnologyByCategoryByWeekWithTrend {
   category: TechType;
@@ -97,6 +98,22 @@ export type APIPostSubscribe = Endpoint<{
   Success: {
     success: true;
     message: string;
+  };
+}>;
+
+export interface LicenseLeaderboard {
+  license: AllowedLicenses;
+  current_hits: number;
+  previous_hits: number;
+  trend: number;
+  percent_change: number;
+}
+export type APIGetLicensesLeaderboard = Endpoint<{
+  Path: '/1/licenses';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: LicenseLeaderboard[];
   };
 }>;
 

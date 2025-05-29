@@ -1,11 +1,47 @@
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 
 import type { LicenseInsert, LicenseRow, RepositoryRow } from '../db/types.js';
-import type { LicenseWeeklyVolume } from '../types/endpoint.js';
+import type { LicenseLeaderboard, LicenseWeeklyVolume } from '../types/endpoint.js';
 
 export async function createLicenses(input: LicenseInsert[]): Promise<void> {
   const q = kyselyClickhouse.insertInto('licenses').values(input);
   await q.execute();
+}
+
+export async function getLicensesLeaderboard({
+  currentWeek,
+  previousWeek,
+}: {
+  currentWeek: string;
+  previousWeek: string;
+}): Promise<LicenseLeaderboard[]> {
+  const res = await clickHouse.query({
+    query: `SELECT
+    license,
+    toUInt32(sumIf(hits, date_week =  {currentWeek: String})) AS raw_current_hits,
+    toUInt32(sumIf(hits, date_week = {previousWeek: String})) AS raw_previous_hits,
+    toInt32(
+      (
+        coalesce(raw_current_hits, 0) - coalesce(raw_previous_hits, 0)
+      )
+    ) AS trend,
+    round(
+      (coalesce(raw_current_hits, 0) * 100) / coalesce(raw_previous_hits, 0) - 100,
+      1
+    ) AS percent_change
+  FROM
+    default.licenses_weekly_mv
+  WHERE
+    date_week IN ( {currentWeek: String}, {previousWeek: String})
+  GROUP BY
+    license
+  ORDER BY raw_current_hits DESC`,
+    query_params: { currentWeek, previousWeek },
+  });
+
+  const json = await res.json<LicenseLeaderboard>();
+
+  return json.data;
 }
 
 export async function getLicensesByRepo(

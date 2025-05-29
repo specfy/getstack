@@ -1,24 +1,35 @@
 import { ResponsiveLine } from '@nivo/line';
-import { IconLicense, IconStar, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
+import {
+  IconDots,
+  IconLicense,
+  IconStar,
+  IconTrendingDown,
+  IconTrendingUp,
+} from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
-import { optionsGetLicense, useLicense } from '@/api/useLicense';
+import { optionsGetLicense, useLicense, useLicensesLeaderboard } from '@/api/useLicense';
+import { LicenseBadge } from '@/components/LicenseBadge';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
+import { TopRepositories } from '@/components/TopRepository';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
 import { APP_URL, seo } from '@/lib/seo';
+import { cn } from '@/lib/utils';
 
+import type { LicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
 import type { LineSeries } from '@nivo/line';
 
 const License: React.FC = () => {
   const { license } = Route.useParams();
 
   const { data, isError, isLoading } = useLicense({ key: license });
+  const { data: leaderboard, isLoading: isLoadingLeaderboard } = useLicensesLeaderboard();
 
   const [current, trend, diff] = useMemo(() => {
     if (!data || data.data.volume.length <= 0) {
@@ -64,34 +75,32 @@ const License: React.FC = () => {
     ];
   }, [data]);
 
-  const position = 1;
+  const [position, inCategory] = useMemo<
+    [number, ({ position: number } & LicenseLeaderboard)[]]
+  >(() => {
+    if (!leaderboard) {
+      return [0, []];
+    }
 
-  // const [position, inCategory] = useMemo<
-  //   [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]
-  // >(() => {
-  //   if (!leaderboard) {
-  //     return [0, []];
-  //   }
+    const tmp = leaderboard.data.findIndex((v) => v.license === license);
+    if (tmp === -1) {
+      return [
+        0,
+        leaderboard.data.slice(0, 4).map((item, index) => {
+          return { ...item, position: index + 1 };
+        }),
+      ];
+    }
 
-  //   const tmp = leaderboard.data.findIndex((v) => v.tech === techKey);
-  //   if (tmp === -1) {
-  //     return [
-  //       0,
-  //       leaderboard.data.slice(0, 4).map((item, index) => {
-  //         return { ...item, position: index + 1 };
-  //       }),
-  //     ];
-  //   }
+    const start = Math.max(0, tmp - 2);
+    const end = Math.min(leaderboard.data.length, tmp === 0 ? 4 : tmp + 3);
 
-  //   const start = Math.max(0, tmp - 2);
-  //   const end = Math.min(leaderboard.data.length, tmp === 0 ? 4 : tmp + 3);
+    const surroundingTechs = leaderboard.data.slice(start, end).map((item, index) => {
+      return { ...item, position: start + index + 1 };
+    });
 
-  //   const surroundingTechs = leaderboard.data.slice(start, end).map((item, index) => {
-  //     return { ...item, position: start + index + 1 };
-  //   });
-
-  //   return [tmp + 1, surroundingTechs];
-  // }, [leaderboard, license]);
+    return [tmp + 1, surroundingTechs];
+  }, [leaderboard, license]);
 
   if (isError) {
     return <NotFound />;
@@ -156,12 +165,12 @@ const License: React.FC = () => {
       <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
         {lic.description}
       </div>
-      {/* {isLoadingLeaderboard && (
+      {isLoadingLeaderboard && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
           <Skeleton className="h-20 w-full " />
           <Skeleton className="h-20 w-full " />
         </div>
-      )} */}
+      )}
       {position > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
           <Card>
@@ -245,15 +254,24 @@ const License: React.FC = () => {
           </Card>
         </div>
       )}
-      <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
-        Number of open-source repositories in GitHub using this license
-      </div>
+
+      {position > 0 && (
+        <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
+          Number of open-source repositories in GitHub using this license
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
-          {/* <TopRepositories topRepos={data.data.topRepos} tech={tech} volume={current} /> */}
+          <TopRepositories
+            topRepos={data.data.topRepos}
+            title={`Top repositories under ${license} License`}
+            description={`Most popular GitHub repositories that are ${license}`}
+            emptyDesc={license}
+            volume={current}
+          />
         </div>
         <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
-          {/* {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />} */}
+          {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
             <div className="border-t pt-5">
               <Card>
@@ -276,14 +294,14 @@ const License: React.FC = () => {
                 licenses
               </Link>
             </h3>
-            {/* <div className="text-sm ml-1 mt-3 flex flex-col gap-1">
+            <div className="text-sm ml-1 mt-3 flex flex-col gap-1">
               {position > 3 && (
                 <div className=" text-xs text-gray-400">
                   <IconDots stroke={1} size={18} />
                 </div>
               )}
               {inCategory.map((row) => {
-                const is = row.tech === techKey;
+                const is = row.license === license;
                 return (
                   <div className="flex items-center gap-4">
                     <div
@@ -294,8 +312,8 @@ const License: React.FC = () => {
                     >
                       #{row.position}
                     </div>
-                    <TechBadge
-                      tech={row.tech}
+                    <LicenseBadge
+                      license={row.license}
                       className={cn(is && ' text-gray-900')}
                       size={is ? 'xl' : 'md'}
                       border
@@ -310,7 +328,7 @@ const License: React.FC = () => {
                     <IconDots stroke={1} size={18} />
                   </div>
                 )}
-            </div> */}
+            </div>
           </div>
 
           <div className="border-t pt-5 mt-1">

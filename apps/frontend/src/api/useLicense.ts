@@ -4,7 +4,10 @@ import { notFound } from '@tanstack/react-router';
 
 import { API_URL } from './api.js';
 
-import type { APIGetLicense } from '@getstack/backend/src/types/endpoint.js';
+import type {
+  APIGetLicense,
+  APIGetLicensesLeaderboard,
+} from '@getstack/backend/src/types/endpoint.js';
 
 export const useLicense = (options: { key?: string }) => {
   return useQuery<APIGetLicense['Success'], Error>(optionsGetLicense(options));
@@ -25,6 +28,29 @@ export const optionsGetLicense = ({ key }: { key?: string }) => {
       }
 
       const json = (await response.json()) as APIGetLicense['Reply'];
+      if ('error' in json) {
+        throw new Error('error');
+      }
+
+      return json;
+    },
+  });
+};
+
+export const useLicensesLeaderboard = () => {
+  return useQuery<APIGetLicensesLeaderboard['Success'], Error>({
+    queryKey: ['getLicensesLeaderboard'],
+    queryFn: async () => {
+      const response = await fetch(`${API_URL}/1/licenses`, {
+        method: 'GET',
+      });
+
+      if (response.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw notFound();
+      }
+
+      const json = (await response.json()) as APIGetLicensesLeaderboard['Reply'];
       if ('error' in json) {
         throw new Error('error');
       }
