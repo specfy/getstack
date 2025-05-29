@@ -14,7 +14,9 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as PrivateImport } from './routes/private'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as LicensesIndexImport } from './routes/licenses/index'
 import { Route as TechTechKeyImport } from './routes/tech/$techKey'
+import { Route as LicensesLicenseImport } from './routes/licenses/$license'
 import { Route as CategoryCategoryImport } from './routes/category/$category'
 import { Route as OrgNameImport } from './routes/$org/$name'
 
@@ -38,9 +40,21 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LicensesIndexRoute = LicensesIndexImport.update({
+  id: '/licenses/',
+  path: '/licenses/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const TechTechKeyRoute = TechTechKeyImport.update({
   id: '/tech/$techKey',
   path: '/tech/$techKey',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LicensesLicenseRoute = LicensesLicenseImport.update({
+  id: '/licenses/$license',
+  path: '/licenses/$license',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,11 +109,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoryCategoryImport
       parentRoute: typeof rootRoute
     }
+    '/licenses/$license': {
+      id: '/licenses/$license'
+      path: '/licenses/$license'
+      fullPath: '/licenses/$license'
+      preLoaderRoute: typeof LicensesLicenseImport
+      parentRoute: typeof rootRoute
+    }
     '/tech/$techKey': {
       id: '/tech/$techKey'
       path: '/tech/$techKey'
       fullPath: '/tech/$techKey'
       preLoaderRoute: typeof TechTechKeyImport
+      parentRoute: typeof rootRoute
+    }
+    '/licenses/': {
+      id: '/licenses/'
+      path: '/licenses'
+      fullPath: '/licenses'
+      preLoaderRoute: typeof LicensesIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -113,7 +141,9 @@ export interface FileRoutesByFullPath {
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/licenses': typeof LicensesIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -122,7 +152,9 @@ export interface FileRoutesByTo {
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/licenses': typeof LicensesIndexRoute
 }
 
 export interface FileRoutesById {
@@ -132,7 +164,9 @@ export interface FileRoutesById {
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/category/$category': typeof CategoryCategoryRoute
+  '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/licenses/': typeof LicensesIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -143,7 +177,9 @@ export interface FileRouteTypes {
     | '/private'
     | '/$org/$name'
     | '/category/$category'
+    | '/licenses/$license'
     | '/tech/$techKey'
+    | '/licenses'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -151,7 +187,9 @@ export interface FileRouteTypes {
     | '/private'
     | '/$org/$name'
     | '/category/$category'
+    | '/licenses/$license'
     | '/tech/$techKey'
+    | '/licenses'
   id:
     | '__root__'
     | '/'
@@ -159,7 +197,9 @@ export interface FileRouteTypes {
     | '/private'
     | '/$org/$name'
     | '/category/$category'
+    | '/licenses/$license'
     | '/tech/$techKey'
+    | '/licenses/'
   fileRoutesById: FileRoutesById
 }
 
@@ -169,7 +209,9 @@ export interface RootRouteChildren {
   PrivateRoute: typeof PrivateRoute
   OrgNameRoute: typeof OrgNameRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
+  LicensesLicenseRoute: typeof LicensesLicenseRoute
   TechTechKeyRoute: typeof TechTechKeyRoute
+  LicensesIndexRoute: typeof LicensesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -178,7 +220,9 @@ const rootRouteChildren: RootRouteChildren = {
   PrivateRoute: PrivateRoute,
   OrgNameRoute: OrgNameRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
+  LicensesLicenseRoute: LicensesLicenseRoute,
   TechTechKeyRoute: TechTechKeyRoute,
+  LicensesIndexRoute: LicensesIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -196,7 +240,9 @@ export const routeTree = rootRoute
         "/private",
         "/$org/$name",
         "/category/$category",
-        "/tech/$techKey"
+        "/licenses/$license",
+        "/tech/$techKey",
+        "/licenses/"
       ]
     },
     "/": {
@@ -214,8 +260,14 @@ export const routeTree = rootRoute
     "/category/$category": {
       "filePath": "category/$category.tsx"
     },
+    "/licenses/$license": {
+      "filePath": "licenses/$license.tsx"
+    },
     "/tech/$techKey": {
       "filePath": "tech/$techKey.tsx"
+    },
+    "/licenses/": {
+      "filePath": "licenses/index.tsx"
     }
   }
 }

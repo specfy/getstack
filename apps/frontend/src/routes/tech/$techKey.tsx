@@ -149,7 +149,7 @@ const Tech: React.FC = () => {
     <div>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center">
+          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
             <img src={`/favicons/${tech.key}.webp`} className="rounded-sm overflow-hidden" />
           </div>{' '}
           <div className="flex flex-col gap-1">

@@ -1,5 +1,5 @@
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
-import { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
+import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
 export type Timestamp = ColumnType<string, Date, Date | string>;
@@ -62,6 +62,24 @@ export type LicenseRow = Selectable<LicensesTable>;
 export type LicenseInsert = Insertable<LicensesTable>;
 export type LicenseUpdate = Updateable<LicensesTable>;
 
+export interface LicensesWeeklyTable {
+  date_week: string;
+  license: AllowedLicenses;
+  hits: number;
+}
+export type LicensesWeeklyRow = Selectable<LicensesWeeklyTable>;
+
+export interface Clickhouse {
+  repositories: RepositoriesTable;
+  technologies: TechnologiesTable;
+  technologies_weekly: TechnologiesWeeklyTable;
+  licenses: LicensesTable;
+  licenses_weekly: LicensesWeeklyRow;
+}
+
+// --------
+// --- Postgres
+
 export interface ProgressTable {
   date_week: string;
   progress: string;
@@ -70,15 +88,16 @@ export interface ProgressTable {
 }
 export type ProgressTableRow = Selectable<ProgressTable>;
 
+export interface LicensesInfoTable {
+  id: number;
+  key: string;
+  description: string;
+}
+export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
+
 export interface Database {
   progress: ProgressTable;
-}
-
-export interface Clickhouse {
-  repositories: RepositoriesTable;
-  technologies: TechnologiesTable;
-  technologies_weekly: TechnologiesWeeklyTable;
-  licenses: LicensesTable;
+  licenses_info: LicensesInfoTable;
 }
 
 export type TX = Transaction<Database>;

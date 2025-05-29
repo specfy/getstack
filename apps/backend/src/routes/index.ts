@@ -4,6 +4,7 @@ import { postCronTriggerAnalyze } from './v1/cron/postTriggerAnalyze.js';
 import { postCronTriggerList } from './v1/cron/postTriggerList.js';
 import { getRoot } from './v1/getRoot.js';
 import { getTopRoute } from './v1/getTop.js';
+import { getLIcense } from './v1/licenses/$license/getLicense.js';
 import { postSubscribe } from './v1/newsletter/postSubscribe.js';
 import { getRepositoryImage } from './v1/repositories/$org/$name/getImage.js';
 import { getApiRepository } from './v1/repositories/$org/$name/getRepository.js';
@@ -24,6 +25,7 @@ export const routes: FastifyPluginAsync = async (f) => {
   await f.register(postSearchRepository, { prefix: '/1' });
   await f.register(postSubscribe, { prefix: '/1' });
   await f.register(getRepositoryImage, { prefix: '/1' });
+  await f.register(getLIcense, { prefix: '/1' });
 
   await f.register(getCategory, { prefix: '/1' });
   await f.register(getCategoryLeaderboard, { prefix: '/1' });

@@ -1,5 +1,7 @@
 import type { Endpoint } from './api.js';
 import type {
+  LicensesInfoTableRow,
+  LicensesWeeklyRow,
   RepositoryRow,
   TechnologiesWeeklyTable,
   TechnologyRow,
@@ -95,5 +97,20 @@ export type APIPostSubscribe = Endpoint<{
   Success: {
     success: true;
     message: string;
+  };
+}>;
+
+export type LicenseWeeklyVolume = Pick<LicensesWeeklyRow, 'date_week' | 'hits'>;
+export type APIGetLicense = Endpoint<{
+  Path: '/1/licenses/:key';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: {
+      license: LicensesInfoTableRow;
+      cumulatedStars: number;
+      topRepos: RepositoryTop[];
+      volume: LicenseWeeklyVolume[];
+    };
   };
 }>;

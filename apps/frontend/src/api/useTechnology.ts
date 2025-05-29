@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { queryOptions, useQuery } from '@tanstack/react-query';
+import { notFound } from '@tanstack/react-router';
 
 import { API_URL } from './api.js';
 
@@ -21,8 +22,9 @@ export const optionsGetTechnology = ({ name }: { name?: string | undefined }) =>
         method: 'GET',
       });
 
-      if (response.status !== 200) {
-        throw new Error('error');
+      if (response.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw notFound();
       }
 
       const json = (await response.json()) as APIGetTechnology['Reply'];
@@ -44,8 +46,9 @@ export const useRelatedTechnology = ({ name }: { name?: string | undefined }) =>
         method: 'GET',
       });
 
-      if (response.status !== 200) {
-        throw new Error('error');
+      if (response.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw notFound();
       }
 
       const json = (await response.json()) as APIGetTopRelatedTechnology['Reply'];
