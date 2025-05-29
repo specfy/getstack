@@ -26,7 +26,7 @@ export const getCategory: FastifyPluginCallback = (fastify: FastifyInstance) => 
       () =>
         getTop10TechnologiesByCategoryForNWeeks({
           category: params.name,
-          weeks: 4,
+          weeks: 10,
           currentWeek,
         })
     );

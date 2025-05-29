@@ -150,7 +150,7 @@ const Category: React.FC = () => {
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-1 font-serif">Top 10</h3>
+        <h3 className="text-lg font-semibold mb-1 font-serif">Top {top10.length}</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
             <div className="text-xs text-neutral-400 mb-4">By number of repositories in GitHub</div>
@@ -176,7 +176,7 @@ const Category: React.FC = () => {
           </div>
           <div className="md:col-span-4">
             <div className="text-xs text-neutral-400 mb-4">Top {top10.length} over time</div>
-            <Card style={{ height: top10.length * 40 }}>
+            <Card style={{ height: Math.max(200, top10.length * 40) }}>
               <ResponsiveAreaBump
                 data={topNData!}
                 margin={{ top: 1, right: 100, bottom: 20, left: 40 }}

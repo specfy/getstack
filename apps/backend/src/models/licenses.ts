@@ -1,11 +1,54 @@
+import { addWeeks, startOfISOWeek } from 'date-fns';
+
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
+import { formatToYearWeek } from '../utils/date.js';
 
 import type { LicenseInsert, LicenseRow, RepositoryRow } from '../db/types.js';
-import type { LicenseLeaderboard, LicenseWeeklyVolume } from '../types/endpoint.js';
+import type { LicenseLeaderboard, LicenseTopN, LicenseWeeklyVolume } from '../types/endpoint.js';
 
 export async function createLicenses(input: LicenseInsert[]): Promise<void> {
   const q = kyselyClickhouse.insertInto('licenses').values(input);
   await q.execute();
+}
+
+export async function getTopLicensesOverTime({
+  weeks,
+  currentWeek,
+}: {
+  weeks: number;
+  currentWeek: string;
+}): Promise<LicenseTopN[]> {
+  const [year, week] = currentWeek.split('-').map(Number);
+  const afterWeek = addWeeks(startOfISOWeek(new Date(year!, 0, 1)), week! - weeks);
+
+  const res = await clickHouse.query({
+    query: `WITH
+    ranked AS (
+        SELECT
+            date_week,
+            license,
+            sum(hits) AS total_hits,
+            row_number() OVER (PARTITION BY date_week, license ORDER BY sum(hits) DESC) AS position
+        FROM licenses_weekly_mv
+        WHERE date_week <= {currentWeek: String}
+              AND date_week >= {afterWeek: String}
+        GROUP BY date_week, license
+    )
+
+SELECT
+    date_week,
+    license,
+    total_hits AS hits,
+    position
+FROM ranked
+WHERE position <= 10
+ORDER BY date_week, position`,
+    query_params: { currentWeek, afterWeek: formatToYearWeek(afterWeek) },
+  });
+
+  const json = await res.json<LicenseTopN>();
+
+  return json.data;
 }
 
 export async function getLicensesLeaderboard({
@@ -18,15 +61,15 @@ export async function getLicensesLeaderboard({
   const res = await clickHouse.query({
     query: `SELECT
     license,
-    toUInt32(sumIf(hits, date_week =  {currentWeek: String})) AS raw_current_hits,
-    toUInt32(sumIf(hits, date_week = {previousWeek: String})) AS raw_previous_hits,
+    toUInt32(sumIf(hits, date_week =  {currentWeek: String})) AS current_hits,
+    toUInt32(sumIf(hits, date_week = {previousWeek: String})) AS previous_hits,
     toInt32(
       (
-        coalesce(raw_current_hits, 0) - coalesce(raw_previous_hits, 0)
+        coalesce(current_hits, 0) - coalesce(previous_hits, 0)
       )
     ) AS trend,
     round(
-      (coalesce(raw_current_hits, 0) * 100) / coalesce(raw_previous_hits, 0) - 100,
+      (coalesce(current_hits, 0) * 100) / coalesce(previous_hits, 0) - 100,
       1
     ) AS percent_change
   FROM
@@ -35,7 +78,7 @@ export async function getLicensesLeaderboard({
     date_week IN ( {currentWeek: String}, {previousWeek: String})
   GROUP BY
     license
-  ORDER BY raw_current_hits DESC`,
+  ORDER BY current_hits DESC`,
     query_params: { currentWeek, previousWeek },
   });
 

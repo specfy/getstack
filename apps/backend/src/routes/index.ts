@@ -6,6 +6,7 @@ import { getRoot } from './v1/getRoot.js';
 import { getTopRoute } from './v1/getTop.js';
 import { getApiLicense } from './v1/licenses/$license/getLicense.js';
 import { getLicenseLeaderboard } from './v1/licenses/getLeaderboard.js';
+import { getLicenses } from './v1/licenses/getLicenses.js';
 import { postSubscribe } from './v1/newsletter/postSubscribe.js';
 import { getRepositoryImage } from './v1/repositories/$org/$name/getImage.js';
 import { getApiRepository } from './v1/repositories/$org/$name/getRepository.js';
@@ -26,6 +27,7 @@ export const routes: FastifyPluginAsync = async (f) => {
   await f.register(postSearchRepository, { prefix: '/1' });
   await f.register(postSubscribe, { prefix: '/1' });
   await f.register(getRepositoryImage, { prefix: '/1' });
+  await f.register(getLicenses, { prefix: '/1' });
   await f.register(getLicenseLeaderboard, { prefix: '/1' });
   await f.register(getApiLicense, { prefix: '/1' });
 

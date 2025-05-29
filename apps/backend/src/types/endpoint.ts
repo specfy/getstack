@@ -101,6 +101,21 @@ export type APIPostSubscribe = Endpoint<{
   };
 }>;
 
+export interface LicenseTopN {
+  date_week: string;
+  license: string;
+  hits: string;
+  position: string;
+}
+export type APIGetLicenses = Endpoint<{
+  Path: '/1/licenses';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: { top: LicenseTopN[] };
+  };
+}>;
+
 export interface LicenseLeaderboard {
   license: AllowedLicenses;
   current_hits: number;
@@ -109,7 +124,7 @@ export interface LicenseLeaderboard {
   percent_change: number;
 }
 export type APIGetLicensesLeaderboard = Endpoint<{
-  Path: '/1/licenses';
+  Path: '/1/licenses/leaderboard';
   Method: 'GET';
   Success: {
     success: true;
