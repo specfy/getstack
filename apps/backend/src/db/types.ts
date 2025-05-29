@@ -1,4 +1,5 @@
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
+import { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
 export type Timestamp = ColumnType<string, Date, Date | string>;
@@ -51,6 +52,16 @@ export interface TechnologiesWeeklyTable {
 }
 export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;
 
+export interface LicensesTable {
+  org: string;
+  name: string;
+  license: AllowedLicenses;
+  date_week: string;
+}
+export type LicenseRow = Selectable<LicensesTable>;
+export type LicenseInsert = Insertable<LicensesTable>;
+export type LicenseUpdate = Updateable<LicensesTable>;
+
 export interface ProgressTable {
   date_week: string;
   progress: string;
@@ -67,6 +78,7 @@ export interface Clickhouse {
   repositories: RepositoriesTable;
   technologies: TechnologiesTable;
   technologies_weekly: TechnologiesWeeklyTable;
+  licenses: LicensesTable;
 }
 
 export type TX = Transaction<Database>;

@@ -8,6 +8,7 @@ import { FSProvider, analyser, flatten } from '@specfy/stack-analyser';
 import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 import { $ } from 'execa';
 
+import { createLicenses, getLicensesByRepo } from '../models/licenses.js';
 import { getActiveWeek } from '../models/progress.js';
 import { updateRepository } from '../models/repositories.js';
 import { createTechnologies, getTechnologiesByRepo } from '../models/technologies.js';
@@ -15,7 +16,7 @@ import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
 
-import type { RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
+import type { LicenseRow, RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';
 
@@ -39,7 +40,7 @@ async function cloneRepository({
 
 export async function getPreviousAnalyzeIfStale(
   repo: RepositoryRow
-): Promise<false | TechnologyRow[]> {
+): Promise<{ techs: TechnologyRow[]; licenses: LicenseRow[] } | false> {
   const githubInfo = await octokit.rest.repos.get({ owner: repo.org, repo: repo.name });
 
   const lastAnalyzedAt = new Date(repo.last_analyzed_at).getTime();
@@ -58,8 +59,9 @@ export async function getPreviousAnalyzeIfStale(
   }
 
   const { currentWeek } = await getActiveWeek();
-  const previous = await getTechnologiesByRepo(repo, currentWeek);
-  return previous;
+  const techs = await getTechnologiesByRepo(repo, currentWeek);
+  const licenses = await getLicensesByRepo(repo, currentWeek);
+  return { techs, licenses };
 }
 
 export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payload> {
@@ -135,6 +137,14 @@ export async function saveAnalysis({
     await createTechnologies(rows);
   }
 
+  if (res.licenses.size > 0) {
+    await createLicenses(
+      [...res.licenses.values()].map((license) => {
+        return { date_week: dateWeek, org: repo.org, name: repo.name, license };
+      })
+    );
+  }
+
   await updateRepository(repo.id, {
     last_fetched_at: formatToClickhouseDatetime(new Date()),
     last_analyzed_at: formatToClickhouseDatetime(new Date()),
@@ -143,15 +153,24 @@ export async function saveAnalysis({
 
 export async function savePreviousIfStale(repo: RepositoryRow, dateWeek: string): Promise<boolean> {
   const previous = await getPreviousAnalyzeIfStale(repo);
-  if (!Array.isArray(previous) || previous.length === 0) {
+  if (previous === false) {
     return false;
   }
 
-  await createTechnologies(
-    previous.map((row) => {
-      return { ...row, date_week: dateWeek };
-    })
-  );
+  if (previous.techs.length > 0) {
+    await createTechnologies(
+      previous.techs.map((row) => {
+        return { ...row, date_week: dateWeek };
+      })
+    );
+  }
+  if (previous.licenses.length > 0) {
+    await createLicenses(
+      previous.licenses.map((row) => {
+        return { ...row, date_week: dateWeek };
+      })
+    );
+  }
 
   await updateRepository(repo.id, {
     last_fetched_at: formatToClickhouseDatetime(new Date()),

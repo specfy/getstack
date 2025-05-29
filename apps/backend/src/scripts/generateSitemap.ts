@@ -5,6 +5,9 @@ import { extendedListTech } from '../utils/stacks.js';
 
 const BASE_URL = 'https://getstack.dev';
 
+/**
+ * npx tsx apps/backend/src/scripts/generateSitemap.ts
+ */
 async function generateSitemap(): Promise<void> {
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
