@@ -9,6 +9,7 @@ import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatQuantity } from '@/lib/number';
+import { APP_URL } from '@/lib/seo';
 import { categories, categoryOrder } from '@/lib/stack';
 
 import type { TechType } from '@specfy/stack-analyser';
@@ -177,5 +178,10 @@ const Try: React.FC = () => {
 };
 
 export const Route = createFileRoute('/')({
+  head: () => {
+    return {
+      links: [{ rel: 'canonical', href: APP_URL }],
+    };
+  },
   component: Index,
 });
