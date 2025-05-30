@@ -17,7 +17,7 @@ export default defineConfig({
     appDirectory: 'src',
   },
   server: {
-    preset: 'cloudflare',
+    preset: 'cloudflare-module',
     unenv: cloudflare,
     routeRules: {
       '/favicons/**': { headers: imageHeaders },
