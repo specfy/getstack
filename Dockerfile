@@ -11,6 +11,8 @@ COPY apps/frontend/package.json ./apps/frontend/package.json
 
 # for Sharp
 ENV SHARP_FORCE_GLOBAL_LIBVIPS=1
+ENV VITE_API_URL=https://api.getstack.dev
+ENV VITE_URL=https://app.getstack.dev
 
 # Install dependencies
 RUN npm install \
