@@ -106,7 +106,7 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
         ignored: row.ignored === 1 && row.ignored_reason === 'manual' ? 1 : repo.ignored,
         description: repo.description,
         homepage_url: repo.homepage_url,
-        repo_created_at: repo.created_at,
+        repo_created_at: repo.repo_created_at,
         updated_at: formatToClickhouseDatetime(new Date()),
       })
       .where('org', '=', repo.org)
