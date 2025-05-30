@@ -26,6 +26,8 @@ export interface RepositoriesTable {
   avatar_url: string;
   homepage_url: string;
   description: string;
+  forks: number;
+  repo_created_at: Timestamp;
 }
 
 export type RepositoryRow = Selectable<RepositoriesTable>;

@@ -129,6 +129,8 @@ export async function refreshOne(
     avatar_url: repo.owner?.avatar_url || '',
     homepage_url: repo.homepage || '',
     description: repo.description || '',
+    forks: repo.forks_count,
+    repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),
   });
 }
 
