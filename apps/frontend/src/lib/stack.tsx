@@ -310,8 +310,6 @@ export const categoryOrder: TechType[] = [
   'messaging',
 ];
 
-export { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
-
 export const listIndexed = {} as Record<AllowedKeys, ExtendedTechItem & TechItem>;
 for (const tech of extendedListTech) {
   listIndexed[tech.key] = tech;
@@ -320,3 +318,5 @@ for (const tech of extendedListTech) {
 export const listCategories = Object.entries(categories).map((v) => {
   return { key: v[0], ...v[1] };
 });
+
+export { extendedListTech } from '@getstack/backend/dist/utils/stacks.js';

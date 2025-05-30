@@ -13,7 +13,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { formatQuantity } from '@/lib/number';
-import { categories, listCategories, listTech } from '@/lib/stack';
+import { categories, extendedListTech, listCategories } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
 export const Search: React.FC<{
@@ -56,7 +56,7 @@ export const Search: React.FC<{
   }, [search]);
   const technologies = useMemo(() => {
     const val = search;
-    return listTech
+    return extendedListTech
       .filter((v) => v.name.includes(val) || v.key.includes(val) || v.type.includes(val))
       .slice(0, 25);
   }, [search]);

@@ -7,17 +7,22 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 COPY apps/backend/package.json ./apps/backend/package.json
+COPY apps/frontend/package.json ./apps/frontend/package.json
 
 # for Sharp
 ENV SHARP_FORCE_GLOBAL_LIBVIPS=1
 
 # Install dependencies
-RUN npm install
+RUN npm install \
+  && cd apps/frontend \
+  && npm i
 
 # Copy the entire repository to the working directory
 COPY . ./
 
-RUN npm run build:back
+RUN true \
+  && npm run build:back \
+  && npm run build:front
 
 # Clean dev dependencies
 RUN true \
@@ -56,5 +61,3 @@ RUN npm install sharp
 # Expose the port the backend service runs on
 EXPOSE 3000
 
-# Set the command to run the backend service
-CMD ["node", "--run", "prod:start"]

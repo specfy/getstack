@@ -1,21 +1,24 @@
 import { clsx } from 'clsx';
-import { extendTailwindMerge } from 'tailwind-merge';
+// import { extendTailwindMerge } from 'tailwind-merge';
 
 import type { ClassValue } from 'clsx';
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 export const isSSR = globalThis.window === undefined;
 
-const customTwMerge = extendTailwindMerge({
-  extend: {
-    theme: {
-      text: ['tiny'],
-    },
-  },
-});
+// const customTwMerge = extendTailwindMerge({
+//   extend: {
+//     theme: {
+//       text: ['tiny'],
+//     },
+//   },
+// });
 
+// export function cn(...inputs: ClassValue[]): string {
+//   return customTwMerge(clsx(inputs));
+// }
 export function cn(...inputs: ClassValue[]): string {
-  return customTwMerge(clsx(inputs));
+  return clsx(inputs);
 }
 
 /**

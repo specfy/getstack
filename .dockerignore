@@ -20,3 +20,4 @@ cliff.toml
 .DS_Store
 **/*.unit.test.ts
 **/*.integration.test.ts
+Dockerfile*
