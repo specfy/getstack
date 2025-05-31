@@ -2,8 +2,8 @@ name: Build Docker Image
 
 on:
   push:
-    branches: [main]  # or your default branch
-  workflow_dispatch:  # allows manual trigger
+    branches: [main] # or your default branch
+  workflow_dispatch: # allows manual trigger
 
 jobs:
   docker-build:
@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: h1fra/getstack:latest
+          tags: h1fra/getstack:latest,h1fra/getstack:${{ github.sha }}
