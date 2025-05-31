@@ -16,14 +16,17 @@ import {
   IconDatabase,
   IconDatabaseEdit,
   IconFrame,
+  IconLayout,
   IconMessage,
   IconNetwork,
   IconPackage,
   IconPackages,
+  IconRobot,
   IconScan,
   IconServer,
   IconShield,
   IconSparkles,
+  IconStopwatch,
   IconTestPipe,
   IconTool,
   IconTransform,
@@ -253,6 +256,25 @@ export const categories: Record<TechType, CategoryDefinition> = {
       'Tools, services, and platforms focused on application security, vulnerability scanning, and threat detection.',
     keyword: 'security application security vulnerability scanning threat detection',
   },
+  automation: {
+    name: 'Automation',
+    icon: IconRobot,
+    description: 'Tools and services for automating tasks and workflows. ',
+    keyword: 'automation task workflow cron job',
+  },
+  runtime: {
+    name: 'Runtime',
+    icon: IconStopwatch,
+    description: 'Execution environments that compile and run code.',
+    keyword: 'runtime application process execution environment interpreter compiler',
+  },
+  ui_framework: {
+    name: 'UI Framework',
+    icon: IconLayout,
+    description:
+      'Frameworks and component libraries for building user interfaces and frontend experiences.',
+    keyword: 'ui framework component',
+  },
 };
 
 export const categoryOrder: TechType[] = [
@@ -261,35 +283,39 @@ export const categoryOrder: TechType[] = [
   'db',
   'ai',
 
+  // UI
+  'ui_framework',
+  'framework',
+  'ui',
+
   // Tools
   'cloud',
-  'framework',
   'queue',
+  'storage',
 
   // Store
-  'storage',
-  'hosting',
   'monitoring',
+  'hosting',
+  'automation',
 
   // CI
   'ci',
   'test',
   'linter',
 
-  // UI
-  'auth',
-  'ui',
-  'analytics',
-
   // Events
   'notification',
   'communication',
   'collaboration',
 
-  // Dev tools
   'orm',
-  'tool',
+  'auth',
+  'analytics',
+
+  // Dev tools
   'package_manager',
+  'runtime',
+  'tool',
 
   // Saas but well known
   'cms',

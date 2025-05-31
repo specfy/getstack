@@ -1261,7 +1261,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Suite of cloud computing services from IBM offering platform as a service, software as a service, and infrastructure as a service.',
   },
-  iftt: {
+  ifttt: {
     website: 'https://ifttt.com/',
     description:
       'Web service that creates chains of simple conditional statements, called applets, to automate tasks between different apps and services.',
@@ -3163,6 +3163,89 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   twitch: {
     website: 'https://www.twitch.tv/',
     description: 'Live streaming platform for video game content and other content.',
+  },
+  apify: {
+    website: 'https://apify.com/',
+    description: 'Platform for building and running web scraping and automation workflows.',
+  },
+  beehiiv: {
+    website: 'https://beehiiv.com/',
+    description: 'Platform for creating and managing newsletters and email campaigns.',
+  },
+  dokku: {
+    website: 'https://dokku.com/',
+    description:
+      'Lightweight, open-source platform for managing Docker containers and applications.',
+  },
+  drizzleorm: {
+    website: 'https://orm.drizzle.team/',
+    description:
+      'Type-safe ORM for TypeScript and JavaScript, designed for simplicity and performance.',
+  },
+  googlesheets: {
+    website: 'https://www.google.com/sheets/about/',
+    description:
+      'Spreadsheet application by Google, offering a web-based interface for data organization and analysis.',
+  },
+  htmx: {
+    website: 'https://htmx.org/',
+    description:
+      'JavaScript library for building interactive web applications, focusing on simplicity and performance.',
+  },
+  infernojs: {
+    website: 'https://infernojs.org/',
+    description:
+      'JavaScript library for building user interfaces, focusing on simplicity and performance.',
+  },
+  instagram: {
+    website: 'https://www.instagram.com/',
+    description: 'Social media platform for sharing and discovering photos and videos.',
+  },
+  jsx: {
+    website: 'https://reactjs.org/docs/jsx-in-depth.html',
+    description:
+      'XML-like syntax extension for JavaScript, used in React for creating user interfaces.',
+  },
+  linkedin: {
+    website: 'https://www.linkedin.com/',
+    description:
+      'Professional networking platform for connecting and sharing career opportunities.',
+  },
+  litjs: {
+    website: 'https://lit.dev/',
+    description: 'Library for building web components, focusing on simplicity and performance.',
+  },
+  microsoft_onedrive: {
+    website: 'https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage',
+    description:
+      'Cloud storage and synchronization service by Microsoft, offering file sharing and collaboration features.',
+  },
+  mssql: {
+    website: 'https://www.microsoft.com/en-us/sql-server/sql-server-2022',
+    description:
+      'Relational database management system by Microsoft, known for its speed and reliability.',
+  },
+  qwikjs: {
+    website: 'https://qwik.builder.io/',
+    description: 'Framework for building web applications, focusing on simplicity and performance.',
+  },
+  stenciljs: {
+    website: 'https://stenciljs.com/',
+    description: 'Compiler for building web components, focusing on simplicity and performance.',
+  },
+  tauri: {
+    website: 'https://tauri.app/',
+    description:
+      'Framework for building desktop applications, focusing on simplicity and performance.',
+  },
+  vuejs: {
+    website: 'https://vuejs.org/',
+    description:
+      'Template syntax extending HTML with directives and expressions for building dynamic user interfaces in Vue applications.',
+  },
+  youtube: {
+    website: 'https://www.youtube.com/',
+    description: 'Video streaming platform for sharing and discovering videos.',
   },
 };
 
