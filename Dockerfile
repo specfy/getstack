@@ -13,6 +13,7 @@ COPY apps/frontend/package.json ./apps/frontend/package.json
 ENV SHARP_FORCE_GLOBAL_LIBVIPS=1
 ENV VITE_API_URL=https://api.getstack.dev
 ENV VITE_URL=https://app.getstack.dev
+ENV VITE_GA_ID=test
 
 # Install dependencies
 RUN npm install \
