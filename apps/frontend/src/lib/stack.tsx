@@ -304,13 +304,13 @@ export const categoryOrder: TechType[] = [
 
   // Tools
   'cloud',
-  'queue',
+  'iac',
   'storage',
 
   // Store
+  'queue',
   'monitoring',
   'hosting',
-  'automation',
 
   // CI
   'ci',
@@ -337,9 +337,11 @@ export const categoryOrder: TechType[] = [
   'etl',
 
   // Saas but broader
+  'automation',
   'saas',
-  'api',
   'app',
+
+  'maps',
 
   // Everything else
   'network',
@@ -347,6 +349,7 @@ export const categoryOrder: TechType[] = [
   'security',
 
   // Deprecated
+  'api',
   'messaging',
 ];
 
