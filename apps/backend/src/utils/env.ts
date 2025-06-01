@@ -27,7 +27,7 @@ const schema = z.object({
   // CRON
   CRON_LIST: bool,
   CRON_ANALYZE: bool,
-  ANALYZE_DLC: z.coerce.date(),
+  ANALYZE_REDO_BEFORE: z.coerce.date(),
   ANALYZE_MIN_STARS: z.coerce.number().default(3000),
   ANALYZE_MAX_SIZE: z.coerce.number().default(950_000),
 

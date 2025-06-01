@@ -16,7 +16,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/tech/adobecommercecloud</loc>
+    <loc>https://getstack.dev/tech/adobe.commercecloud</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -146,7 +146,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/apify</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/apiplatform</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/apple</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/apple.maps</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -486,6 +501,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/azure.maps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/azure.mariadb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -527,6 +547,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/bash</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/beehiiv</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -936,6 +961,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/dokku</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/drizzleorm</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/droneci</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1331,7 +1366,67 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/tech/googleanalytics</loc>
+    <loc>https://getstack.dev/tech/google</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.analytics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.calendar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.chat</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.docs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.drive</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.forms</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.gmail</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.keep</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.meet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.sheets</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.slides</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/google.tasks</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1386,6 +1481,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/heremaps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/heroku</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1407,6 +1507,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/hotjar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/htmx</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1446,7 +1551,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/tech/iftt</loc>
+    <loc>https://getstack.dev/tech/ifttt</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/infernojs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1462,6 +1572,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/inngest</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/instagram</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1507,6 +1622,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/joomla</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/jsx</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1606,7 +1726,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/linkedin</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/liquibase</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/litjs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1656,6 +1786,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/mapbox</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/mariadb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1697,6 +1832,16 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/meteorjs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/microsoft</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/microsoft.onedrive</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1752,6 +1897,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/mongoexpress</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/mssql</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2161,6 +2311,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/qwikjs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/rabbitmq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2531,6 +2686,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/stenciljs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/storybook</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2632,6 +2792,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/tanstackstart</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/tauri</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2876,6 +3041,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/vuejs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/wasp</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2936,6 +3106,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/youtube</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/zapier</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2976,12 +3151,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/saas</loc>
+    <loc>https://getstack.dev/category/cloud</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/cloud</loc>
+    <loc>https://getstack.dev/category/cms</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3011,7 +3186,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/framework</loc>
+    <loc>https://getstack.dev/category/ui_framework</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3021,12 +3196,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/language</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/category/tool</loc>
+    <loc>https://getstack.dev/category/iac</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3041,12 +3211,37 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/category/framework</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/category/automation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/category/maps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/category/ci</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getstack.dev/category/package_manager</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/category/tool</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/category/saas</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3061,11 +3256,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/api</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getstack.dev/category/storage</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3076,12 +3266,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/category/security</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/category/notification</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/cms</loc>
+    <loc>https://getstack.dev/category/language</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3096,7 +3291,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/category/security</loc>
+    <loc>https://getstack.dev/category/runtime</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

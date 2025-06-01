@@ -17,6 +17,7 @@ import {
   IconDatabaseEdit,
   IconFrame,
   IconLayout,
+  IconMap,
   IconMessage,
   IconNetwork,
   IconPackage,
@@ -24,6 +25,7 @@ import {
   IconRobot,
   IconScan,
   IconServer,
+  IconSettingsCode,
   IconShield,
   IconSparkles,
   IconStopwatch,
@@ -274,6 +276,18 @@ export const categories: Record<TechType, CategoryDefinition> = {
     description:
       'Frameworks and component libraries for building user interfaces and frontend experiences.',
     keyword: 'ui framework component',
+  },
+  iac: {
+    name: 'IaC',
+    icon: IconSettingsCode,
+    description: 'Infrastructure as Code tools for managing infrastructure and services.',
+    keyword: 'iac infrastructure as code',
+  },
+  maps: {
+    name: 'Maps',
+    icon: IconMap,
+    description: 'Maps and geospatial services for location-based applications.',
+    keyword: 'maps geospatial location based application',
   },
 };
 

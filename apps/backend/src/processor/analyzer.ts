@@ -54,7 +54,7 @@ export async function getPreviousAnalyzeIfStale(
   if (!analyzedRecently) {
     return false;
   }
-  if (envs.ANALYZE_DLC.getTime() > lastAnalyzedAt) {
+  if (envs.ANALYZE_REDO_BEFORE.getTime() > lastAnalyzedAt) {
     return false;
   }
 

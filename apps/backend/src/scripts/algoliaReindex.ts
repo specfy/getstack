@@ -22,7 +22,7 @@ async function main(): Promise<void> {
       objectID: repo.github_id,
       org: repo.org,
       name: repo.name,
-      stars: repo.stars,
+      stars: Number.parseInt(repo.stars as unknown as string, 10) || 0,
       description: repo.description || '',
       avatarUrl: repo.avatar_url || '',
     }));

@@ -23,7 +23,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Software company that provides a range of products and services for the creation, management, and distribution of digital content.',
   },
-  adobecommercecloud: {
+  'adobe.commercecloud': {
     website: 'https://business.adobe.com/products/commerce/magento/cloud.html',
     github: 'magento/magento-cloud',
     description: 'Cloud-based e-commerce platform, formerly Magento.',
@@ -1149,7 +1149,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Fast Go linters runner, aggregating multiple linters to analyze Go source code for style and correctness.',
   },
-  googleanalytics: {
+  'google.analytics': {
     website: 'https://analytics.google.com/',
     description:
       'Web analytics service by Google that tracks and reports website traffic, user behavior, and conversions.',
@@ -3182,7 +3182,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Type-safe ORM for TypeScript and JavaScript, designed for simplicity and performance.',
   },
-  googlesheets: {
+  'google.sheets': {
     website: 'https://www.google.com/sheets/about/',
     description:
       'Spreadsheet application by Google, offering a web-based interface for data organization and analysis.',
@@ -3215,11 +3215,6 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://lit.dev/',
     description: 'Library for building web components, focusing on simplicity and performance.',
   },
-  microsoft_onedrive: {
-    website: 'https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage',
-    description:
-      'Cloud storage and synchronization service by Microsoft, offering file sharing and collaboration features.',
-  },
   mssql: {
     website: 'https://www.microsoft.com/en-us/sql-server/sql-server-2022',
     description:
@@ -3246,6 +3241,97 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   youtube: {
     website: 'https://www.youtube.com/',
     description: 'Video streaming platform for sharing and discovering videos.',
+  },
+  'microsoft.onedrive': {
+    website: 'https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage',
+    description:
+      'Cloud storage and synchronization service by Microsoft, offering file sharing and collaboration features.',
+  },
+  'apple.maps': {
+    website: 'https://www.apple.com/maps/',
+    description: 'Maps and geospatial services for location-based applications.',
+  },
+  'azure.maps': {
+    website: 'https://learn.microsoft.com/en-us/azure/azure-maps/',
+    description: 'Maps and geospatial services for location-based applications.',
+  },
+  'google.calendar': {
+    website: 'https://calendar.google.com/',
+    description:
+      'Calendar and scheduling service by Google, offering a range of features for scheduling and managing events.',
+  },
+  'google.chat': {
+    website: 'https://chat.google.com/',
+    description:
+      'Chat and messaging service by Google, offering a range of features for communication and collaboration.',
+  },
+  'google.docs': {
+    website: 'https://docs.google.com/',
+    description:
+      'Document and collaboration service by Google, offering a range of features for creating and sharing documents.',
+  },
+  'google.drive': {
+    website: 'https://drive.google.com/',
+    description:
+      'Cloud storage and synchronization service by Google, offering file sharing and collaboration features.',
+  },
+  'google.forms': {
+    website: 'https://forms.google.com/',
+    description:
+      'Form and survey service by Google, offering a range of features for creating and sharing forms.',
+  },
+  'google.gmail': {
+    website: 'https://mail.google.com/',
+    description:
+      'Email and messaging service by Google, offering a range of features for communication and collaboration.',
+  },
+  'google.keep': {
+    website: 'https://keep.google.com/',
+    description:
+      'Note-taking service by Google, offering a range of features for creating and sharing notes.',
+  },
+  'google.meet': {
+    website: 'https://meet.google.com/',
+    description:
+      'Video conferencing service by Google, offering a range of features for creating and sharing meetings.',
+  },
+  'google.slides': {
+    website: 'https://docs.google.com/presentation/',
+    description:
+      'Presentation and collaboration service by Google, offering a range of features for creating and sharing presentations.',
+  },
+  'google.sites': {
+    website: 'https://sites.google.com/',
+    description:
+      'Website and collaboration service by Google, offering a range of features for creating and sharing websites.',
+  },
+  'google.tasks': {
+    website: 'https://tasks.google.com/',
+    description:
+      'Task and project management service by Google, offering a range of features for creating and sharing tasks and projects.',
+  },
+  apple: {
+    website: 'https://www.apple.com/',
+    description:
+      'Apple is a technology company that designs and sells consumer electronics, software, and online services.',
+  },
+  microsoft: {
+    website: 'https://www.microsoft.com/',
+    description:
+      'Microsoft is a technology company that designs and sells consumer electronics, software, and online services.',
+  },
+  google: {
+    website: 'https://www.google.com/',
+    description:
+      'Google is a technology company that designs and sells consumer electronics, software, and online services.',
+  },
+  heremaps: {
+    website: 'https://www.here.com/maps',
+    description: 'Maps and geospatial services for location-based applications.',
+  },
+  mapbox: {
+    website: 'https://www.mapbox.com/',
+    description: 'Maps and geospatial services for location-based applications.',
   },
 };
 
