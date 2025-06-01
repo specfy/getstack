@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Newsletter } from '@/components/Newsletter';
-import { APP_URL, seo } from '@/lib/seo';
+import { APP_URL } from '@/lib/envs';
+import { seo } from '@/lib/seo';
 
 const RouteComponent: React.FC = () => {
   return (

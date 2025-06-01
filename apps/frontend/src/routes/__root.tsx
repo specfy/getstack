@@ -6,12 +6,12 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 // eslint-disable-next-line import-x/default
 import React from 'react';
 
-import { API_URL } from '@/api/api';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import indexCss from '@/index.css?url';
+import { API_URL, APP_URL } from '@/lib/envs';
 import { queryClient } from '@/lib/query';
-import { APP_URL, seo } from '@/lib/seo';
+import { seo } from '@/lib/seo';
 
 import type { QueryClient } from '@tanstack/react-query';
 

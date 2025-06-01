@@ -1,5 +1,3 @@
-export const APP_URL = import.meta.env.VITE_URL ?? 'http://localhost:5173';
-
 export const seo = ({
   title,
   description,

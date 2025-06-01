@@ -19,6 +19,11 @@ const schema = z.object({
   // Github
   GITHUB_TOKEN: z.string(),
 
+  // Algolia
+  ALGOLIA_APP_ID: z.string().optional(),
+  ALGOLIA_API_KEY: z.string().optional(),
+  ALGOLIA_INDEX_NAME: z.string().optional(),
+
   // CRON
   CRON_LIST: bool,
   CRON_ANALYZE: bool,

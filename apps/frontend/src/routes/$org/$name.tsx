@@ -3,7 +3,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
 
-import { API_URL } from '@/api/api';
 import { optionsGetRepository, useRepository } from '@/api/useRepository';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
@@ -11,8 +10,9 @@ import { TechBadge } from '@/components/TechBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { API_URL, APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
-import { APP_URL, seo } from '@/lib/seo';
+import { seo } from '@/lib/seo';
 import { categories, categoryOrder } from '@/lib/stack';
 
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';

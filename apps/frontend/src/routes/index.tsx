@@ -8,8 +8,8 @@ import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
-import { APP_URL } from '@/lib/seo';
 import { categories, categoryOrder } from '@/lib/stack';
 
 import type { TechType } from '@specfy/stack-analyser';

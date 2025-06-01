@@ -21,8 +21,9 @@ import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
-import { APP_URL, seo } from '@/lib/seo';
+import { seo } from '@/lib/seo';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 

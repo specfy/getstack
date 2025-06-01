@@ -2,12 +2,12 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL, ApiResError } from './api.js';
+import { ApiResError } from './api.js';
+import { ALGOLIA_INDEX_NAME, API_URL } from '../lib/envs';
+import { algolia } from '@/lib/algolia.js';
 
-import type {
-  APIGetRepository,
-  APIPostRepositorySearch,
-} from '@getstack/backend/src/types/endpoint.js';
+import type { AlgoliaRepositoryObject } from '@getstack/backend/src/types/algolia.js';
+import type { APIGetRepository } from '@getstack/backend/src/types/endpoint.js';
 
 export const useRepository = (opts: { org: string; name: string }) => {
   return useQuery<APIGetRepository['Success'], Error>(optionsGetRepository(opts));
@@ -36,23 +36,20 @@ export const optionsGetRepository = ({ org, name }: { org: string; name: string 
   });
 };
 
-export const useRepositorySearch = ({ search }: { search: string }) => {
-  return useQuery<APIPostRepositorySearch['Success'], Error>({
+export const useRepositorySearchAlgolia = ({ search }: { search: string }) => {
+  return useQuery<AlgoliaRepositoryObject[], Error>({
     enabled: Boolean(search),
-    queryKey: ['postRepositorySearch', search],
+    queryKey: ['algoliaRepositorySearch', search],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/repositories/search`, {
-        method: 'POST',
-        body: JSON.stringify({ search }),
-        headers: { 'content-type': 'application/json' },
+      const res = await algolia.search<AlgoliaRepositoryObject>({
+        requests: [{ indexName: ALGOLIA_INDEX_NAME, query: search, hitsPerPage: 20 }],
       });
 
-      const json = (await response.json()) as APIPostRepositorySearch['Reply'];
-      if ('error' in json) {
-        throw new ApiResError(json);
+      if (!('hits' in res.results[0])) {
+        return [];
       }
 
-      return json;
+      return res.results[0].hits;
     },
   });
 };

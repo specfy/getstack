@@ -1,4 +1,4 @@
-import { API_URL } from './api';
+import { API_URL } from '../lib/envs';
 
 import type { APIPostSubscribe } from '../../../backend/src/types/endpoint';
 

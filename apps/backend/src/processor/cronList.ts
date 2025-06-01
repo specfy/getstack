@@ -2,12 +2,14 @@ import { CronJob } from 'cron';
 
 import { getOrInsert, update } from '../models/progress.js';
 import { ANALYZE_MIN_STARS, upsertRepository } from '../models/repositories.js';
+import { algolia } from '../utils/algolia.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
 import { defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
+import type { AlgoliaRepositoryObject } from '../types/algolia.js';
 import type { RestEndpointMethodTypes } from '@octokit/rest';
 
 const logger = defaultLogger.child({ svc: 'cron.list' });
@@ -132,6 +134,21 @@ export async function refreshOne(
     forks: repo.forks_count,
     repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),
   });
+
+  if (envs.ALGOLIA_INDEX_NAME) {
+    const body: AlgoliaRepositoryObject = {
+      objectID: String(repo.id),
+      org,
+      name,
+      stars: repo.stargazers_count,
+      description: repo.description || '',
+      avatarUrl: repo.owner?.avatar_url || '',
+    };
+    await algolia.saveObject({
+      indexName: envs.ALGOLIA_INDEX_NAME,
+      body: body as unknown as Record<string, unknown>,
+    });
+  }
 }
 
 function filter(

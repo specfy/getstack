@@ -3,7 +3,7 @@ import { Link, useNavigate } from '@tanstack/react-router';
 import { useMemo, useRef, useState } from 'react';
 import { useDebounce, useKey } from 'react-use';
 
-import { useRepositorySearch } from '@/api/useRepository';
+import { useRepositorySearchAlgolia } from '@/api/useRepository';
 import {
   Command,
   CommandEmpty,
@@ -35,7 +35,7 @@ export const Search: React.FC<{
     200,
     [search]
   );
-  const { data, isLoading } = useRepositorySearch({ search: debounced });
+  const { data, isLoading } = useRepositorySearchAlgolia({ search: debounced });
 
   useKey(
     'Escape',
@@ -156,12 +156,12 @@ export const Search: React.FC<{
                 })}
               </CommandGroup>
             )}
-            {data && data.data.length > 0 && (
+            {data && data.length > 0 && (
               <CommandGroup heading="Repositories">
-                {data.data.map((row) => {
+                {data.map((row) => {
                   return (
                     <CommandItem
-                      key={row.id}
+                      key={row.objectID}
                       className="flex justify-between cursor-pointer"
                       asChild
                       onMouseDown={(e) => {
@@ -179,7 +179,7 @@ export const Search: React.FC<{
                       <Link to="/$org/$name" params={{ org: row.org, name: row.name }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={row.avatar_url} />
+                            <img src={row.avatarUrl} />
                           </div>
                           <span>{row.name}</span>
                         </div>

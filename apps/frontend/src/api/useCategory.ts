@@ -2,7 +2,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from './api';
+import { API_URL } from '../lib/envs';
 
 import type {
   APIGetCategory,

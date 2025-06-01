@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { API_URL } from './api';
+import { API_URL } from '../lib/envs';
 
 import type { APIGetTop } from '../../../backend/src/types/endpoint';
 

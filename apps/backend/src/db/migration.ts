@@ -4,7 +4,11 @@ import path from 'node:path';
 import { FileMigrationProvider, Migrator } from 'kysely';
 
 import { db, kyselyClickhouse } from './client.js';
+import { algolia } from '../utils/algolia.js';
+import { envs } from '../utils/env.js';
 import { defaultLogger as logger } from '../utils/logger.js';
+
+import type { IndexSettings } from 'algoliasearch';
 
 const migratorDB = new Migrator({
   db: db,
@@ -59,6 +63,43 @@ export async function migrate(): Promise<boolean> {
           logger.error(`failed to execute migration "${it.migrationName}"`);
         }
       }
+    }
+  }
+
+  {
+    if (envs.ALGOLIA_INDEX_NAME && envs.ALGOLIA_API_KEY && envs.ALGOLIA_APP_ID) {
+      const indexName = envs.ALGOLIA_INDEX_NAME;
+      const settings: IndexSettings = {
+        minWordSizefor1Typo: 4,
+        minWordSizefor2Typos: 8,
+        hitsPerPage: 20,
+        maxValuesPerFacet: 100,
+        searchableAttributes: ['unordered(org)', 'unordered(name)', 'unordered(description)'],
+        optionalWords: null,
+        paginationLimitedTo: 1000,
+        exactOnSingleWordQuery: 'attribute',
+        ranking: [
+          'desc(stars)',
+          'typo',
+          'geo',
+          'words',
+          'filters',
+          'proximity',
+          'attribute',
+          'exact',
+          'custom',
+        ],
+        separatorsToIndex: '',
+        removeWordsIfNoResults: 'none',
+        queryType: 'prefixLast',
+        highlightPreTag: '<em>',
+        highlightPostTag: '</em>',
+        alternativesAsExact: ['ignorePlurals', 'singleWordSynonym'],
+      };
+      // const exists = await algolia.indexExists({ indexName });
+      await algolia.setSettings({ indexName, indexSettings: settings });
+
+      logger.info('Algolia migrated');
     }
   }
 

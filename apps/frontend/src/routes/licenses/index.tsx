@@ -10,8 +10,9 @@ import { Report } from '@/components/Report';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
-import { APP_URL, seo } from '@/lib/seo';
+import { seo } from '@/lib/seo';
 
 import type { LicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
 import type { AreaBumpSerie } from '@nivo/bump';

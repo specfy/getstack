@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Button } from '@/components/ui/button';
-import { APP_URL, seo } from '@/lib/seo';
+import { APP_URL } from '@/lib/envs';
+import { seo } from '@/lib/seo';
 
 const About: React.FC = () => {
   return (

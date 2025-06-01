@@ -118,3 +118,8 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
 
   await kyselyClickhouse.insertInto('repositories').values(repo).execute();
 }
+
+export async function listAllRepositories(): Promise<RepositoryRow[]> {
+  const res = await kyselyClickhouse.selectFrom('repositories').selectAll().execute();
+  return res;
+}

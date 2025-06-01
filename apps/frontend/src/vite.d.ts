@@ -10,6 +10,9 @@ interface ImportMetaEnv {
   readonly VITE_API_URL?: string | undefined;
   readonly VITE_URL?: string | undefined;
   readonly VITE_GA_ID?: string | undefined;
+  readonly VITE_ALGOLIA_APP_ID?: string | undefined;
+  readonly VITE_ALGOLIA_API_KEY?: string | undefined;
+  readonly VITE_ALGOLIA_INDEX_NAME?: string | undefined;
 }
 
 interface ImportMeta {
