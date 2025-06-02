@@ -41,13 +41,9 @@ export const useRepositorySearchAlgolia = ({ search }: { search: string }) => {
     enabled: Boolean(search),
     queryKey: ['algoliaRepositorySearch', search],
     queryFn: async () => {
-      const res = await algolia.search<AlgoliaRepositoryObject>({
+      const res = await algolia.searchForHits<AlgoliaRepositoryObject>({
         requests: [{ indexName: ALGOLIA_INDEX_NAME, query: search, hitsPerPage: 20 }],
       });
-
-      if (!('hits' in res.results[0])) {
-        return [];
-      }
 
       return res.results[0].hits;
     },

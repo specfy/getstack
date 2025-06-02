@@ -45,7 +45,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
         const withPrevious = await savePreviousIfStale(repo, dateWeek);
         if (withPrevious) {
           logger.info('No changes since last fetch');
-          await wait(250);
+          await wait(envs.ANALYZE_WAIT);
           continue;
         }
       } catch (err) {
@@ -58,7 +58,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
       } catch (err) {
         logger.error(err, `Failed to analyze`);
         await updateRepository(repo.id, { errored: 1 });
-        await wait(250);
+        await wait(envs.ANALYZE_WAIT);
         continue;
       }
 
@@ -70,7 +70,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
         await updateRepository(repo.id, { errored: 1 });
       }
 
-      await wait(250);
+      await wait(envs.ANALYZE_WAIT);
     }
 
     logger.info('✅ done');

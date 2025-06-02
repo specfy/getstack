@@ -30,6 +30,7 @@ const schema = z.object({
   ANALYZE_REDO_BEFORE: z.coerce.date(),
   ANALYZE_MIN_STARS: z.coerce.number().default(3000),
   ANALYZE_MAX_SIZE: z.coerce.number().default(950_000),
+  ANALYZE_WAIT: z.coerce.number().default(1000),
 
   // Newsletter
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
