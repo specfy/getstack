@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
+import { getOrCache } from '../../../../../models/cache.js';
 import { getActiveWeek } from '../../../../../models/progress.js';
 import { getRepository } from '../../../../../models/repositories.js';
 import { getTechnologiesByRepo } from '../../../../../models/technologies.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
-import { getOrCache } from '../../../../../utils/cache.js';
 
 import type { APIGetRepository } from '../../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -23,17 +23,19 @@ export const getApiRepository: FastifyPluginCallback = (fastify: FastifyInstance
 
     const params = valParams.data;
 
-    const repo = await getOrCache(['getRepository', params.org, params.name], () =>
-      getRepository(params)
-    );
+    const repo = await getOrCache({
+      keys: ['getRepository', params.org, params.name],
+      fn: () => getRepository(params),
+    });
     if (!repo) {
       return notFound(reply);
     }
 
     const weeks = await getActiveWeek();
-    const techs = await getOrCache(['getTechnologiesByRepo', repo.id, weeks.currentWeek], () =>
-      getTechnologiesByRepo(repo, weeks.currentWeek)
-    );
+    const techs = await getOrCache({
+      keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+      fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+    });
 
     reply.status(200).send({ success: true, data: { repo, techs } });
   });

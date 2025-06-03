@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { getOrCache } from '../../../../models/cache.js';
 import {
   getLicenseCumulatedStars,
   getLicenseVolumePerWeek,
@@ -8,7 +9,6 @@ import {
 import { getLicense } from '../../../../models/licensesInfo.js';
 import { getActiveWeek } from '../../../../models/progress.js';
 import { notFound } from '../../../../utils/apiErrors.js';
-import { getOrCache } from '../../../../utils/cache.js';
 
 import type { APIGetLicense } from '../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -35,17 +35,18 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
     }
 
     const { currentWeek } = await getActiveWeek();
-    const topRepos = await getOrCache(
-      ['getTopRepositoriesForLicense', params.key, currentWeek],
-      () => getTopRepositoriesForLicense({ license: params.key, currentWeek })
-    );
-    const volume = await getOrCache(['getLicenseVolumePerWeek', params.key, currentWeek], () =>
-      getLicenseVolumePerWeek({ license: params.key, currentWeek })
-    );
-    const cumulatedStars = await getOrCache(
-      ['getLicenseCumulatedStars', params.key, currentWeek],
-      () => getLicenseCumulatedStars({ license: params.key, currentWeek })
-    );
+    const topRepos = await getOrCache({
+      keys: ['getTopRepositoriesForLicense', params.key, currentWeek],
+      fn: () => getTopRepositoriesForLicense({ license: params.key, currentWeek }),
+    });
+    const volume = await getOrCache({
+      keys: ['getLicenseVolumePerWeek', params.key, currentWeek],
+      fn: () => getLicenseVolumePerWeek({ license: params.key, currentWeek }),
+    });
+    const cumulatedStars = await getOrCache({
+      keys: ['getLicenseCumulatedStars', params.key, currentWeek],
+      fn: () => getLicenseCumulatedStars({ license: params.key, currentWeek }),
+    });
 
     reply.status(200).send({
       success: true,

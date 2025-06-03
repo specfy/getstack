@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
+import { getOrCache } from '../../../../models/cache.js';
 import { getActiveWeek } from '../../../../models/progress.js';
 import {
   getTechnologyCumulatedStars,
   getTechnologyVolumePerWeek,
   getTopRepositoriesForTechnology,
 } from '../../../../models/technologies.js';
-import { getOrCache } from '../../../../utils/cache.js';
 
 import type { APIGetTechnology } from '../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -29,17 +29,18 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const { currentWeek } = await getActiveWeek();
 
-    const topRepos = await getOrCache(
-      ['getTopRepositoriesForTechnology', params.name, currentWeek],
-      () => getTopRepositoriesForTechnology({ tech: params.name, currentWeek })
-    );
-    const volume = await getOrCache(['getTechnologyVolumePerWeek', params.name, currentWeek], () =>
-      getTechnologyVolumePerWeek({ tech: params.name, currentWeek })
-    );
-    const cumulatedStars = await getOrCache(
-      ['getTechnologyCumulatedStars', params.name, currentWeek],
-      () => getTechnologyCumulatedStars({ tech: params.name, currentWeek })
-    );
+    const topRepos = await getOrCache({
+      keys: ['getTopRepositoriesForTechnology', params.name, currentWeek],
+      fn: () => getTopRepositoriesForTechnology({ tech: params.name, currentWeek }),
+    });
+    const volume = await getOrCache({
+      keys: ['getTechnologyVolumePerWeek', params.name, currentWeek],
+      fn: () => getTechnologyVolumePerWeek({ tech: params.name, currentWeek }),
+    });
+    const cumulatedStars = await getOrCache({
+      keys: ['getTechnologyCumulatedStars', params.name, currentWeek],
+      fn: () => getTechnologyCumulatedStars({ tech: params.name, currentWeek }),
+    });
 
     reply.status(200).send({
       success: true,

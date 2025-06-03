@@ -67,7 +67,7 @@ export async function getRepositoryToAnalyze({
   return await trx
     .selectFrom('repositories')
     .selectAll()
-    .where('last_fetched_at', '<', beforeDate.toISOString().split('T')[0]!)
+    .where('last_fetched_at', '<', beforeDate)
     .where('errored', '=', 0)
     .where('ignored', '=', 0)
     .where('stars', '>=', ANALYZE_MIN_STARS)

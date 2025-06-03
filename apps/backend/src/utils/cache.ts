@@ -17,7 +17,13 @@ export const cache = new LRUCache({
   allowStale: true,
 });
 
-export async function getOrCache<T>(keys: (number | string)[], fn: () => Promise<T>): Promise<T> {
+export async function getOrCacheMemory<T>({
+  keys,
+  fn,
+}: {
+  keys: (number | string)[];
+  fn: () => Promise<T>;
+}): Promise<T> {
   const key = `${keys.join('')}`;
   const cached = cache.get(key);
   if (cached) {

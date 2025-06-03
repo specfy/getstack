@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
+import { getOrCache } from '../../../../../models/cache.js';
 import { getActiveWeek } from '../../../../../models/progress.js';
 import { getTopRelatedTechnology } from '../../../../../models/technologies.js';
-import { getOrCache } from '../../../../../utils/cache.js';
 
 import type { APIGetTopRelatedTechnology } from '../../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
@@ -24,9 +24,10 @@ export const getTechnologyRelated: FastifyPluginCallback = (fastify: FastifyInst
     const params = valParams.data;
 
     const { currentWeek } = await getActiveWeek();
-    const data = await getOrCache(['getTopRelatedTechnology', params.name, currentWeek], () =>
-      getTopRelatedTechnology({ tech: params.name, currentWeek })
-    );
+    const data = await getOrCache({
+      keys: ['getTopRelatedTechnology', params.name, currentWeek],
+      fn: () => getTopRelatedTechnology({ tech: params.name, currentWeek }),
+    });
 
     reply.status(200).send({ success: true, data });
   });

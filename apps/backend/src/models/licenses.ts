@@ -118,7 +118,7 @@ export async function getTopRepositoriesForLicense({
     query: `SELECT
     r.*
 FROM
-    repositories AS r
+    repositories2 AS r
 INNER JOIN
     licenses AS l
 ON
@@ -170,7 +170,7 @@ export async function getLicenseCumulatedStars({
     query: `SELECT
     SUM(stars) as stars
 FROM
-    repositories AS r
+    repositories2 AS r
 INNER JOIN
     licenses AS l
 ON

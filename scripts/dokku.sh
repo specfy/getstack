@@ -19,6 +19,7 @@ dokku config:set --no-restart getstack-api \
   CRON_ANALYZE=true \
   CRON_LIST=true \
   DATABASE_URL= \
+  IS_PROD=true \
   NODE_ENV="production" \
   DOKKU_DOCKERFILE_START_CMD="node --run prod:start"
 

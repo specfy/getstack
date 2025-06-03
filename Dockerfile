@@ -36,7 +36,6 @@ RUN true \
 # Resulting new, minimal image
 FROM node:22.15.0-bookworm-slim AS final
 
-ENV NODE_ENV=production
 
 # - Bash is just to be able to log inside the image and have a decent shell
 # - OpenSSL is here to handle HTTPS + git clone requests correctly
@@ -60,7 +59,12 @@ WORKDIR /app
 # Code
 COPY --from=compilation --chown=node:node /app /app
 
+ENV NODE_ENV=production
+
 RUN npm install sharp
+
+ARG git_hash
+ENV GIT_HASH $git_hash
 
 # Expose the port the backend service runs on
 EXPOSE 3000

@@ -2,7 +2,8 @@ import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
-export type Timestamp = ColumnType<string, Date, Date | string>;
+export type TimestampClickhouse = ColumnType<string, Date, Date | string>;
+export type Timestamp = ColumnType<Date, Date, Date | string>;
 export type CreatedAt = ColumnType<string, Date | undefined, never>;
 export type UpdatedAt = ColumnType<string, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
@@ -110,10 +111,21 @@ export interface LicensesInfoTable {
 }
 export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
 
+// Add cache table types
+export interface CacheTable {
+  key: string;
+  value: string;
+  expires_at: Timestamp;
+}
+export type CacheRow = Selectable<CacheTable>;
+export type CacheInsert = Insertable<CacheTable>;
+export type CacheUpdate = Updateable<CacheTable>;
+
 export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
   repositories: RepositoriesTable;
+  cache: CacheTable;
 }
 
 export type TX = Transaction<Database>;

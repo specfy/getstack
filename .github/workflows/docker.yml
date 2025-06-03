@@ -28,4 +28,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: git_hash=${{ github.sha }}
           tags: h1fra/getstack:latest,h1fra/getstack:${{ github.sha }}

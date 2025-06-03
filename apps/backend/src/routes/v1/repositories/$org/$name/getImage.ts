@@ -2,11 +2,11 @@ import { listIndexed } from '@specfy/stack-analyser/dist/register.js';
 import sharp from 'sharp';
 import { z } from 'zod';
 
+import { getOrCache } from '../../../../../models/cache.js';
 import { getActiveWeek } from '../../../../../models/progress.js';
 import { getRepository } from '../../../../../models/repositories.js';
 import { getTechnologiesByRepo } from '../../../../../models/technologies.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
-import { getOrCache } from '../../../../../utils/cache.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
@@ -89,17 +89,19 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
 
     const params = valParams.data;
 
-    const repo = await getOrCache(['getRepository', params.org, params.name], () =>
-      getRepository(params)
-    );
+    const repo = await getOrCache({
+      keys: ['getRepository', params.org, params.name],
+      fn: () => getRepository(params),
+    });
     if (!repo) {
       return notFound(reply);
     }
 
     const weeks = await getActiveWeek();
-    const tech = await getOrCache(['getTechnologiesByRepo', repo.id, weeks.currentWeek], () =>
-      getTechnologiesByRepo(repo, weeks.currentWeek)
-    );
+    const tech = await getOrCache({
+      keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+      fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+    });
 
     // const stars = formatQuantity(repo.stars);
     // const starsLen = 60 + stars.length * 17;

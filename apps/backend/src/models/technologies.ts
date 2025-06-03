@@ -235,7 +235,7 @@ export async function getTopRepositoriesForTechnology({
     query: `SELECT
     r.*
 FROM
-    repositories AS r
+    repositories2 AS r
 INNER JOIN
     technologies AS t
 ON
@@ -287,7 +287,7 @@ export async function getTechnologyCumulatedStars({
     query: `SELECT
     SUM(stars) as stars
 FROM
-    repositories AS r
+    repositories2 AS r
 INNER JOIN
     technologies AS t
 ON

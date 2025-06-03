@@ -2,17 +2,7 @@ import { pino } from 'pino';
 
 import { envs } from './env.js';
 
-import type { Level, LoggerOptions } from 'pino';
-
-// https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#LogSeverity
-const levelToSeverity: Record<string, string> = {
-  trace: 'DEBUG',
-  debug: 'DEBUG',
-  info: 'INFO',
-  warn: 'WARNING',
-  error: 'ERROR',
-  fatal: 'CRITICAL',
-};
+import type { LoggerOptions } from 'pino';
 
 export const options: LoggerOptions = {
   level: 'info',
@@ -65,21 +55,8 @@ const pretty = {
   },
 };
 
-if (envs.IS_GCP && options.formatters) {
-  options.formatters.level = function level(label) {
-    const pinoLevel = label as Level;
-    const severity = levelToSeverity[label] ?? 'INFO';
-    // `@type` property tells Error Reporting to track even if there is no `stack_trace`
-    // you might want to make this an option the plugin, in our case we do want error reporting for all errors, with or without a stack
-    const typeProp =
-      pinoLevel === 'error' || pinoLevel === 'fatal'
-        ? {
-            '@type':
-              'type.googleapis.com/google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent',
-          }
-        : {};
-    return { severity, ...typeProp };
-  };
+if (envs.IS_PROD && options.formatters) {
+  //
 } else {
   options.transport = pretty;
 }
