@@ -1,7 +1,11 @@
 import { CronJob } from 'cron';
 
 import { getOrInsert, update } from '../models/progress.js';
-import { ANALYZE_MIN_STARS, upsertRepository } from '../models/repositories.js';
+import {
+  ANALYZE_MIN_STARS,
+  updateClickhouseRepository,
+  upsertRepository,
+} from '../models/repositories.js';
 import { algolia } from '../utils/algolia.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
@@ -133,6 +137,11 @@ export async function refreshOne(
     description: repo.description || '',
     forks: repo.forks_count,
     repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),
+  });
+  await updateClickhouseRepository({
+    org,
+    name,
+    stars: repo.stargazers_count,
   });
 
   if (envs.ALGOLIA_INDEX_NAME) {

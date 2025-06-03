@@ -3,6 +3,7 @@ import '@specfy/stack-analyser/dist/autoload.js';
 import { CronJob } from 'cron';
 
 import { analyze, saveAnalysis, savePreviousIfStale } from './analyzer.js';
+import { db } from '../db/client.js';
 import { getOrInsert, update } from '../models/progress.js';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
 import { formatToYearWeek } from '../utils/date.js';
@@ -33,44 +34,51 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
     const beforeDate = new Date(progress.progress);
 
     while (Date.now() < end) {
-      const repo = await getRepositoryToAnalyze({ beforeDate });
-      if (!repo) {
-        await update({ ...progress, done: true });
+      const cont = await db.transaction().execute(async (trx) => {
+        const repo = await getRepositoryToAnalyze({ trx, beforeDate });
+        if (!repo) {
+          await update({ ...progress, done: true });
+          return false;
+        }
+
+        logger.info(`Processing ${repo.url}`);
+
+        try {
+          const withPrevious = await savePreviousIfStale(repo, dateWeek);
+          if (withPrevious) {
+            logger.info('No changes since last fetch');
+            await wait(envs.ANALYZE_WAIT);
+            return true;
+          }
+        } catch (err) {
+          logger.error(err, 'Failed to get previous');
+        }
+
+        let res: Payload;
+        try {
+          res = await analyze(repo, logger);
+        } catch (err) {
+          logger.error(err, `Failed to analyze`);
+          await updateRepository(repo.id, { errored: 1 });
+          await wait(envs.ANALYZE_WAIT);
+          return true;
+        }
+
+        try {
+          await saveAnalysis({ repo, res, dateWeek });
+          logger.info(`Done`);
+        } catch (err) {
+          logger.error(err, `Failed to save`);
+          await updateRepository(repo.id, { errored: 1 });
+        }
+
+        await wait(envs.ANALYZE_WAIT);
+        return true;
+      });
+
+      if (!cont) {
         break;
       }
-
-      logger.info(`Processing ${repo.url}`);
-
-      try {
-        const withPrevious = await savePreviousIfStale(repo, dateWeek);
-        if (withPrevious) {
-          logger.info('No changes since last fetch');
-          await wait(envs.ANALYZE_WAIT);
-          continue;
-        }
-      } catch (err) {
-        logger.error(err, 'Failed to get previous');
-      }
-
-      let res: Payload;
-      try {
-        res = await analyze(repo, logger);
-      } catch (err) {
-        logger.error(err, `Failed to analyze`);
-        await updateRepository(repo.id, { errored: 1 });
-        await wait(envs.ANALYZE_WAIT);
-        continue;
-      }
-
-      try {
-        await saveAnalysis({ repo, res, dateWeek });
-        logger.info(`Done`);
-      } catch (err) {
-        logger.error(err, `Failed to save`);
-        await updateRepository(repo.id, { errored: 1 });
-      }
-
-      await wait(envs.ANALYZE_WAIT);
     }
 
     logger.info('✅ done');

@@ -1,24 +1,26 @@
-import { clickHouse, kyselyClickhouse } from '../db/client.js';
+import { clickHouse, db } from '../db/client.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 
-import type { RepositoryInsert, RepositoryRow, RepositoryUpdate } from '../db/types.js';
+import type {
+  ClickhouseRepositoryInsert,
+  RepositoryInsert,
+  RepositoryRow,
+  RepositoryUpdate,
+  TX,
+} from '../db/types.js';
 
 export const ANALYZE_MIN_STARS = envs.ANALYZE_MIN_STARS;
 
 export async function createRepository(input: RepositoryInsert): Promise<RepositoryRow> {
-  return await kyselyClickhouse
-    .insertInto('repositories')
-    .values(input)
-    .returningAll()
-    .executeTakeFirstOrThrow();
+  return await db.insertInto('repositories').values(input).returningAll().executeTakeFirstOrThrow();
 }
 
 export async function getRepository(repo: {
   org: string;
   name: string;
 }): Promise<RepositoryRow | undefined> {
-  const row = await kyselyClickhouse
+  const row = await db
     .selectFrom('repositories')
     .selectAll()
     .where('org', '=', repo.org)
@@ -29,7 +31,7 @@ export async function getRepository(repo: {
 }
 
 export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {
-  await kyselyClickhouse
+  await db
     .updateTable('repositories')
     .set({
       ...input,
@@ -40,18 +42,14 @@ export async function updateRepository(id: string, input: RepositoryUpdate): Pro
 }
 
 export async function findRepositoryById(id: string): Promise<RepositoryRow | undefined> {
-  return await kyselyClickhouse
-    .selectFrom('repositories')
-    .selectAll()
-    .where('id', '=', id)
-    .executeTakeFirst();
+  return await db.selectFrom('repositories').selectAll().where('id', '=', id).executeTakeFirst();
 }
 
 export async function findRepositoryByOrgAndName(
   org: string,
   name: string
 ): Promise<RepositoryRow | undefined> {
-  return await kyselyClickhouse
+  return await db
     .selectFrom('repositories')
     .selectAll()
     .where('org', '=', org)
@@ -59,42 +57,32 @@ export async function findRepositoryByOrgAndName(
     .executeTakeFirst();
 }
 
-export async function searchRepository(search: string): Promise<RepositoryRow[]> {
-  const res = await clickHouse.query({
-    query: `SELECT * FROM repositories
-    WHERE (org ILIKE {search: String} OR name ILIKE {search: String})
-      ORDER BY stars DESC
-      LIMIT 10`,
-    format: 'JSON',
-    query_params: { search: `%${search}%` },
-  });
-  const json = await res.json<RepositoryRow>();
-  return json.data;
-}
-
 export async function getRepositoryToAnalyze({
+  trx,
   beforeDate,
 }: {
+  trx: TX;
   beforeDate: Date;
 }): Promise<RepositoryRow | undefined> {
-  const res = await clickHouse.query({
-    query: `SELECT * FROM repositories
-    WHERE last_fetched_at < '${beforeDate.toISOString().split('T')[0]}'
-      AND errored = 0
-      AND ignored = 0
-      AND stars >= ${ANALYZE_MIN_STARS}
-      LIMIT 1`,
-    format: 'JSON',
-  });
-  const json = await res.json();
-  return json.data[0] as unknown as RepositoryRow | undefined;
+  return await trx
+    .selectFrom('repositories')
+    .selectAll()
+    .where('last_fetched_at', '<', beforeDate.toISOString().split('T')[0]!)
+    .where('errored', '=', 0)
+    .where('ignored', '=', 0)
+    .where('stars', '>=', ANALYZE_MIN_STARS)
+    .orderBy('stars', 'desc')
+    .limit(1)
+    .forUpdate()
+    .skipLocked()
+    .executeTakeFirst();
 }
 
 export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
   const row = await getRepository(repo);
 
   if (row) {
-    await kyselyClickhouse
+    await db
       .updateTable('repositories')
       .set({
         avatar_url: repo.avatar_url,
@@ -116,10 +104,24 @@ export async function upsertRepository(repo: RepositoryInsert): Promise<void> {
     return;
   }
 
-  await kyselyClickhouse.insertInto('repositories').values(repo).execute();
+  await db.insertInto('repositories').values(repo).execute();
 }
 
 export async function listAllRepositories(): Promise<RepositoryRow[]> {
-  const res = await kyselyClickhouse.selectFrom('repositories').selectAll().execute();
+  const res = await db.selectFrom('repositories').selectAll().execute();
   return res;
+}
+
+export async function updateClickhouseRepository(repo: ClickhouseRepositoryInsert): Promise<void> {
+  await clickHouse.insert({
+    table: 'repositories2',
+    values: [
+      {
+        org: repo.org,
+        name: repo.name,
+        stars: repo.stars,
+      },
+    ],
+    format: 'JSONEachRow',
+  });
 }

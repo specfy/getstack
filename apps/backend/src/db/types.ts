@@ -12,34 +12,12 @@ export interface RepositoriesClickhouse {
   org: string;
   name: string;
   stars: number;
-  updated_at: Timestamp;
-}
-export interface RepositoriesTable {
-  id: ColumnType<string, never, never>;
-  github_id: string;
-  org: string;
-  name: string;
-  branch: string;
-  stars: number;
-  url: string;
-  ignored: number;
-  ignored_reason: string;
-  errored: number;
-  created_at: CreatedAt;
-  updated_at: UpdatedAt;
-  last_fetched_at: Timestamp;
-  size: number;
-  last_analyzed_at: Timestamp;
-  avatar_url: string;
-  homepage_url: string;
-  description: string;
-  forks: number;
-  repo_created_at: Timestamp;
+  updated_at: CreatedAt;
 }
 
-export type RepositoryRow = Selectable<RepositoriesTable>;
-export type RepositoryInsert = Insertable<RepositoriesTable>;
-export type RepositoryUpdate = Updateable<RepositoriesTable>;
+export type ClickhouseRepositoryRow = Selectable<RepositoriesClickhouse>;
+export type ClickhouseRepositoryInsert = Insertable<RepositoriesClickhouse>;
+export type ClickhouseRepositoryUpdate = Updateable<RepositoriesClickhouse>;
 
 export interface TechnologiesTable {
   org: string;
@@ -79,7 +57,7 @@ export interface LicensesWeeklyTable {
 export type LicensesWeeklyRow = Selectable<LicensesWeeklyTable>;
 
 export interface Clickhouse {
-  repositories: RepositoriesTable;
+  // repositories: RepositoriesTable;
   repositories2: RepositoriesClickhouse;
   technologies: TechnologiesTable;
   technologies_weekly: TechnologiesWeeklyTable;
@@ -89,6 +67,33 @@ export interface Clickhouse {
 
 // --------
 // --- Postgres
+
+export interface RepositoriesTable {
+  id: ColumnType<string, never, never>;
+  github_id: string;
+  org: string;
+  name: string;
+  branch: string;
+  stars: number;
+  url: string;
+  ignored: number;
+  ignored_reason: string;
+  errored: number;
+  created_at: CreatedAt;
+  updated_at: UpdatedAt;
+  last_fetched_at: Timestamp;
+  size: number;
+  last_analyzed_at: Timestamp;
+  avatar_url: string;
+  homepage_url: string;
+  description: string;
+  forks: number;
+  repo_created_at: Timestamp;
+}
+
+export type RepositoryRow = Selectable<RepositoriesTable>;
+export type RepositoryInsert = Insertable<RepositoriesTable>;
+export type RepositoryUpdate = Updateable<RepositoriesTable>;
 
 export interface ProgressTable {
   date_week: string;
