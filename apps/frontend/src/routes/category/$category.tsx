@@ -359,7 +359,7 @@ export const Route = createFileRoute('/category/$category')({
       throw notFound();
     }
 
-    const data = await context.queryClient.ensureQueryData(optionsGetCategory({ name: cat.name }));
+    const data = await context.queryClient.ensureQueryData(optionsGetCategory({ name: category }));
     return data;
   },
   head: (ctx) => {
