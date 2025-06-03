@@ -3,12 +3,16 @@ import { z } from 'zod';
 import { getOrCache } from '../../../../models/cache.js';
 import { getActiveWeek } from '../../../../models/progress.js';
 import { getTop10TechnologiesByCategoryForNWeeks } from '../../../../models/technologies.js';
+import { categories } from '../../../../utils/stacks.js';
 
 import type { APIGetCategory } from '../../../../types/endpoint.js';
+import type { TechType } from '@specfy/stack-analyser';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 const schemaParams = z.object({
-  name: z.string().max(256),
+  name: z.string().refine((val) => categories.includes(val as TechType), {
+    message: 'Invalid category',
+  }),
 });
 
 export const getCategory: FastifyPluginCallback = (fastify: FastifyInstance) => {

@@ -1,9 +1,8 @@
 import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 
 import { defaultLogger } from '../utils/logger.js';
+import { categories } from '../utils/stacks.js';
 import { wait } from '../utils/wait.js';
-
-import type { TechType } from '@specfy/stack-analyser';
 
 const logger = defaultLogger.child({
   script: 'cache',
@@ -11,49 +10,10 @@ const logger = defaultLogger.child({
 
 const API_URL = 'http://localhost:3000/1';
 
-const ALL_TECH_TYPES: Record<TechType, null> = {
-  ai: null,
-  analytics: null,
-  api: null,
-  app: null,
-  auth: null,
-  automation: null,
-  ci: null,
-  cloud: null,
-  cms: null,
-  collaboration: null,
-  communication: null,
-  crm: null,
-  db: null,
-  etl: null,
-  framework: null,
-  hosting: null,
-  iac: null,
-  language: null,
-  linter: null,
-  maps: null,
-  messaging: null,
-  monitoring: null,
-  network: null,
-  notification: null,
-  orm: null,
-  package_manager: null,
-  payment: null,
-  queue: null,
-  runtime: null,
-  saas: null,
-  security: null,
-  storage: null,
-  test: null,
-  tool: null,
-  ui_framework: null,
-  ui: null,
-};
-
 // ---
 // Categories
 // ---
-for (const category of Object.keys(ALL_TECH_TYPES) as TechType[]) {
+for (const category of categories) {
   const url = `${API_URL}/categories/${encodeURIComponent(category)}`;
   try {
     logger.info(`Category: ${category}`);

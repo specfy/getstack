@@ -1,6 +1,6 @@
 import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 
-import type { AllowedKeys, TechItem } from '@specfy/stack-analyser';
+import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
 
 export interface ExtendedTechItem {
   website?: string;
@@ -3345,3 +3345,43 @@ const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
 });
 
 export { extendedListTech };
+
+const categoriesRaw: Record<TechType, null> = {
+  ai: null,
+  analytics: null,
+  api: null,
+  app: null,
+  auth: null,
+  automation: null,
+  ci: null,
+  cloud: null,
+  cms: null,
+  collaboration: null,
+  communication: null,
+  crm: null,
+  db: null,
+  etl: null,
+  framework: null,
+  hosting: null,
+  iac: null,
+  language: null,
+  linter: null,
+  maps: null,
+  messaging: null,
+  monitoring: null,
+  network: null,
+  notification: null,
+  orm: null,
+  package_manager: null,
+  payment: null,
+  queue: null,
+  runtime: null,
+  saas: null,
+  security: null,
+  storage: null,
+  test: null,
+  tool: null,
+  ui_framework: null,
+  ui: null,
+};
+export const categories = Object.keys(categoriesRaw) as TechType[];
