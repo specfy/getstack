@@ -26,3 +26,4 @@ Dockerfile
 .output
 build
 dist
+clickhouse_backup/

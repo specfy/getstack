@@ -7,6 +7,13 @@ export type CreatedAt = ColumnType<string, Date | undefined, never>;
 export type UpdatedAt = ColumnType<string, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
 
+export interface RepositoriesClickhouse {
+  id: ColumnType<string, never, never>;
+  org: string;
+  name: string;
+  stars: number;
+  updated_at: Timestamp;
+}
 export interface RepositoriesTable {
   id: ColumnType<string, never, never>;
   github_id: string;
@@ -73,6 +80,7 @@ export type LicensesWeeklyRow = Selectable<LicensesWeeklyTable>;
 
 export interface Clickhouse {
   repositories: RepositoriesTable;
+  repositories2: RepositoriesClickhouse;
   technologies: TechnologiesTable;
   technologies_weekly: TechnologiesWeeklyTable;
   licenses: LicensesTable;
@@ -100,6 +108,7 @@ export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
 export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
+  repositories: RepositoriesTable;
 }
 
 export type TX = Transaction<Database>;

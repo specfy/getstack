@@ -39,3 +39,5 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 .vinxi/
 .output/
+
+clickhouse_backup/
