@@ -4,7 +4,8 @@
   "type": "module",
   "license": "GPL-3.0-only",
   "workspaces": [
-    "apps/backend"
+    "apps/backend",
+    "apps/frontend"
   ],
   "scripts": {
     "dev": "npm run dev:front && npm run dev:back",
