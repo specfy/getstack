@@ -19,9 +19,9 @@ ENV VITE_ALGOLIA_API_KEY=226ec03e3294262ab9ea797f2275d8fb
 ENV VITE_ALGOLIA_INDEX_NAME=getstack
 
 # Install dependencies
-RUN npm install \
+RUN npm ci \
   && cd apps/frontend \
-  && npm i
+  && npm ci
 
 # Copy the entire repository to the working directory
 COPY . ./

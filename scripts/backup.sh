@@ -2,7 +2,7 @@
 
 if [ -z "$1" ] || [ -z "$2" ]; then
     echo "Usage: $0 <CLICKHOUSE_HOST> <CLICKHOUSE_PASSWORD>"
-    echo "Example: $0 ldp3g2mxso.us-east1.gcp.clickhouse.cloud mypassword"
+    echo "Example: $0 aaa.us-east1.gcp.clickhouse.cloud mypassword"
     exit 1
 fi
 
