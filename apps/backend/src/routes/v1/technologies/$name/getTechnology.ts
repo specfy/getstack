@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { getOrCache } from '../../../../models/cache.js';
 import { getActiveWeek } from '../../../../models/progress.js';
+import { getRepositories } from '../../../../models/repositories.js';
 import {
   getTechnologyCumulatedStars,
   getTechnologyVolumePerWeek,
@@ -42,16 +43,20 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
       fn: () => getTechnologyCumulatedStars({ tech: params.name, currentWeek }),
     });
 
+    const repos = await getRepositories({
+      ids: topRepos.map((row) => row.id),
+    });
+
     reply.status(200).send({
       success: true,
       data: {
         cumulatedStars,
-        topRepos: topRepos.map((row) => {
+        topRepos: repos.map((row) => {
           return {
+            id: row.id,
             name: row.name,
             org: row.org,
             stars: row.stars,
-            url: row.url,
             avatar_url: row.avatar_url,
           };
         }),

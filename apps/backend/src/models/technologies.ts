@@ -3,7 +3,12 @@ import { addWeeks, startOfISOWeek } from 'date-fns';
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';
 
-import type { RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
+import type {
+  ClickhouseRepositoryRow,
+  RepositoryRow,
+  TechnologyInsert,
+  TechnologyRow,
+} from '../db/types.js';
 import type {
   RelatedTechnology,
   TechnologyByCategoryByWeekWithTrend,
@@ -230,12 +235,12 @@ export async function getTopRepositoriesForTechnology({
 }: {
   tech: string;
   currentWeek: string;
-}): Promise<RepositoryRow[]> {
+}): Promise<ClickhouseRepositoryRow[]> {
   const res = await clickHouse.query({
     query: `SELECT
     r.*
 FROM
-    repositories2 AS r
+    repositories2 AS r FINAL
 INNER JOIN
     technologies AS t
 ON
@@ -248,7 +253,7 @@ LIMIT 30;`,
     query_params: { tech, currentWeek },
   });
 
-  const json = await res.json<RepositoryRow>();
+  const json = await res.json<ClickhouseRepositoryRow>();
 
   return json.data;
 }
@@ -287,7 +292,7 @@ export async function getTechnologyCumulatedStars({
     query: `SELECT
     SUM(stars) as stars
 FROM
-    repositories2 AS r
+    repositories2 AS r FINAL
 INNER JOIN
     technologies AS t
 ON

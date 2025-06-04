@@ -51,7 +51,7 @@ export type APIGetCategoryLeaderboard = Endpoint<{
   };
 }>;
 
-export type RepositoryTop = Pick<RepositoryRow, 'avatar_url' | 'name' | 'org' | 'stars' | 'url'>;
+export type RepositoryTop = Pick<RepositoryRow, 'avatar_url' | 'id' | 'name' | 'org' | 'stars'>;
 export type TechnologyWeeklyVolume = Pick<TechnologiesWeeklyTable, 'date_week' | 'hits'>;
 export type APIGetTechnology = Endpoint<{
   Path: '/1/technologies/:name';

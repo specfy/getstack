@@ -47,7 +47,7 @@ export const TopRepositories: React.FC<{
         {top10.map((repo) => {
           return (
             <Link
-              key={repo.url}
+              key={repo.id}
               className="py-4 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
@@ -83,7 +83,7 @@ export const TopRepositories: React.FC<{
                 className="px-2 py-0 h-6 font-normal cursor-pointer text-xs text-gray-600 hover:text-gray-900"
                 asChild
               >
-                <Link key={repo.url} to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
+                <Link key={repo.id} to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
                   {repo.org}/{repo.name}
                 </Link>
               </Button>

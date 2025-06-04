@@ -1,4 +1,5 @@
 import { db } from '../db/client.js';
+import { envs } from '../utils/env.js';
 
 import type { CacheRow } from '../db/types.js';
 
@@ -35,6 +36,10 @@ export async function getOrCache<T>({
   fn: () => Promise<T>;
   ttl?: number;
 }): Promise<T> {
+  if (!envs.CACHE) {
+    return fn();
+  }
+
   const key = `${keys.join(';')}`;
   const cache = await getCache(key);
   if (cache && cache.expires_at.getTime() > Date.now()) {

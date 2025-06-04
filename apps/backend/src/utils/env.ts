@@ -12,6 +12,7 @@ const schema = z.object({
   NODE_ENV: z.enum(['production', 'development', 'test']).default('development'),
   GIT_HASH: z.string().optional(),
   IS_PROD: bool,
+  CACHE: bool,
 
   // DB
   DATABASE_URL: z.string().url(),

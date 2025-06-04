@@ -37,4 +37,8 @@ export async function up(db: Kysely<Database>): Promise<void> {
   await sql`
     CREATE INDEX "idx_repositories_analyze" ON "repositories" USING BTREE ("last_fetched_at" ASC NULLS FIRST,"stars") WHERE ignored = 0 AND errored = 0;
   `.execute(db);
+
+  await sql`
+    CREATE INDEX "idx_repositories_githubid" ON "repositories" USING BTREE ("github_id");
+  `.execute(db);
 }

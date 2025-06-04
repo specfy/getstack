@@ -8,6 +8,7 @@ import {
 } from '../../../../models/licenses.js';
 import { getLicense } from '../../../../models/licensesInfo.js';
 import { getActiveWeek } from '../../../../models/progress.js';
+import { getRepositories } from '../../../../models/repositories.js';
 import { notFound } from '../../../../utils/apiErrors.js';
 
 import type { APIGetLicense } from '../../../../types/endpoint.js';
@@ -48,9 +49,26 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
       fn: () => getLicenseCumulatedStars({ license: params.key, currentWeek }),
     });
 
+    const repos = await getRepositories({
+      ids: topRepos.map((row) => row.id),
+    });
+
     reply.status(200).send({
       success: true,
-      data: { license, topRepos, volume, cumulatedStars },
+      data: {
+        license,
+        topRepos: repos.map((row) => {
+          return {
+            id: row.id,
+            name: row.name,
+            org: row.org,
+            stars: row.stars,
+            avatar_url: row.avatar_url,
+          };
+        }),
+        volume,
+        cumulatedStars,
+      },
     });
   });
 };

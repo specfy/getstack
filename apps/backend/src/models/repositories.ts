@@ -30,6 +30,10 @@ export async function getRepository(repo: {
   return row;
 }
 
+export async function getRepositories({ ids }: { ids: string[] }): Promise<RepositoryRow[]> {
+  return await db.selectFrom('repositories').selectAll().where('github_id', 'in', ids).execute();
+}
+
 export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {
   await db
     .updateTable('repositories')
