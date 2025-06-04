@@ -23,19 +23,19 @@ export const getApiRepository: FastifyPluginCallback = (fastify: FastifyInstance
 
     const params = valParams.data;
 
-    const repo = await getOrCache({
-      keys: ['getRepository', params.org, params.name],
-      fn: () => getRepository(params),
-    });
+    const repo = await getRepository(params);
     if (!repo) {
       return notFound(reply);
     }
 
     const weeks = await getActiveWeek();
-    const techs = await getOrCache({
-      keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
-      fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
-    });
+    const techs =
+      repo.ignored === 0
+        ? await getOrCache({
+            keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+            fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+          })
+        : [];
 
     reply.status(200).send({ success: true, data: { repo, techs } });
   });

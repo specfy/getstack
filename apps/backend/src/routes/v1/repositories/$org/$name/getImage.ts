@@ -89,19 +89,19 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
 
     const params = valParams.data;
 
-    const repo = await getOrCache({
-      keys: ['getRepository', params.org, params.name],
-      fn: () => getRepository(params),
-    });
+    const repo = await getRepository(params);
     if (!repo) {
       return notFound(reply);
     }
 
     const weeks = await getActiveWeek();
-    const tech = await getOrCache({
-      keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
-      fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
-    });
+    const tech =
+      repo.ignored === 0
+        ? await getOrCache({
+            keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+            fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+          })
+        : [];
 
     // const stars = formatQuantity(repo.stars);
     // const starsLen = 60 + stars.length * 17;

@@ -79,8 +79,10 @@ if (hasTechs) {
 // ---
 if (hasRepos) {
   const repos = await listAllRepositories();
+  const sorted = repos.toSorted((a, b) => b.stars - a.stars).filter((r) => r.ignored === 0);
+
   let repoCount = 0;
-  for (const repo of repos) {
+  for (const repo of sorted) {
     const url = `${API_URL}/repositories/${encodeURIComponent(repo.org)}/${encodeURIComponent(repo.name)}`;
     try {
       logger.info(`Repo: ${repo.org}/${repo.name}`);
