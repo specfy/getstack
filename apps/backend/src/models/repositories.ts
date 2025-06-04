@@ -31,7 +31,12 @@ export async function getRepository(repo: {
 }
 
 export async function getRepositories({ ids }: { ids: string[] }): Promise<RepositoryRow[]> {
-  return await db.selectFrom('repositories').selectAll().where('github_id', 'in', ids).execute();
+  return await db
+    .selectFrom('repositories')
+    .selectAll()
+    .where('github_id', 'in', ids)
+    .orderBy('stars', 'desc')
+    .execute();
 }
 
 export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {

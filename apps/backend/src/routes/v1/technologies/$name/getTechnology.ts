@@ -1,3 +1,4 @@
+import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 import { z } from 'zod';
 
 import { getOrCache } from '../../../../models/cache.js';
@@ -10,13 +11,13 @@ import {
 } from '../../../../models/technologies.js';
 
 import type { APIGetTechnology } from '../../../../types/endpoint.js';
+import type { AllowedKeys } from '@specfy/stack-analyser';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 const schemaParams = z.object({
-  name: z
-    .string()
-    .regex(/[a-zA-Z0-9_.]+/)
-    .max(256),
+  name: z.string().refine((val) => listIndexed[val as AllowedKeys], {
+    message: 'Invalid category',
+  }),
 });
 
 export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) => {
@@ -43,9 +44,12 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
       fn: () => getTechnologyCumulatedStars({ tech: params.name, currentWeek }),
     });
 
-    const repos = await getRepositories({
-      ids: topRepos.map((row) => row.id),
-    });
+    const repos =
+      topRepos.length > 0
+        ? await getRepositories({
+            ids: topRepos.map((row) => row.id),
+          })
+        : [];
 
     reply.status(200).send({
       success: true,
