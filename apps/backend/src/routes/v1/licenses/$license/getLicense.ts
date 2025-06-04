@@ -38,7 +38,14 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
     const { currentWeek } = await getActiveWeek();
     const topRepos = await getOrCache({
       keys: ['getTopRepositoriesForLicense', params.key, currentWeek],
-      fn: () => getTopRepositoriesForLicense({ license: params.key, currentWeek }),
+      fn: async () => {
+        const tmp = await getTopRepositoriesForLicense({ license: params.key, currentWeek });
+        return tmp.length > 0
+          ? await getRepositories({
+              ids: tmp.map((row) => row.id),
+            })
+          : [];
+      },
     });
     const volume = await getOrCache({
       keys: ['getLicenseVolumePerWeek', params.key, currentWeek],
@@ -49,15 +56,11 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
       fn: () => getLicenseCumulatedStars({ license: params.key, currentWeek }),
     });
 
-    const repos = await getRepositories({
-      ids: topRepos.map((row) => row.id),
-    });
-
     reply.status(200).send({
       success: true,
       data: {
         license,
-        topRepos: repos.map((row) => {
+        topRepos: topRepos.map((row) => {
           return {
             id: row.id,
             name: row.name,
