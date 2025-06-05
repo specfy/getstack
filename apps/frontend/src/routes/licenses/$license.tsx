@@ -1,10 +1,13 @@
 import { ResponsiveLine } from '@nivo/line';
 import {
+  IconCheck,
+  IconCircle,
   IconDots,
   IconLicense,
   IconStar,
   IconTrendingDown,
   IconTrendingUp,
+  IconX,
 } from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
@@ -139,18 +142,14 @@ const License: React.FC = () => {
     <div>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
+          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
             <IconLicense size={30} />
           </div>
           <div className="flex flex-col gap-1">
-            <Link
-              to="/licenses/$license"
-              params={{ license }}
-              className="text-xs text-gray-400 leading-3"
-            >
+            <Link to="/licenses" className="text-sm text-gray-400 leading-5">
               License
             </Link>
-            <div className="text-2xl font-semibold leading-6 font-serif">{license}</div>
+            <div className="text-3xl font-semibold leading-6 font-serif">{lic.full_name}</div>
           </div>
         </h2>
         {position > 0 && (
@@ -163,9 +162,61 @@ const License: React.FC = () => {
           </div>
         )}
       </header>
-      <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
-        {lic.description}
+      <div className="flex gap-10 mt-4">
+        <div className="w-1/2 text-pretty text-gray-600 md:text-lg font-serif font-light">
+          {lic.description}
+        </div>
+        <div>
+          <div className="flex gap-10">
+            {lic.permissions.length > 0 && (
+              <div className="text-sm text-gray-500">
+                <h3 className="text-md font-semibold mb-1">Permissions</h3>
+                {lic.permissions.map((permission, i) => {
+                  return (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <div className="size-4 text-green-500">
+                        <IconCheck size={16} />
+                      </div>
+                      {permission}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {lic.limitations.length > 0 && (
+              <div className="text-sm text-gray-500">
+                <h3 className="text-md font-semibold mb-1">Limitations</h3>
+                {lic.limitations.map((limitation, i) => {
+                  return (
+                    <div key={i} className="flex items-center gap-2 text-sm ">
+                      <div className="size-4 text-red-500">
+                        <IconX size={16} />
+                      </div>
+                      {limitation}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {lic.conditions.length > 0 && (
+              <div className="text-sm text-gray-500">
+                <h3 className="text-md font-semibold mb-1">Conditions</h3>
+                {lic.conditions.map((condition, i) => {
+                  return (
+                    <div key={i} className="flex items-center gap-2 text-sm ">
+                      <div className="size-4 text-yellow-500">
+                        <IconCircle size={16} />
+                      </div>
+                      {condition}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
+
       {isLoadingLeaderboard && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
           <Skeleton className="h-20 w-full " />
@@ -256,11 +307,6 @@ const License: React.FC = () => {
         </div>
       )}
 
-      {position > 0 && (
-        <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
-          Number of open-source repositories in GitHub using this license
-        </div>
-      )}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories

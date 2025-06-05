@@ -123,7 +123,8 @@ const Licenses: React.FC = () => {
           </div>
         </h2>
         <h3 className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
-          Blabla
+          Discover the most popular open source licenses used across GitHub repositories. This
+          ranking shows which licenses are trending and how their adoption evolves over time.
         </h3>
       </header>
 

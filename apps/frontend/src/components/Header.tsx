@@ -48,7 +48,10 @@ export const Header: React.FC = () => {
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Button variant={'ghost'} size="icon" className="justify-start" asChild>
-                <a href="https://github.com/specfy/stack-analyser?ref=getstack.dev" target="_blank">
+                <a
+                  href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
+                  target="_blank"
+                >
                   <img src={`/favicons/github.webp`} className="w-5 h-5" />
                 </a>
               </Button>

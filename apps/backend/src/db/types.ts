@@ -108,6 +108,10 @@ export interface LicensesInfoTable {
   id: number;
   key: string;
   description: string;
+  full_name: string;
+  permissions: string[];
+  conditions: string[];
+  limitations: string[];
 }
 export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
 

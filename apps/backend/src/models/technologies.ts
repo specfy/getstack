@@ -238,7 +238,7 @@ export async function getTopRepositoriesForTechnology({
 }): Promise<ClickhouseRepositoryRow[]> {
   const res = await clickHouse.query({
     query: `SELECT
-    r.*
+    r.id
 FROM
     repositories2 AS r FINAL
 INNER JOIN

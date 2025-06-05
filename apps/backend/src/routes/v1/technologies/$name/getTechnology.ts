@@ -33,14 +33,7 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const topRepos = await getOrCache({
       keys: ['getTopRepositoriesForTechnology', params.name, currentWeek],
-      fn: async () => {
-        const tmp = await getTopRepositoriesForTechnology({ tech: params.name, currentWeek });
-        return tmp.length > 0
-          ? await getRepositories({
-              ids: tmp.map((row) => row.id),
-            })
-          : [];
-      },
+      fn: async () => await getTopRepositoriesForTechnology({ tech: params.name, currentWeek }),
     });
     const volume = await getOrCache({
       keys: ['getTechnologyVolumePerWeek', params.name, currentWeek],
@@ -51,13 +44,17 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
       fn: () => getTechnologyCumulatedStars({ tech: params.name, currentWeek }),
     });
 
-    // TODO: cache this
-
+    const repos =
+      topRepos.length > 0
+        ? await getRepositories({
+            ids: topRepos.map((row) => row.id),
+          })
+        : [];
     reply.status(200).send({
       success: true,
       data: {
         cumulatedStars,
-        topRepos: topRepos.map((row) => {
+        topRepos: repos.map((row) => {
           return {
             id: row.id,
             name: row.name,

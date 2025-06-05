@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
             <PopoverContent className="w-70 flex flex-col gap-4" align="start">
               <Button variant={'outline'} className="justify-start" asChild>
                 <a
-                  href="https://github.com/specfy/stack-analyser?ref=getstack.dev"
+                  href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
               </Button>
               <Button variant={'outline'} className="justify-start" asChild>
                 <a
-                  href="https://github.com/specfy/getstack?ref=getstack.dev"
+                  href="https://github.com/specfy/getstack?utm_source=getstack.dev"
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
           Analyze my repo
         </Link>
         <a
-          href="https://github.com/specfy/stack-analyser?ref=getstack.dev"
+          href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
           target="_blank"
           className="text-gray-700 transition-colors hover:text-gray-950"
         >

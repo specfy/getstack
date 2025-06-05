@@ -33,7 +33,7 @@ export async function getTopLicensesOverTime({
             date_week,
             license,
             sum(hits) AS total_hits,
-            row_number() OVER (PARTITION BY date_week, license ORDER BY sum(hits) DESC) AS position
+            row_number() OVER (PARTITION BY date_week ORDER BY sum(hits) DESC) AS position
         FROM licenses_weekly_mv
         WHERE date_week <= {currentWeek: String}
               AND date_week >= {afterWeek: String}
@@ -121,7 +121,7 @@ export async function getTopRepositoriesForLicense({
 }): Promise<ClickhouseRepositoryRow[]> {
   const res = await clickHouse.query({
     query: `SELECT
-    r.*
+    r.id
 FROM
     repositories2 AS r FINAL
 INNER JOIN

@@ -268,7 +268,7 @@ const Tech: React.FC = () => {
 
       {position > 0 && (
         <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
-          Number of open-source repositories in GitHub using this technology
+          Repositories using this technology over time
         </div>
       )}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
@@ -286,13 +286,13 @@ const Tech: React.FC = () => {
         <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
           <div className="grid gap-2 grid-cols-2 md:gap-4">
             {tech.github && (
-              <a href={`https://github.com/${tech.github}?ref=getstack.dev`} target="_blank">
+              <a href={`https://github.com/${tech.github}?utm_source=getstack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
                   <IconBrandGithub stroke={1} /> GitHub
                 </Button>
               </a>
             )}
-            <a href={`${tech.website}?ref=getstack.dev`} target="_blank">
+            <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
               <Button variant="outline" className="cursor-pointer w-full">
                 <IconWorld stroke={1} /> Website
               </Button>

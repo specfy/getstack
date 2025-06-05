@@ -142,14 +142,14 @@ const Repo: React.FC = () => {
         </div>
         <div className="md:w-2/6">
           <div className="flex gap-4 mb-4">
-            <a href={`${repo.url}?ref=getstack.dev`} target="_blank" className="grow w-full">
+            <a href={`${repo.url}?utm_source=getstack.dev`} target="_blank" className="grow w-full">
               <Button variant="outline" className="cursor-pointer w-full">
                 <IconBrandGithub stroke={1} /> GitHub
               </Button>
             </a>
             {repo.homepage_url && (
               <a
-                href={`${repo.homepage_url}?ref=getstack.dev`}
+                href={`${repo.homepage_url}?utm_source=getstack.dev`}
                 target="_blank"
                 className="grow w-full"
               >
