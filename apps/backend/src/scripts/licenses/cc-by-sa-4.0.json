@@ -1,0 +1,22 @@
+{
+    "fullName": "Creative Commons Share Alike 4.0",
+    "description": "A copyleft license that allows distribution, remixing, adapting, and building upon the material but requires derivative works to be licensed under identical terms and proper attribution to be given.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Attribution",
+        "Same license"
+    ]
+}

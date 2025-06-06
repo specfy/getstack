@@ -1,0 +1,18 @@
+{
+    "fullName": "CeCILL-B",
+    "description": "A permissive license created in France that is compatible with international copyright law. It allows unlimited freedom with the software while requiring preservation of copyright and license notices.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

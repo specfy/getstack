@@ -1,0 +1,19 @@
+{
+    "fullName": "Xdebug License v1.03",
+    "description": "A permissive license used by the Xdebug PHP debugging tool. It allows unlimited freedom with the software while requiring preservation of copyright notices and restricts use of the Xdebug name.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "No Xdebug name"
+    ]
+}

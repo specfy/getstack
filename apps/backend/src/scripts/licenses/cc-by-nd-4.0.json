@@ -1,0 +1,20 @@
+{
+    "fullName": "Creative Commons No Derivatives 4.0",
+    "description": "A license that allows distribution of the material in any medium or format but prohibits creation of derivative works. Requires attribution to the creator but preserves the original work unchanged.",
+    "permissions": [
+        "Commercial use",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark",
+        "No derivatives"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Attribution"
+    ]
+}

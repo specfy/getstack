@@ -1,0 +1,18 @@
+{
+    "fullName": "Python License 2.0",
+    "description": "A permissive license used for Python software that allows unlimited freedom with the software. It requires preservation of copyright notices and includes specific terms for Python derivatives.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

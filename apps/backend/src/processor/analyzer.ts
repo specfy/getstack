@@ -16,7 +16,14 @@ import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
 
-import type { LicenseRow, RepositoryRow, TechnologyInsert, TechnologyRow } from '../db/types.js';
+import type {
+  LicenseInsert,
+  LicenseRow,
+  RepositoryRow,
+  TechnologyInsert,
+  TechnologyRow,
+} from '../db/types.js';
+import type { AllowedLicensesLowercase } from '../types/stack.js';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';
 
@@ -138,11 +145,19 @@ export async function saveAnalysis({
   }
 
   if (res.licenses.size > 0) {
-    await createLicenses(
-      [...res.licenses.values()].map((license) => {
-        return { date_week: dateWeek, org: repo.org, name: repo.name, license };
-      })
-    );
+    const licenses: LicenseInsert[] = [];
+    for (const license of res.licenses.values()) {
+      if (license.startsWith('LicenseRef-')) {
+        continue;
+      }
+      licenses.push({
+        date_week: dateWeek,
+        org: repo.org,
+        name: repo.name,
+        license: license.toLocaleLowerCase() as AllowedLicensesLowercase,
+      });
+    }
+    await createLicenses(licenses);
   }
 
   await updateRepository(repo.id, {

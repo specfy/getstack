@@ -1,0 +1,18 @@
+{
+    "fullName": "PostgreSQL License",
+    "description": "A permissive license similar to the MIT License but with slightly different wording. It allows unlimited freedom with the software as long as copyright and license notices are preserved.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "fullName": "zlib License",
+    "description": "A short permissive license that is compatible with GPL. It allows modification and redistribution but requires that altered source versions be plainly marked as such and not misrepresented as the original software.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Source changes"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "fullName": "ISC License",
+    "description": "A permissive license that is functionally equivalent to the MIT License but with simpler language. It allows unlimited freedom with the software as long as copyright and license notices are preserved.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

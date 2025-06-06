@@ -1,0 +1,20 @@
+{
+    "fullName": "Elastic License 2.0",
+    "description": "A source-available license that allows most uses including modification and redistribution but prohibits providing the software as a service to third parties and circumventing license key functionality.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No service",
+        "No reverse engineering"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "fullName": "BSD Zero Clause License",
+    "description": "A permissive license that is effectively equivalent to public domain. It allows unlimited freedom without any conditions, including no requirement to preserve copyright notices or license text.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": []
+}

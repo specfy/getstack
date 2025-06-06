@@ -1,0 +1,18 @@
+{
+    "fullName": "Sun Industry Standards Source License v1.1",
+    "description": "A license used by Sun Microsystems for industry standards implementations. It allows use and modification for implementing the standard but restricts certain commercial uses.",
+    "permissions": [
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Standards compliance"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "fullName": "FSF Unlimited License",
+    "description": "A permissive license used by the Free Software Foundation that allows unlimited freedom with the software. It requires no conditions or restrictions on use, modification, or distribution.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [],
+    "conditions": []
+}

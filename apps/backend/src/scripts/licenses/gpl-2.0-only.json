@@ -1,0 +1,21 @@
+{
+    "fullName": "GNU General Public License v2.0 only",
+    "description": "A strong copyleft license that specifically requires GPL-2.0 without allowing later versions. Requires derivative works to be licensed under the same terms and mandates source code disclosure for distributed software.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "State changes",
+        "Same license"
+    ]
+}

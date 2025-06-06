@@ -1,0 +1,23 @@
+{
+    "fullName": "Server Side Public License v1",
+    "description": "A copyleft license that extends AGPL-3.0 to require service providers to open source all software used to provide the service. Designed to prevent cloud providers from using open source without contributing back.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "Network use",
+        "Service source",
+        "Same license"
+    ]
+}

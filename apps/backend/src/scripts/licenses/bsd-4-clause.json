@@ -1,0 +1,20 @@
+{
+    "fullName": "BSD 4-Clause \"Original\" License",
+    "description": "The original BSD license that includes an advertising clause requiring acknowledgment in all advertising materials. This clause has caused compatibility issues and is rarely used today.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "No endorsement",
+        "Advertising clause"
+    ]
+}

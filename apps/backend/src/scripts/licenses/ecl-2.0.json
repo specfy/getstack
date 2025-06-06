@@ -1,0 +1,21 @@
+{
+    "fullName": "Educational Community License v2.0",
+    "description": "A permissive license based on the Apache License 2.0 but modified for educational institutions. It allows unlimited freedom while requiring attribution and including patent grants from contributors.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "State changes"
+    ]
+}

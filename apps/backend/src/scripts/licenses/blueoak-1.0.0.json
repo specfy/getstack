@@ -1,0 +1,17 @@
+{
+    "fullName": "Blue Oak Model License 1.0.0",
+    "description": "A modern permissive license designed to be simple and clear. It allows unlimited freedom with the software while requiring only attribution and includes explicit disclaimers of liability and warranty.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "Attribution"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "fullName": "MIT No Attribution",
+    "description": "A permissive license that is even more permissive than the MIT License by removing the requirement for including copyright notices and license text in redistributions. Essentially equivalent to public domain.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": []
+}

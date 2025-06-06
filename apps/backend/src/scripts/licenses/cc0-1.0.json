@@ -1,0 +1,17 @@
+{
+    "fullName": "Creative Commons Zero v1.0",
+    "description": "A public domain dedication that allows creators to give up their copyright and put their works into the worldwide public domain. CC0 allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark",
+        "No patent"
+    ],
+    "conditions": []
+}

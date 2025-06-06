@@ -1,0 +1,23 @@
+{
+    "fullName": "GNU Affero General Public License v3.0 or later",
+    "description": "Strongest copyleft license with network provisions that allows users to choose AGPL-3.0 or any later version. Requires source code disclosure for network services and provides flexibility for future AGPL versions.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "Network use",
+        "State changes",
+        "Same license"
+    ]
+}

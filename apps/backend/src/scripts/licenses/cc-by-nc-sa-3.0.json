@@ -1,0 +1,21 @@
+{
+    "fullName": "Creative Commons Non Commercial Share Alike 3.0",
+    "description": "A copyleft license that allows distribution, remixing, and adaptation for non-commercial purposes only. Requires attribution and derivative works must be licensed under identical terms. Earlier version than 4.0.",
+    "permissions": [
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark",
+        "No commercial"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Attribution",
+        "Same license"
+    ]
+}

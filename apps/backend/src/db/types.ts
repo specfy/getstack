@@ -1,5 +1,5 @@
+import type { AllowedLicensesLowercase } from '../types/stack.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
-import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
 
 export type TimestampClickhouse = ColumnType<string, Date, Date | string>;
@@ -43,7 +43,7 @@ export type TechnologyWeeklyRow = Selectable<TechnologiesWeeklyTable>;
 export interface LicensesTable {
   org: string;
   name: string;
-  license: AllowedLicenses;
+  license: AllowedLicensesLowercase;
   date_week: string;
 }
 export type LicenseRow = Selectable<LicensesTable>;
@@ -52,7 +52,7 @@ export type LicenseUpdate = Updateable<LicensesTable>;
 
 export interface LicensesWeeklyTable {
   date_week: string;
-  license: AllowedLicenses;
+  license: AllowedLicensesLowercase;
   hits: number;
 }
 export type LicensesWeeklyRow = Selectable<LicensesWeeklyTable>;
@@ -105,8 +105,8 @@ export interface ProgressTable {
 export type ProgressTableRow = Selectable<ProgressTable>;
 
 export interface LicensesInfoTable {
-  id: number;
-  key: string;
+  id: ColumnType<number, never, never>;
+  key: AllowedLicensesLowercase;
   description: string;
   full_name: string;
   permissions: string[];
@@ -114,6 +114,8 @@ export interface LicensesInfoTable {
   limitations: string[];
 }
 export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
+export type LicensesInfoInsert = Insertable<LicensesInfoTable>;
+export type LicensesInfoUpdate = Updateable<LicensesInfoTable>;
 
 // Add cache table types
 export interface CacheTable {

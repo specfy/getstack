@@ -1,0 +1,22 @@
+{
+    "fullName": "GNU Lesser General Public License v3.0 only",
+    "description": "A weak copyleft license that specifically requires LGPL-3.0 without allowing later versions. Allows linking with proprietary software while requiring source disclosure for LGPL-licensed modifications.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "State changes",
+        "Same license"
+    ]
+}

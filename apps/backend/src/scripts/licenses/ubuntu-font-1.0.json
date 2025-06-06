@@ -1,0 +1,19 @@
+{
+    "fullName": "Ubuntu Font License v1.0",
+    "description": "A license designed specifically for the Ubuntu font family. It allows unlimited freedom with the fonts while requiring that derivative fonts use different names and preserving copyright notices.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Rename"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "fullName": "GNU Lesser General Public License v2.1",
+    "description": "A weak copyleft license that allows linking with proprietary software. It requires disclosure of source code for modifications to LGPL-licensed components but lacks patent protection found in later versions.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "State changes",
+        "Same license"
+    ]
+}

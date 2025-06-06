@@ -1,0 +1,12 @@
+{
+    "fullName": "Do What The F*ck You Want To Public License",
+    "description": "A permissive license with no conditions that allows users to do whatever they want with the software. It's essentially a public domain dedication with colorful language and no restrictions whatsoever.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [],
+    "conditions": []
+}

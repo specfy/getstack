@@ -1,0 +1,21 @@
+{
+    "fullName": "GNU Lesser General Public License v2.0 or later",
+    "description": "A weak copyleft license that allows users to choose LGPL-2.0 or any later version. Permits linking with proprietary software while requiring source disclosure for LGPL-licensed modifications.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "State changes",
+        "Same license"
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "fullName": "LaTeX Project Public License v1.3c",
+    "description": "A license designed for LaTeX and related software that allows modification and distribution but requires that modified versions use different names. It protects the integrity of the LaTeX system.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Rename",
+        "State changes"
+    ]
+}

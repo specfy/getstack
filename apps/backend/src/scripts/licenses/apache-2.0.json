@@ -1,0 +1,22 @@
+{
+    "fullName": "Apache License 2.0",
+    "description": "A permissive license that provides an express grant of patent rights from contributors. It requires preservation of copyright and license notices, and documentation of significant changes when distributing modified versions.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "State changes",
+        "Include NOTICE"
+    ]
+}

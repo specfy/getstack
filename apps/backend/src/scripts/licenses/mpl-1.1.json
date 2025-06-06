@@ -1,0 +1,21 @@
+{
+    "fullName": "Mozilla Public License 1.1",
+    "description": "A weak copyleft license that allows combining with proprietary code. It requires disclosure of source code for modifications to MPL-licensed files but lacks patent protection found in version 2.0.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "Same license"
+    ]
+}

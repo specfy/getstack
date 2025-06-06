@@ -1,0 +1,19 @@
+{
+    "fullName": "MIT +no-false-attribs License",
+    "description": "A variant of the MIT License that adds a clause prohibiting false attribution. It prevents misrepresentation of the origin of the software while maintaining MIT's permissive nature.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "No false attribution"
+    ]
+}

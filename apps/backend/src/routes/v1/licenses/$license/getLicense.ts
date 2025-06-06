@@ -12,12 +12,13 @@ import { getRepositories } from '../../../../models/repositories.js';
 import { notFound } from '../../../../utils/apiErrors.js';
 
 import type { APIGetLicense } from '../../../../types/endpoint.js';
+import type { AllowedLicensesLowercase } from '../../../../types/stack.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 const schemaParams = z.object({
   key: z
     .string()
-    .regex(/[a-zA-Z0-9_.-]+/)
+    .regex(/[a-z0-9_.-]+/)
     .max(25),
 });
 
@@ -30,7 +31,7 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
 
     const params = valParams.data;
 
-    const license = await getLicense(params.key);
+    const license = await getLicense(params.key as AllowedLicensesLowercase);
     if (!license) {
       return notFound(reply);
     }

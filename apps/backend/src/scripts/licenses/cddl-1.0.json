@@ -1,0 +1,21 @@
+{
+    "fullName": "Common Development and Distribution License 1.0",
+    "description": "A weak copyleft license that allows linking with proprietary code. It requires source code disclosure for modifications to CDDL-licensed files but permits larger works under different terms. Created by Sun Microsystems.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "Same license"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "fullName": "BSD 2-Clause Plus Patent License",
+    "description": "A variant of the BSD 2-Clause License that includes an explicit patent grant from contributors. It provides additional patent protection while maintaining the simplicity of the BSD 2-Clause License.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

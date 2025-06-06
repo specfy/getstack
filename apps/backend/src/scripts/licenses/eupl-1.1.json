@@ -1,0 +1,21 @@
+{
+    "fullName": "European Union Public License 1.1",
+    "description": "A copyleft license created by the European Commission that is compatible with several other copyleft licenses. Earlier version than 1.2 with similar requirements for derivative works and source code disclosure.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Source code",
+        "Same license"
+    ]
+}

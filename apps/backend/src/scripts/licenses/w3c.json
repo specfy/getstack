@@ -1,0 +1,18 @@
+{
+    "fullName": "W3C License",
+    "description": "A permissive license used by the World Wide Web Consortium for web standards and software. It allows unlimited freedom with the software while requiring preservation of copyright notices and disclaimers.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

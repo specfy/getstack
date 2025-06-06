@@ -1,0 +1,19 @@
+{
+    "fullName": "SIL Open Font License 1.1",
+    "description": "A license designed specifically for fonts and related software. It allows fonts to be used, studied, modified and redistributed freely but prevents them from being sold by themselves and requires derivative fonts to use different names.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Rename"
+    ]
+}

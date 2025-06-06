@@ -1,0 +1,18 @@
+{
+    "fullName": "NCSA Open Source License",
+    "description": "A permissive license that combines features from the MIT License and BSD licenses. It allows unlimited freedom with the software while requiring preservation of copyright and license notices.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

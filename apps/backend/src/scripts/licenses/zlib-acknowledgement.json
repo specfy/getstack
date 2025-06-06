@@ -1,0 +1,19 @@
+{
+    "fullName": "zlib/libpng License with Acknowledgement",
+    "description": "A variant of the zlib License that adds an acknowledgement requirement. It allows modification and redistribution but requires acknowledgement in documentation or other materials.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Source changes",
+        "Acknowledgement"
+    ]
+}

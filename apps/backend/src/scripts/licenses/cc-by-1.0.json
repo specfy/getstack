@@ -1,0 +1,19 @@
+{
+    "fullName": "Creative Commons 1.0 Generic",
+    "description": "The earliest version of the Creative Commons Attribution license that allows distribution, remixing, adapting, and building upon the material in any medium or format, as long as attribution is given to the creator.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Attribution"
+    ]
+}

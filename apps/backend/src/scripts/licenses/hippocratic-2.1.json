@@ -1,0 +1,20 @@
+{
+    "fullName": "Hippocratic License 2.1",
+    "description": "An ethical source license that allows software use only if it does not violate human rights or cause harm. It combines open source principles with ethical constraints on usage.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "Ethical use"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "Ethical compliance"
+    ]
+}

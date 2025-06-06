@@ -1,0 +1,18 @@
+{
+    "fullName": "BSD 2-Clause \"Simplified\" License",
+    "description": "A permissive license that is similar to the BSD 3-Clause License but removes the non-endorsement clause. It allows unlimited freedom with the software as long as copyright and license notices are preserved.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

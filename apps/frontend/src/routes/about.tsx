@@ -67,6 +67,14 @@ const About: React.FC = () => {
           </a>
         </Button>
       </div>
+
+      <h3 className="font-serif">Thanks and attribution</h3>
+      <div>
+        Some techs logos are provided by{' '}
+        <a href="https://logo.dev?utm_source=getstack.Dev" title="Logo API">
+          Logo.dev
+        </a>
+      </div>
     </div>
   );
 };

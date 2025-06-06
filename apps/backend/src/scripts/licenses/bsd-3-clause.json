@@ -1,0 +1,19 @@
+{
+    "fullName": "BSD 3-Clause \"Revised\" License",
+    "description": "A permissive license that comes with a non-endorsement clause that prevents the use of the names of contributors for endorsement of derived products without written consent.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice",
+        "No endorsement"
+    ]
+}

@@ -149,7 +149,7 @@ const License: React.FC = () => {
             <Link to="/licenses" className="text-sm text-gray-400 leading-5">
               License
             </Link>
-            <div className="text-3xl font-semibold leading-6 font-serif">{lic.full_name}</div>
+            <div className="text-3xl font-semibold leading-8 font-serif">{lic.full_name}</div>
           </div>
         </h2>
         {position > 0 && (
@@ -162,58 +162,56 @@ const License: React.FC = () => {
           </div>
         )}
       </header>
-      <div className="flex gap-10 mt-4">
-        <div className="w-1/2 text-pretty text-gray-600 md:text-lg font-serif font-light">
+      <div className="flex gap-10 mt-6">
+        <div className="md:w-10/20 text-pretty text-gray-800 md:text-lg font-serif font-light">
           {lic.description}
         </div>
-        <div>
-          <div className="flex gap-10">
-            {lic.permissions.length > 0 && (
-              <div className="text-sm text-gray-500">
-                <h3 className="text-md font-semibold mb-1">Permissions</h3>
-                {lic.permissions.map((permission, i) => {
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-sm">
-                      <div className="size-4 text-green-500">
-                        <IconCheck size={16} />
-                      </div>
-                      {permission}
+        <div className="md:w-11/20 flex gap-10 justify-end">
+          {lic.permissions.length > 0 && (
+            <div className="">
+              <h3 className="text-md font-semibold mb-1 font-serif">Permissions</h3>
+              {lic.permissions.map((permission, i) => {
+                return (
+                  <div key={i} className="flex items-center gap-2 text-sm text-gray-500">
+                    <div className="size-4 text-green-500">
+                      <IconCheck size={16} />
                     </div>
-                  );
-                })}
-              </div>
-            )}
-            {lic.limitations.length > 0 && (
-              <div className="text-sm text-gray-500">
-                <h3 className="text-md font-semibold mb-1">Limitations</h3>
-                {lic.limitations.map((limitation, i) => {
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-sm ">
-                      <div className="size-4 text-red-500">
-                        <IconX size={16} />
-                      </div>
-                      {limitation}
+                    {permission}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {lic.limitations.length > 0 && (
+            <div className="">
+              <h3 className="text-md font-semibold mb-1 font-serif">Limitations</h3>
+              {lic.limitations.map((limitation, i) => {
+                return (
+                  <div key={i} className="flex items-center gap-2 text-sm text-gray-500">
+                    <div className="size-4 text-red-500">
+                      <IconX size={16} />
                     </div>
-                  );
-                })}
-              </div>
-            )}
-            {lic.conditions.length > 0 && (
-              <div className="text-sm text-gray-500">
-                <h3 className="text-md font-semibold mb-1">Conditions</h3>
-                {lic.conditions.map((condition, i) => {
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-sm ">
-                      <div className="size-4 text-yellow-500">
-                        <IconCircle size={16} />
-                      </div>
-                      {condition}
+                    {limitation}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {lic.conditions.length > 0 && (
+            <div className="">
+              <h3 className="text-md font-semibold mb-1 font-serif">Conditions</h3>
+              {lic.conditions.map((condition, i) => {
+                return (
+                  <div key={i} className="flex items-center gap-2 text-sm text-gray-500 ">
+                    <div className="size-4 text-yellow-500">
+                      <IconCircle size={15} />
                     </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+                    {condition}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -311,7 +309,7 @@ const License: React.FC = () => {
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories
             topRepos={data.data.topRepos}
-            title={`Top repositories under ${license} License`}
+            title={`Top repositories under ${lic.full_name}`}
             description={`Most popular GitHub repositories that are ${license}`}
             emptyDesc={license}
             volume={current}
@@ -402,8 +400,8 @@ export const Route = createFileRoute('/licenses/$license')({
     return {
       meta: [
         ...seo({
-          title: `${data.license.key} usage and trends - getStack`,
-          description: `Discover ${data.license.key} License usage across the most popular open-source GitHub repositories`,
+          title: `${data.license.full_name} usage and trends - getStack`,
+          description: `Discover ${data.license.full_name} usage across the most popular open-source GitHub repositories`,
           url,
         }),
       ],

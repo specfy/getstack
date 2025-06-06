@@ -1,0 +1,20 @@
+{
+    "fullName": "Mulan Permissive Software License v2",
+    "description": "A permissive license created in China that allows unlimited freedom with the software. It requires preservation of copyright and license notices and includes explicit patent grants from contributors.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Patent use",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty",
+        "No trademark"
+    ],
+    "conditions": [
+        "License notice",
+        "Copyright notice"
+    ]
+}

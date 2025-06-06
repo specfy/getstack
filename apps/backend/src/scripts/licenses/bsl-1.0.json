@@ -1,0 +1,17 @@
+{
+    "fullName": "Boost Software License 1.0",
+    "description": "A permissive license designed for C++ libraries that allows unlimited freedom with the software. It requires no copyright notices for binary distributions and includes explicit disclaimers.",
+    "permissions": [
+        "Commercial use",
+        "Modification",
+        "Distribution",
+        "Private use"
+    ],
+    "limitations": [
+        "No liability",
+        "No warranty"
+    ],
+    "conditions": [
+        "License notice"
+    ]
+}
