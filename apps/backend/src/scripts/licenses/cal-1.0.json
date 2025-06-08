@@ -1,5 +1,5 @@
 {
-    "fullName": "Cryptographic Autonomy License v1.0",
+    "fullName": "Cryptographic Autonomy v1.0",
     "description": "A copyleft license that extends traditional copyleft to include user autonomy over cryptographic keys and data. It requires that users maintain control over their data and cryptographic keys.",
     "permissions": [
         "Commercial use",

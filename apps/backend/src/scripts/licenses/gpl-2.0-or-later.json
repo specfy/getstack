@@ -1,5 +1,5 @@
 {
-    "fullName": "GNU General Public License v2.0 or later",
+    "fullName": "GPL v2.0 or later",
     "description": "A strong copyleft license that allows users to choose GPL-2.0 or any later version. Requires derivative works to be licensed under the same terms and mandates source code disclosure for distributed software.",
     "permissions": [
         "Commercial use",

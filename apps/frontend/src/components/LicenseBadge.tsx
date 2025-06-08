@@ -5,11 +5,12 @@ import { cn } from '@/lib/utils';
 import type { ClassValue } from 'clsx';
 
 export const LicenseBadge: React.FC<{
-  license: string;
+  licenseKey: string;
+  fullName: string;
   size?: 'l' | 'md' | 'xl';
   className?: ClassValue;
   border?: boolean;
-}> = ({ license, className, size, border }) => {
+}> = ({ licenseKey, fullName, className, size, border }) => {
   return (
     <Link
       className={cn(
@@ -20,9 +21,9 @@ export const LicenseBadge: React.FC<{
         className
       )}
       to={`/licenses/$license`}
-      params={{ license }}
+      params={{ license: licenseKey }}
     >
-      <div className="truncate text-ellipsis">{license}</div>
+      <div className="truncate text-ellipsis">{fullName}</div>
     </Link>
   );
 };

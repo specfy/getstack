@@ -28,3 +28,7 @@ export async function upsertLicense(data: LicensesInfoInsert): Promise<void> {
     .onConflict((oc) => oc.column('key').doUpdateSet(tmp))
     .executeTakeFirst();
 }
+
+export async function getAllLicensesNames(): Promise<{ key: string; full_name: string }[]> {
+  return await db.selectFrom('licenses_info').select(['key', 'full_name']).execute();
+}

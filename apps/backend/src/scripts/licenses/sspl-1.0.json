@@ -1,5 +1,5 @@
 {
-    "fullName": "Server Side Public License v1",
+    "fullName": "Server Side Public v1",
     "description": "A copyleft license that extends AGPL-3.0 to require service providers to open source all software used to provide the service. Designed to prevent cloud providers from using open source without contributing back.",
     "permissions": [
         "Commercial use",

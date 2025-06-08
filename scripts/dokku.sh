@@ -47,3 +47,9 @@ dokku git:from-image getstack h1fra/getstack:$IMAGE_TAG
 dokku letsencrypt:set getstack email EMAIL
 dokku letsencrypt:enable getstack
 dokku docker-options:add getstack deploy "--restart=always"
+
+# ClickHouse
+sudo dokku plugin:install https://github.com/dokku/dokku-clickhouse.git --name clickhouse
+dokku clickhouse:create clickhouse -p PASSWORD -r PASSWORD
+dokku clickhouse:link getstack-api
+dokku clickhouse:expose clickhouse 9000 8123

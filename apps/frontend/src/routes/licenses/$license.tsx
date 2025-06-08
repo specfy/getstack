@@ -26,7 +26,7 @@ import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
 import { cn } from '@/lib/utils';
 
-import type { LicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
+import type { APILicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
 import type { LineSeries } from '@nivo/line';
 
 const License: React.FC = () => {
@@ -80,7 +80,7 @@ const License: React.FC = () => {
   }, [data]);
 
   const [position, inCategory] = useMemo<
-    [number, ({ position: number } & LicenseLeaderboard)[]]
+    [number, ({ position: number } & APILicenseLeaderboard)[]]
   >(() => {
     if (!leaderboard) {
       return [0, []];
@@ -358,7 +358,8 @@ const License: React.FC = () => {
                       #{row.position}
                     </div>
                     <LicenseBadge
-                      license={row.license}
+                      licenseKey={row.license}
+                      fullName={row.full_name}
                       className={cn(is && ' text-gray-900')}
                       size={is ? 'xl' : 'md'}
                       border

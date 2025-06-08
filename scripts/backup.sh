@@ -14,6 +14,7 @@ CLICKHOUSE_DB="default"
 # List of tables to backup (from types.ts Clickhouse interface)
 TABLES=(
     "repositories"
+    "repositories2"
     "technologies"
     "licenses"
 )
@@ -30,7 +31,7 @@ for TABLE in "${TABLES[@]}"; do
         --secure \
         --database="$CLICKHOUSE_DB" \
         --query="SELECT * FROM $TABLE FORMAT CSVWithNames" \
-        > "$BACKUP_DIR/${TABLE}.csv"
+        >"$BACKUP_DIR/${TABLE}.csv"
 done
 
 echo "Backup completed. CSV files are in $BACKUP_DIR"

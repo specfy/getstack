@@ -1,5 +1,5 @@
 {
-    "fullName": "GNU Lesser General Public License v3.0",
+    "fullName": "LGPL v3.0",
     "description": "A weak copyleft license that allows linking with proprietary software. It requires disclosure of source code for modifications to LGPL-licensed components but permits larger works under different terms.",
     "permissions": [
         "Commercial use",

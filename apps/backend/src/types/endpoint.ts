@@ -97,12 +97,13 @@ export interface LicenseTopN {
   hits: string;
   position: string;
 }
+export type APILicenseTopN = { full_name: string } & LicenseTopN;
 export type APIGetLicenses = Endpoint<{
   Path: '/1/licenses';
   Method: 'GET';
   Success: {
     success: true;
-    data: { top: LicenseTopN[] };
+    data: { top: APILicenseTopN[] };
   };
 }>;
 
@@ -113,12 +114,13 @@ export interface LicenseLeaderboard {
   trend: number;
   percent_change: number;
 }
+export type APILicenseLeaderboard = { full_name: string } & LicenseLeaderboard;
 export type APIGetLicensesLeaderboard = Endpoint<{
   Path: '/1/licenses/leaderboard';
   Method: 'GET';
   Success: {
     success: true;
-    data: LicenseLeaderboard[];
+    data: APILicenseLeaderboard[];
   };
 }>;
 

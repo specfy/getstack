@@ -14,17 +14,17 @@ import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
 
-import type { LicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
+import type { APILicenseLeaderboard } from '@getstack/backend/src/types/endpoint';
 import type { AreaBumpSerie } from '@nivo/bump';
 
 const Licenses: React.FC = () => {
   const { data, isError, isLoading } = useLicenses();
   const { data: leaderboard } = useLicensesLeaderboard();
   const [pie, setPie] = useState<{ id: string; value: number }[]>([]);
-  const [top10, setTop10] = useState<LicenseLeaderboard[]>([]);
-  const [rest, setRest] = useState<LicenseLeaderboard[]>([]);
-  const [winner, setWinner] = useState<LicenseLeaderboard>();
-  const [looser, setLooser] = useState<LicenseLeaderboard>();
+  const [top10, setTop10] = useState<APILicenseLeaderboard[]>([]);
+  const [rest, setRest] = useState<APILicenseLeaderboard[]>([]);
+  const [winner, setWinner] = useState<APILicenseLeaderboard>();
+  const [looser, setLooser] = useState<APILicenseLeaderboard>();
 
   const topNData = useMemo(() => {
     if (!data) {
@@ -37,15 +37,15 @@ const Licenses: React.FC = () => {
     > = {};
 
     for (const row of data.data.top) {
-      if (!(row.license in topN)) {
-        topN[row.license] = { id: row.license, data: [] };
+      if (!(row.full_name in topN)) {
+        topN[row.full_name] = { id: row.full_name, data: [] };
       }
       const week = Number.parseInt(row.date_week.split('-')[1], 10);
       const date = new Date();
       date.setMonth(0);
       date.setDate(1);
       date.setDate(date.getDate() + (week - 1) * 7);
-      topN[row.license].data.push({
+      topN[row.full_name].data.push({
         x: row.date_week,
         y: Number.parseInt(row.hits, 10),
       });
@@ -60,10 +60,10 @@ const Licenses: React.FC = () => {
     }
 
     const tmp: { id: string; value: number }[] = [];
-    let up: LicenseLeaderboard | undefined;
-    let down: LicenseLeaderboard | undefined;
+    let up: APILicenseLeaderboard | undefined;
+    let down: APILicenseLeaderboard | undefined;
     for (const row of leaderboard.data) {
-      tmp.push({ id: row.license, value: row.current_hits });
+      tmp.push({ id: row.full_name, value: row.current_hits });
       if ((!up || row.percent_change > up.percent_change) && row.percent_change > 0.1) {
         up = row;
       } else if ((!down || row.percent_change < down.percent_change) && row.percent_change < -0.1) {
@@ -119,7 +119,7 @@ const Licenses: React.FC = () => {
             <IconLicense size={39} />
           </div>
           <div>
-            <div className="text-2xl font-semibold font-serif">Licenses</div>
+            <div className="text-3xl font-semibold font-serif leading-14">Licenses</div>
           </div>
         </h2>
         <h3 className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
@@ -139,7 +139,12 @@ const Licenses: React.FC = () => {
                   const formatted = formatQuantity(row.current_hits);
                   return (
                     <div className="flex justify-between items-center" key={row.license}>
-                      <LicenseBadge license={row.license} size="l" border />
+                      <LicenseBadge
+                        licenseKey={row.license}
+                        fullName={row.full_name}
+                        size="l"
+                        border
+                      />
                       <div className="flex gap-1 items-center">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
@@ -191,9 +196,15 @@ const Licenses: React.FC = () => {
               <div className="flex flex-col gap-1">
                 {rest.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
+                  console.log(row);
                   return (
                     <div className="flex justify-between items-center" key={row.license}>
-                      <LicenseBadge license={row.license} size="md" border />
+                      <LicenseBadge
+                        licenseKey={row.license}
+                        fullName={row.full_name}
+                        size="md"
+                        border
+                      />
                       <div className="flex gap-1 items-center">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
@@ -215,7 +226,11 @@ const Licenses: React.FC = () => {
                 <CardHeader className="relative">
                   <CardDescription>Best</CardDescription>
                   <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                    <LicenseBadge license={winner.license} size="xl" />
+                    <LicenseBadge
+                      licenseKey={winner.license}
+                      fullName={winner.full_name}
+                      size="xl"
+                    />
                   </CardTitle>
                   <div className="absolute right-4 top-0">
                     <TrendsBadge pct={winner.percent_change} />
@@ -237,7 +252,11 @@ const Licenses: React.FC = () => {
                 <CardHeader className="relative">
                   <CardDescription>Worst</CardDescription>
                   <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                    <LicenseBadge license={looser.license} size="xl" />
+                    <LicenseBadge
+                      licenseKey={looser.license}
+                      fullName={looser.full_name}
+                      size="xl"
+                    />
                   </CardTitle>
                   <div className="absolute right-4 top-0">
                     <TrendsBadge pct={looser.percent_change} />

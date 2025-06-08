@@ -1,6 +1,6 @@
 {
-    "fullName": "BSD 3-Clause Clear License",
-    "description": "A variant of the BSD 3-Clause License that explicitly excludes patent rights. It includes a clear statement that no patent rights are granted, making patent obligations more transparent.",
+    "fullName": "BSD 3-Clause Clear",
+    "description": "A variant of the BSD 3-Clause that explicitly excludes patent rights. It includes a clear statement that no patent rights are granted, making patent obligations more transparent.",
     "permissions": [
         "Commercial use",
         "Modification",

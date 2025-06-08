@@ -1,6 +1,6 @@
 {
     "fullName": "BSD 3-Clause with Attribution",
-    "description": "A variant of the BSD 3-Clause License that adds an attribution requirement. It requires that attribution be given in all copies and derivative works while maintaining the BSD's permissive nature.",
+    "description": "A variant of the BSD 3-Clause that adds an attribution requirement. It requires that attribution be given in all copies and derivative works while maintaining the BSD's permissive nature.",
     "permissions": [
         "Commercial use",
         "Modification",

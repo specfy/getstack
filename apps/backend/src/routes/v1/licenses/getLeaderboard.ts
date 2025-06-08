@@ -1,8 +1,9 @@
 import { getOrCache } from '../../../models/cache.js';
 import { getLicensesLeaderboard } from '../../../models/licenses.js';
+import { getAllLicensesNames } from '../../../models/licensesInfo.js';
 import { getActiveWeek } from '../../../models/progress.js';
 
-import type { APIGetLicensesLeaderboard } from '../../../types/endpoint.js';
+import type { APIGetLicensesLeaderboard, APILicenseLeaderboard } from '../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 export const getLicenseLeaderboard: FastifyPluginCallback = (fastify: FastifyInstance) => {
@@ -13,9 +14,23 @@ export const getLicenseLeaderboard: FastifyPluginCallback = (fastify: FastifyIns
       fn: () => getLicensesLeaderboard({ ...weeks }),
     });
 
+    const res = await getAllLicensesNames();
+    const names = new Map<string, string>();
+    for (const row of res) {
+      names.set(row.key, row.full_name);
+    }
+
+    const leaderboard: APILicenseLeaderboard[] = [];
+    for (const row of data) {
+      leaderboard.push({
+        ...row,
+        full_name: names.get(row.license)!,
+      });
+    }
+
     reply.status(200).send({
       success: true,
-      data: data,
+      data: leaderboard,
     });
   });
 };

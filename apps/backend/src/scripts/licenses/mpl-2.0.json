@@ -1,5 +1,5 @@
 {
-    "fullName": "Mozilla Public License 2.0",
+    "fullName": "Mozilla Public 2.0",
     "description": "A weak copyleft license that allows combining with proprietary code. It requires disclosure of source code for modifications to MPL-licensed files but allows larger works to use different licenses.",
     "permissions": [
         "Commercial use",

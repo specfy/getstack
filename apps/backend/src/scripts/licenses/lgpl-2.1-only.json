@@ -1,5 +1,5 @@
 {
-    "fullName": "GNU Lesser General Public License v2.1 only",
+    "fullName": "LGPL v2.1 only",
     "description": "A weak copyleft license that specifically requires LGPL-2.1 without allowing later versions. Allows linking with proprietary software while requiring source disclosure for LGPL-licensed modifications.",
     "permissions": [
         "Commercial use",

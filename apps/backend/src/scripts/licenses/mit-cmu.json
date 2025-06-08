@@ -1,6 +1,6 @@
 {
-    "fullName": "CMU License",
-    "description": "A permissive license similar to the MIT License but with Carnegie Mellon University-specific language. It allows unlimited freedom with the software while requiring preservation of copyright notices.",
+    "fullName": "CMU",
+    "description": "A permissive license similar to the MIT but with Carnegie Mellon University-specific language. It allows unlimited freedom with the software while requiring preservation of copyright notices.",
     "permissions": [
         "Commercial use",
         "Modification",

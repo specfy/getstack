@@ -1,5 +1,5 @@
 {
-    "fullName": "GNU General Public License v3.0",
+    "fullName": "GPL v3.0",
     "description": "A strong copyleft license that requires derivative works to be licensed under the same terms. It provides patent protection, prohibits hardware restrictions on software freedom, and mandates source code disclosure for distributed software.",
     "permissions": [
         "Commercial use",
