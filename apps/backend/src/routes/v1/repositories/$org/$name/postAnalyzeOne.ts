@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { db } from '../../../../../db/client.js';
 import { getRepository } from '../../../../../models/repositories.js';
 import { analyze, saveAnalysis, savePreviousIfStale } from '../../../../../processor/analyzer.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
@@ -33,14 +34,16 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
 
     const dateWeek = formatToYearWeek(new Date());
     try {
-      const withPrevious = await savePreviousIfStale(repo, dateWeek);
-      if (withPrevious) {
-        logger.info(`With previous`);
-      } else {
-        const res = await analyze(repo, logger);
-        await saveAnalysis({ repo, res, dateWeek });
-        logger.info(`Done`);
-      }
+      await db.transaction().execute(async (trx) => {
+        const withPrevious = await savePreviousIfStale({ trx, repo, dateWeek });
+        if (withPrevious) {
+          logger.info(`With previous`);
+        } else {
+          const res = await analyze(repo, logger);
+          await saveAnalysis({ trx, repo, res, dateWeek });
+          logger.info(`Done`);
+        }
+      });
     } catch (err) {
       logger.error(`Failed to process`, err);
       reply.status(500).send({ error: { code: 'failed_to_process', status: 500 } });

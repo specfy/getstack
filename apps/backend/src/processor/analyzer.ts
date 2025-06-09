@@ -20,6 +20,7 @@ import type {
   LicenseInsert,
   LicenseRow,
   RepositoryRow,
+  TX,
   TechnologyInsert,
   TechnologyRow,
 } from '../db/types.js';
@@ -108,10 +109,12 @@ export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payl
 }
 
 export async function saveAnalysis({
+  trx,
   repo,
   res,
   dateWeek,
 }: {
+  trx: TX;
   repo: RepositoryRow;
   res: Payload;
   dateWeek: string;
@@ -160,13 +163,25 @@ export async function saveAnalysis({
     await createLicenses(licenses);
   }
 
-  await updateRepository(repo.id, {
-    last_fetched_at: formatToClickhouseDatetime(new Date()),
-    last_analyzed_at: formatToClickhouseDatetime(new Date()),
+  await updateRepository({
+    trx,
+    id: repo.id,
+    input: {
+      last_fetched_at: formatToClickhouseDatetime(new Date()),
+      last_analyzed_at: formatToClickhouseDatetime(new Date()),
+    },
   });
 }
 
-export async function savePreviousIfStale(repo: RepositoryRow, dateWeek: string): Promise<boolean> {
+export async function savePreviousIfStale({
+  trx,
+  repo,
+  dateWeek,
+}: {
+  trx: TX;
+  repo: RepositoryRow;
+  dateWeek: string;
+}): Promise<boolean> {
   const previous = await getPreviousAnalyzeIfStale(repo);
   if (previous === false) {
     return false;
@@ -187,8 +202,12 @@ export async function savePreviousIfStale(repo: RepositoryRow, dateWeek: string)
     );
   }
 
-  await updateRepository(repo.id, {
-    last_fetched_at: formatToClickhouseDatetime(new Date()),
+  await updateRepository({
+    trx,
+    id: repo.id,
+    input: {
+      last_fetched_at: formatToClickhouseDatetime(new Date()),
+    },
   });
   return true;
 }

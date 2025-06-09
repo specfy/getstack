@@ -39,8 +39,16 @@ export async function getRepositories({ ids }: { ids: string[] }): Promise<Repos
     .execute();
 }
 
-export async function updateRepository(id: string, input: RepositoryUpdate): Promise<void> {
-  await db
+export async function updateRepository({
+  trx,
+  id,
+  input,
+}: {
+  trx: TX;
+  id: string;
+  input: RepositoryUpdate;
+}): Promise<void> {
+  await trx
     .updateTable('repositories')
     .set({
       ...input,

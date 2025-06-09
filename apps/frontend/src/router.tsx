@@ -33,6 +33,7 @@ export function createRouter() {
       routeTree,
       context: { queryClient },
       defaultPreload: 'intent',
+      // @ts-expect-error yes I know
       defaultErrorComponent: DefaultCatchBoundary,
       defaultNotFoundComponent: () => <NotFound />,
       scrollRestoration: true,
