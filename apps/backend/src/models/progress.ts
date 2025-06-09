@@ -1,7 +1,8 @@
 import { db } from '../db/client.js';
 import { formatToDate } from '../utils/date.js';
 
-import type { ProgressTableRow } from '../db/types.js';
+import type { Database, ProgressTableRow, TX } from '../db/types.js';
+import type { Kysely } from 'kysely';
 
 export async function getActiveWeek(): Promise<{ currentWeek: string; previousWeek: string }> {
   const row = await db
@@ -44,8 +45,8 @@ export async function getOrInsert({
   return res;
 }
 
-export async function update(row: ProgressTableRow): Promise<void> {
-  await db
+export async function update(trx: Kysely<Database> | TX, row: ProgressTableRow): Promise<void> {
+  await trx
     .updateTable('progress')
     .set({ progress: row.progress, done: row.done })
     .where('date_week', '=', row.date_week)

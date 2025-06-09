@@ -1,5 +1,6 @@
 import { CronJob } from 'cron';
 
+import { db } from '../db/client.js';
 import { getOrInsert, update } from '../models/progress.js';
 import {
   ANALYZE_MIN_STARS,
@@ -53,7 +54,7 @@ export const cronListGithubRepositories = CronJob.from({
 
         currentDate = nextDate;
 
-        await update({
+        await update(db, {
           date_week: dateWeek,
           progress: nextDate.toISOString(),
           done: false,
@@ -65,7 +66,7 @@ export const cronListGithubRepositories = CronJob.from({
     }
 
     if (currentDate.getTime() <= endDate.getTime()) {
-      await update({
+      await update(db, {
         date_week: dateWeek,
         progress: endDate.toISOString(),
         done: true,

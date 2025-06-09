@@ -55,7 +55,6 @@ function CommandInput({
 }: { icon?: false | React.JSX.Element | undefined } & React.ComponentProps<
   typeof CommandPrimitive.Input
 >) {
-  console.log({ icon });
   return (
     <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
       {icon === false || icon === undefined ? (
