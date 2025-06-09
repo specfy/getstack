@@ -31,7 +31,7 @@ export async function migrate(): Promise<boolean> {
   {
     const { error, results } = await migratorDB.migrateToLatest();
     if (error !== undefined) {
-      logger.error('failed to migrate');
+      logger.error('failed to migrate DN');
       logger.error(error);
       return false;
     }
@@ -45,12 +45,13 @@ export async function migrate(): Promise<boolean> {
         }
       }
     }
+    logger.info('DB migrated');
   }
 
   {
     const { error, results } = await migratorClickhouse.migrateToLatest();
     if (error !== undefined) {
-      logger.error('failed to migrate');
+      logger.error('failed to migrate ClickHouse');
       logger.error(error);
       return false;
     }
@@ -64,6 +65,7 @@ export async function migrate(): Promise<boolean> {
         }
       }
     }
+    logger.info('ClickHouse migrated');
   }
 
   {

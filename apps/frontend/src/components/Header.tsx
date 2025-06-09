@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
     <header className="flex justify-between items-center mt-2 mb-1 px-4">
       <Link className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700" to="/">
         <IconStack2 /> <span className="font-medium tracking-tighter">getStack</span>
-        <div className="text-xs pt-0.5">Open Source Trends</div>
+        <div className="text-xs pt-0.5">Technology Trends</div>
       </Link>
       <NavigationMenu>
         <NavigationMenuList>

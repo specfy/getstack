@@ -107,7 +107,7 @@ const Repo: React.FC = () => {
       )}
       <main className="mt-14 flex flex-col-reverse md:flex-row gap-10">
         <div className="md:w-4/6">
-          <h3 className="text-lg font-semibold font-serif">Technologies</h3>{' '}
+          <h3 className="text-lg font-semibold font-serif">Built with</h3>{' '}
           <div className="text-xs text-neutral-400 mb-4">
             List of all the technologies this repository is using, automatically extracted every
             week.

@@ -2,23 +2,27 @@ import { globSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { getAllLicensesNames } from '../models/licensesInfo.js';
 import { extendedListTech } from '../utils/stacks.js';
 
 const BASE_URL = 'https://getstack.dev';
 
 /**
- * npx tsx apps/backend/src/scripts/generateSitemap.ts
+ * npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts
  */
 async function generateSitemap(): Promise<void> {
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
-  sitemap += `
+  const urls = [BASE_URL, `${BASE_URL}/blog`, `${BASE_URL}/about`, `${BASE_URL}/licenses`];
+  for (const url of urls) {
+    sitemap += `
   <url>
-    <loc>${BASE_URL}</loc>
+    <loc>${url}</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>`;
+  }
 
   const categories = new Set<string>();
   for (const category of categories) {
@@ -30,18 +34,6 @@ async function generateSitemap(): Promise<void> {
   </url>`;
   }
 
-  sitemap += `
-  <url>
-    <loc>${BASE_URL}/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
-  sitemap += `
-  <url>
-    <loc>${BASE_URL}/about</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
   const allPosts = globSync('apps/frontend/src/posts/**.mdx');
   for (const post of allPosts) {
     const tmp = await readFile(post);
@@ -70,6 +62,16 @@ async function generateSitemap(): Promise<void> {
     sitemap += `
   <url>
     <loc>${BASE_URL}/tech/${tech.key}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+  }
+
+  const licenses = await getAllLicensesNames();
+  for (const license of licenses) {
+    sitemap += `
+  <url>
+    <loc>${BASE_URL}/licenses/${license.key}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`;
