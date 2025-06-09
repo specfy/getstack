@@ -10,6 +10,10 @@
     "start": "vinxi start"
   },
   "dependencies": {
+    "@content-collections/core": "0.9.0",
+    "@content-collections/markdown": "0.1.4",
+    "@content-collections/mdx": "0.2.2",
+    "@content-collections/vite": "0.2.5",
     "@nivo/bump": "0.99.0",
     "@nivo/core": "0.99.0",
     "@nivo/line": "0.99.0",
@@ -17,7 +21,7 @@
     "@radix-ui/react-dialog": "1.1.14",
     "@radix-ui/react-navigation-menu": "1.2.13",
     "@radix-ui/react-popover": "1.1.14",
-    "@radix-ui/react-slot": "1.2.3",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tabler/icons-react": "3.31.0",
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.4",
@@ -33,6 +37,7 @@
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "4.1.0",
+    "dayjs": "1.11.13",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-use": "17.6.0",
@@ -42,6 +47,7 @@
     "unenv": "1.10.0",
     "vinxi": "0.5.3",
     "vite": "6.3.5",
+    "zod": "3.25.56",
     "zustand": "5.0.5"
   },
   "devDependencies": {

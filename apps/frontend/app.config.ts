@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import contentCollections from '@content-collections/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from '@tanstack/react-start/config';
 import { cloudflare } from 'unenv';
@@ -30,6 +31,7 @@ export default defineConfig({
         projects: ['./tsconfig.json'],
       }),
       tailwindcss(),
+      contentCollections(),
     ],
 
     ssr: {

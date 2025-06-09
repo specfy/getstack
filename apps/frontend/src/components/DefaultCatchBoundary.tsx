@@ -2,7 +2,7 @@ import { ErrorComponent, Link, rootRouteId, useMatch, useRouter } from '@tanstac
 
 import type { ErrorComponentProps } from '@tanstack/react-router';
 
-export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
+export const DefaultCatchBoundary: React.FC<{ error: ErrorComponentProps }> = ({ error }) => {
   const router = useRouter();
   const isRoot = useMatch({
     strict: false,
@@ -17,7 +17,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
       <div className="flex gap-2 items-center flex-wrap">
         <button
           onClick={() => {
-            router.invalidate();
+            void router.invalidate();
           }}
           className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
         >
@@ -45,4 +45,4 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
       </div>
     </div>
   );
-}
+};

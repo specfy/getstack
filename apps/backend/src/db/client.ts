@@ -14,6 +14,7 @@ export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
     pool: new Pool({
       connectionString: envs.DATABASE_URL,
+      statement_timeout: 60_000,
     }),
   }),
 });

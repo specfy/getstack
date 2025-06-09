@@ -41,6 +41,11 @@ export const Header: React.FC = () => {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
+            <NavigationMenuLink href="/blog" asChild>
+              <Link to="/blog">Blog</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
             <NavigationMenuLink href="/about" asChild>
               <Link to="/about">About</Link>
             </NavigationMenuLink>
@@ -54,7 +59,7 @@ export const Header: React.FC = () => {
                   className="flex flex-row gap-2"
                 >
                   <img src={`/favicons/github.webp`} className="w-5 h-5" />
-                  <div className="text-sm">288</div>
+                  <div className="text-sm">289</div>
                 </a>
               </Button>
             </NavigationMenuLink>

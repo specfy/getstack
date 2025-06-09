@@ -26,12 +26,16 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "content-collections": [
+        "./.content-collections/generated"
       ]
     }
   },
   "include": [
     "src",
-    "app.config.ts"
+    "app.config.ts",
+    "content-collections.ts"
   ],
   "references": [
     {

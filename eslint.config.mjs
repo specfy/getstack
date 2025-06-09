@@ -3,7 +3,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['**/dist/', '**/node_modules/', '**/.wrangler'],
+    ignores: ['**/dist/', '**/node_modules/', '**/.wrangler', '**/.content-collections/'],
   },
   ...lint.configs.base,
   ...lint.configs.strict,
@@ -52,10 +52,20 @@ export default [
     },
   },
   {
-    files: ['apps/frontend/src/components/*.tsx'],
+    files: ['apps/frontend/src/components/ui/**.tsx'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/naming-convention': 'off',
+      'unicorn/filename-case': 'off',
+    },
+  },
+  {
+    files: [
+      'apps/frontend/src/components/**.tsx',
+      'apps/backend/src/db/migrationsClickhouse/**',
+      'apps/backend/src/db/migrationsDb/**',
+    ],
+    rules: {
       'unicorn/filename-case': 'off',
     },
   },

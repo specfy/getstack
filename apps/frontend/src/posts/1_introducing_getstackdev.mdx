@@ -1,0 +1,50 @@
+---
+id: 1
+title: "Introducing getStack.dev"
+summary: "getStack.dev tracks the real tech stacks of popular GitHub repos to show what tools developers actually use. Updated weekly, open source, and powered by real code—not hype."
+slug: introducing-getstack-track-technical-stack
+publishedAt: "2025-06-10"
+updatedAt: "2025-06-10"
+author: Samuel Bodin
+avatarUrl: https://avatars.githubusercontent.com/u/1637651?v=4
+authorUrl: https://www.linkedin.com/in/bodinsamuel/
+image: /blog/1_see_whats_trending_in_open_source.png
+---
+
+# Introducing getStack.dev
+
+After 15 years in software engineering, I found myself hitting the same wall over and over again: figuring out what tools to use, **what's hype vs what's actually useful**.
+
+It's not that we lack options. The problem is the opposite—there are too many. Every year, new frameworks, libraries, databases, and build tools emerge. Some are genuinely useful. Others are just noise. And unless you're deep in a specific niche or glued to Twitter, it's hard to tell the difference.
+
+That's why I built getStack.dev.
+
+<img src="/blog/1_see_whats_trending_in_open_source.png" alt="See what's trending in Open Source" />
+
+## What is inside?
+
+getStack.dev is a website that **tracks the tech stacks of more than 33K repositories**. It fetches repositories from GitHub (those with more than 1000 stars and recent activity), analyzes them, and surfaces what tools they use—frameworks, languages, bundlers, testing tools, linters, deployment systems, licenses and more.
+
+It's not based on surveys or opinions. It's **based on source code**.
+
+And it's **updated weekly**, so you can see how things evolve over time—what gets adopted, what falls out of use, and how tech stacks shift.
+
+The goal wasn't to create another trend report. I wanted something I could actually use when deciding what to learn next, or when evaluating whether a tool has gained real traction. If a dependency shows up consistently across dozens of major projects, that tells me more than any blog post ever could.
+
+## How It Works Under the Hood
+
+The system behind getStack.dev is open source (give us a star on [GitHub](https://github.com/specfy/getstack)). It starts by scanning GitHub for repositories with over 1000 stars that have had commits in the last two years. Once selected, each repo gets analyzed weekly.
+
+The analysis is done using [stack-analyser](https://github.com/specfy/stack-analyser), a lightweight tool I wrote to detect technology usage from repo contents: `package.json`, `docker-compose.yml`, `.env`, `cargo.toml`, `composer.json`, config files, files extensions, files content, etc.
+
+The extracted data is stored in ClickHouse, which makes querying large datasets fast and efficient—even when looking at multi-year trends across thousands of projects.
+
+You can explore this data on the site, where it's categorized, searchable, and visualized over time.
+
+## What You'll Find
+
+You can browse tech stacks by category: UI frameworks, languages, tools, databases, package managers, etc. You can dig into the stack of a specific project or explore trends: which tools are gaining traction, which ones are fading, and which ones are just holding steady.
+
+I built getStack.dev to answer questions I had as a developer, not as a product, but as a personal tool. It's grown into something I think a lot of people could benefit from.
+
+If you're tired of guessing what's actually being used in modern codebases, go take a look. It's open source, always updating, and built to give real answers from real code.

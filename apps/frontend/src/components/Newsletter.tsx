@@ -9,7 +9,7 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
   const [msg, setMsg] = useState('');
   const [err, setErr] = useState('');
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -19,7 +19,7 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
       return;
     }
 
-    async function exec() {
+    async function exec(): Promise<void> {
       try {
         const res = await postSubscribe({ email });
         setErr('');

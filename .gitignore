@@ -41,3 +41,4 @@ tsconfig.tsbuildinfo
 .output/
 
 clickhouse_backup/
+.content-collections

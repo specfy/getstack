@@ -15,9 +15,11 @@ import { Route as PrivateImport } from './routes/private'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as LicensesIndexImport } from './routes/licenses/index'
+import { Route as BlogIndexImport } from './routes/blog/index'
 import { Route as TechTechKeyImport } from './routes/tech/$techKey'
 import { Route as LicensesLicenseImport } from './routes/licenses/$license'
 import { Route as CategoryCategoryImport } from './routes/category/$category'
+import { Route as BlogSlugImport } from './routes/blog/$slug'
 import { Route as OrgNameImport } from './routes/$org/$name'
 
 // Create/Update Routes
@@ -46,6 +48,12 @@ const LicensesIndexRoute = LicensesIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const BlogIndexRoute = BlogIndexImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const TechTechKeyRoute = TechTechKeyImport.update({
   id: '/tech/$techKey',
   path: '/tech/$techKey',
@@ -61,6 +69,12 @@ const LicensesLicenseRoute = LicensesLicenseImport.update({
 const CategoryCategoryRoute = CategoryCategoryImport.update({
   id: '/category/$category',
   path: '/category/$category',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BlogSlugRoute = BlogSlugImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgNameImport
       parentRoute: typeof rootRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugImport
+      parentRoute: typeof rootRoute
+    }
     '/category/$category': {
       id: '/category/$category'
       path: '/category/$category'
@@ -123,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TechTechKeyImport
       parentRoute: typeof rootRoute
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/licenses/': {
       id: '/licenses/'
       path: '/licenses'
@@ -140,9 +168,11 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/blog': typeof BlogIndexRoute
   '/licenses': typeof LicensesIndexRoute
 }
 
@@ -151,9 +181,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/blog': typeof BlogIndexRoute
   '/licenses': typeof LicensesIndexRoute
 }
 
@@ -163,9 +195,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
+  '/blog/': typeof BlogIndexRoute
   '/licenses/': typeof LicensesIndexRoute
 }
 
@@ -176,9 +210,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/private'
     | '/$org/$name'
+    | '/blog/$slug'
     | '/category/$category'
     | '/licenses/$license'
     | '/tech/$techKey'
+    | '/blog'
     | '/licenses'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -186,9 +222,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/private'
     | '/$org/$name'
+    | '/blog/$slug'
     | '/category/$category'
     | '/licenses/$license'
     | '/tech/$techKey'
+    | '/blog'
     | '/licenses'
   id:
     | '__root__'
@@ -196,9 +234,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/private'
     | '/$org/$name'
+    | '/blog/$slug'
     | '/category/$category'
     | '/licenses/$license'
     | '/tech/$techKey'
+    | '/blog/'
     | '/licenses/'
   fileRoutesById: FileRoutesById
 }
@@ -208,9 +248,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   PrivateRoute: typeof PrivateRoute
   OrgNameRoute: typeof OrgNameRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
   LicensesLicenseRoute: typeof LicensesLicenseRoute
   TechTechKeyRoute: typeof TechTechKeyRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   LicensesIndexRoute: typeof LicensesIndexRoute
 }
 
@@ -219,9 +261,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   PrivateRoute: PrivateRoute,
   OrgNameRoute: OrgNameRoute,
+  BlogSlugRoute: BlogSlugRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
   LicensesLicenseRoute: LicensesLicenseRoute,
   TechTechKeyRoute: TechTechKeyRoute,
+  BlogIndexRoute: BlogIndexRoute,
   LicensesIndexRoute: LicensesIndexRoute,
 }
 
@@ -239,9 +283,11 @@ export const routeTree = rootRoute
         "/about",
         "/private",
         "/$org/$name",
+        "/blog/$slug",
         "/category/$category",
         "/licenses/$license",
         "/tech/$techKey",
+        "/blog/",
         "/licenses/"
       ]
     },
@@ -257,6 +303,9 @@ export const routeTree = rootRoute
     "/$org/$name": {
       "filePath": "$org/$name.tsx"
     },
+    "/blog/$slug": {
+      "filePath": "blog/$slug.tsx"
+    },
     "/category/$category": {
       "filePath": "category/$category.tsx"
     },
@@ -265,6 +314,9 @@ export const routeTree = rootRoute
     },
     "/tech/$techKey": {
       "filePath": "tech/$techKey.tsx"
+    },
+    "/blog/": {
+      "filePath": "blog/index.tsx"
     },
     "/licenses/": {
       "filePath": "licenses/index.tsx"
