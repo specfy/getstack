@@ -1,12 +1,14 @@
 import { z } from 'zod';
 
 import { getOrCache } from '../../../../../models/cache.js';
+import { getLicensesByRepo } from '../../../../../models/licenses.js';
+import { getAllLicensesNames } from '../../../../../models/licensesInfo.js';
 import { getActiveWeek } from '../../../../../models/progress.js';
 import { getRepository } from '../../../../../models/repositories.js';
 import { getTechnologiesByRepo } from '../../../../../models/technologies.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
 
-import type { APIGetRepository } from '../../../../../types/endpoint.js';
+import type { APIGetRepository, APILicenseWithName } from '../../../../../types/endpoint.js';
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
 const schemaParams = z.object({
@@ -27,16 +29,32 @@ export const getApiRepository: FastifyPluginCallback = (fastify: FastifyInstance
     if (!repo) {
       return notFound(reply);
     }
+    if (repo.ignored === 1) {
+      reply.status(200).send({ success: true, data: { repo, techs: [], licenses: [] } });
+      return;
+    }
 
     const weeks = await getActiveWeek();
-    const techs =
-      repo.ignored === 0
-        ? await getOrCache({
-            keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
-            fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
-          })
-        : [];
+    const techs = await getOrCache({
+      keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+      fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+    });
+    const rawLicenses = await getOrCache({
+      keys: ['getLicensesByRepo', repo.id, weeks.currentWeek],
+      fn: () => getLicensesByRepo(repo, weeks.currentWeek),
+    });
 
-    reply.status(200).send({ success: true, data: { repo, techs } });
+    const licensesNames = await getAllLicensesNames();
+    const names = new Map<string, string>();
+    for (const row of licensesNames) {
+      names.set(row.key, row.full_name);
+    }
+
+    const licenses: APILicenseWithName[] = [];
+    for (const row of rawLicenses) {
+      licenses.push({ ...row, full_name: names.get(row.license)! });
+    }
+
+    reply.status(200).send({ success: true, data: { repo, techs, licenses } });
   });
 };

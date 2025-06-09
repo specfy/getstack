@@ -1,5 +1,6 @@
 import type { Endpoint } from './api.js';
 import type {
+  LicenseRow,
   LicensesInfoTableRow,
   LicensesWeeklyRow,
   RepositoryRow,
@@ -72,12 +73,13 @@ export type APIGetTopRelatedTechnology = Endpoint<{
   };
 }>;
 
+export type APILicenseWithName = { full_name: string } & LicenseRow;
 export type APIGetRepository = Endpoint<{
   Path: '/1/repositories/:org/:name';
   Method: 'GET';
   Success: {
     success: true;
-    data: { repo: RepositoryRow; techs: TechnologyRow[] };
+    data: { repo: RepositoryRow; techs: TechnologyRow[]; licenses: APILicenseWithName[] };
   };
 }>;
 

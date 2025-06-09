@@ -30,7 +30,7 @@ export const Route = createRootRouteWithContext<{
         },
         { itemProp: 'image', content: `${APP_URL}/screenshot.jpg` },
         ...seo({
-          title: 'getStack - Open Source Tech Trends',
+          title: 'getStack - Technology Trends',
           description: `Explore the most popular technologies and repositories, refreshed every week from GitHub`,
           url: `${APP_URL}/`,
         }),
@@ -110,7 +110,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <div className="flex flex-col w-full max-w-screen-lg">
               <Header />
 
-              <div className="h-full px-4">{children}</div>
+              <div className="h-full px-4 min-h-[calc(100vh-150px)]">{children}</div>
 
               <Footer />
             </div>

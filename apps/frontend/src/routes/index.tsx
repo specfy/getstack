@@ -30,7 +30,7 @@ const Index: React.FC = () => {
   return (
     <div className="">
       <div className="text-center mb-14 mt-14">
-        <h1 className="text-4xl font-semibold font-serif">Discover Open Source Trends</h1>
+        <h1 className="text-4xl font-semibold font-serif leading-14">Technology Trends</h1>
         <p className="text-lg font-light text-gray-600">
           Explore the most popular technologies and repositories, refreshed every week
         </p>

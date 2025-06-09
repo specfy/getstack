@@ -32,10 +32,10 @@ export const Search: React.FC<{
     () => {
       setDebounced(search);
     },
-    200,
+    100,
     [search]
   );
-  const { data, isLoading } = useRepositorySearchAlgolia({ search: debounced });
+  const { data, isLoading, isFetching } = useRepositorySearchAlgolia({ search: debounced });
 
   useKey(
     'Escape',
@@ -75,7 +75,7 @@ export const Search: React.FC<{
           onBlur={() => {
             setTimeout(() => setIsFocused(false), 100);
           }}
-          icon={isLoading && <IconLoader className="animate-spin size-4" />}
+          icon={(isLoading || isFetching) && <IconLoader className="animate-spin size-4" />}
         />
         {showList && (
           <CommandEmpty

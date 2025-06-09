@@ -334,7 +334,7 @@ const Tech: React.FC = () => {
               {inCategory.map((row) => {
                 const is = row.tech === techKey;
                 return (
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4" key={row.tech}>
                     <div
                       className={cn(
                         'text-gray-400 font-semibold text-md w-4',

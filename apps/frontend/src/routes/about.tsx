@@ -10,7 +10,7 @@ const About: React.FC = () => {
       <h2 className="text-3xl font-semibold mb-2 font-serif">About</h2>
       <p>
         getStack is a powerful tool that provides comprehensive, and trending insights into the open
-        source world by analyzing <strong className="font-semibold">+20K open repositories</strong>{' '}
+        source world by analyzing <strong className="font-semibold">+33K open repositories</strong>{' '}
         from GitHub.
       </p>
       <h3 className="font-serif">Which technologies are tracked?</h3>
@@ -33,10 +33,10 @@ const About: React.FC = () => {
       <ol>
         <li>No private repos, no templates, no forks, and not archived.</li>
         <li>
-          Have more than <strong>+1500 stars</strong>
+          Have more than <strong>+1000 stars</strong>
         </li>
         <li>Active in the last 2 years</li>
-        <li>Less than 1Gb in disk size </li>
+        <li>Less than 2Gb in disk size </li>
         <li>
           Passes basic name filtering (e.g: awesome, templates, examples, boilerplate, tutorials,
           etc.)
@@ -49,21 +49,21 @@ const About: React.FC = () => {
         configuration for the technology you are looking for. If that's so, you can make a feature
         request or a pull request directly in our GitHub repository.
       </p>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 md:flex-row">
         <Button variant={'outline'} asChild>
           <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
             <img src={`/favicons/github.webp`} className="w-5 h-5" />
-            @specfy/getstack
+            <span className="text-gray-800">@specfy/getstack</span>
           </a>
         </Button>
         <Button variant={'outline'} asChild>
           <a
             href="https://github.com/specfy/stack-analyser"
             target="_blank"
-            className="no-underline"
+            className="no-underline "
           >
             <img src={`/favicons/github.webp`} className="w-5 h-5" />
-            @specfy/stack-analyzer
+            <span className="text-gray-800">@specfy/stack-analyzer</span>
           </a>
         </Button>
       </div>

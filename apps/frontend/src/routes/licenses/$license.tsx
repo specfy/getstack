@@ -162,7 +162,7 @@ const License: React.FC = () => {
           </div>
         )}
       </header>
-      <div className="flex gap-10 mt-6">
+      <div className="flex flex-col md:flex-row gap-10 mt-6">
         <div className="md:w-10/20 text-pretty text-gray-800 md:text-lg font-serif font-light">
           {lic.description}
         </div>
@@ -348,7 +348,7 @@ const License: React.FC = () => {
               {inCategory.map((row) => {
                 const is = row.license === license;
                 return (
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4" key={row.license}>
                     <div
                       className={cn(
                         'text-gray-400 font-semibold text-md w-4',

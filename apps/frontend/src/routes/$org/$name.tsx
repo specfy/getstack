@@ -1,5 +1,13 @@
-import { IconBrandGithub, IconClock, IconStar, IconWorld } from '@tabler/icons-react';
-import { createFileRoute } from '@tanstack/react-router';
+import {
+  IconBrandGithub,
+  IconClock,
+  IconGitFork,
+  IconLicense,
+  IconStar,
+  IconWeight,
+  IconWorld,
+} from '@tabler/icons-react';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
 
@@ -11,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { API_URL, APP_URL } from '@/lib/envs';
-import { formatQuantity } from '@/lib/number';
+import { formatQuantity, formatSize } from '@/lib/number';
 import { seo } from '@/lib/seo';
 import { categories, categoryOrder } from '@/lib/stack';
 
@@ -80,6 +88,7 @@ const Repo: React.FC = () => {
   }
 
   const repo = data.data.repo;
+  const licenses = data.data.licenses;
 
   return (
     <div>
@@ -139,6 +148,9 @@ const Repo: React.FC = () => {
               )}
             </div>
           )}
+          <div className="mt-10 md:hidden">
+            <Report />
+          </div>
         </div>
         <div className="md:w-2/6">
           <div className="flex gap-4 mb-4">
@@ -160,7 +172,6 @@ const Repo: React.FC = () => {
             )}
           </div>
           <Card>
-            {/* <CardHeader>About</CardHeader> */}
             <CardContent>
               <div>
                 <div className="flex items-center gap-3 py-1">
@@ -173,16 +184,54 @@ const Repo: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-3 py-1">
                   <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                    <IconGitFork size={18} />
+                    Forks
+                  </p>
+                  <hr className="flex-1" />
+                  <span className="text-sm font-semibold">{formatQuantity(repo.forks)}</span>
+                </div>
+                <div className="flex items-center gap-3 py-1">
+                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                    <IconWeight size={18} />
+                    Size
+                  </p>
+                  <hr className="flex-1" />
+                  <span className="text-sm font-semibold">{formatSize(repo.size)}</span>
+                </div>
+                <div className="flex items-center gap-3 py-1">
+                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
                     <IconClock size={18} />
                     Last Analyzed
                   </p>
                   <hr className="flex-1" />
                   <span className="text-sm font-semibold">{lastAnalyzed}</span>
                 </div>
+                <div className="flex items-start gap-3 py-1">
+                  <Link className="flex items-center gap-1.5 text-gray-500 text-sm" to="/licenses">
+                    <IconLicense size={18} />
+                    License{licenses.length > 1 ? 's' : ''}
+                  </Link>
+                  <hr className="flex-1 mt-2.5" />
+                  <span className="text-sm font-semibold text-right">
+                    {licenses.map((license) => {
+                      return (
+                        <Link
+                          key={license.license}
+                          to="/licenses/$license"
+                          params={{ license: license.license }}
+                          className="block"
+                        >
+                          {license.full_name}
+                        </Link>
+                      );
+                    })}
+                    {licenses.length <= 0 && 'n/a'}
+                  </span>
+                </div>
               </div>
             </CardContent>
           </Card>
-          <div className="mt-10">
+          <div className="mt-10 hidden md:block">
             <Report />
           </div>
         </div>

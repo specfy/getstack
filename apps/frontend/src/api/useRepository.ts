@@ -40,6 +40,7 @@ export const useRepositorySearchAlgolia = ({ search }: { search: string }) => {
   return useQuery<AlgoliaRepositoryObject[], Error>({
     enabled: Boolean(search),
     queryKey: ['algoliaRepositorySearch', search],
+    placeholderData: (prev) => prev,
     queryFn: async () => {
       const res = await algolia.searchForHits<AlgoliaRepositoryObject>({
         requests: [{ indexName: ALGOLIA_INDEX_NAME, query: search, hitsPerPage: 20 }],

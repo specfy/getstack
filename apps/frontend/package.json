@@ -45,6 +45,7 @@
     "tailwindcss": "4.1.8",
     "tw-animate-css": "1.2.7",
     "unenv": "1.10.0",
+    "vaul": "^1.1.2",
     "vinxi": "0.5.3",
     "vite": "6.3.5",
     "zod": "3.25.56",

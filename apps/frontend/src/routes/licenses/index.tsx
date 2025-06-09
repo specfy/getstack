@@ -196,7 +196,6 @@ const Licenses: React.FC = () => {
               <div className="flex flex-col gap-1">
                 {rest.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
-                  console.log(row);
                   return (
                     <div className="flex justify-between items-center" key={row.license}>
                       <LicenseBadge

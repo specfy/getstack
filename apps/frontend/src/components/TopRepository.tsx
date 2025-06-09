@@ -56,7 +56,7 @@ export const TopRepositories: React.FC<{
                 <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center justify-center shrink-0">
                   <img src={repo.avatar_url} className="w-6 h-6 rounded-sm overflow-hidden" />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col truncate">
                   <div className="font-semibold text-sm truncate text-ellipsis">{repo.name}</div>
                   <div className="text-[10px] text-gray-400 truncate text-ellipsis">{repo.org}</div>
                 </div>
@@ -78,12 +78,13 @@ export const TopRepositories: React.FC<{
           {rest.map((repo) => {
             return (
               <Button
+                key={repo.id}
                 variant={'ghost'}
                 size={'sm'}
                 className="px-2 py-0 h-6 font-normal cursor-pointer text-xs text-gray-600 hover:text-gray-900"
                 asChild
               >
-                <Link key={repo.id} to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
+                <Link to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
                   {repo.org}/{repo.name}
                 </Link>
               </Button>
