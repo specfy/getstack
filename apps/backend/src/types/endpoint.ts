@@ -140,3 +140,15 @@ export type APIGetLicense = Endpoint<{
     };
   };
 }>;
+
+export type APIGetData = Endpoint<{
+  Path: '/1/data';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: {
+      lastRefresh: string;
+      inProgress: boolean;
+    };
+  };
+}>;

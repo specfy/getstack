@@ -264,7 +264,7 @@ const License: React.FC = () => {
               </CardFooter>
             )}
           </Card>
-          <Card style={{ height: 176 }} className="py-0 col-span-3">
+          <Card style={{ height: 'auto', minHeight: '180px' }} className="py-0 col-span-3">
             <ResponsiveLine
               data={chartData}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}

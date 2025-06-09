@@ -5,6 +5,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
 
 import { optionsGetCategory, useCategory, useCategoryLeaderboard } from '@/api/useCategory';
+import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -154,7 +155,9 @@ const Category: React.FC = () => {
         <h3 className="text-lg font-semibold mb-1 font-serif">Top {top10.length}</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
-            <div className="text-xs text-neutral-400 mb-4">By number of repositories in GitHub</div>
+            <div className="text-xs text-neutral-400 pt-1.5">
+              By number of repositories in GitHub
+            </div>
             <Card className="border-transparent p-0">
               <div className="flex flex-col gap-1 ">
                 {top10.map((row) => {
@@ -176,8 +179,13 @@ const Category: React.FC = () => {
             </Card>
           </div>
           <div className="md:col-span-4">
-            <div className="text-xs text-neutral-400 mb-4">Top {top10.length} over time</div>
-            <Card style={{ height: Math.max(200, top10.length * 40) }}>
+            <div className="flex justify-between items-center">
+              <div className="text-xs text-neutral-400">Top {top10.length} over time</div>
+              <div>
+                <DataProgress />
+              </div>
+            </div>
+            <Card style={{ height: Math.max(200, top10.length * 40) }} className="mt-4">
               <ResponsiveAreaBump
                 data={topNData!}
                 margin={{ top: 1, right: 100, bottom: 20, left: 40 }}

@@ -2,6 +2,7 @@ import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { useTop } from '@/api/useTop';
+import { DataProgress } from '@/components/DataProgress';
 import { Newsletter } from '@/components/Newsletter';
 import { Search } from '@/components/Search';
 import { TechBadge } from '@/components/TechBadge';
@@ -30,7 +31,7 @@ const Index: React.FC = () => {
   return (
     <div className="">
       <div className="text-center mb-14 mt-14">
-        <h1 className="text-4xl font-semibold font-serif leading-14">Technology Trends</h1>
+        <h1 className="text-4xl font-semibold font-serif leading-14">Discover Technology Trends</h1>
         <p className="text-lg font-light text-gray-600">
           Explore the most popular technologies and repositories, refreshed every week
         </p>
@@ -40,8 +41,13 @@ const Index: React.FC = () => {
         <Button variant={'default'}>Search</Button>
       </div>
       <Try />
-      <div className="text-xs text-neutral-400 mt-14 text-pretty">
-        Most popular tech per category by number of repositories
+      <div className="flex justify-between items-center mt-14">
+        <div className="text-xs text-neutral-400 text-pretty">
+          Most popular tech per category by number of repositories
+        </div>
+        <div>
+          <DataProgress />
+        </div>
       </div>
       <div className="mt-2 grid grid-cols-1 gap-6 md:grid-cols-3">
         {isLoading && (

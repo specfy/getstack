@@ -2,6 +2,7 @@ import { getCategory } from './v1/categories/$name/getCategory.js';
 import { getCategoryLeaderboard } from './v1/categories/$name/leaderboard/getLeaderboard.js';
 import { postCronTriggerAnalyze } from './v1/cron/postTriggerAnalyze.js';
 import { postCronTriggerList } from './v1/cron/postTriggerList.js';
+import { getData } from './v1/data/getData.js';
 import { getRoot } from './v1/getRoot.js';
 import { getTopRoute } from './v1/getTop.js';
 import { getApiLicense } from './v1/licenses/$license/getLicense.js';
@@ -28,6 +29,7 @@ export const routes: FastifyPluginAsync = async (f) => {
   await f.register(getLicenses, { prefix: '/1' });
   await f.register(getLicenseLeaderboard, { prefix: '/1' });
   await f.register(getApiLicense, { prefix: '/1' });
+  await f.register(getData, { prefix: '/1' });
 
   await f.register(getCategory, { prefix: '/1' });
   await f.register(getCategoryLeaderboard, { prefix: '/1' });

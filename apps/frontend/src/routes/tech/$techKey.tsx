@@ -13,6 +13,7 @@ import { useMemo } from 'react';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
 import { optionsGetTechnology, useRelatedTechnology, useTechnology } from '@/api/useTechnology';
+import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -182,95 +183,98 @@ const Tech: React.FC = () => {
           <Skeleton className="h-20 w-full " />
         </div>
       )}
-      {position > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
-          <Card>
-            <CardHeader className="relative">
-              <CardDescription>Repositories</CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
-                {repoCount}
-              </CardTitle>
 
-              {trend !== null && (
-                <div className="absolute right-4 top-0">
-                  <TrendsBadge pct={trend} />
-                </div>
-              )}
-            </CardHeader>
-            {trend === null ? (
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                No noticeable change in usage since last week
-              </CardFooter>
-            ) : (
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                {trend > 0 ? (
-                  <>
-                    <div className="line-clamp-1 flex gap-2 font-medium">
-                      Trending up this week <IconTrendingUp className="size-4" />
-                    </div>
-                    <div className="text-muted-foreground">
-                      Found in {diff} more repo{diff > 1 && 's'}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="line-clamp-1 flex gap-2 font-medium">
-                      Trending down this week <IconTrendingDown className="size-4" />
-                    </div>
-                    <div className="text-muted-foreground">
-                      Removed in {diff} repo{diff > 1 && 's'}
-                    </div>
-                  </>
+      <div className="mt-10">
+        <div className="flex justify-end items-center">
+          <div>
+            <DataProgress />
+          </div>
+        </div>
+        {position > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4">
+            <Card>
+              <CardHeader className="relative">
+                <CardDescription>Repositories</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
+                  {repoCount}
+                </CardTitle>
+
+                {trend !== null && (
+                  <div className="absolute right-4 top-0">
+                    <TrendsBadge pct={trend} />
+                  </div>
                 )}
-              </CardFooter>
-            )}
-          </Card>
-          <Card style={{ height: 176 }} className="py-0 col-span-3">
-            <ResponsiveLine
-              data={chartData}
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-              xScale={{ type: 'point' }}
-              enableArea={true}
-              axisTop={null}
-              axisRight={null}
-              enableGridX={false}
-              enableGridY={false}
-              pointSize={5}
-              pointColor={{ theme: 'background' }}
-              pointBorderWidth={2}
-              pointBorderColor={{ from: 'seriesColor' }}
-              pointLabelYOffset={-12}
-              enableTouchCrosshair={true}
-              useMesh={true}
-              role="application"
-              curve="monotoneX"
-              yScale={{
-                type: 'linear',
-                min: 0,
-                max: 'auto',
-                stacked: true,
-                reverse: false,
-              }}
-              axisBottom={{
-                tickSize: 1,
-                tickPadding: 6,
-                tickRotation: 0,
-                legend: '',
-                legendOffset: 11,
-                legendPosition: 'middle',
-                truncateTickAt: 0,
-              }}
-              axisLeft={null}
-            />
-          </Card>
-        </div>
-      )}
+              </CardHeader>
+              {trend === null ? (
+                <CardFooter className="flex-col items-start gap-1 text-sm">
+                  No noticeable change in usage since last week
+                </CardFooter>
+              ) : (
+                <CardFooter className="flex-col items-start gap-1 text-sm">
+                  {trend > 0 ? (
+                    <>
+                      <div className="line-clamp-1 flex gap-2 font-medium">
+                        Trending up this week <IconTrendingUp className="size-4" />
+                      </div>
+                      <div className="text-muted-foreground">
+                        Found in {diff} more repo{diff > 1 && 's'}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="line-clamp-1 flex gap-2 font-medium">
+                        Trending down this week <IconTrendingDown className="size-4" />
+                      </div>
+                      <div className="text-muted-foreground">
+                        Removed in {diff} repo{diff > 1 && 's'}
+                      </div>
+                    </>
+                  )}
+                </CardFooter>
+              )}
+            </Card>
+            <Card style={{ height: 'auto', minHeight: '180px' }} className="py-0 col-span-3">
+              <ResponsiveLine
+                data={chartData}
+                margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
+                xScale={{ type: 'point' }}
+                enableArea={true}
+                axisTop={null}
+                axisRight={null}
+                enableGridX={false}
+                enableGridY={false}
+                pointSize={5}
+                pointColor={{ theme: 'background' }}
+                pointBorderWidth={2}
+                pointBorderColor={{ from: 'seriesColor' }}
+                pointLabelYOffset={-12}
+                enableTouchCrosshair={true}
+                useMesh={true}
+                role="application"
+                curve="monotoneX"
+                yScale={{
+                  type: 'linear',
+                  min: 0,
+                  max: 'auto',
+                  stacked: true,
+                  reverse: false,
+                }}
+                axisBottom={{
+                  tickSize: 1,
+                  tickPadding: 6,
+                  tickRotation: 0,
+                  legend: '',
+                  legendOffset: 11,
+                  legendPosition: 'middle',
+                  truncateTickAt: 0,
+                }}
+                axisLeft={null}
+              />
+            </Card>
+          </div>
+        )}
+      </div>
 
-      {position > 0 && (
-        <div className="text-xs text-neutral-400 mb-2 text-right mt-2">
-          Repositories using this technology over time
-        </div>
-      )}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories
