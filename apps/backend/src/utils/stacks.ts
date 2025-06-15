@@ -3333,6 +3333,225 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://www.mapbox.com/',
     description: 'Maps and geospatial services for location-based applications.',
   },
+  'vercel.functions': {
+    website: 'https://vercel.com/docs/functions',
+    description: 'Serverless functions for building web applications.',
+  },
+  antd: {
+    website: 'https://ant.design/',
+    description:
+      'React UI library for building beautiful products more flexible and working with happiness',
+  },
+  antdicons: {
+    website: 'https://ant.design/components/icon/',
+    description: 'Icon library by Ant Design.',
+  },
+  lucideicons: {
+    website: 'https://lucide.dev/',
+    description: 'Beautiful & consistent icons, made by the community.',
+  },
+  apachetika: {
+    website: 'https://tika.apache.org/',
+    description:
+      'Apache Tika is a toolkit for detecting and extracting metadata and structured text from various documents.',
+  },
+  ariakitui: {
+    website: 'https://ariakit.org/',
+    description: 'Accessible, mobile-friendly, and customizable UI components for React.',
+  },
+  bootstrapicons: {
+    website: 'https://icons.getbootstrap.com/',
+    description: 'Free, open-source SVG icon library for Bootstrap.',
+  },
+  chakraui: {
+    website: 'https://chakra-ui.com/',
+    description: 'Simple, modular and accessible component library for React.',
+  },
+  daisyui: {
+    website: 'https://daisyui.com/',
+    description: 'A library of free to use components for React.',
+  },
+  codemirror: {
+    website: 'https://codemirror.net/',
+    description: 'In-browser code editor.',
+  },
+  composio: {
+    website: 'https://composio.com/',
+    description: 'Integration Platform for AI Agents & LLMs',
+  },
+  feathericons: {
+    website: 'https://feathericons.com/',
+    description: 'Beautiful, customizable icons for your next project.',
+  },
+  fluentui: {
+    website: 'https://developer.microsoft.com/en-us/fluentui',
+    description:
+      'A collection of UX frameworks for creating beautiful, cross-platform apps that share code, design, and interaction behavior.',
+  },
+  fontawesome: {
+    website: 'https://fontawesome.com/',
+    description: "The web's most popular icon set and toolkit.",
+  },
+  headlessui: {
+    website: 'https://headlessui.com/',
+    description:
+      'Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.',
+  },
+  heroicons: {
+    website: 'https://heroicons.com/',
+    description: 'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
+  },
+  heroui: {
+    website: 'https://heroui.org/',
+    description: 'A set of accessible, mobile-friendly, and customizable UI components for React.',
+  },
+  crawl4ai: {
+    website: 'https://crawl4ai.com/',
+    description:
+      'Crawl4AI is a platform for building and running web scraping and automation workflows.',
+  },
+  honojs: {
+    website: 'https://hono.dev/',
+    description: 'Hono is a framework for building serverless applications.',
+  },
+  ionicons: {
+    website: 'https://ionic.io/ionicons',
+    description: 'Beautifully crafted open source icons for Ionic apps.',
+  },
+  materialui: {
+    website: 'https://mui.com/',
+    description: "MUI is a library of React components that implements Google's Material Design.",
+  },
+  muiicons: {
+    website: 'https://mui.com/material-ui/material-icons/',
+    description: 'Material Design icons by Google.',
+  },
+  joijs: {
+    website: 'https://joi.dev/',
+    description: 'The most powerful schema description language and data validator for JavaScript',
+  },
+  jsonschema: {
+    website: 'https://json-schema.org/',
+    description:
+      'JSON Schema is a vocabulary that allows you to annotate and validate JSON documents.',
+  },
+  knex: {
+    website: 'https://knexjs.org/',
+    description:
+      'A query builder for PostgreSQL, MySQL, MariaDB, SQLite3, and Oracle, designed to be flexible, portable, and fun to use.',
+  },
+  mantineui: {
+    website: 'https://mantine.dev/',
+    description: 'A fully featured React components library',
+  },
+  mcp: {
+    website: 'https://modelcontextprotocol.io/',
+    description:
+      'MCP is an open protocol that standardizes how applications provide context to LLMs.',
+  },
+  mkdocs: {
+    website: 'https://www.mkdocs.org/',
+    description:
+      'MKDocs is a static site generator that converts your reStructuredText content into HTML.',
+  },
+  monacoeditor: {
+    website: 'https://microsoft.github.io/monaco-editor/',
+    description: 'VSCode standalone editor for the browser.',
+  },
+  openapi: {
+    website: 'https://www.openapis.org/',
+    description:
+      'OpenAPI is a specification for describing, producing, consuming, and visualizing RESTful web services.',
+  },
+  opentelemetry: {
+    website: 'https://opentelemetry.io/',
+    description:
+      'OpenTelemetry is a set of APIs, SDKs, and tools that are designed to help you instrument, generate, collect, and export telemetry data such as metrics, logs, and traces.',
+  },
+  phosphoreicons: {
+    website: 'https://phosphoricons.com/',
+    description: 'Phosphor is a flexible icon family for interfaces, diagrams, and visualizations.',
+  },
+  reacticons: {
+    website: 'https://react-icons.github.io/react-icons/',
+    description: 'A library of React components for icons.',
+  },
+  reactrouterdom: {
+    website: 'https://reactrouter.com/',
+    description: 'React Router is a library for routing in React.',
+  },
+  radixicons: {
+    website: 'https://www.radix-ui.com/icons',
+    description: 'Beautiful, consistent, and accessible icons for React.',
+  },
+  shadcn: {
+    website: 'https://ui.shadcn.com/',
+    description:
+      'A library of React components for building beautiful, consistent, and accessible UI.',
+  },
+  remixrouter: {
+    website: 'https://remix.run/docs/en/v1/api/remix',
+    description:
+      'Remix is a full-stack web framework that lets you focus on the user interface and business logic instead of spending time building infrastructure.',
+  },
+  sandpackeditor: {
+    website: 'https://sandpack.codesandbox.io/',
+    description: 'Run any JavaScript and Node.js app in any browser, powered by CodeSandbox.',
+  },
+  simpleicons: {
+    website: 'https://simpleicons.org/',
+    description: 'Simple Icons is a library of SVG icons for popular brands.',
+  },
+  tanstackrouter: {
+    website: 'https://tanstack.com/router/latest',
+    description: 'Modern and scalable routing for React and Solid applications.',
+  },
+  tablericons: {
+    website: 'https://tabler.io/icons',
+    description:
+      'Free and open source icons designed to make your website or app attractive, visually consistent and simply beautiful.',
+  },
+  trpc: {
+    website: 'https://trpc.io/',
+    description: 'End-to-end typesafe APIs made easy.',
+  },
+  umijs: {
+    website: 'https://umijs.org/',
+    description: 'A framework for building web applications.',
+  },
+  valibot: {
+    website: 'https://valibot.dev/',
+    description: 'TypeScript validation library for runtime data.',
+  },
+  valkey: {
+    website: 'https://valkey.dev/',
+    description:
+      'Valkey is an open source high-performance key/value datastore that supports a variety of workloads such as caching, message queues, and can act as a primary database.',
+  },
+  wikipedia: {
+    website: 'https://www.wikipedia.org/',
+    description:
+      'Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation.',
+  },
+  wolframalpha: {
+    website: 'https://www.wolframalpha.com/',
+    description:
+      'Wolfram Alpha is a computational knowledge engine that can answer questions and solve problems in a variety of fields.',
+  },
+  zod: {
+    website: 'https://zod.dev/',
+    description: 'TypeScript-first schema validation with static type inference.',
+  },
+  lexicaleditor: {
+    website: 'https://lexical.dev/',
+    description:
+      'A library for building rich text editors with a focus on performance and accessibility.',
+  },
+  remixicons: {
+    website: 'https://remixicon.com/',
+    description:
+      'Open-source neutral-style system symbols elaborately crafted for designers and developers.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
@@ -3383,5 +3602,6 @@ const categoriesRaw: Record<TechType, null> = {
   tool: null,
   ui_framework: null,
   ui: null,
+  iconset: null,
 };
 export const categories = Object.keys(categoriesRaw) as TechType[];

@@ -12,12 +12,12 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsGetRepository, useRepository } from '@/api/useRepository';
+import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import { API_URL, APP_URL } from '@/lib/envs';
 import { formatQuantity, formatSize } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -55,28 +55,7 @@ const Repo: React.FC = () => {
   }, [data]);
 
   if (isLoading) {
-    return (
-      <div>
-        <header className="flex gap-2 justify-between mt-10">
-          <h2 className="flex gap-4 items-center">
-            <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
-              <Skeleton className="h-full w-full" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <Skeleton className="h-2 w-10" />
-              <div className="text-2xl font-semibold leading-6">
-                <Skeleton className="h-10 w-50 max-w-2xl" />
-              </div>
-            </div>
-          </h2>
-        </header>
-        <Skeleton className="h-10 w-full mt-4" />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
-          <Skeleton className="h-20 w-full " />
-          <Skeleton className="h-20 w-full " />
-        </div>
-      </div>
-    );
+    return <LoadingHeader />;
   }
 
   if (error) {
@@ -94,7 +73,7 @@ const Repo: React.FC = () => {
     <div>
       <header className="flex gap-2 justify-between items-end mt-10">
         <h2 className="flex gap-4 items-center">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
+          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border">
             {repo.avatar_url ? (
               <img src={repo.avatar_url} className="rounded-md overflow-hidden" />
             ) : (
@@ -102,15 +81,15 @@ const Repo: React.FC = () => {
             )}
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-xs text-gray-400 leading-3">GitHub repository</div>
-            <div className="text-2xl font-semibold leading-6">
-              <span className="text-gray-500 text-xl">{repo.org} /</span> {repo.name}
+            <div className="text-sm text-gray-400 leading-5">GitHub repository</div>
+            <div className="text-3xl font-semibold leading-8">
+              <span className="text-gray-500 text-2xl">{repo.org} /</span> {repo.name}
             </div>
           </div>
         </h2>
       </header>
       {repo.description && (
-        <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">
+        <div className="mt-5 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">
           {repo.description}
         </div>
       )}

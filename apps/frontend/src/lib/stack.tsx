@@ -16,6 +16,7 @@ import {
   IconDatabase,
   IconDatabaseEdit,
   IconFrame,
+  IconIcons,
   IconLayout,
   IconMap,
   IconMessage,
@@ -289,6 +290,12 @@ export const categories: Record<TechType, CategoryDefinition> = {
     description: 'Maps and geospatial services for location-based applications.',
     keyword: 'maps geospatial location based application',
   },
+  iconset: {
+    name: 'Iconset',
+    icon: IconIcons,
+    description: 'Iconsets for building user interfaces and frontend experiences.',
+    keyword: 'iconset icon library',
+  },
 };
 
 export const categoryOrder: TechType[] = [
@@ -341,6 +348,7 @@ export const categoryOrder: TechType[] = [
   'saas',
   'app',
 
+  'iconset',
   'maps',
 
   // Everything else

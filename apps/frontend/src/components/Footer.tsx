@@ -78,6 +78,12 @@ export const Footer: React.FC = () => {
         >
           Suggest a tool
         </a>
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=specfy&repo=stack-analyser&type=star&count=true&size=medium"
+          width="90"
+          height="30"
+          title="GitHub"
+        ></iframe>
       </div>
     </footer>
   );

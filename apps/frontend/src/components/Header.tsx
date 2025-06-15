@@ -137,18 +137,23 @@ export const Header: React.FC = () => {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Button variant={'ghost'} className="justify-start" asChild>
+              {/* <Button variant={'ghost'} className="justify-start" asChild>
                   <a
                     href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
                     target="_blank"
                     className="flex flex-row gap-2"
                   >
                     <img src={`/favicons/github.webp`} className="w-5 h-5" />
-                    <div className="text-sm">289</div>
+                    <div className="text-sm">290</div>
                   </a>
-                </Button>
-              </NavigationMenuLink>
+                </Button> */}
+              <iframe
+                src="https://ghbtns.com/github-btn.html?user=specfy&repo=stack-analyser&type=star&count=true&size=medium"
+                width="90"
+                height="30"
+                title="GitHub"
+                className="mt-2.5"
+              ></iframe>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

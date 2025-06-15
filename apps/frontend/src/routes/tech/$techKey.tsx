@@ -14,6 +14,7 @@ import { useMemo } from 'react';
 import { useCategoryLeaderboard } from '@/api/useCategory';
 import { optionsGetTechnology, useRelatedTechnology, useTechnology } from '@/api/useTechnology';
 import { DataProgress } from '@/components/DataProgress';
+import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TechBadge } from '@/components/TechBadge';
@@ -117,28 +118,7 @@ const Tech: React.FC = () => {
     return <NotFound />;
   }
   if (isLoading) {
-    return (
-      <div>
-        <header className="flex gap-2 justify-between mt-10">
-          <h2 className="flex gap-4 items-center">
-            <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
-              <Skeleton className="h-full w-full" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <Skeleton className="h-2 w-10" />
-              <div className="text-2xl font-semibold leading-6">
-                <Skeleton className="h-10 w-50 max-w-2xl" />
-              </div>
-            </div>
-          </h2>
-        </header>
-        <Skeleton className="h-10 w-full mt-4" />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
-          <Skeleton className="h-20 w-full " />
-          <Skeleton className="h-20 w-full " />
-        </div>
-      </div>
-    );
+    return <LoadingHeader />;
   }
   if (!data) {
     return null;
@@ -148,18 +128,18 @@ const Tech: React.FC = () => {
     <div>
       <header className="flex gap-2 justify-between mt-10">
         <h2 className="flex gap-4 items-center">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
+          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
             <img src={`/favicons/${tech.key}.webp`} className="rounded-sm overflow-hidden" />
           </div>{' '}
           <div className="flex flex-col gap-1">
             <Link
               to="/category/$category"
               params={{ category: tech.type }}
-              className="text-xs text-gray-400 leading-3"
+              className="text-sm text-gray-400 leading-5"
             >
               {categories[tech.type].name}
             </Link>
-            <div className="text-2xl font-semibold leading-6 font-serif">{tech.name}</div>
+            <div className="text-3xl font-semibold leading-8 font-serif">{tech.name}</div>
           </div>
         </h2>
         {position > 0 && (
@@ -173,7 +153,7 @@ const Tech: React.FC = () => {
         )}
       </header>
       {tech.description && (
-        <div className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
+        <div className="mt-6 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
           {tech.description}
         </div>
       )}
@@ -341,7 +321,7 @@ const Tech: React.FC = () => {
                   <div className="flex items-center gap-4" key={row.tech}>
                     <div
                       className={cn(
-                        'text-gray-400 font-semibold text-md w-4',
+                        'text-gray-400 font-semibold text-md min-w-4',
                         is && 'text-lg text-gray-600'
                       )}
                     >
