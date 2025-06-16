@@ -60,6 +60,9 @@ export const Header: React.FC = () => {
               <Link to="/" className="text-lg">
                 Home
               </Link>
+              <Link to="/licenses" className="text-lg">
+                Licenses Tracker
+              </Link>
               <Link to="/private" className="text-lg">
                 Analyze Repo
               </Link>
@@ -119,6 +122,11 @@ export const Header: React.FC = () => {
             <NavigationMenuItem className="hidden md:inline-block">
               <NavigationMenuLink href="/" asChild>
                 <Link to="/">Home</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/licenses" asChild>
+                <Link to="/licenses">Licenses</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>

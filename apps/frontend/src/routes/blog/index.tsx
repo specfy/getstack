@@ -40,7 +40,7 @@ const Blog: React.FC = () => {
           return (
             <Link className="block" to="/blog/$slug" params={{ slug: `${post.slug}-${post.id}` }}>
               <Card key={post.id} className="pt-0 hover:shadow-lg transition-shadow duration-30">
-                <img src={post.image} alt="" />
+                <img src={post.imageCover || post.image} alt="" />
                 <CardHeader>
                   <CardTitle>
                     <h2 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -64,7 +64,7 @@ const Blog: React.FC = () => {
 export const Route = createFileRoute('/blog/')({
   loader: () => {
     return {
-      posts: allPosts,
+      posts: allPosts.sort((a, b) => (a.id > b.id ? -1 : 1)),
     };
   },
   head: () => {

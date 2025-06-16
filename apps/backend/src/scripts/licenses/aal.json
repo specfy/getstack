@@ -1,0 +1,19 @@
+{
+    "fullName": "AAL",
+    "description": "A permissive license designed for academic and research software, allowing commercial use while requiring attribution and license preservation. It provides strong patent protection and includes a termination clause for patent litigation.",
+    "permissions": [
+        "commercial use",
+        "modification",
+        "distribution",
+        "patent use"
+    ],
+    "limitations": [
+        "liability",
+        "warranty"
+    ],
+    "conditions": [
+        "license notice",
+        "copyright notice",
+        "patent notice"
+    ]
+}
