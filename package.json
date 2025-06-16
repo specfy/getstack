@@ -19,7 +19,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:up": "docker compose up -d",
     "db:migrate": "cd apps/backend && npm run migrate",
-    "prod:start": "node apps/backend/dist/db/migrate.js && node apps/backend/dist/index.js"
+    "prod:start": "node apps/backend/dist/db/migrate.js && node apps/backend/dist/index.js",
+    "generate:sitemap": "npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts"
   },
   "devDependencies": {
     "@h1fra/eslint-config": "1.0.12",
