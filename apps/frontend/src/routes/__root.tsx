@@ -102,6 +102,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }}
           />
         )}
+        {/* Plausible Analytics */}
+        <script
+          defer
+          data-domain="getstack.dev"
+          src="https://plausible.getstack.dev/js/script.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`,
+          }}
+        />
         <HeadContent />
       </head>
       <body>
