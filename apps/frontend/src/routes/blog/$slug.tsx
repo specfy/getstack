@@ -84,6 +84,7 @@ export const Route = createFileRoute('/blog/$slug')({
           title: `${data.title} - getStack blog`,
           description: data.summary,
           url,
+          image: data.image,
         }),
       ],
       links: [{ rel: 'canonical', href: url }],
