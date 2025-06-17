@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { API_URL } from '../lib/envs';
 
@@ -6,7 +6,12 @@ import type { APIGetTop } from '../../../backend/src/types/endpoint';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useTop = () => {
-  return useQuery<APIGetTop['Success'], Error>({
+  return useQuery<APIGetTop['Success'], Error>(optionsGetTop());
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const optionsGetTop = () => {
+  return queryOptions<APIGetTop['Success'], Error>({
     queryKey: ['getTop'],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/top`, {

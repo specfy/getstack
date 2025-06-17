@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
-import { useTop } from '@/api/useTop';
+import { optionsGetTop, useTop } from '@/api/useTop';
 import { DataProgress } from '@/components/DataProgress';
 import { Newsletter } from '@/components/Newsletter';
 import { Search } from '@/components/Search';
@@ -123,14 +123,9 @@ const highlights: Highlight[] = [
   { type: 'tech', name: 'vite', displayName: 'Vite' },
   { type: 'tech', name: 'clickhouse', displayName: 'ClickHouse' },
 ];
-
-function getRandomSample<T>(arr: T[], n: number): T[] {
-  // Shuffle a copy and slice the first n elements for unique random sample
-  return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
-}
+const randomHighlights = [...highlights].sort(() => Math.random() - 0.5).slice(0, 3);
 
 const Try: React.FC = () => {
-  const randomHighlights = useMemo(() => getRandomSample(highlights, 3), []);
   return (
     <div className="flex justify-center mt-8 items-center gap-4">
       <div className="text-gray-600 font-serif text-sm">Try</div>
@@ -184,6 +179,10 @@ const Try: React.FC = () => {
 };
 
 export const Route = createFileRoute('/')({
+  loader: async ({ context }) => {
+    const data = await context.queryClient.ensureQueryData(optionsGetTop());
+    return data;
+  },
   head: () => {
     return {
       links: [{ rel: 'canonical', href: APP_URL }],
