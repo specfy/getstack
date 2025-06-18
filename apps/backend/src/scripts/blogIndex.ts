@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck in dockerfile it's not present
 import { allPosts } from '../../../frontend/.content-collections/generated/index.js';
 import { db } from '../db/client.js';
 import { defaultLogger } from '../utils/logger.js';
