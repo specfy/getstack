@@ -6,7 +6,7 @@ import type { Kysely } from 'kysely';
 export async function up(db: Kysely<Database>): Promise<void> {
   await sql`
     CREATE TABLE "posts" (
-      "id" int4 NOT NULL DEFAULT nextval('posts_id_seq'::regclass),
+      "id" serial,
       "title" text NOT NULL,
       "content" text NOT NULL,
       "summary" text NOT NULL,
