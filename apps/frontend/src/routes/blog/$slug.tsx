@@ -2,8 +2,8 @@
 import { MDXContent } from '@content-collections/mdx/react';
 import { IconHome } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound, redirect } from '@tanstack/react-router';
-import { allPosts } from 'content-collections';
 
+import { optionsGetPost } from '@/api/usePosts';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,9 +17,7 @@ import { seo } from '@/lib/seo';
 
 const BlogPost: React.FC = () => {
   const post = Route.useLoaderData();
-  // const isMdx = post._meta.fileName.endsWith('.mdx');
 
-  // return <div>Hello</div>;
   return (
     <div className="mt-20">
       <Breadcrumb>
@@ -42,14 +40,15 @@ const BlogPost: React.FC = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <article className="prose max-w-none container py-8 md:w-2/3">
-        <MDXContent code={post.mdx} />
+        {/* <post.content /> */}
+        <MDXContent code={post.content} />
       </article>
     </div>
   );
 };
 
 export const Route = createFileRoute('/blog/$slug')({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
     const paramSlug = params.slug as string;
     const lastDashIndex = paramSlug.lastIndexOf('-');
     if (lastDashIndex === -1) {
@@ -62,21 +61,20 @@ export const Route = createFileRoute('/blog/$slug')({
     }
 
     const slug = paramSlug.slice(0, Math.max(0, lastDashIndex));
-    const post = allPosts.find((p) => p.id === id);
-    if (!post) {
-      throw notFound();
+
+    const data = await context.queryClient.ensureQueryData(optionsGetPost(id));
+
+    if (data.metadata.slug !== slug) {
+      throw redirect({ to: '/blog/$slug', params: { slug: `${data.metadata.slug}-${data.id}` } });
     }
-    if (post.slug !== slug) {
-      throw redirect({ to: '/blog/$slug', params: { slug: `${post.slug}-${post.id}` } });
-    }
-    return post;
+    return data;
   },
   head: (ctx) => {
     const data = ctx.loaderData;
     if (!data) {
       return {};
     }
-    const url = `${APP_URL}/blog/${data.slug}-${data.id}`;
+    const url = `${APP_URL}/blog/${data.metadata.slug}-${data.id}`;
 
     return {
       meta: [
@@ -84,7 +82,7 @@ export const Route = createFileRoute('/blog/$slug')({
           title: `${data.title} - getStack blog`,
           description: data.summary,
           url,
-          image: data.image,
+          image: data.metadata.image,
         }),
       ],
       links: [{ rel: 'canonical', href: url }],

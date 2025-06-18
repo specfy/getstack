@@ -64,11 +64,35 @@ export type CacheRow = Selectable<CacheTable>;
 export type CacheInsert = Insertable<CacheTable>;
 export type CacheUpdate = Updateable<CacheTable>;
 
+export interface PostsTable {
+  id: number;
+  title: string;
+  content: string;
+  summary: string;
+  techs: string[];
+  categories: string[];
+  metadata: {
+    author: string;
+    avatarUrl: string;
+    authorUrl: string;
+    slug: string;
+    image: string;
+    imageCover?: string | undefined;
+  };
+  created_at: Timestamp;
+  updated_at: Timestamp;
+}
+
+export type PostsRow = Selectable<PostsTable>;
+export type PostsInsert = Insertable<PostsTable>;
+export type PostsUpdate = Updateable<PostsTable>;
+
 export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
   repositories: RepositoriesTable;
   cache: CacheTable;
+  posts: PostsTable;
 }
 
 export type TX = Transaction<Database>;

@@ -1,8 +1,8 @@
 import { IconHome } from '@tabler/icons-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
-import { allPosts } from 'content-collections';
 import dayjs from 'dayjs';
 
+import { optionsGetPosts } from '@/api/usePosts';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -33,21 +33,25 @@ const Blog: React.FC = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        {posts.posts.map((post) => {
-          const date = dayjs(post.publishedAt);
-
+      <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 md:mx-0 md:max-w-none md:grid-cols-3">
+        {posts.map((post) => {
+          const date = dayjs(post.updated_at);
           return (
-            <Link className="block" to="/blog/$slug" params={{ slug: `${post.slug}-${post.id}` }}>
-              <Card key={post.id} className="pt-0 hover:shadow-lg transition-shadow duration-30">
-                <img src={post.imageCover || post.image} alt="" />
+            <Link
+              className="block"
+              to="/blog/$slug"
+              params={{ slug: `${post.metadata.slug}-${post.id}` }}
+              key={post.id}
+            >
+              <Card className="pt-0 hover:shadow-lg transition-shadow duration-30">
+                <img src={post.metadata.imageCover || post.metadata.image} alt="" />
                 <CardHeader>
                   <CardTitle>
                     <h2 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={`/blog/${post.id}-${post.slug}`}>{post.title}</a>
+                      <a href={`/blog/${post.metadata.slug}-${post.id}`}>{post.title}</a>
                     </h2>
                   </CardTitle>
-                  <time dateTime={post.publishedAt.toISOString()} className="text-gray-500 text-xs">
+                  <time dateTime={post.updated_at} className="text-gray-500 text-xs">
                     {date.format('MMM DD, YYYY')}
                   </time>
                 </CardHeader>
@@ -62,10 +66,9 @@ const Blog: React.FC = () => {
 };
 
 export const Route = createFileRoute('/blog/')({
-  loader: () => {
-    return {
-      posts: allPosts.sort((a, b) => (a.id > b.id ? -1 : 1)),
-    };
+  loader: async ({ context }) => {
+    const data = await context.queryClient.ensureQueryData(optionsGetPosts());
+    return data;
   },
   head: () => {
     const url = `${APP_URL}/blog/`;

@@ -6,7 +6,7 @@ import type {
   TechnologyRow,
   TechnologyWeeklyRow,
 } from '../db/types.clickhouse.js';
-import type { LicensesInfoTableRow, RepositoryRow } from '../db/types.db.js';
+import type { LicensesInfoTableRow, PostsRow, RepositoryRow } from '../db/types.db.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 
@@ -149,5 +149,31 @@ export type APIGetData = Endpoint<{
       lastRefresh: string;
       inProgress: boolean;
     };
+  };
+}>;
+
+type DateToString<T> = {
+  [K in keyof T]: T[K] extends Date ? string : T[K];
+};
+export type APIPostSimple = DateToString<
+  Pick<PostsRow, 'id' | 'metadata' | 'summary' | 'title' | 'updated_at'>
+>;
+export type APIGetPosts = Endpoint<{
+  Path: '/1/posts';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: APIPostSimple[];
+  };
+}>;
+
+export type APIPost = DateToString<PostsRow>;
+export type APIGetPost = Endpoint<{
+  Path: '/1/posts/:id';
+  Method: 'GET';
+  Params: { id: number };
+  Success: {
+    success: true;
+    data: APIPost;
   };
 }>;

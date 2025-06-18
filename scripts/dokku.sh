@@ -53,3 +53,5 @@ sudo dokku plugin:install https://github.com/dokku/dokku-clickhouse.git --name c
 dokku clickhouse:create clickhouse -p PASSWORD -r PASSWORD
 dokku clickhouse:link getstack-api
 dokku clickhouse:expose clickhouse 9000 8123
+
+# Plausible

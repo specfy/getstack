@@ -9,6 +9,8 @@ import { getApiLicense } from './v1/licenses/$license/getLicense.js';
 import { getLicenseLeaderboard } from './v1/licenses/getLeaderboard.js';
 import { getLicenses } from './v1/licenses/getLicenses.js';
 import { postSubscribe } from './v1/newsletter/postSubscribe.js';
+import { getPost } from './v1/posts/$id/getPost.js';
+import { getPosts } from './v1/posts/getPosts.js';
 import { getRepositoryImage } from './v1/repositories/$org/$name/getImage.js';
 import { getApiRepository } from './v1/repositories/$org/$name/getRepository.js';
 import { postAnalyzeOne } from './v1/repositories/$org/$name/postAnalyzeOne.js';
@@ -30,6 +32,8 @@ export const routes: FastifyPluginAsync = async (f) => {
   await f.register(getLicenseLeaderboard, { prefix: '/1' });
   await f.register(getApiLicense, { prefix: '/1' });
   await f.register(getData, { prefix: '/1' });
+  await f.register(getPosts, { prefix: '/1' });
+  await f.register(getPost, { prefix: '/1' });
 
   await f.register(getCategory, { prefix: '/1' });
   await f.register(getCategoryLeaderboard, { prefix: '/1' });
