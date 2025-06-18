@@ -34,7 +34,7 @@
   },
   "include": [
     "src",
-    "app.config.ts",
+    "vite.config.ts",
     "content-collections.ts"
   ],
   "references": [

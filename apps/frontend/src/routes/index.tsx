@@ -40,7 +40,7 @@ const Index: React.FC = () => {
         <Search onPick={() => null} inline />
         <Button variant={'default'}>Search</Button>
       </div>
-      <Try />
+      <Try key={1} />
       <div className="flex justify-between items-center mt-14">
         <div className="text-xs text-neutral-400 text-pretty">
           Most popular tech per category by number of repositories
