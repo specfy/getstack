@@ -64,7 +64,7 @@ ENV NODE_ENV=production
 RUN npm install sharp
 
 ARG git_hash
-ENV GIT_HASH $git_hash
+ENV GIT_HASH=$git_hash
 
 # Expose the port the backend service runs on
 EXPOSE 3000

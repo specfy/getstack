@@ -42,3 +42,4 @@ tsconfig.tsbuildinfo
 
 clickhouse_backup/
 .content-collections
+.nitro
