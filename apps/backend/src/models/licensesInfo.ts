@@ -1,6 +1,6 @@
 import { db } from '../db/client.js';
 
-import type { LicensesInfoInsert, LicensesInfoTableRow } from '../db/types.js';
+import type { LicensesInfoInsert, LicensesInfoTableRow } from '../db/types.db.js';
 import type { AllowedLicensesLowercase } from '../types/stack.js';
 
 export async function getLicense(

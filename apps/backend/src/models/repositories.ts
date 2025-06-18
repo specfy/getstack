@@ -2,13 +2,8 @@ import { clickHouse, db } from '../db/client.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 
-import type {
-  ClickhouseRepositoryInsert,
-  RepositoryInsert,
-  RepositoryRow,
-  RepositoryUpdate,
-  TX,
-} from '../db/types.js';
+import type { ClickhouseRepositoryInsert } from '../db/types.clickhouse.js';
+import type { RepositoryInsert, RepositoryRow, RepositoryUpdate, TX } from '../db/types.db.js';
 
 export const ANALYZE_MIN_STARS = envs.ANALYZE_MIN_STARS;
 

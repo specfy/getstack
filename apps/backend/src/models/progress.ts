@@ -1,7 +1,7 @@
 import { db } from '../db/client.js';
 import { formatToDate } from '../utils/date.js';
 
-import type { Database, ProgressTableRow, TX } from '../db/types.js';
+import type { Database, ProgressTableRow, TX } from '../db/types.db.js';
 import type { Kysely } from 'kysely';
 
 export async function getActiveWeek(): Promise<{ currentWeek: string; previousWeek: string }> {

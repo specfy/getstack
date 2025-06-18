@@ -5,7 +5,8 @@ import pg from 'pg';
 
 import { envs } from '../utils/env.js';
 
-import type { Clickhouse, Database } from './types.js';
+import type { Clickhouse } from './types.clickhouse.js';
+import type { Database } from './types.db.js';
 import type { Dialect } from 'kysely';
 
 const Pool = pg.Pool;

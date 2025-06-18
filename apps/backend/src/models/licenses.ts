@@ -3,12 +3,8 @@ import { addWeeks, startOfISOWeek } from 'date-fns';
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';
 
-import type {
-  ClickhouseRepositoryRow,
-  LicenseInsert,
-  LicenseRow,
-  RepositoryRow,
-} from '../db/types.js';
+import type { ClickhouseRepositoryRow, LicenseInsert, LicenseRow } from '../db/types.clickhouse.js';
+import type { RepositoryRow } from '../db/types.db.js';
 import type { LicenseLeaderboard, LicenseTopN, LicenseWeeklyVolume } from '../types/endpoint.js';
 
 export async function createLicenses(input: LicenseInsert[]): Promise<void> {

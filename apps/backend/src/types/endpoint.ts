@@ -1,13 +1,12 @@
 import type { Endpoint } from './api.js';
 import type {
   LicenseRow,
-  LicensesInfoTableRow,
   LicensesWeeklyRow,
-  RepositoryRow,
   TechnologiesWeeklyTable,
   TechnologyRow,
   TechnologyWeeklyRow,
-} from '../db/types.js';
+} from '../db/types.clickhouse.js';
+import type { LicensesInfoTableRow, RepositoryRow } from '../db/types.db.js';
 import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
 import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 

@@ -5,10 +5,10 @@ import { formatToYearWeek } from '../utils/date.js';
 
 import type {
   ClickhouseRepositoryRow,
-  RepositoryRow,
   TechnologyInsert,
   TechnologyRow,
-} from '../db/types.js';
+} from '../db/types.clickhouse.js';
+import type { RepositoryRow } from '../db/types.db.js';
 import type {
   RelatedTechnology,
   TechnologyByCategoryByWeekWithTrend,

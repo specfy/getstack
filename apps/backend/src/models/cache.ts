@@ -1,7 +1,7 @@
 import { db } from '../db/client.js';
 import { envs } from '../utils/env.js';
 
-import type { CacheRow } from '../db/types.js';
+import type { CacheRow } from '../db/types.db.js';
 
 export async function getCache(key: string): Promise<CacheRow | undefined> {
   return await db.selectFrom('cache').selectAll().where('key', '=', key).executeTakeFirst();

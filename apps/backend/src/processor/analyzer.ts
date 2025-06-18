@@ -19,11 +19,10 @@ import { octokit } from '../utils/github.js';
 import type {
   LicenseInsert,
   LicenseRow,
-  RepositoryRow,
-  TX,
   TechnologyInsert,
   TechnologyRow,
-} from '../db/types.js';
+} from '../db/types.clickhouse.js';
+import type { RepositoryRow, TX } from '../db/types.db.js';
 import type { AllowedLicensesLowercase } from '../types/stack.js';
 import type { AllowedKeys, Payload } from '@specfy/stack-analyser';
 import type { Logger } from 'pino';

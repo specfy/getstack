@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { upsertLicense } from '../models/licensesInfo.js';
 
-import type { LicensesInfoInsert, LicensesInfoTableRow } from '../db/types.js';
+import type { LicensesInfoInsert, LicensesInfoTableRow } from '../db/types.db.js';
 import type { AllowedLicensesLowercase } from '../types/stack.js';
 
 type LicenseFileData = { fullName: string } & Pick<
