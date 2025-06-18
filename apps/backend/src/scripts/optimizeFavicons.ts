@@ -3,20 +3,22 @@ import path from 'node:path';
 
 import sharp from 'sharp';
 
+/**
+ *  npx tsx apps/backend/src/scripts/optimizeFavicons.ts
+ */
+
 const inputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
-const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons-optimized');
 const maxWidth = 200;
 const quality = 100;
 
-fs.mkdirSync(outputDir, { recursive: true });
-
 for (const file of fs.readdirSync(inputDir)) {
-  if (!file.endsWith('.webp')) {
+  if (!file.endsWith('-unop.webp')) {
     continue;
   }
 
   const inputPath = path.join(inputDir, file);
-  const outputPath = path.join(outputDir, file);
+  const outputFileName = file.replace('-unop.webp', '.webp');
+  const outputPath = path.join(inputDir, outputFileName);
 
   try {
     const image = sharp(inputPath);
@@ -28,7 +30,10 @@ for (const file of fs.readdirSync(inputDir)) {
       await image.webp({ quality }).toFile(outputPath);
     }
 
-    console.log('Optimized:', file);
+    // Delete the original -unop.webp file after successful processing
+    fs.unlinkSync(inputPath);
+
+    console.log('Optimized:', file, '->', outputFileName);
   } catch (err) {
     console.error('Failed to process:', file, err);
   }
