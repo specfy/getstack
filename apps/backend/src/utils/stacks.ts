@@ -3552,6 +3552,154 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description:
       'Open-source neutral-style system symbols elaborately crafted for designers and developers.',
   },
+  ada: {
+    website: 'https://www.ada.dev/',
+    description: 'Ada is a programming language for building web applications.',
+  },
+  apacheCordova: {
+    website: 'https://cordova.apache.org/',
+    description: 'Apache Cordova is a framework for building cross-platform mobile applications.',
+  },
+  arktype: {
+    website: 'https://arktype.io/',
+    github: 'arktypeio/arktype',
+    description: 'Arktype is a static type checker for JavaScript and TypeScript.',
+  },
+  aspnet: {
+    website: 'https://dotnet.microsoft.com/en-us/apps/aspnet',
+    description: 'ASP.NET is a web framework for building web applications and services.',
+  },
+  babel: {
+    website: 'https://babeljs.io/',
+    github: 'babel/babel',
+    description: 'Babel is a compiler for JavaScript.',
+  },
+  baseui: {
+    website: 'https://base-ui.com/',
+    github: 'mui/base-ui',
+    description:
+      'Base UI is a library of React components for building beautiful, consistent, and accessible UI.',
+  },
+  capacitorjs: {
+    website: 'https://capacitorjs.com/',
+    github: 'capacitorjs/capacitor',
+    description: 'Capacitor is a framework for building cross-platform mobile applications.',
+  },
+  cloudinary: {
+    website: 'https://cloudinary.com/',
+    description: 'Cloudinary is a cloud-based image and video management service.',
+  },
+  cobol: {
+    website: 'https://www.cobol.dev/',
+    description: 'COBOL is a programming language for building web applications.',
+  },
+  coffeescript: {
+    website: 'https://coffeescript.org/',
+    github: 'jashkenas/coffeescript',
+    description: 'CoffeeScript is a programming language that compiles to JavaScript.',
+  },
+  docsify: {
+    website: 'https://docsify.js.org/',
+    github: 'docsifyjs/docsify',
+    description: 'Docsify is a documentation site generator for JavaScript and TypeScript.',
+  },
+  haskell: {
+    website: 'https://www.haskell.org/',
+    description: 'Haskell is a functional programming language.',
+  },
+  ionic: {
+    website: 'https://ionicframework.com/',
+    github: 'ionic-team/ionic',
+    description: 'Ionic is a framework for building cross-platform mobile applications.',
+  },
+  lua: {
+    website: 'https://www.lua.org/',
+    description: 'Lua is a programming language for building web applications.',
+  },
+  matlab: {
+    website: 'https://www.mathworks.com/products/matlab.html',
+    description: 'MATLAB is a programming language for building web applications.',
+  },
+  objectivec: {
+    website: 'https://developer.apple.com/documentation/objectivec',
+    description: 'Objective-C is a programming language for building web applications.',
+  },
+  perl: {
+    website: 'https://www.perl.org/',
+    description: 'Perl is a programming language for building web applications.',
+  },
+  r: {
+    website: 'https://www.r-project.org/',
+    description: 'R is a programming language for building web applications.',
+  },
+  parceljs: {
+    website: 'https://parceljs.org/',
+    github: 'parcel-bundler/parcel',
+    description: 'Parcel is a fast, zero configuration web application bundler.',
+  },
+  polarsh: {
+    website: 'https://polarsh.com/',
+    github: 'polarsource/polar',
+    description: 'Polar is a modern, open-source, and fully customizable UI framework.',
+  },
+  rekaui: {
+    website: 'https://reka-ui.com/',
+    github: 'unovue/reka-ui',
+    description: 'Reka is a modern, open-source, and fully customizable UI framework.',
+  },
+  rolldown: {
+    website: 'https://rolldown.rs/',
+    github: 'rolldown/rolldown',
+    description: 'Rolldown is a fast, zero configuration web application bundler.',
+  },
+  rspack: {
+    website: 'https://rspack.dev/',
+    github: 'web-infra-dev/rspack',
+    description: 'Rspack is a fast, zero configuration web application bundler.',
+  },
+  scala: {
+    website: 'https://www.scala-lang.org/',
+    description: 'Scala is a programming language for building web applications.',
+  },
+  slatedocs: {
+    website: 'https://slatedocs.github.io/slate',
+    github: 'slatedocs/slate',
+    description: 'Slate is a documentation site generator for JavaScript and TypeScript.',
+  },
+  superstruct: {
+    website: 'https://docs.superstructjs.org/',
+    github: 'ianstormtaylor/superstruct',
+    description: 'Superstruct is a simple and fast schema validation library for JavaScript.',
+  },
+  swc: {
+    website: 'https://swc.rs/',
+    github: 'swc-project/swc',
+    description: 'SWC is a fast, zero configuration web application bundler.',
+  },
+  testinglibrary: {
+    website: 'https://testing-library.com/',
+    github: 'testing-library/testing-library-js',
+    description: 'Testing Library is a library for testing React applications.',
+  },
+  typebox: {
+    website: 'https://github.com/sinclairzx81/typebox',
+    github: 'sinclairzx81/typebox',
+    description: 'TypeBox is a simple and fast schema validation library for JavaScript.',
+  },
+  visualbasicnet: {
+    website: 'https://docs.microsoft.com/en-us/dotnet/visual-basic/',
+    description: 'Visual Basic is a programming language for building web applications.',
+  },
+  vitepress: {
+    website: 'https://vitepress.dev/',
+    github: 'vuejs/vitepress',
+    description: 'VitePress is a documentation site generator for JavaScript and TypeScript.',
+  },
+  vuepress: {
+    website: 'https://vuepress.vuejs.org/',
+    github: 'vuejs/vuepress',
+    description: 'VuePress is a documentation site generator for JavaScript and TypeScript.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
@@ -3603,5 +3751,8 @@ const categoriesRaw: Record<TechType, null> = {
   ui_framework: null,
   ui: null,
   iconset: null,
+  builder: null,
+  ssg: null,
+  validation: null,
 };
 export const categories = Object.keys(categoriesRaw) as TechType[];

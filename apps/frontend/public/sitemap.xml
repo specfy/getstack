@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/ada</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/adminer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -112,6 +117,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/anthropic</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/apacheCordova</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -216,12 +226,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/arktype</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/asana</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getstack.dev/tech/asdf</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/aspnet</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -591,6 +611,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/babel</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/baseui</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/bash</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -711,6 +741,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/capacitorjs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/cargo</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -811,6 +846,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/cloudinary</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/cobol</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/cockroachdb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -832,6 +877,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/codesandboxci</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/coffeescript</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1017,6 +1067,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/docker</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/docsify</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1561,6 +1616,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/haskell</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/headlessui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1706,6 +1766,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/ionic</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/ionicons</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1806,6 +1871,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/kotlin</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/koyeb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1896,6 +1966,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/lua</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/lucideicons</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1942,6 +2017,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/materialui</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/matlab</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2181,6 +2261,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/objectivec</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/oceanbase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2276,6 +2361,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/parceljs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/payloadcms</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2287,6 +2377,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/percona</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/perl</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2387,6 +2482,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/poetry</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/polarsh</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2501,6 +2601,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/r</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/rabbitmq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2591,6 +2696,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/rekaui</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/relativeci</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2651,7 +2761,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/rolldown</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/rollup</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/rspack</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2697,6 +2817,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/sas</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/scala</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2841,6 +2966,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/slatedocs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/snowflake</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2976,6 +3106,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/superstruct</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/supertokens</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2987,6 +3122,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/sveltejs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/swc</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3081,6 +3221,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/testinglibrary</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/tidb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3157,6 +3302,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/twitter</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/typebox</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3286,7 +3436,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/visualbasicnet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/vite</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/vitepress</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3302,6 +3462,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/vuejs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/vuepress</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3426,11 +3591,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/aal</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getstack.dev/licenses/afl-3.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3442,21 +3602,6 @@
   </url>
   <url>
     <loc>https://getstack.dev/licenses/agpl-3.0-only</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/bsd-2-clause-patent</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/bsd-2-clause</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/bsd-3-clause-clear</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3486,7 +3631,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/licenses/bsd-2-clause-patent</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/bsd-2-clause</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/licenses/bsd-3-clause-attribution</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/bsd-3-clause-clear</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/bsd-3-clause</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3501,12 +3666,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/licenses/busl-1.1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/cal-1.0</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/licenses/cc-by-1.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getstack.dev/licenses/cc-by-3.0</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/cc-by-4.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3561,67 +3741,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/busl-1.1</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/cal-1.0</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/fsful</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/bsd-3-clause</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/vim</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/w3c-20150513</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/w3c</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/wtfpl</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/x11</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/xdebug-1.03</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/zlib-acknowledgement</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/zlib</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getstack.dev/licenses/elastic-2.0</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/epl-1.0</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/epl-2.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3632,6 +3762,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/licenses/eupl-1.2</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/fsful</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3691,17 +3826,22 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/epl-1.0</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/epl-2.0</loc>
+    <loc>https://getstack.dev/licenses/lgpl-2.1-or-later</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getstack.dev/licenses/lgpl-2.1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/lgpl-3.0-only</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/lgpl-3.0-or-later</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3776,37 +3916,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/lgpl-3.0-only</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/lgpl-3.0-or-later</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/unicode-dfs-2016</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/unlicense</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/cc-by-4.0</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getstack.dev/licenses/lgpl-2.1-or-later</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getstack.dev/licenses/php-3.01</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/postgresql</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/psf-2.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3836,17 +3956,62 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/licenses/unicode-dfs-2016</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/unlicense</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/licenses/upl-1.0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/postgresql</loc>
+    <loc>https://getstack.dev/licenses/vim</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/licenses/psf-2.0</loc>
+    <loc>https://getstack.dev/licenses/w3c-20150513</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/w3c</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/wtfpl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/x11</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/xdebug-1.03</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/zlib-acknowledgement</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/zlib</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/licenses/aal</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -19,7 +19,9 @@ const fetchFavicons = async (): Promise<void> => {
 
     try {
       const fileName = `${tech.key}.webp`;
+      const fileNameUnOp = `${tech.key}-unop.webp`;
       const filePath = path.join(outputDir, fileName);
+      const filePathUnOp = path.join(outputDir, fileNameUnOp);
 
       try {
         await fs.stat(filePath);
@@ -39,8 +41,8 @@ const fetchFavicons = async (): Promise<void> => {
         continue;
       }
 
-      await fs.writeFile(filePath, Buffer.from(await response.arrayBuffer()));
-      console.log(`Favicon saved for ${tech.key} at ${filePath}`);
+      await fs.writeFile(filePathUnOp, Buffer.from(await response.arrayBuffer()));
+      console.log(`Favicon saved for ${tech.key} at ${filePathUnOp}`);
     } catch (err) {
       console.error(`Failed to fetch favicon for ${tech.key}:`, err);
     }
