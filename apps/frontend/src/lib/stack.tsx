@@ -359,9 +359,12 @@ export const categoryOrder: TechType[] = [
   'runtime',
   'tool',
 
+  'validation',
+  'builder',
+
   // Saas but well known
   'cms',
-  'payment',
+  'ssg',
   'etl',
 
   // Saas but broader
@@ -370,6 +373,7 @@ export const categoryOrder: TechType[] = [
   'app',
 
   'iconset',
+  'payment',
   'maps',
 
   // Everything else
@@ -380,6 +384,65 @@ export const categoryOrder: TechType[] = [
   // Deprecated
   'api',
   'messaging',
+];
+
+export const categoryGroup: { name: string; categories: TechType[]; description: string }[] = [
+  {
+    name: 'Highlight',
+    description: 'The most popular categories',
+    categories: ['language', 'db', 'ai'],
+  },
+
+  {
+    name: 'Infrastructure',
+    description: 'Most popular infrastructure and services for hosting and managing applications',
+    categories: ['cloud', 'iac', 'storage', 'queue', 'monitoring', 'hosting'],
+  },
+
+  {
+    name: 'UI & App',
+    description: 'Most popular libraries, and tools for building website and user interfaces',
+    categories: ['ui_framework', 'framework', 'ui', 'iconset', 'ssg', 'auth', 'cms', 'maps'],
+  },
+
+  {
+    name: 'Data Libraries',
+    description: 'Most popular libraries for data manipulation and validation',
+    categories: ['orm', 'validation', 'automation'],
+  },
+
+  {
+    name: 'Dev tools',
+    description: 'Most popular tools for development',
+    categories: ['runtime', 'package_manager', 'builder', 'tool'],
+  },
+
+  {
+    name: 'CI',
+    description: 'Most popular CI/CD tools for automating workflows',
+    categories: ['ci', 'test', 'linter'],
+  },
+
+  {
+    name: 'Saas',
+    description: 'Most popular Saas tools for building applications',
+    categories: [
+      'analytics',
+      'collaboration',
+      'communication',
+      'saas',
+      'payment',
+      'etl',
+      'crm',
+      'api',
+    ],
+  },
+
+  {
+    name: 'Others',
+    description: 'Everything else',
+    categories: ['app', 'security', 'network'],
+  },
 ];
 
 export const listIndexed = {} as Record<AllowedKeys, ExtendedTechItem & TechItem>;

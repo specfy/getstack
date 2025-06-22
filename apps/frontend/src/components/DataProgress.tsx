@@ -23,7 +23,7 @@ export const DataProgress: React.FC = () => {
           ) : (
             <IconCheck stroke={1} size={16} className="text-lime-700" />
           )}
-          {data.data.inProgress ? 'Refreshing' : 'Fresh'}
+          Data is {data.data.inProgress ? 'refreshing' : 'fresh from this week'}
         </div>
       </TooltipTrigger>
       <TooltipContent>

@@ -9,23 +9,52 @@ import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
-import { categories, categoryOrder } from '@/lib/stack';
+import { categories, categoryGroup, listIndexed } from '@/lib/stack';
 
+import type { TechnologyByCategoryByWeekWithTrend } from '@getstack/backend/src/types/endpoint';
 import type { TechType } from '@specfy/stack-analyser';
 
 const Index: React.FC = () => {
   const { data, isLoading } = useTop();
 
-  const sorted = useMemo(() => {
+  const groupedData = useMemo(() => {
     if (!data?.data) {
       return [];
     }
 
-    return [...data.data].sort(
-      (a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category)
-    );
+    // Create groups structure
+    const groups: {
+      name: string;
+      description: string;
+      categories: { category: TechType; rows: TechnologyByCategoryByWeekWithTrend[] }[];
+    }[] = [];
+
+    for (const group of categoryGroup) {
+      const groupCategories = [];
+
+      for (const cat of group.categories) {
+        const categoryData = data.data.find((item) => item.category === cat);
+        if (categoryData && categoryData.rows.length > 0) {
+          groupCategories.push({
+            category: cat,
+            rows: categoryData.rows,
+          });
+        }
+      }
+
+      if (groupCategories.length > 0) {
+        groups.push({
+          name: group.name,
+          description: group.description,
+          categories: groupCategories,
+        });
+      }
+    }
+
+    return groups;
   }, [data]);
 
   return (
@@ -41,70 +70,88 @@ const Index: React.FC = () => {
         <Button variant={'default'}>Search</Button>
       </div>
       <Try key={1} />
-      <div className="flex justify-between items-center mt-14">
-        <div className="text-xs text-neutral-400 text-pretty">
-          Most popular tech per category by number of repositories
-        </div>
-        <div>
-          <DataProgress />
-        </div>
+      <div className="flex justify-end items-center mt-14">
+        <DataProgress />
       </div>
-      <div className="mt-2 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-2 space-y-14">
         {isLoading && (
-          <>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <Skeleton className="h-20" />
             <Skeleton className="h-20" />
             <Skeleton className="h-20" />
             <Skeleton className="h-20" />
             <Skeleton className="h-20" />
             <Skeleton className="h-20" />
-          </>
+          </div>
         )}
-        {sorted.map(({ category, rows }, index) => {
-          const def = categories[category as TechType];
-          const Icon = def.icon;
+        {groupedData.map((group, groupIndex) => {
           return (
-            <>
-              {index === 12 && (
+            <div key={group.name}>
+              {groupIndex === 2 && (
                 <div className="flex flex-col justify-center items-center px-4 py-10 md:col-span-3">
                   <Newsletter />
                 </div>
               )}
-              <Link
-                key={index}
-                to={`/category/$category`}
-                params={{ category }}
-                className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[250px]"
-              >
-                <div className="p-4 h-full">
-                  <div className="flex items-center mb-6 gap-4">
-                    <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
-                      <Icon size={22} />
-                    </div>
-                    <h4 className="text-md font-semibold font-serif">{def.name}</h4>
-                  </div>
-                  <ul className="flex flex-col gap-3">
-                    {rows.map((row, rowIndex) => {
-                      const formatted = formatQuantity(row.current_hits);
-                      return (
-                        <li key={rowIndex}>
-                          <div className="flex items-center justify-between text-xs h-5">
-                            <TechBadge tech={row.tech} border />
-                            <div className="flex gap-1 items-center">
-                              {row.previous_hits > 0 &&
-                                (row.percent_change > 0.5 || row.percent_change < -0.5) && (
-                                  <TrendsBadge pct={row.percent_change} />
-                                )}
-                              <div className="font-semibold w-8 text-right">{formatted}</div>
+              <h2 className="text-2xl font-semibold font-serif mb-1 text-gray-800">{group.name}</h2>
+              <p className="text-sm text-gray-600 mb-4 font-serif mb-4">{group.description}</p>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                {group.categories.map(({ category, rows }, index) => {
+                  const def = categories[category as TechType];
+                  const Icon = def.icon;
+                  return (
+                    <>
+                      <Link
+                        key={index}
+                        to={`/category/$category`}
+                        params={{ category }}
+                        className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[250px]"
+                      >
+                        <div className="p-4 h-full">
+                          <div className="flex items-center mb-6 gap-4">
+                            <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
+                              <Icon size={22} />
                             </div>
+                            <h4 className="text-md font-semibold font-serif">{def.name}</h4>
                           </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </Link>
-            </>
+                          <ul className="flex flex-col gap-3">
+                            {rows.map((row, rowIndex) => {
+                              const formatted = formatQuantity(row.current_hits);
+                              const name = listIndexed[row.tech].name;
+                              return (
+                                <li
+                                  key={rowIndex}
+                                  title={`${name} is used by ${formatted} repositories`}
+                                >
+                                  <div className="flex items-center justify-between text-xs h-5">
+                                    <TechBadge tech={row.tech} border />
+                                    <div className="flex gap-1 items-center">
+                                      {row.previous_hits > 0 &&
+                                        (row.percent_change > 0.5 || row.percent_change < -0.5) && (
+                                          <TrendsBadge pct={row.percent_change} />
+                                        )}
+                                      <Tooltip>
+                                        <TooltipTrigger>
+                                          <div className="font-semibold w-8 text-right">
+                                            {formatted}
+                                          </div>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                          {formatted} repositories are using {name}
+                                        </TooltipContent>
+                                      </Tooltip>
+                                    </div>
+                                  </div>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </Link>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
           );
         })}
       </div>
