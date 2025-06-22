@@ -5,11 +5,11 @@ import { optionsGetTop, useTop } from '@/api/useTop';
 import { DataProgress } from '@/components/DataProgress';
 import { Newsletter } from '@/components/Newsletter';
 import { Search } from '@/components/Search';
+import { TT } from '@/components/TT';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { categories, categoryGroup, listIndexed } from '@/lib/stack';
@@ -120,7 +120,7 @@ const Index: React.FC = () => {
                               return (
                                 <li
                                   key={rowIndex}
-                                  title={`${name} is used by ${formatted} repositories`}
+                                  aria-description={`${name} is used by ${formatted} repositories`}
                                 >
                                   <div className="flex items-center justify-between text-xs h-5">
                                     <TechBadge tech={row.tech} border />
@@ -129,16 +129,13 @@ const Index: React.FC = () => {
                                         (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                                           <TrendsBadge pct={row.percent_change} />
                                         )}
-                                      <Tooltip>
-                                        <TooltipTrigger>
-                                          <div className="font-semibold w-8 text-right">
-                                            {formatted}
-                                          </div>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                          {formatted} repositories are using {name}
-                                        </TooltipContent>
-                                      </Tooltip>
+                                      <TT
+                                        description={`${name} is used by ${formatted} repositories`}
+                                      >
+                                        <div className="font-semibold w-8 text-right">
+                                          {formatted}
+                                        </div>
+                                      </TT>
                                     </div>
                                   </div>
                                 </li>

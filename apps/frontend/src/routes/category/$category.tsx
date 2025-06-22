@@ -9,6 +9,7 @@ import { DataProgress } from '@/components/DataProgress';
 import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
+import { TT } from '@/components/TT';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -141,15 +142,22 @@ const Category: React.FC = () => {
               <div className="flex flex-col gap-1 ">
                 {top10.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
+                  const name = listIndexed[row.tech].name;
                   return (
-                    <div className="flex justify-between items-center" key={row.tech}>
+                    <div
+                      className="flex justify-between items-center"
+                      key={row.tech}
+                      aria-description={`${name} is used by ${formatted} repositories`}
+                    >
                       <TechBadge tech={row.tech} size="l" border />
                       <div className="flex gap-1 items-center">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
-                        <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                        <TT description={`${name} is used by ${formatted} repositories`}>
+                          <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                        </TT>
                       </div>
                     </div>
                   );

@@ -17,6 +17,7 @@ import { DataProgress } from '@/components/DataProgress';
 import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
+import { TT } from '@/components/TT';
 import { TechBadge } from '@/components/TechBadge';
 import { TopRepositories } from '@/components/TopRepository';
 import { TrendsBadge } from '@/components/TrendsBadge';
@@ -270,17 +271,24 @@ const Tech: React.FC = () => {
         <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
           <div className="grid gap-2 grid-cols-2 md:gap-4">
             {tech.github && (
-              <a href={`https://github.com/${tech.github}?utm_source=getstack.dev`} target="_blank">
+              <TT description={`https://github.com/${tech.github}`}>
+                <a
+                  href={`https://github.com/${tech.github}?utm_source=getstack.dev`}
+                  target="_blank"
+                >
+                  <Button variant="outline" className="cursor-pointer w-full">
+                    <IconBrandGithub stroke={1} /> GitHub
+                  </Button>
+                </a>
+              </TT>
+            )}
+            <TT description={tech.website}>
+              <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
                 <Button variant="outline" className="cursor-pointer w-full">
-                  <IconBrandGithub stroke={1} /> GitHub
+                  <IconWorld stroke={1} /> Website
                 </Button>
               </a>
-            )}
-            <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
-              <Button variant="outline" className="cursor-pointer w-full">
-                <IconWorld stroke={1} /> Website
-              </Button>
-            </a>
+            </TT>
           </div>
           {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (

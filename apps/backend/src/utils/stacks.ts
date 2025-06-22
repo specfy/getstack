@@ -3,7 +3,7 @@ import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js'
 import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
 
 export interface ExtendedTechItem {
-  website?: string;
+  website: string;
   github?: string;
   iconURL?: string;
   description: string;

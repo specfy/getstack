@@ -51,6 +51,7 @@ export const TopRepositories: React.FC<{
               className="py-4 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
+              aria-description={`${repo.org}/${repo.name} is using ${emptyDesc}`}
             >
               <header className="flex gap-2">
                 <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center justify-center shrink-0">

@@ -143,7 +143,10 @@ const License: React.FC = () => {
         )}
       </header>
       <div className="flex flex-col md:flex-row gap-10 mt-6">
-        <div className="md:w-10/20 text-pretty text-gray-800 md:text-lg font-serif font-light">
+        <div
+          className="md:w-10/20 text-pretty text-gray-800 md:text-lg font-serif font-light"
+          aria-description={`${lic.full_name} explained and meaning`}
+        >
           {lic.description}
         </div>
         <div className="md:w-11/20 flex gap-10 justify-end">
