@@ -216,6 +216,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/appsignal</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/appveyor</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2756,6 +2761,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/revenuecat</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/rollbar</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3482,6 +3492,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/webpack</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/whatsapp</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

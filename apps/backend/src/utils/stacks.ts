@@ -3700,6 +3700,19 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'vuejs/vuepress',
     description: 'VuePress is a documentation site generator for JavaScript and TypeScript.',
   },
+  appsignal: {
+    website: 'https://appsignal.com/',
+    description:
+      'Monitoring and analytics platform for cloud-scale applications, providing visibility across infrastructure, applications, and logs.',
+  },
+  revenuecat: {
+    website: 'https://www.revenuecat.com/',
+    description: 'Subscription and in-app purchase management for iOS and Android.',
+  },
+  whatsapp: {
+    website: 'https://www.whatsapp.com/',
+    description: 'Messaging platform for iOS and Android.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {

@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@getstack/backend": "file:../backend",
-    "@specfy/stack-analyser": "1.27.0",
+    "@specfy/stack-analyser": "1.27.1",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "autoprefixer": "10.4.21",
