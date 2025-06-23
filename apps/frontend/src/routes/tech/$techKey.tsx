@@ -12,9 +12,8 @@ import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { useCategoryLeaderboard } from '@/api/useCategory';
-import { optionsGetTechnology, useRelatedTechnology, useTechnology } from '@/api/useTechnology';
+import { optionsGetTechnology, useRelatedTechnology } from '@/api/useTechnology';
 import { DataProgress } from '@/components/DataProgress';
-import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TT } from '@/components/TT';
@@ -39,22 +38,22 @@ const Tech: React.FC = () => {
   const { techKey } = Route.useParams();
 
   const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
-  const { data, isLoading } = useTechnology({ name: tech?.key });
+  const { data } = Route.useLoaderData();
   const { data: leaderboard, isLoading: isLoadingLeaderboard } = useCategoryLeaderboard({
     name: tech?.type,
   });
 
   const [current, trend, diff] = useMemo(() => {
-    if (!data || data.data.volume.length <= 0) {
+    if (data.volume.length <= 0) {
       return [null, null, 0];
     }
 
-    const crr = data.data.volume.at(-1)!;
-    if (data.data.volume.length <= 1) {
+    const crr = data.volume.at(-1)!;
+    if (data.volume.length <= 1) {
       return [crr, null, 0];
     }
 
-    const lastWeek = data.data.volume.at(-2)!;
+    const lastWeek = data.volume.at(-2)!;
     const pct = (crr.hits * 100) / lastWeek.hits - 100;
     return [
       crr,
@@ -67,17 +66,14 @@ const Tech: React.FC = () => {
     if (!current) {
       return ['0', '0'];
     }
-    return [formatQuantity(current.hits), formatQuantity(data!.data.cumulatedStars)];
+    return [formatQuantity(current.hits), formatQuantity(data.cumulatedStars)];
   }, [current]);
 
   const chartData = useMemo<LineSeries[]>(() => {
-    if (!data) {
-      return [];
-    }
     return [
       {
         id: 'volume',
-        data: data.data.volume.map((r) => {
+        data: data.volume.map((r) => {
           // Parse YYYY-WW into a valid date
           const [year, week] = r.date_week.split('-').map(Number);
           const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
@@ -118,12 +114,6 @@ const Tech: React.FC = () => {
   if (!tech) {
     return <NotFound />;
   }
-  if (isLoading) {
-    return <LoadingHeader />;
-  }
-  if (!data) {
-    return null;
-  }
 
   return (
     <div>
@@ -144,7 +134,9 @@ const Tech: React.FC = () => {
           </div>
         </h2>
         {position > 0 && (
-          <div>
+          <div
+            aria-description={`${tech.name} is ranked #${position} in ${categories[tech.type].name}`}
+          >
             <div className="text-[10px] text-right text-gray-500">position in category</div>
             <div className="text-4xl text-right font-semibold text-gray-400 font-serif">
               <span className="font-normal text-gray-400">#</span>
@@ -158,12 +150,6 @@ const Tech: React.FC = () => {
           {tech.description}
         </div>
       )}
-      {isLoadingLeaderboard && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
-          <Skeleton className="h-20 w-full " />
-          <Skeleton className="h-20 w-full " />
-        </div>
-      )}
 
       <div className="mt-10">
         <div className="flex justify-end items-center">
@@ -171,13 +157,13 @@ const Tech: React.FC = () => {
             <DataProgress />
           </div>
         </div>
-        {position > 0 && (
+        {data.volume.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4">
             <Card>
               <CardHeader className="relative">
                 <CardDescription>Repositories</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
-                  {repoCount}
+                  {repoCount} <span className="text-xs text-gray-400">in GitHub</span>
                 </CardTitle>
 
                 {trend !== null && (
@@ -259,7 +245,7 @@ const Tech: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
         <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
           <TopRepositories
-            topRepos={data.data.topRepos}
+            topRepos={data.topRepos}
             title={`Top repositories using ${tech.name}`}
             description={`Most popular GitHub repositories that import or use ${tech.name}`}
             emptyDesc={tech.name}

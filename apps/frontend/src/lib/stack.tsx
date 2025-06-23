@@ -424,8 +424,8 @@ export const categoryGroup: { name: string; categories: TechType[]; description:
   },
 
   {
-    name: 'Saas',
-    description: 'Most popular Saas tools for building applications',
+    name: 'SaaS',
+    description: 'Most popular SaaS tools for building applications',
     categories: [
       'analytics',
       'collaboration',

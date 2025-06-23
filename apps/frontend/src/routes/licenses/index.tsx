@@ -4,10 +4,9 @@ import { IconLicense, IconTrendingDown, IconTrendingUp } from '@tabler/icons-rea
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useLicenses, useLicensesLeaderboard } from '@/api/useLicense';
+import { optionsGetLicenses, useLicensesLeaderboard } from '@/api/useLicense';
 import { DataProgress } from '@/components/DataProgress';
 import { LicenseBadge } from '@/components/LicenseBadge';
-import { LoadingHeader } from '@/components/LoadingHeader';
 import { Report } from '@/components/Report';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,7 +18,7 @@ import type { APILicenseLeaderboard } from '@getstack/backend/src/types/endpoint
 import type { AreaBumpSerie } from '@nivo/bump';
 
 const Licenses: React.FC = () => {
-  const { data, isError, isLoading } = useLicenses();
+  const { data } = Route.useLoaderData();
   const { data: leaderboard } = useLicensesLeaderboard();
   const [pie, setPie] = useState<{ id: string; value: number }[]>([]);
   const [top10, setTop10] = useState<APILicenseLeaderboard[]>([]);
@@ -28,16 +27,12 @@ const Licenses: React.FC = () => {
   const [looser, setLooser] = useState<APILicenseLeaderboard>();
 
   const topNData = useMemo(() => {
-    if (!data) {
-      return [];
-    }
-
     const topN: Record<
       string,
       AreaBumpSerie<{ x: number | string; y: number }, { id: string }>
     > = {};
 
-    for (const row of data.data.top) {
+    for (const row of data.top) {
       if (!(row.full_name in topN)) {
         topN[row.full_name] = { id: row.full_name, data: [] };
       }
@@ -78,14 +73,6 @@ const Licenses: React.FC = () => {
     setTop10(leaderboard.data.slice(0, 10));
     setRest(leaderboard.data.slice(10));
   }, [leaderboard]);
-
-  if (isError) {
-    return null;
-  }
-
-  if (isLoading) {
-    return <LoadingHeader />;
-  }
 
   if (!leaderboard) {
     return null;
@@ -320,6 +307,10 @@ const Licenses: React.FC = () => {
 };
 
 export const Route = createFileRoute('/licenses/')({
+  loader: async ({ context }) => {
+    const data = await context.queryClient.ensureQueryData(optionsGetLicenses());
+    return data;
+  },
   head: () => {
     const url = `${APP_URL}/licenses`;
     return {

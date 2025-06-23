@@ -38,7 +38,13 @@ export const optionsGetCategory = ({ name }: { name?: string }) => {
 };
 
 export const useCategoryLeaderboard = ({ name }: { name?: string | undefined }) => {
-  return useQuery<APIGetCategoryLeaderboard['Success'], Error>({
+  return useQuery<APIGetCategoryLeaderboard['Success'], Error>(
+    useCategoryLeaderboardOptions({ name })
+  );
+};
+
+export const useCategoryLeaderboardOptions = ({ name }: { name?: string | undefined }) => {
+  return queryOptions<APIGetCategoryLeaderboard['Success'], Error>({
     enabled: Boolean(name),
     queryKey: ['getCategoryLeaderboard', name],
     queryFn: async () => {
