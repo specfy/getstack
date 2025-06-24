@@ -1,7 +1,5 @@
 import { APP_URL } from './envs';
 
-import type { AnyRouteMatch } from '@tanstack/react-router';
-
 export const seo = ({
   title,
   description,
@@ -12,7 +10,7 @@ export const seo = ({
   url: string;
   description: string;
   image?: string;
-}): AnyRouteMatch['meta'] => {
+}): ({ name: string; content: string } | { title: string })[] => {
   const imageEnd = image || `${APP_URL}/screenshot.jpg`;
   const tags = [
     { title },

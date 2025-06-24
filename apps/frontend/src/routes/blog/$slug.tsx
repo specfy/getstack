@@ -4,6 +4,9 @@ import { IconHome } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound, redirect } from '@tanstack/react-router';
 
 import { optionsGetPost } from '@/api/usePosts';
+import { BadgeRepo } from '@/components/content/BadgeRepo';
+import { HTop } from '@/components/content/Heading';
+import { Image } from '@/components/content/Image';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,6 +15,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
 import { APP_URL } from '@/lib/envs';
 import { seo } from '@/lib/seo';
 
@@ -41,7 +45,10 @@ const BlogPost: React.FC = () => {
       </Breadcrumb>
       <article className="prose max-w-none container py-8 md:w-2/3">
         {/* <post.content /> */}
-        <MDXContent code={post.content} />
+        <MDXContent
+          code={post.content}
+          components={{ BadgeRepo: BadgeRepo, HTop: HTop, Image: Image, Button: Button }}
+        />
       </article>
     </div>
   );
@@ -67,6 +74,7 @@ export const Route = createFileRoute('/blog/$slug')({
     if (data.metadata.slug !== slug) {
       throw redirect({ to: '/blog/$slug', params: { slug: `${data.metadata.slug}-${data.id}` } });
     }
+
     return data;
   },
   head: (ctx) => {
@@ -88,5 +96,6 @@ export const Route = createFileRoute('/blog/$slug')({
       links: [{ rel: 'canonical', href: url }],
     };
   },
+  // ssr: false,
   component: BlogPost,
 });

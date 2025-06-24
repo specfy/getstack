@@ -157,7 +157,7 @@ export const Header: React.FC = () => {
                 </Button> */}
               <iframe
                 src="https://ghbtns.com/github-btn.html?user=specfy&repo=stack-analyser&type=star&count=true&size=medium"
-                width="90"
+                width="100"
                 height="30"
                 title="GitHub"
                 className="mt-2.5"

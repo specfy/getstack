@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
         </a>
         <iframe
           src="https://ghbtns.com/github-btn.html?user=specfy&repo=stack-analyser&type=star&count=true&size=medium"
-          width="90"
+          width="100"
           height="30"
           title="GitHub"
         ></iframe>

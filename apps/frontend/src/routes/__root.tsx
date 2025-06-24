@@ -118,7 +118,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <Providers>
           <div className="min-h-screen flex justify-center">
-            <div className="flex flex-col w-full max-w-screen-lg">
+            <div className="flex flex-col w-full max-w-screen-xl">
               <Header />
 
               <div className="h-full px-4 min-h-[calc(100vh-150px)]">{children}</div>
