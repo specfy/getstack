@@ -19,6 +19,8 @@ const posts = defineCollection({
     authorUrl: z.string().url(),
     image: z.string(),
     imageCover: z.string().optional(),
+    techs: z.array(z.string()).optional(),
+    categories: z.array(z.string()).optional(),
   }),
 
   transform: async (document, context) => {

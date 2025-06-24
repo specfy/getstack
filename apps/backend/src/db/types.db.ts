@@ -69,8 +69,8 @@ export interface PostsTable {
   title: string;
   content: string;
   summary: string;
-  techs: string[];
-  categories: string[];
+  techs: { data: string[] };
+  categories: { data: string[] };
   metadata: {
     author: string;
     avatarUrl: string;

@@ -35,7 +35,7 @@ export const optionsGetPosts = () => {
 
 export const optionsGetPost = (id: number) => {
   return queryOptions<APIGetPost['Success']['data'], Error>({
-    queryKey: ['getPost'],
+    queryKey: ['getPost', id],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/posts/${id}`, {
         method: 'GET',

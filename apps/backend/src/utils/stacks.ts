@@ -2362,7 +2362,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   tanstackstart: {
     website: 'https://tanstack.com/start/latest',
-    github: 'TanStack/start',
+    github: 'tanstack/router',
     description:
       'Open-source library for building modern, performant, and accessible web applications with React, focusing on developer experience and performance.',
   },

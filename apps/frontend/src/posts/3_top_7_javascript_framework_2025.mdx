@@ -7,29 +7,29 @@ publishedAt: "2025-06-24"
 updatedAt: "2025-06-24"
 author: Samuel Bodin
 avatarUrl: https://avatars.githubusercontent.com/u/1637651?v=4
-authorUrl: https://www.linkedin.com/in/bodinsamuel/
-image: /blog/3_top_10_javascript_framework_2025.png
+authorUrl: https://x.com/samdotdev
+image: "/blog/3_top_10_javascript_framework_2025.png"
 techs: ["nextjs", "nuxtjs", "nestjs", "remixrun", "tanstackstart", "meteorjs", "sveltejs", "solidjs", "qwikjs", "astro"]
-category: "framework"
+categories: ["framework"]
 ---
-
-# Top 7 JavaScript Frameworks in 2025
 
 The JavaScript ecosystem is constantly evolving, with new frameworks emerging and established ones adapting to meet modern development needs. Based on our analysis of thousands of GitHub repositories, here are the top 7 JavaScript full-stack frameworks that are shaping web development in 2025.
 
 <HTop position={1} tech="nextjs">Next.js</HTop>
 
-<Image src="/website/nextjs.png" alt="Next.js Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'nextjs' }}>
+  <Image src="/website/nextjs.png" alt="Next.js Framework" />
+</Link>
 
-**Current Usage: 1,105 popular GitHub repositories** (+0.6% WoW growth)
+<TechSummary volume="1.1K" percentChange={'+0.2'} stars="132K" tech="nextjs" />
 
-[Next.js](https://getstack.dev/tech/nextjs) continues to dominate the JavaScript framework landscape with its powerful React-based architecture. The framework's success stems from its excellent developer experience, built-in optimizations, and seamless deployment options.
+[Next.js](https://getstack.dev/tech/nextjs) continues to **dominate the JavaScript framework landscape** with its powerful React-based architecture. The framework's success stems from its excellent developer experience, built-in optimizations, and seamless deployment options.
 
 The framework has become the go-to choice for React developers who need server-side rendering, static site generation, and API routes all in one package. Its integration with Vercel deployment makes it particularly attractive for teams looking to ship quickly without infrastructure complexity.
 
 **Trend Analysis**: Next.js shows steady growth, indicating strong adoption in production environments. The framework's focus on performance and developer experience continues to resonate with teams building modern web applications.
 
-<div>For example, Next.js is used in major repositories such as <BadgeRepo avatar_url="https://avatars.githubusercontent.com/u/130738209?v=4" name="AutoGPT" org="Significant-Gravitas" /> and <BadgeRepo avatar_url="https://avatars.githubusercontent.com/u/59452120?v=4" name="excalidraw" org="excalidraw" />.</div>
+<div>For example, Next.js is used in major repositories such as <BadgeRepo avatar_url="https://avatars.githubusercontent.com/u/59452120?v=4" name="excalidraw" org="excalidraw" /> and <BadgeRepo avatar_url="https://avatars.githubusercontent.com/u/130738209?v=4" name="AutoGPT" org="Significant-Gravitas" />.</div>
 
 **Pros:**
 - Server-side rendering and static site generation out of the box
@@ -43,15 +43,21 @@ The framework has become the go-to choice for React developers who need server-s
 - Limited flexibility for custom server configurations
 - Potential vendor lock-in with Vercel ecosystem
 
+<Link to="/tech/$techKey" params={{ techKey: 'nextjs' }}>
+  <Button>More about Next.js</Button>
+</Link>
+
 <HTop position={2} tech="nuxtjs">Nuxt.js</HTop>
 
-<Image src="/website/nuxtjs.png" alt="Nuxt.js Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'nuxtjs' }}>
+  <Image src="/website/nuxtjs.png" alt="Nuxt.js Framework" />
+</Link>
 
-**Current Usage: 151 popular GitHub repositories** (+0.7% WoW growth)
+<TechSummary volume="150" percentChange={'-0.7'} stars="57K" tech="nuxtjs" />
 
 [Nuxt.js](https://getstack.dev/tech/nuxtjs) brings the same level of sophistication to Vue.js that Next.js provides for React. Its convention-over-configuration approach and powerful features make it a favorite among Vue developers.
 
-The framework's automatic routing based on file structure and built-in SEO optimization make it particularly attractive for content-heavy websites and marketing applications. Nuxt.js's module system allows for easy extension and customization.
+The framework's automatic routing based on file structure and built-in SEO optimization make it particularly **attractive for content-heavy websites and marketing applications**. Nuxt.js's module system allows for easy extension and customization.
 
 **Trend Analysis**: Nuxt.js shows positive growth, indicating strong adoption in the Vue.js ecosystem. The framework's focus on developer experience and performance optimization aligns well with modern development practices.
 
@@ -69,15 +75,19 @@ Notable projects using Nuxt.js include <BadgeRepo avatar_url="https://avatars.gi
 - Limited third-party integrations
 - Steeper learning curve for complex applications
 
-<Button>Read more</Button>
+<Link to="/tech/$techKey" params={{ techKey: 'nuxtjs' }}>
+  <Button>More about Nuxt.js</Button>
+</Link>
 
 <HTop position={3} tech="nestjs">NestJS</HTop>
 
-<Image src="/website/nestjs.png" alt="NestJS Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'nestjs' }}>
+  <Image src="/website/nestjs.png" alt="NestJS Framework" />
+</Link>
 
-**Current Usage: 91 popular GitHub repositories** (+1.1% WoW growth)
+<TechSummary volume="91" percentChange={'0'} stars="71K" tech="nestjs" />
 
-[NestJS](https://getstack.dev/tech/nestjs) brings enterprise-level architecture to Node.js development with its TypeScript-first approach and dependency injection patterns inspired by Angular.
+[NestJS](https://getstack.dev/tech/nestjs) brings **enterprise-level architecture to Node.js development** with its TypeScript-first approach and dependency injection patterns inspired by Angular.
 
 The framework's decorators and dependency injection make it particularly attractive for large-scale applications and microservices. NestJS's built-in support for testing and documentation generation supports enterprise development practices.
 
@@ -97,13 +107,19 @@ Prominent repositories leveraging NestJS include <BadgeRepo avatar_url="https://
 - Over-engineering for simple applications
 - Limited flexibility for rapid prototyping
 
+<Link to="/tech/$techKey" params={{ techKey: 'nestjs' }}>
+  <Button>More about NestJS</Button>
+</Link>
+
 <HTop position={4} tech="remixrun">Remix</HTop>
 
-<Image src="/website/remixrun.png" alt="Remix Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'remixrun' }}>
+  <Image src="/website/remixrun.png" alt="Remix Framework" />
+</Link>
 
-**Current Usage: 58 popular GitHub repositories** (-18.3% WoW decline)
+<TechSummary volume="58" percentChange={'0'} stars="31K" tech="remixrun" />
 
-Despite the decline in usage, [Remix](https://getstack.dev/tech/remixrun) remains a powerful full-stack framework that emphasizes web standards and modern UX patterns. Its focus on server-side rendering and progressive enhancement sets it apart.
+Despite the **decline in usage**, [Remix](https://getstack.dev/tech/remixrun) remains a powerful full-stack framework that emphasizes web standards and modern UX patterns. Its focus on server-side rendering and progressive enhancement sets it apart.
 
 The framework's web standards-first approach and built-in error boundaries provide a solid foundation for robust applications. Remix's focus on user experience and progressive enhancement aligns well with modern web development principles.
 
@@ -123,13 +139,19 @@ Remix is used in repositories such as <BadgeRepo avatar_url="https://avatars.git
 - Limited third-party integrations
 - Steeper learning curve for complex applications
 
+<Link to="/tech/$techKey" params={{ techKey: 'remixrun' }}>
+  <Button>More about Remix</Button>
+</Link>
+
 <HTop position={5} tech="tanstackstart">TanStack Start</HTop>
 
-<Image src="/website/tanstackstart.png" alt="TanStack Start Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'tanstackstart' }}>
+  <Image src="/website/tanstackstart.png" alt="TanStack Start Framework" />
+</Link>
 
-**Current Usage: 12 popular GitHub repositories**
+<TechSummary volume="13" percentChange={'+8.3'} stars="10K" tech="tanstackstart" />
 
-[TanStack Start](https://getstack.dev/tech/tanstackstart) represents the next generation of full-stack frameworks, focusing on developer experience and modern web standards.
+[TanStack Start](https://getstack.dev/tech/tanstackstart) represents the **next generation of full-stack frameworks**, focusing on developer experience and modern web standards.
 
 The framework's modern development patterns and built-in state management make it an attractive choice for TypeScript projects. TanStack Start's focus on performance and developer-friendly tooling aligns well with modern development practices.
 
@@ -149,15 +171,21 @@ Some notable repositories supporting TanStack Start are <BadgeRepo avatar_url="h
 - Limited third-party integrations
 - Newer framework with evolving patterns
 
+<Link to="/tech/$techKey" params={{ techKey: 'tanstackstart' }}>
+  <Button>More about TanStack Start</Button>
+</Link>
+
 <HTop position={6} tech="meteorjs">Meteor.js</HTop>
 
-<Image src="/website/meteorjs.png" alt="Meteor.js Framework" />
+<Link to="/tech/$techKey" params={{ techKey: 'meteorjs' }}>
+  <Image src="/website/meteorjs.png" alt="Meteor.js Framework" />
+</Link>
 
-**Current Usage: 10 popular GitHub repositories**
+<TechSummary volume="12" percentChange={'+20'} stars="44K" tech="meteorjs" />
 
 [Meteor.js](https://getstack.dev/tech/meteorjs) specializes in real-time applications with its reactive data system and seamless client-server communication.
 
-The framework's real-time capabilities and built-in user authentication make it an excellent choice for collaborative applications and live dashboards. Meteor's full-stack JavaScript development approach simplifies the development process.
+The framework's real-time capabilities and built-in user authentication make it an **excellent choice for collaborative applications and live dashboards**. Meteor's full-stack JavaScript development approach simplifies the development process.
 
 **Trend Analysis**: Meteor.js maintains stable usage, particularly in applications requiring real-time functionality. The framework's specialized focus on real-time applications keeps it relevant despite competition from more general-purpose frameworks.
 
@@ -175,15 +203,19 @@ Meteor.js powers projects like <BadgeRepo avatar_url="https://avatars.githubuser
 - Performance concerns with large datasets
 - Steeper learning curve for complex applications
 
+<Link to="/tech/$techKey" params={{ techKey: 'meteorjs' }}>
+  <Button>More about Meteor.js</Button>
+</Link>
+
 <HTop position={7} tech="sveltejs">SvelteKit</HTop>
 
-<Image src="/website/sveltejs.png" alt="Svelte.js Framework" />
-
-**Current Usage: 8 popular GitHub repositories**
+<Link to="/tech/$techKey" params={{ techKey: 'sveltejs' }}>
+  <Image src="/website/sveltejs.png" alt="SvelteKit Framework" />
+</Link>
 
 [Svelte.js](https://getstack.dev/tech/sveltejs) represents a paradigm shift in frontend development with its compile-time approach that generates highly optimized vanilla JavaScript.
 
-The framework's reactive system and minimal runtime make it particularly attractive for performance-critical applications. Svelte's focus on simplicity and developer experience has created a dedicated following among developers who prefer a more straightforward approach to building user interfaces.
+The framework's reactive system and minimal runtime make it particularly attractive for **performance-critical applications**. Svelte's focus on simplicity and developer experience has created a dedicated following among developers who prefer a more straightforward approach to building user interfaces.
 
 **Trend Analysis**: Svelte.js maintains stable usage, particularly in applications where performance and bundle size are critical concerns. The framework's unique compile-time approach continues to attract developers looking for alternatives to virtual DOM-based frameworks.
 
@@ -201,9 +233,13 @@ Svelte.js powers projects like <BadgeRepo avatar_url="https://avatars.githubuser
 - Limited third-party integrations
 - Steeper learning curve for complex state management
 
+<Link to="/tech/$techKey" params={{ techKey: 'sveltejs' }}>
+  <Button>More about SvelteKit</Button>
+</Link>
+
 ## Key Trends in 2025
 
-The JavaScript framework landscape in 2025 shows several clear trends. **Performance-first development** is driving adoption of frameworks like Next.js and Svelte.js, while **TypeScript adoption** is boosting frameworks like NestJS and TanStack Start. **Full-stack integration** continues to be important, with frameworks providing seamless development experiences dominating the landscape.
+The JavaScript framework landscape in 2025 shows several clear trends. **Performance-first development** is driving adoption of frameworks like Next.js and SvelteKit, while **TypeScript adoption** is boosting frameworks like NestJS and TanStack Start. **Full-stack integration** continues to be important, with frameworks providing seamless development experiences dominating the landscape.
 
 The data shows that developers are increasingly choosing frameworks based on specific use cases rather than following general trends. Next.js dominates for React applications, while specialized frameworks like NestJS for enterprise backends and Svelte.js for performance-critical applications are carving out important niches.
 

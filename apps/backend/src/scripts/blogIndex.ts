@@ -15,6 +15,7 @@ async function main(): Promise<void> {
     if (!Array.isArray(allPosts)) {
       throw new TypeError('allPosts is not an array');
     }
+
     logger.info(`Found ${allPosts.length} posts to index`);
 
     // Upsert each post
@@ -33,8 +34,8 @@ async function main(): Promise<void> {
         title: post.title,
         content: post.mdx,
         summary: post.summary,
-        techs: [], // TODO: Extract techs from content
-        categories: [], // TODO: Extract categories from content
+        techs: { data: 'techs' in post ? (post.techs as string[]) : [] },
+        categories: { data: 'categories' in post ? (post.categories as string[]) : [] },
         metadata,
         created_at: new Date(post.publishedAt),
         updated_at: new Date(post.updatedAt),
@@ -48,6 +49,8 @@ async function main(): Promise<void> {
             title: postData.title,
             content: postData.content,
             summary: postData.summary,
+            techs: postData.techs,
+            categories: postData.categories,
             metadata: postData.metadata,
             updated_at: postData.updated_at,
           })
