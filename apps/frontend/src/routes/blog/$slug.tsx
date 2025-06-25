@@ -151,7 +151,7 @@ export const Route = createFileRoute('/blog/$slug')({
           title: `${data.title} - getStack blog`,
           description: data.summary,
           url,
-          image: data.metadata.image,
+          image: `${APP_URL}${data.metadata.image}`,
         }),
         { name: 'article:published_time', content: data.created_at },
         { name: 'article:modified_time', content: data.updated_at },
