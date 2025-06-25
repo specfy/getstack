@@ -30,5 +30,9 @@ export async function upsertLicense(data: LicensesInfoInsert): Promise<void> {
 }
 
 export async function getAllLicensesNames(): Promise<{ key: string; full_name: string }[]> {
-  return await db.selectFrom('licenses_info').select(['key', 'full_name']).execute();
+  return await db
+    .selectFrom('licenses_info')
+    .select(['key', 'full_name'])
+    .orderBy('key', 'asc')
+    .execute();
 }
