@@ -210,7 +210,7 @@ const Try: React.FC = () => {
                     <img
                       src={`/favicons/${item.name.toLowerCase()}.webp`}
                       className="rounded-xs overflow-hidden"
-                      alt={`${item.name} logo`}
+                      alt={`${item.displayName} logo`}
                     />
                   </div>
                   <div className="truncate text-ellipsis">{item.displayName}</div>

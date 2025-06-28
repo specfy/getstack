@@ -128,6 +128,7 @@ export const Search: React.FC<{
             {technologies.length > 0 && (
               <CommandGroup heading="Technologies">
                 {technologies.map((row) => {
+                  const name = categories[row.type].name;
                   return (
                     <CommandItem
                       key={row.key}
@@ -145,11 +146,11 @@ export const Search: React.FC<{
                       <Link to="/tech/$techKey" params={{ techKey: row.key }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={`/favicons/${row.key}.webp`} alt={`${row.key} logo`} />
+                            <img src={`/favicons/${row.key}.webp`} alt={`${name} logo`} />
                           </div>
                           <span>{row.name}</span>
                         </div>
-                        <div className="text-gray-500 text-xs">{categories[row.type].name}</div>
+                        <div className="text-gray-500 text-xs">{name}</div>
                       </Link>
                     </CommandItem>
                   );
@@ -179,7 +180,7 @@ export const Search: React.FC<{
                       <Link to="/$org/$name" params={{ org: row.org, name: row.name }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={row.avatarUrl} />
+                            <img src={row.avatarUrl} alt={`${row.name} logo`} />
                           </div>
                           <span>{row.name}</span>
                         </div>

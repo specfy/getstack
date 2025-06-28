@@ -12,6 +12,7 @@ export const TechBadge: React.FC<{
   className?: ClassValue;
   border?: boolean;
 }> = ({ tech, className, size, border }) => {
+  const name = listIndexed[tech].name;
   return (
     <Link
       className={cn(
@@ -28,10 +29,10 @@ export const TechBadge: React.FC<{
         <img
           src={`/favicons/${tech}.webp`}
           className="rounded-xs overflow-hidden"
-          alt={`${tech} logo`}
+          alt={`${name} logo`}
         />
       </div>
-      <div className="truncate text-ellipsis">{listIndexed[tech].name}</div>
+      <div className="truncate text-ellipsis">{name}</div>
     </Link>
   );
 };
