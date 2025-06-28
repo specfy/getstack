@@ -7,7 +7,7 @@ import { seo } from '@/lib/seo';
 const About: React.FC = () => {
   return (
     <div className="md:w-2/3 prose mt-10">
-      <h2 className="text-3xl font-semibold mb-2 font-serif">About</h2>
+      <h1 className="text-3xl font-semibold mb-2 font-serif">About</h1>
       <p>
         getStack is a powerful tool that provides comprehensive, and trending insights into the open
         source world by analyzing <strong className="font-semibold">+33K open repositories</strong>{' '}
@@ -52,7 +52,7 @@ const About: React.FC = () => {
       <div className="flex flex-col gap-2 md:flex-row">
         <Button variant={'outline'} asChild>
           <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
-            <img src={`/favicons/github.webp`} className="w-5 h-5" />
+            <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
             <span className="text-gray-800">@specfy/getstack</span>
           </a>
         </Button>
@@ -62,7 +62,7 @@ const About: React.FC = () => {
             target="_blank"
             className="no-underline "
           >
-            <img src={`/favicons/github.webp`} className="w-5 h-5" />
+            <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
             <span className="text-gray-800">@specfy/stack-analyzer</span>
           </a>
         </Button>

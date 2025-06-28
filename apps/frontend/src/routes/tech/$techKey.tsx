@@ -118,9 +118,13 @@ const Tech: React.FC = () => {
   return (
     <div>
       <header className="flex gap-2 justify-between mt-10">
-        <h2 className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center">
           <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
-            <img src={`/favicons/${tech.key}.webp`} className="rounded-sm overflow-hidden" />
+            <img
+              src={`/favicons/${tech.key}.webp`}
+              className="rounded-sm overflow-hidden"
+              alt={`${tech.name} logo`}
+            />
           </div>{' '}
           <div className="flex flex-col gap-1">
             <Link
@@ -130,9 +134,9 @@ const Tech: React.FC = () => {
             >
               {categories[tech.type].name}
             </Link>
-            <div className="text-3xl font-semibold leading-8 font-serif">{tech.name}</div>
+            <h1 className="text-3xl font-semibold leading-8 font-serif">{tech.name}</h1>
           </div>
-        </h2>
+        </div>
         {position > 0 && (
           <div
             aria-description={`${tech.name} is ranked #${position} in ${categories[tech.type].name}`}

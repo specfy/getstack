@@ -81,14 +81,14 @@ const Licenses: React.FC = () => {
   return (
     <div>
       <header className="mb-10 flex flex-col gap-2 mt-10">
-        <h2 className="flex gap-4 ">
+        <h1 className="flex gap-4 ">
           <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
             <IconLicense size={39} />
           </div>
           <div>
             <div className="text-3xl font-semibold font-serif leading-14">Licenses</div>
           </div>
-        </h2>
+        </h1>
         <h3 className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
           Discover the most popular open source licenses used across GitHub repositories. This
           ranking shows which licenses are trending and how their adoption evolves over time.

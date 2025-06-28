@@ -134,7 +134,11 @@ export async function refreshOne(
     last_analyzed_at: formatToClickhouseDatetime(new Date()),
     size: repo.size,
     avatar_url: repo.owner?.avatar_url || '',
-    homepage_url: repo.homepage || '',
+    homepage_url: repo.homepage
+      ? repo.homepage.startsWith('https:/')
+        ? repo.homepage
+        : `https://${repo.homepage}`
+      : '',
     description: repo.description || '',
     forks: repo.forks_count,
     repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),

@@ -36,7 +36,8 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
-                  <img src={`/favicons/github.webp`} className="w-5 h-5" /> @specfy/stack-analyzer
+                  <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />{' '}
+                  @specfy/stack-analyzer
                 </a>
               </Button>
               <Button variant={'outline'} className="justify-start" asChild>
@@ -45,7 +46,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
-                  <img src={`/favicons/github.webp`} className="w-5 h-5" />
+                  <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
                   @specfy/getstack
                 </a>
               </Button>

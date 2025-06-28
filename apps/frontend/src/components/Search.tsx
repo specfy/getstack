@@ -145,7 +145,7 @@ export const Search: React.FC<{
                       <Link to="/tech/$techKey" params={{ techKey: row.key }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={`/favicons/${row.key}.webp`} />
+                            <img src={`/favicons/${row.key}.webp`} alt={`${row.key} logo`} />
                           </div>
                           <span>{row.name}</span>
                         </div>

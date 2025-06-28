@@ -117,15 +117,15 @@ const Category: React.FC = () => {
   return (
     <div>
       <header className="mb-10 flex flex-col gap-2 mt-10">
-        <h2 className="flex gap-4 ">
+        <div className="flex gap-4 ">
           <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border">
             <cat.icon size={46} />
           </div>{' '}
           <div className="flex flex-col gap-1">
             <div className="text-sm text-gray-400 leading-5">Category</div>
-            <div className="text-3xl font-semibold font-serif leading-8">{cat.name}</div>
+            <h1 className="text-3xl font-semibold font-serif leading-8">{cat.name}</h1>
           </div>
-        </h2>
+        </div>
         <h3 className="mt-5 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
           {cat.description}
         </h3>

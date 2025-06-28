@@ -72,21 +72,25 @@ const Repo: React.FC = () => {
   return (
     <div>
       <header className="flex gap-2 justify-between items-end mt-10">
-        <h2 className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center">
           <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border">
             {repo.avatar_url ? (
-              <img src={repo.avatar_url} className="rounded-md overflow-hidden" />
+              <img
+                src={repo.avatar_url}
+                className="rounded-md overflow-hidden"
+                alt={`${repo.org} logo`}
+              />
             ) : (
-              <img src={`/favicons/github.webp`} />
+              <img src={`/favicons/github.webp`} alt="GitHub logo" />
             )}
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-sm text-gray-400 leading-5">GitHub repository</div>
-            <div className="text-3xl font-semibold leading-8">
+            <h1 className="text-3xl font-semibold leading-8">
               <span className="text-gray-500 text-2xl">{repo.org} /</span> {repo.name}
-            </div>
+            </h1>
           </div>
-        </h2>
+        </div>
       </header>
       {repo.description && (
         <div className="mt-5 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">

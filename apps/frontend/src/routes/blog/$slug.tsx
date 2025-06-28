@@ -54,7 +54,11 @@ const BlogPost: React.FC = () => {
             rel="noreferrer"
             className="flex items-center gap-2 !text-gray-900 no-underline  text-xs"
           >
-            <img src={post.metadata.avatarUrl} alt="" className="h-6 w-6 rounded-full bg-gray-50" />
+            <img
+              src={post.metadata.avatarUrl}
+              className="h-6 w-6 rounded-full bg-gray-50"
+              alt={`${post.metadata.author} avatar`}
+            />
             <div className="text-sm leading-3">{post.metadata.author}</div>
           </a>
           <time dateTime={post.created_at} className="text-gray-500 text-xs">

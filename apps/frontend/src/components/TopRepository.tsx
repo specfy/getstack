@@ -55,7 +55,11 @@ export const TopRepositories: React.FC<{
             >
               <header className="flex gap-2">
                 <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center justify-center shrink-0">
-                  <img src={repo.avatar_url} className="w-6 h-6 rounded-sm overflow-hidden" />
+                  <img
+                    src={repo.avatar_url}
+                    className="w-6 h-6 rounded-sm overflow-hidden"
+                    alt={`${repo.org} logo`}
+                  />
                 </div>
                 <div className="flex flex-col truncate">
                   <div className="font-semibold text-sm truncate text-ellipsis">{repo.name}</div>

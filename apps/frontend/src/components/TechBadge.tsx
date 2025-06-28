@@ -25,7 +25,11 @@ export const TechBadge: React.FC<{
       params={{ techKey: tech }}
     >
       <div className={cn('w-4', size === 'xl' && 'w-5')}>
-        <img src={`/favicons/${tech}.webp`} className="rounded-xs overflow-hidden" />
+        <img
+          src={`/favicons/${tech}.webp`}
+          className="rounded-xs overflow-hidden"
+          alt={`${tech} logo`}
+        />
       </div>
       <div className="truncate text-ellipsis">{listIndexed[tech].name}</div>
     </Link>

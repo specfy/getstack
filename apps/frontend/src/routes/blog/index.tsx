@@ -44,7 +44,7 @@ const Blog: React.FC = () => {
               key={post.id}
             >
               <Card className="pt-0 hover:shadow-lg transition-shadow duration-30">
-                <img src={post.metadata.imageCover || post.metadata.image} alt="" />
+                <img src={post.metadata.imageCover || post.metadata.image} alt={post.title} />
                 <CardHeader>
                   <CardTitle>
                     <h2 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -71,7 +71,7 @@ export const Route = createFileRoute('/blog/')({
     return data;
   },
   head: () => {
-    const url = `${APP_URL}/blog/`;
+    const url = `${APP_URL}/blog`;
     return {
       meta: [
         ...seo({
