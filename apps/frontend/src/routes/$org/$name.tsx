@@ -79,9 +79,11 @@ const Repo: React.FC = () => {
                 src={repo.avatar_url}
                 className="rounded-md overflow-hidden"
                 alt={`${repo.org} logo`}
+                width={56}
+                height={56}
               />
             ) : (
-              <img src={`/favicons/github.webp`} alt="GitHub logo" />
+              <img src={`/favicons/github.webp`} alt="GitHub logo" width={56} height={56} />
             )}
           </div>
           <div className="flex flex-col gap-1">

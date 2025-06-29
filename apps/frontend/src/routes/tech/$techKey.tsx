@@ -124,6 +124,8 @@ const Tech: React.FC = () => {
               src={`/favicons/${tech.key}.webp`}
               className="rounded-sm overflow-hidden"
               alt={`${tech.name} logo`}
+              width={56}
+              height={56}
             />
           </div>{' '}
           <div className="flex flex-col gap-1">

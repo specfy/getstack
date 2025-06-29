@@ -16,7 +16,13 @@ export const BadgeRepo: React.FC<{ avatar_url: string; name: string; org: string
       params={{ org, name }}
     >
       <div className="bg-gray-50 w-5 h-5 flex items-center justify-center shrink-0">
-        <img src={avatar_url} className="w-4 h-4 rounded-sm overflow-hidden" alt={`${org} logo`} />
+        <img
+          src={avatar_url}
+          className="w-4 h-4 rounded-sm overflow-hidden"
+          alt={`${org} logo`}
+          width={16}
+          height={16}
+        />
       </div>
       <div className="flex leading-5">
         <div className="text-gray-800">{org}/</div>

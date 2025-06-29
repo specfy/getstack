@@ -24,12 +24,17 @@ export const TechBadge: React.FC<{
       )}
       to={`/tech/$techKey`}
       params={{ techKey: tech }}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
     >
       <div className={cn('w-4', size === 'xl' && 'w-5')}>
         <img
           src={`/favicons/${tech}.webp`}
           className="rounded-xs overflow-hidden"
           alt={`${name} logo`}
+          width={size === 'xl' ? 20 : 16}
+          height={size === 'xl' ? 20 : 16}
         />
       </div>
       <div className="truncate text-ellipsis">{name}</div>

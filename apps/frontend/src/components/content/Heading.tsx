@@ -16,7 +16,13 @@ export const HTop = ({
       <span className="text-gray-400 font-bold text-3xl">#{position}</span>
       <div className="flex items-center gap-2">
         <div className="flex w-7 h-7 rounded overflow-hidden items-center justify-center">
-          <img src={`/favicons/${tech}.webp`} className="h-full w-full" alt={children as string} />
+          <img
+            src={`/favicons/${tech}.webp`}
+            className="h-full w-full"
+            alt={children as string}
+            width={28}
+            height={28}
+          />
         </div>
         <h2 className="leading-10 mt-0 mb-0">{children}</h2>
       </div>

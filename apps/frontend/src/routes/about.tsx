@@ -52,7 +52,13 @@ const About: React.FC = () => {
       <div className="flex flex-col gap-2 md:flex-row">
         <Button variant={'outline'} asChild>
           <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
-            <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
+            <img
+              src={`/favicons/github.webp`}
+              className="w-5 h-5"
+              alt="GitHub logo"
+              width={20}
+              height={20}
+            />
             <span className="text-gray-800">@specfy/getstack</span>
           </a>
         </Button>
@@ -62,7 +68,13 @@ const About: React.FC = () => {
             target="_blank"
             className="no-underline "
           >
-            <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
+            <img
+              src={`/favicons/github.webp`}
+              className="w-5 h-5"
+              alt="GitHub logo"
+              width={20}
+              height={20}
+            />
             <span className="text-gray-800">@specfy/stack-analyzer</span>
           </a>
         </Button>

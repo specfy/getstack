@@ -59,6 +59,8 @@ export const TopRepositories: React.FC<{
                     src={repo.avatar_url}
                     className="w-6 h-6 rounded-sm overflow-hidden"
                     alt={`${repo.org} logo`}
+                    width={24}
+                    height={24}
                   />
                 </div>
                 <div className="flex flex-col truncate">

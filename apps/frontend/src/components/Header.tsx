@@ -31,26 +31,41 @@ export const Header: React.FC = () => {
       <div className="flex md:hidden justify-between items-center ">
         <Popover open={menuOpen} onOpenChange={onOpenChange}>
           <div className="flex gap-2 items-center">
-            <Link className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700" to="/">
+            <Link
+              className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700"
+              to="/"
+              title="Home"
+            >
               <IconStack2 /> <span className="font-medium tracking-tighter">getStack</span>
             </Link>
           </div>
           <div className="flex gap-2 items-center">
             <div className="flex gap-0 items-center">
-              <Button variant={'ghost'} size="icon" onClick={() => setSearchOpen(true)}>
+              <Button
+                variant={'ghost'}
+                size="icon"
+                onClick={() => setSearchOpen(true)}
+                title="Search"
+              >
                 <IconSearch size={18} stroke={1} />
               </Button>
-              <Button variant={'ghost'} size="icon" asChild>
+              <Button variant={'ghost'} size="icon" asChild title="GitHub">
                 <a
                   href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
                   target="_blank"
                 >
-                  <img src={`/favicons/github.webp`} className="w-4 h-4" alt="GitHub logo" />
+                  <img
+                    src={`/favicons/github.webp`}
+                    className="w-4 h-4"
+                    alt="GitHub logo"
+                    width={16}
+                    height={16}
+                  />
                 </a>
               </Button>
             </div>
             <PopoverTrigger asChild>
-              <Button variant={'ghost'} size="icon" className="border-l pl-4">
+              <Button variant={'ghost'} size="icon" className="border-l pl-4" title="Menu">
                 <IconMenu2 stroke={1} size={18} />
               </Button>
             </PopoverTrigger>
@@ -84,7 +99,13 @@ export const Header: React.FC = () => {
                     target="_blank"
                     className="flex gap-2 items-center"
                   >
-                    <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />{' '}
+                    <img
+                      src={`/favicons/github.webp`}
+                      className="w-5 h-5"
+                      alt="GitHub logo"
+                      width={20}
+                      height={20}
+                    />{' '}
                     @specfy/stack-analyzer
                   </a>
                 </Button>
@@ -96,7 +117,13 @@ export const Header: React.FC = () => {
                     target="_blank"
                     className="flex gap-2 items-center"
                   >
-                    <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />{' '}
+                    <img
+                      src={`/favicons/github.webp`}
+                      className="w-5 h-5"
+                      alt="GitHub logo"
+                      width={20}
+                      height={20}
+                    />{' '}
                     @specfy/getstack
                   </a>
                 </Button>
@@ -107,7 +134,11 @@ export const Header: React.FC = () => {
       </div>
 
       <div className="hidden md:flex justify-between items-center ">
-        <Link className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700" to="/">
+        <Link
+          className="h-8 flex gap-1.5 items-center font-light text-md text-gray-700"
+          to="/"
+          title="Home"
+        >
           <IconStack2 /> <span className="font-medium tracking-tighter">getStack</span>
           <div className="text-xs pt-0.5 font-serif">Technology Trends</div>
         </Link>
@@ -115,7 +146,12 @@ export const Header: React.FC = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Button variant={'ghost'} size="icon" onClick={() => setSearchOpen(true)}>
+                <Button
+                  variant={'ghost'}
+                  size="icon"
+                  onClick={() => setSearchOpen(true)}
+                  title="Search"
+                >
                   <IconSearch />
                 </Button>
               </NavigationMenuLink>

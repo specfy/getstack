@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
 import { optionsGetTop, useTop } from '@/api/useTop';
@@ -18,6 +18,7 @@ import type { TechnologyByCategoryByWeekWithTrend } from '@getstack/backend/src/
 import type { TechType } from '@specfy/stack-analyser';
 
 const Index: React.FC = () => {
+  const navigate = useNavigate();
   const { data, isLoading } = useTop();
 
   const groupedData = useMemo(() => {
@@ -99,52 +100,58 @@ const Index: React.FC = () => {
                   const def = categories[category as TechType];
                   const Icon = def.icon;
                   return (
-                    <>
-                      <Link
-                        key={index}
-                        to={`/category/$category`}
-                        params={{ category }}
-                        className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[250px]"
-                      >
-                        <div className="p-4 h-full">
-                          <div className="flex items-center mb-6 gap-4">
-                            <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
-                              <Icon size={22} />
-                            </div>
-                            <h4 className="text-md font-semibold font-serif">{def.name}</h4>
+                    <div
+                      className="border rounded flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 bg-white p-1 h-[250px] cursor-pointer"
+                      onClick={() => {
+                        void navigate({
+                          to: '/category/$category',
+                          params: { category },
+                        });
+                      }}
+                    >
+                      <div className="p-4 h-full">
+                        <Link
+                          key={index}
+                          to={`/category/$category`}
+                          params={{ category }}
+                          className="flex items-center mb-6 gap-4"
+                        >
+                          <div className="w-8 h-8 bg-neutral-100 rounded-md p-1 border">
+                            <Icon size={22} />
                           </div>
-                          <ul className="flex flex-col gap-3">
-                            {rows.map((row, rowIndex) => {
-                              const formatted = formatQuantity(row.current_hits);
-                              const name = listIndexed[row.tech].name;
-                              return (
-                                <li
-                                  key={rowIndex}
-                                  aria-description={`${name} is used by ${formatted} repositories`}
-                                >
-                                  <div className="flex items-center justify-between text-xs h-5">
-                                    <TechBadge tech={row.tech} border />
-                                    <div className="flex gap-1 items-center">
-                                      {row.previous_hits > 0 &&
-                                        (row.percent_change > 0.5 || row.percent_change < -0.5) && (
-                                          <TrendsBadge pct={row.percent_change} />
-                                        )}
-                                      <TT
-                                        description={`${name} is used by ${formatted} repositories`}
-                                      >
-                                        <div className="font-semibold w-8 text-right">
-                                          {formatted}
-                                        </div>
-                                      </TT>
-                                    </div>
+                          <h3 className="text-md font-semibold font-serif">{def.name}</h3>
+                        </Link>
+                        <ul className="flex flex-col gap-3">
+                          {rows.map((row, rowIndex) => {
+                            const formatted = formatQuantity(row.current_hits);
+                            const name = listIndexed[row.tech].name;
+                            return (
+                              <li
+                                key={rowIndex}
+                                aria-description={`${name} is used by ${formatted} repositories`}
+                              >
+                                <div className="flex items-center justify-between text-xs h-5">
+                                  <TechBadge tech={row.tech} border />
+                                  <div className="flex gap-1 items-center">
+                                    {row.previous_hits > 0 &&
+                                      (row.percent_change > 0.5 || row.percent_change < -0.5) && (
+                                        <TrendsBadge pct={row.percent_change} />
+                                      )}
+                                    <TT
+                                      description={`${name} is used by ${formatted} repositories`}
+                                    >
+                                      <div className="font-semibold w-8 text-right">
+                                        {formatted}
+                                      </div>
+                                    </TT>
                                   </div>
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </div>
-                      </Link>
-                    </>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
                   );
                 })}
               </div>
@@ -167,7 +174,8 @@ const highlights: Highlight[] = [
   { type: 'tech', name: 'vite', displayName: 'Vite' },
   { type: 'tech', name: 'clickhouse', displayName: 'ClickHouse' },
 ];
-const randomHighlights = [...highlights].sort(() => Math.random() - 0.5).slice(0, 3);
+// const randomHighlights = [...highlights].sort(() => Math.random() - 0.5).slice(0, 3);
+const randomHighlights = highlights.slice(0, 3);
 
 const Try: React.FC = () => {
   return (
@@ -190,6 +198,8 @@ const Try: React.FC = () => {
                       src={`/favicons/${item.name.toLowerCase()}.webp`}
                       className="rounded-xs overflow-hidden"
                       alt={`${item.name} logo`}
+                      width={16}
+                      height={16}
                     />
                   </div>
                   <div className="truncate text-ellipsis">{item.name}</div>
@@ -211,6 +221,8 @@ const Try: React.FC = () => {
                       src={`/favicons/${item.name.toLowerCase()}.webp`}
                       className="rounded-xs overflow-hidden"
                       alt={`${item.displayName} logo`}
+                      width={16}
+                      height={16}
                     />
                   </div>
                   <div className="truncate text-ellipsis">{item.displayName}</div>

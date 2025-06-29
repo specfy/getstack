@@ -58,6 +58,8 @@ const BlogPost: React.FC = () => {
               src={post.metadata.avatarUrl}
               className="h-6 w-6 rounded-full bg-gray-50"
               alt={`${post.metadata.author} avatar`}
+              width={24}
+              height={24}
             />
             <div className="text-sm leading-3">{post.metadata.author}</div>
           </a>

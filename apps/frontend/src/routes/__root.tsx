@@ -83,7 +83,7 @@ function Providers({ children }: { children: React.ReactNode }) {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <head>
         {/* Plausible Analytics */}
         <script

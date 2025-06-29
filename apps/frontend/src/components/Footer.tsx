@@ -14,18 +14,18 @@ export const Footer: React.FC = () => {
         </div>
         <div className="flex mb-2 gap-2">
           <a href="https://x.com/samdotb" target="_blank">
-            <Button variant={'outline'} size={'sm'}>
+            <Button variant={'outline'} size={'sm'} title="Twitter">
               <IconBrandTwitter />
             </Button>
           </a>
-          <a href="mailto:contact@getstack.dev" target="_blank">
+          <a href="mailto:contact@getstack.dev" target="_blank" title="Email">
             <Button variant={'outline'} size={'sm'}>
               <IconAt />
             </Button>
           </a>
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant={'outline'} size={'sm'}>
+              <Button variant={'outline'} size={'sm'} title="GitHub">
                 <IconBrandGithub />
               </Button>
             </PopoverTrigger>
@@ -36,7 +36,13 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
-                  <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />{' '}
+                  <img
+                    src={`/favicons/github.webp`}
+                    className="w-5 h-5"
+                    alt="GitHub logo"
+                    width={20}
+                    height={20}
+                  />{' '}
                   @specfy/stack-analyzer
                 </a>
               </Button>
@@ -46,14 +52,20 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   className="flex gap-2 items-center"
                 >
-                  <img src={`/favicons/github.webp`} className="w-5 h-5" alt="GitHub logo" />
+                  <img
+                    src={`/favicons/github.webp`}
+                    className="w-5 h-5"
+                    alt="GitHub logo"
+                    width={20}
+                    height={20}
+                  />
                   @specfy/getstack
                 </a>
               </Button>
             </PopoverContent>
           </Popover>
           <a href="https://www.linkedin.com/in/bodinsamuel/" target="_blank">
-            <Button variant={'outline'} size={'sm'}>
+            <Button variant={'outline'} size={'sm'} title="LinkedIn">
               <IconBrandLinkedin />
             </Button>
           </a>

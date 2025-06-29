@@ -146,7 +146,12 @@ export const Search: React.FC<{
                       <Link to="/tech/$techKey" params={{ techKey: row.key }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={`/favicons/${row.key}.webp`} alt={`${name} logo`} />
+                            <img
+                              src={`/favicons/${row.key}.webp`}
+                              alt={`${name} logo`}
+                              width={16}
+                              height={16}
+                            />
                           </div>
                           <span>{row.name}</span>
                         </div>
@@ -180,7 +185,12 @@ export const Search: React.FC<{
                       <Link to="/$org/$name" params={{ org: row.org, name: row.name }}>
                         <div className="flex gap-2 items-center">
                           <div className={'w-4'}>
-                            <img src={row.avatarUrl} alt={`${row.name} logo`} />
+                            <img
+                              src={row.avatarUrl}
+                              alt={`${row.name} logo`}
+                              width={16}
+                              height={16}
+                            />
                           </div>
                           <span>{row.name}</span>
                         </div>
