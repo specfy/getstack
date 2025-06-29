@@ -3713,6 +3713,70 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://www.whatsapp.com/',
     description: 'Messaging platform for iOS and Android.',
   },
+  'adobe.analytics': {
+    website: 'https://www.adobe.com/analytics.html',
+    description: 'Analytics platform for web and mobile applications.',
+  },
+  'adobe.experiencemanager': {
+    website: 'https://www.adobe.com/experience-manager.html',
+    description: 'Platform for creating and managing digital experiences.',
+  },
+  'google.pay': {
+    website: 'https://pay.google.com/',
+    description: 'Payment platform for web and mobile applications.',
+  },
+  adonisjs: {
+    website: 'https://adonisjs.com/',
+    github: 'adonisjs/core',
+    description: 'Framework for building web applications.',
+  },
+  arkui: {
+    website: 'https://ark-ui.com/',
+    github: 'chakra-ui/ark',
+    description: 'UI framework for building web applications.',
+  },
+  dioxus: {
+    website: 'https://dioxuslabs.com/',
+    github: 'dioxuslabs/dioxus',
+    description: 'UI framework for building web applications.',
+  },
+  fumadocs: {
+    website: 'https://fumadocs.dev/',
+    github: 'fuma-nama/fumadocs',
+    description:
+      'Fumadocs is a beautiful documentation framework for Developers, flexible and performant, with everything from Next.js.',
+  },
+  honeybadger: {
+    website: 'https://www.honeybadger.io/',
+    description: 'Error monitoring and reporting for web applications.',
+  },
+  oxlint: {
+    website: 'https://oxc.rs/',
+    github: 'oxc-project/oxc',
+    description:
+      'Oxlint is a Rust-powered linter for JavaScript and TypeScript is designed to be fast and simple to adopt.',
+  },
+  paystack: {
+    website: 'https://paystack.com/',
+    description: 'Payment platform for web and mobile applications.',
+  },
+  replicate: {
+    website: 'https://replicate.com/',
+    description: 'AI platform for building web applications.',
+  },
+  spotify: {
+    website: 'https://www.spotify.com/',
+    description: 'Music streaming platform for web and mobile applications.',
+  },
+  storyblok: {
+    website: 'https://www.storyblok.com/',
+    description: 'Content management system for web and mobile applications.',
+  },
+  sveltekit: {
+    website: 'https://kit.svelte.dev/',
+    github: 'sveltejs/svelte',
+    description: 'SvelteKit is a framework for building web applications.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {

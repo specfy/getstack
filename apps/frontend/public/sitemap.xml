@@ -51,7 +51,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/adobe.analytics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/adobe.commercecloud</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/adobe.experiencemanager</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/adonisjs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -237,6 +252,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/arktype</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/arkui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1061,6 +1081,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/dioxus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/discord</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1267,6 +1292,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/frontegg</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/fumadocs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1571,6 +1601,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/google.pay</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/google.sheets</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1672,6 +1707,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/hexojs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/honeybadger</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2356,6 +2396,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/oxlint</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/paddle</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2382,6 +2427,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/paypal</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/paystack</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2741,6 +2791,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/replicate</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/replit</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3031,6 +3086,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/spotify</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/sqlalchemy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3057,6 +3117,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/stenciljs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/storyblok</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3137,6 +3202,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/sveltejs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/sveltekit</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

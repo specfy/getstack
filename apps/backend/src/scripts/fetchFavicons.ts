@@ -7,6 +7,11 @@ import { extendedListTech } from '../utils/stacks.js';
  * LOGODEV_KEY=KEY npx tsx apps/backend/src/scripts/fetchFavicons.ts
  */
 const fetchFavicons = async (): Promise<void> => {
+  const logoDevKey = process.env['LOGODEV_KEY'];
+  if (!logoDevKey) {
+    throw new Error('LOGODEV_KEY is not set');
+  }
+
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
 
   // Ensure the output directory exists
@@ -29,6 +34,7 @@ const fetchFavicons = async (): Promise<void> => {
       } catch {
         // not exists
       }
+
       const faviconUrl = new URL(
         `https://img.logo.dev/${new URL(tech.website).hostname}?token=${process.env['LOGODEV_KEY']}&size=64&retina=true&format=webp`
       );
