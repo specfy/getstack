@@ -11,31 +11,31 @@
     "prod:migrate": "node dist/db/migrate.js"
   },
   "dependencies": {
-    "@clickhouse/client": "1.11.1",
+    "@clickhouse/client": "1.11.2",
     "@fastify/cors": "11.0.1",
     "@founderpath/kysely-clickhouse": "1.7.0",
-    "@octokit/rest": "21.1.1",
+    "@octokit/rest": "22.0.0",
     "@specfy/stack-analyser": "1.27.2",
-    "algoliasearch": "5.25.0",
+    "algoliasearch": "5.29.0",
     "close-with-grace": "2.2.0",
-    "cron": "4.3.0",
+    "cron": "4.3.1",
     "date-fns": "4.1.0",
-    "execa": "9.5.2",
-    "fastify": "5.3.2",
-    "kysely": "0.28.1",
+    "execa": "9.6.0",
+    "fastify": "5.4.0",
+    "kysely": "0.28.2",
     "lru-cache": "11.1.0",
-    "octokit": "5.0.2",
-    "pg": "8.14.1",
-    "pino": "9.6.0",
+    "octokit": "5.0.3",
+    "pg": "8.16.3",
+    "pino": "9.7.0",
     "pino-pretty": "13.0.0",
-    "sharp": "^0.34.1",
-    "zod": "3.24.3"
+    "sharp": "0.34.2",
+    "zod": "3.25.67"
   },
   "devDependencies": {
     "@types/degit": "2.8.6",
     "@types/node": "22.14.1",
-    "@types/pg": "8.11.13",
-    "tsx": "4.19.3",
+    "@types/pg": "8.15.4",
+    "tsx": "4.20.3",
     "typescript": "5.8.3"
   }
 }

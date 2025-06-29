@@ -10,7 +10,7 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@content-collections/core": "0.9.0",
+    "@content-collections/core": "0.9.1",
     "@content-collections/markdown": "0.1.4",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/vite": "0.2.5",
@@ -23,7 +23,7 @@
     "@radix-ui/react-popover": "1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
-    "@tabler/icons-react": "3.31.0",
+    "@tabler/icons-react": "3.34.0",
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.4",
     "@tanstack/react-query": "5.80.2",
@@ -43,9 +43,9 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-use": "17.6.0",
-    "tailwind-merge": "3.3.0",
-    "tailwindcss": "4.1.8",
-    "tw-animate-css": "1.2.7",
+    "tailwind-merge": "3.3.1",
+    "tailwindcss": "4.1.11",
+    "tw-animate-css": "1.3.4",
     "vaul": "^1.1.2",
     "vite": "6.3.5",
     "zod": "3.25.56",
@@ -54,11 +54,11 @@
   "devDependencies": {
     "@getstack/backend": "file:../backend",
     "@specfy/stack-analyser": "1.27.2",
-    "@types/react": "19.1.2",
-    "@types/react-dom": "19.1.2",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
     "autoprefixer": "10.4.21",
     "typescript": "5.8.3",
-    "vite-bundle-analyzer": "0.22.0",
+    "vite-bundle-analyzer": "0.23.0",
     "vite-tsconfig-paths": "5.1.4"
   }
 }
