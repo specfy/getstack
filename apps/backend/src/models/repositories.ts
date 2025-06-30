@@ -129,9 +129,11 @@ export async function updateClickhouseRepository(repo: ClickhouseRepositoryInser
     table: 'repositories2',
     values: [
       {
+        id: repo.id,
         org: repo.org,
         name: repo.name,
         stars: repo.stars,
+        updated_at: formatToClickhouseDatetime(new Date()),
       },
     ],
     format: 'JSONEachRow',

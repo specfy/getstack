@@ -9,11 +9,11 @@ export type UpdatedAt = ColumnType<string, Date | undefined, Date>;
 export type BooleanDefault = ColumnType<boolean, boolean | undefined>;
 
 export interface RepositoriesClickhouse {
-  id: ColumnType<string, never, never>;
+  id: string;
   org: string;
   name: string;
   stars: number;
-  updated_at: CreatedAt;
+  updated_at: UpdatedAt;
 }
 
 export type ClickhouseRepositoryRow = Selectable<RepositoriesClickhouse>;
