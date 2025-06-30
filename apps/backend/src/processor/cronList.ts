@@ -144,6 +144,7 @@ export async function refreshOne(
     repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),
   });
   await updateClickhouseRepository({
+    id: String(repo.id),
     org,
     name,
     stars: repo.stargazers_count,
