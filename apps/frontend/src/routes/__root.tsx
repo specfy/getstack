@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 // eslint-disable-next-line import-x/default
@@ -10,7 +10,6 @@ import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import indexCss from '@/index.css?url';
 import { API_URL, APP_URL } from '@/lib/envs';
-import { queryClient } from '@/lib/query';
 import { seo } from '@/lib/seo';
 
 import type { QueryClient } from '@tanstack/react-query';
@@ -78,6 +77,7 @@ function RootComponent() {
 }
 
 function Providers({ children }: { children: React.ReactNode }) {
+  const queryClient = useQueryClient();
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }
 
