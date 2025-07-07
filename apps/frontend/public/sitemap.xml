@@ -36,6 +36,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/blog/top-10-iconsets-july-2025-4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/ada</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

@@ -2,6 +2,7 @@
 import { MDXContent } from '@content-collections/mdx/react';
 import { IconHome } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound, redirect } from '@tanstack/react-router';
+import dayjs from 'dayjs';
 
 import { optionsGetPost } from '@/api/usePosts';
 import { BadgeRepo } from '@/components/content/BadgeRepo';
@@ -23,6 +24,8 @@ import { listCategories } from '@/lib/stack';
 
 const BlogPost: React.FC = () => {
   const post = Route.useLoaderData();
+
+  const date = dayjs(post.updated_at);
 
   return (
     <div className="mt-20">
@@ -64,11 +67,7 @@ const BlogPost: React.FC = () => {
             <div className="text-sm leading-3">{post.metadata.author}</div>
           </a>
           <time dateTime={post.created_at} className="text-gray-500 text-xs">
-            {new Date(post.created_at).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
+            {date.format('MMMM DD, YYYY')}
           </time>
           {post.categories.data.length > 0 && (
             <div className="flex items-center gap-2">

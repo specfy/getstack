@@ -20,10 +20,11 @@
     "db:up": "docker compose up -d",
     "db:migrate": "cd apps/backend && npm run migrate",
     "prod:start": "node apps/backend/dist/db/migrate.js && node apps/backend/dist/index.js",
-    "generate:favicons": "npx tsx --env-file=.env apps/backend/src/scripts/fetchFavicons.ts",
-    "optimize:favicons": "npx tsx --env-file=.env apps/backend/src/scripts/optimizeFavicons.ts",
-    "generate:sitemap": "npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts",
-    "generate:dataForBlog": "npx tsx --env-file=.env apps/backend/src/scripts/getDataForBlog.ts"
+    "favicons:generate": "npx tsx --env-file=.env apps/backend/src/scripts/fetchFavicons.ts",
+    "favicons:optimize": "npx tsx --env-file=.env apps/backend/src/scripts/optimizeFavicons.ts",
+    "sitemap:generate": "npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts",
+    "blog:generate": "npx tsx --env-file=.env apps/backend/src/scripts/getDataForBlog.ts",
+    "blog:index": "npx tsx --env-file=.env apps/backend/src/scripts/blogIndex.ts"
   },
   "devDependencies": {
     "@h1fra/eslint-config": "1.0.12",
