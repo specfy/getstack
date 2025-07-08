@@ -294,9 +294,9 @@ export const categories: Record<TechType, CategoryDefinition> = {
     keyword: 'maps geospatial location based application',
   },
   iconset: {
-    name: 'Iconset',
+    name: 'Icon Library',
     icon: IconIcons,
-    description: 'Iconsets for building user interfaces and frontend experiences.',
+    description: 'Icon libraries for building user interfaces and frontend experiences.',
     keyword: 'iconset icon library',
   },
   builder: {
