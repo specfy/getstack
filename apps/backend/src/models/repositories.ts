@@ -1,9 +1,12 @@
 import { clickHouse, db } from '../db/client.js';
+import { algolia } from '../utils/algolia.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 
 import type { ClickhouseRepositoryInsert } from '../db/types.clickhouse.js';
 import type { RepositoryInsert, RepositoryRow, RepositoryUpdate, TX } from '../db/types.db.js';
+import type { AlgoliaRepositoryObject } from '../types/algolia.js';
+import type { Logger } from 'pino';
 
 export const ANALYZE_MIN_STARS = envs.ANALYZE_MIN_STARS;
 
@@ -138,4 +141,42 @@ export async function updateClickhouseRepository(repo: ClickhouseRepositoryInser
     ],
     format: 'JSONEachRow',
   });
+}
+
+export async function reindexRepositoriesToAlgolia(logger: Logger): Promise<void> {
+  if (!envs.ALGOLIA_INDEX_NAME) {
+    throw new Error('ALGOLIA_INDEX_NAME is not set in envs');
+  }
+
+  const repos = await listAllRepositories();
+  logger.info(`Found ${repos.length} repositories to reindex.`);
+
+  const CHUNK_SIZE = 1000;
+  let success = 0;
+  let failed = 0;
+
+  while (repos.length > 0) {
+    const chunk = repos.splice(0, CHUNK_SIZE);
+    const objects: AlgoliaRepositoryObject[] = chunk.map((repo) => ({
+      objectID: repo.github_id,
+      org: repo.org,
+      name: repo.name,
+      stars: Number.parseInt(repo.stars as unknown as string, 10) || 0,
+      description: repo.description || '',
+      avatarUrl: repo.avatar_url || '',
+    }));
+    try {
+      await algolia.saveObjects({
+        indexName: envs.ALGOLIA_INDEX_NAME,
+        objects: objects as unknown as Record<string, unknown>[],
+      });
+      success += objects.length;
+      logger.info(`Reindexed ${success} repositories...`);
+    } catch (err: unknown) {
+      failed += objects.length;
+      logger.error(`Failed to reindex chunk:`, err);
+    }
+  }
+
+  logger.info(`Done. Success: ${success}, Failed: ${failed}`);
 }

@@ -8,6 +8,7 @@ import { defaultLogger as logger } from './utils/logger.js';
 
 import './processor/cronAnalyzer.js';
 import './processor/cronList.js';
+import './crons/algolia.js';
 
 // Instantiate Fastify with some config
 const app = Fastify(options);
