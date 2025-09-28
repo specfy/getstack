@@ -265,14 +265,42 @@ export async function getTechnologyVolumePerWeek({
   tech: string;
   currentWeek: string;
 }): Promise<TechnologyWeeklyVolume[]> {
+  console.log('getTechnologyVolumePerWeek', tech, currentWeek);
   const res = await clickHouse.query({
-    query: `SELECT
-      date_week,
-      SUM(hits) AS hits
-    FROM technologies_weekly_mv
-    WHERE tech = {tech: String} AND date_week <= {currentWeek: String}
-    GROUP BY date_week
-    ORDER BY date_week`,
+    query: `WITH
+      -- Get the date range for this technology
+      date_bounds AS (
+        SELECT
+          min(date_week) AS min_week,
+          {currentWeek: String} AS current_week
+        FROM technologies_weekly_mv
+        WHERE tech = {tech: String} AND date_week <= {currentWeek: String}
+      ),
+
+      -- Generate all weeks from min to current week
+      all_weeks AS (
+        SELECT DISTINCT date_week
+        FROM technologies_weekly_mv
+        WHERE date_week >= (SELECT min_week FROM date_bounds)
+          AND date_week <= {currentWeek: String}
+      ),
+
+      -- Get actual data for this specific technology
+      tech_data AS (
+        SELECT
+          date_week,
+          SUM(hits) AS hits
+        FROM technologies_weekly_mv
+        WHERE tech = {tech: String} AND date_week <= {currentWeek: String}
+        GROUP BY date_week
+      )
+
+    SELECT
+      aw.date_week,
+      coalesce(td.hits, 0) AS hits
+    FROM all_weeks aw
+    LEFT JOIN tech_data td ON aw.date_week = td.date_week
+    ORDER BY aw.date_week`,
     query_params: { tech, currentWeek },
   });
 
