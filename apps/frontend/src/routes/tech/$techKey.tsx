@@ -11,8 +11,12 @@ import { Link, createFileRoute, notFound } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
-import { useCategoryLeaderboard } from '@/api/useCategory';
-import { optionsGetTechnology, useRelatedTechnology } from '@/api/useTechnology';
+import { optionsCategoryLeaderboardOptions, useCategoryLeaderboard } from '@/api/useCategory';
+import {
+  optionsGetTechnology,
+  optionsRelatedTechnologyOptions,
+  useRelatedTechnology,
+} from '@/api/useTechnology';
 import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
@@ -446,6 +450,11 @@ export const Route = createFileRoute('/tech/$techKey')({
     const data = await context.queryClient.ensureQueryData(
       optionsGetTechnology({ name: tech.key })
     );
+    await context.queryClient.ensureQueryData(
+      optionsCategoryLeaderboardOptions({ name: tech.type })
+    );
+    await context.queryClient.ensureQueryData(optionsRelatedTechnologyOptions({ name: tech.key }));
+
     return data;
   },
   head: (ctx) => {

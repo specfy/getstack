@@ -1,12 +1,16 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { optionsGetCategory, useCategory, useCategoryLeaderboard } from '@/api/useCategory';
+import {
+  optionsCategoryLeaderboardOptions,
+  optionsGetCategory,
+  useCategoryLeaderboard,
+} from '@/api/useCategory';
 import { DataProgress } from '@/components/DataProgress';
-import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TT } from '@/components/TT';
@@ -29,26 +33,18 @@ const Category: React.FC = () => {
   const { category } = Route.useParams();
 
   const cat = categories[category as TechType] as CategoryDefinition | undefined;
-  const { data, isLoading } = useCategory({ name: category });
-  const { data: leaderboard } = useCategoryLeaderboard({ name: category });
-  const [pie, setPie] = useState<{ id: string; value: number }[]>([]);
-  const [nonFoundTech, setNonFoundTech] = useState<TechItemWithExtended[]>([]);
-  const [top10, setTop10] = useState<TechnologyByCategoryByWeekWithTrend[]>([]);
-  const [rest, setRest] = useState<TechnologyByCategoryByWeekWithTrend[]>([]);
-  const [winner, setWinner] = useState<TechnologyByCategoryByWeekWithTrend>();
-  const [looser, setLooser] = useState<TechnologyByCategoryByWeekWithTrend>();
+  const { data } = Route.useLoaderData();
+  const { data: leaderboard } = useSuspenseQuery(
+    optionsCategoryLeaderboardOptions({ name: category })
+  );
 
   const topNData = useMemo(() => {
-    if (!data) {
-      return [];
-    }
-
     const topN: Record<
       string,
       AreaBumpSerie<{ x: number | string; y: number }, { tech: string }>
     > = {};
 
-    for (const row of data.data.top) {
+    for (const row of data.top) {
       if (!(row.tech in topN)) {
         const indexed = listIndexed[row.tech];
         topN[row.tech] = { id: indexed.name, tech: row.tech, data: [] };
@@ -67,11 +63,7 @@ const Category: React.FC = () => {
     return Object.values(topN);
   }, [data, category]);
 
-  useEffect(() => {
-    if (!leaderboard) {
-      return;
-    }
-
+  const { pie, winner, looser, nonFoundTech, top10, rest } = useMemo(() => {
     const tmp: { id: string; value: number }[] = [];
     let up: TechnologyByCategoryByWeekWithTrend | undefined;
     let down: TechnologyByCategoryByWeekWithTrend | undefined;
@@ -84,9 +76,6 @@ const Category: React.FC = () => {
         down = row;
       }
     }
-    setPie(tmp);
-    setWinner(up);
-    setLooser(down);
 
     // Identify undiscovered tech by diffing listIndexed for the category with discoveredTech
     const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
@@ -96,22 +85,19 @@ const Category: React.FC = () => {
         nonFound.push(item);
       }
     }
-    setNonFoundTech(nonFound);
 
-    setTop10(leaderboard.data.slice(0, 10));
-    setRest(leaderboard.data.slice(10));
+    return {
+      pie: tmp,
+      winner: up,
+      looser: down,
+      nonFoundTech: nonFound,
+      top10: leaderboard.data.slice(0, 10),
+      rest: leaderboard.data.slice(10),
+    };
   }, [leaderboard]);
 
   if (!cat) {
     return <NotFound />;
-  }
-
-  if (isLoading) {
-    return <LoadingHeader />;
-  }
-
-  if (!data) {
-    return null;
   }
 
   return (
@@ -355,6 +341,9 @@ export const Route = createFileRoute('/category/$category')({
     }
 
     const data = await context.queryClient.ensureQueryData(optionsGetCategory({ name: category }));
+    await context.queryClient.ensureQueryData(
+      optionsCategoryLeaderboardOptions({ name: category })
+    );
     return data;
   },
   head: (ctx) => {

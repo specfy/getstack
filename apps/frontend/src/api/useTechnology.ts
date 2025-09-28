@@ -38,14 +38,19 @@ export const optionsGetTechnology = ({ name }: { name?: string | undefined }) =>
 };
 
 export const useRelatedTechnology = ({ name }: { name?: string | undefined }) => {
-  return useQuery<APIGetTopRelatedTechnology['Success'], Error>({
+  return useQuery<APIGetTopRelatedTechnology['Success'], Error>(
+    optionsRelatedTechnologyOptions({ name })
+  );
+};
+
+export const optionsRelatedTechnologyOptions = ({ name }: { name?: string | undefined }) => {
+  return queryOptions<APIGetTopRelatedTechnology['Success'], Error>({
     enabled: Boolean(name),
     queryKey: ['getTechnologyRelated', name],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/technologies/${name}/related`, {
         method: 'GET',
       });
-
       if (response.status === 404) {
         // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw notFound();

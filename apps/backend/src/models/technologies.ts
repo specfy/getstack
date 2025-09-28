@@ -265,7 +265,6 @@ export async function getTechnologyVolumePerWeek({
   tech: string;
   currentWeek: string;
 }): Promise<TechnologyWeeklyVolume[]> {
-  console.log('getTechnologyVolumePerWeek', tech, currentWeek);
   const res = await clickHouse.query({
     query: `WITH
       -- Get the date range for this technology
