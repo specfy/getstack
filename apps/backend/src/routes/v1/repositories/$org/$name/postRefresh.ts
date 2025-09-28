@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { getRepository } from '../../../../../models/repositories.js';
 import { refreshOne } from '../../../../../processor/cronList.js';

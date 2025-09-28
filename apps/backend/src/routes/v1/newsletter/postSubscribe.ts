@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { serverError } from '../../../utils/apiErrors.js';
 import { envs } from '../../../utils/env.js';

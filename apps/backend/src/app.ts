@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/max-params */
 import cors from '@fastify/cors';
+import rateLimit from '@fastify/rate-limit';
 
 import { routes } from './routes/index.js';
 import { notFound, serverError } from './utils/apiErrors.js';
@@ -41,6 +42,16 @@ export default async function createApp(
 
   f.setNotFoundHandler(function (req, res) {
     return notFound(res, `${req.method} ${req.url}`);
+  });
+
+  await f.register(rateLimit, {
+    max: 100,
+    timeWindow: 60_000,
+    errorResponseBuilder: () => {
+      return {
+        error: { code: 'rate_limit_exceeded', status: 429 },
+      };
+    },
   });
 
   f.removeAllContentTypeParsers();

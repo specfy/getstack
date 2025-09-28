@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { db } from '../../../../db/client.js';
 import { notFound } from '../../../../utils/apiErrors.js';

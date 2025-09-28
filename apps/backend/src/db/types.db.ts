@@ -1,5 +1,6 @@
 import type { AllowedLicensesLowercase } from '../types/stack.js';
-import type { ColumnType, Insertable, Selectable, Transaction, Updateable } from 'kysely';
+import type { AnalyserJson } from '@specfy/stack-analyser';
+import type { ColumnType, Insertable, Kysely, Selectable, Transaction, Updateable } from 'kysely';
 
 export type Timestamp = ColumnType<Date, Date, Date | string>;
 export type CreatedAt = ColumnType<string, Date | undefined, never>;
@@ -27,11 +28,23 @@ export interface RepositoriesTable {
   description: string;
   forks: number;
   repo_created_at: Timestamp;
+  private: boolean;
 }
 
 export type RepositoryRow = Selectable<RepositoriesTable>;
 export type RepositoryInsert = Insertable<RepositoriesTable>;
 export type RepositoryUpdate = Updateable<RepositoriesTable>;
+
+export interface RepositoriesAnalysisTable {
+  id: ColumnType<string, never, never>;
+  repository_id: string;
+  analysis: AnalyserJson;
+  last_manual_at: Timestamp;
+}
+
+export type RepositoryAnalysisRow = Selectable<RepositoriesAnalysisTable>;
+export type RepositoryAnalysisInsert = Insertable<RepositoriesAnalysisTable>;
+export type RepositoryAnalysisUpdate = Updateable<RepositoriesAnalysisTable>;
 
 export interface ProgressTable {
   date_week: string;
@@ -91,8 +104,9 @@ export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
   repositories: RepositoriesTable;
+  repositories_analysis: RepositoriesAnalysisTable;
   cache: CacheTable;
   posts: PostsTable;
 }
 
-export type TX = Transaction<Database>;
+export type TX = Kysely<Database> | Transaction<Database>;

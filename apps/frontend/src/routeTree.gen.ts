@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivateRouteImport } from './routes/private'
+import { Route as AnalyzeRepositoryRouteImport } from './routes/analyze-repository'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LicensesIndexRouteImport } from './routes/licenses/index'
@@ -23,6 +24,11 @@ import { Route as OrgNameRouteImport } from './routes/$org/$name'
 const PrivateRoute = PrivateRouteImport.update({
   id: '/private',
   path: '/private',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyzeRepositoryRoute = AnalyzeRepositoryRouteImport.update({
+  id: '/analyze-repository',
+  path: '/analyze-repository',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,6 +80,7 @@ const OrgNameRoute = OrgNameRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analyze-repository': typeof AnalyzeRepositoryRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analyze-repository': typeof AnalyzeRepositoryRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analyze-repository': typeof AnalyzeRepositoryRoute
   '/private': typeof PrivateRoute
   '/$org/$name': typeof OrgNameRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/analyze-repository'
     | '/private'
     | '/$org/$name'
     | '/blog/$slug'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/analyze-repository'
     | '/private'
     | '/$org/$name'
     | '/blog/$slug'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/analyze-repository'
     | '/private'
     | '/$org/$name'
     | '/blog/$slug'
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AnalyzeRepositoryRoute: typeof AnalyzeRepositoryRoute
   PrivateRoute: typeof PrivateRoute
   OrgNameRoute: typeof OrgNameRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/private'
       fullPath: '/private'
       preLoaderRoute: typeof PrivateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analyze-repository': {
+      id: '/analyze-repository'
+      path: '/analyze-repository'
+      fullPath: '/analyze-repository'
+      preLoaderRoute: typeof AnalyzeRepositoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -238,6 +258,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AnalyzeRepositoryRoute: AnalyzeRepositoryRoute,
   PrivateRoute: PrivateRoute,
   OrgNameRoute: OrgNameRoute,
   BlogSlugRoute: BlogSlugRoute,

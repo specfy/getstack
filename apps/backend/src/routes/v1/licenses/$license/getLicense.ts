@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { getOrCache } from '../../../../models/cache.js';
 import {
@@ -53,8 +53,8 @@ export const getApiLicense: FastifyPluginCallback = (fastify: FastifyInstance) =
     const repos =
       topRepos.length > 0
         ? await getRepositories({
-            ids: topRepos.map((row) => row.id),
-          })
+          ids: topRepos.map((row) => row.id),
+        })
         : [];
 
     reply.status(200).send({
