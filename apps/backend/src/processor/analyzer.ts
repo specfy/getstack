@@ -11,7 +11,9 @@ import { $ } from 'execa';
 import { createLicenses, getLicensesByRepo } from '../models/licenses.js';
 import { getActiveWeek } from '../models/progress.js';
 import { updateRepository } from '../models/repositories.js';
+import { upsertRepositoryAnalysis } from '../models/repositoriesAnalysis.js';
 import { createTechnologies, getTechnologiesByRepo } from '../models/technologies.js';
+import { cleanAnalysis } from '../utils/analyzer.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
@@ -71,7 +73,10 @@ export async function getPreviousAnalyzeIfStale(
   return { techs, licenses };
 }
 
-export async function analyze(repo: RepositoryRow, logger: Logger): Promise<Payload> {
+export async function analyze(
+  repo: Pick<RepositoryRow, 'branch' | 'name' | 'org'>,
+  logger: Logger
+): Promise<Payload> {
   const fullName = `${repo.org}/${repo.name}`;
   const dir = path.join(os.tmpdir(), 'getstack', repo.org, repo.name);
 
@@ -169,6 +174,11 @@ export async function saveAnalysis({
       last_fetched_at: formatToClickhouseDatetime(new Date()),
       last_analyzed_at: formatToClickhouseDatetime(new Date()),
     },
+  });
+  await upsertRepositoryAnalysis(trx, {
+    repository_id: repo.id,
+    analysis: cleanAnalysis(res.toJson()),
+    last_manual_at: new Date(),
   });
 }
 

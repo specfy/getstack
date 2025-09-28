@@ -46,7 +46,7 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button size={'sm'} className="text-xs" type="submit">
+          <Button className="text-xs" type="submit">
             Subscribe
           </Button>
         </form>

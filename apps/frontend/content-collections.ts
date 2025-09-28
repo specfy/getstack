@@ -1,7 +1,7 @@
 import { defineCollection, defineConfig } from '@content-collections/core';
 import { compileMarkdown } from '@content-collections/markdown';
 import { compileMDX } from '@content-collections/mdx';
-import { z } from 'zod';
+import * as z from 'zod';
 
 const posts = defineCollection({
   name: 'posts',
