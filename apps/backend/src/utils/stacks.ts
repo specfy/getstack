@@ -3777,6 +3777,54 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     github: 'sveltejs/svelte',
     description: 'SvelteKit is a framework for building web applications.',
   },
+  databuddy: {
+    website: 'https://databuddy.cc/',
+    description: 'Analytics platform for web applications.',
+  },
+  datafast: {
+    website: 'https://datafa.st/',
+    description: 'Analytics platform for web applications.',
+  },
+  effectjs: {
+    website: 'https://effect.website/',
+    description: 'Type-safe functional programming for JavaScript.',
+  },
+  fathom: {
+    website: 'https://usefathom.com/',
+    description: 'Analytics platform for web applications.',
+  },
+  hugeicons: {
+    website: 'https://hugeicons.com/',
+    description: 'Beautiful, high-quality icon library for web applications.',
+  },
+  elysiajs: {
+    website: 'https://elysiajs.com/',
+    description: 'Elegant, type-safe, and performant web framework for JavaScript.',
+  },
+  lordicon: {
+    website: 'https://lordicon.com/',
+    description: 'Beautiful, high-quality icon library for web applications.',
+  },
+  materialdesignicons: {
+    website: 'https://materialdesignicons.com/',
+    description: 'Material Design icons inspired by Google.',
+  },
+  remult: {
+    website: 'https://remult.dev/',
+    description: 'Type-safe ORM and CRUD for JavaScript and TypeScript.',
+  },
+  simpleanalytics: {
+    website: 'https://simpleanalytics.com/',
+    description: 'Analytics platform for web applications.',
+  },
+  ultracite: {
+    website: 'https://ultracite.dev/',
+    description: 'Ultra-fast, zero-config linter for your AI integrations.',
+  },
+  useautumn: {
+    website: 'https://useautumn.com/',
+    description: 'Stripe payments for your SaaS.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {

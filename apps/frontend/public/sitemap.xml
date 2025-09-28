@@ -36,7 +36,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://getstack.dev/blog/top-10-iconsets-july-2025-4</loc>
+    <loc>https://getstack.dev/blog/top-10-icon-libraries-july-2025-4</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1021,12 +1021,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/databuddy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/datadog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getstack.dev/tech/datadome</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/datafast</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1166,6 +1176,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/effectjs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/elasticcloud</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1187,6 +1202,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/elixir</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/elysiajs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1242,6 +1262,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/fastly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/fathom</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1751,6 +1776,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/hugeicons</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/huggingface</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2021,6 +2051,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/lordicon</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/lua</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2067,6 +2102,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/mariadb</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/materialdesignicons</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2786,6 +2826,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/remult</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/render</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3017,6 +3062,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/signoz</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/simpleanalytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -3421,6 +3471,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/ultracite</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/umijs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3447,6 +3502,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/uptimekuma</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/useautumn</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
