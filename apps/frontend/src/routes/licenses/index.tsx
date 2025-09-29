@@ -1,10 +1,11 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconLicense, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { optionsGetLicenses, useLicensesLeaderboard } from '@/api/useLicense';
+import { optionsGetLicenses, optionsLicensesLeaderboard } from '@/api/useLicense';
 import { DataProgress } from '@/components/DataProgress';
 import { LicenseBadge } from '@/components/LicenseBadge';
 import { Report } from '@/components/Report';
@@ -19,7 +20,7 @@ import type { AreaBumpSerie } from '@nivo/bump';
 
 const Licenses: React.FC = () => {
   const { data } = Route.useLoaderData();
-  const { data: leaderboard } = useLicensesLeaderboard();
+  const { data: leaderboard } = useSuspenseQuery(optionsLicensesLeaderboard());
   const [pie, setPie] = useState<{ id: string; value: number }[]>([]);
   const [top10, setTop10] = useState<APILicenseLeaderboard[]>([]);
   const [rest, setRest] = useState<APILicenseLeaderboard[]>([]);
@@ -51,10 +52,6 @@ const Licenses: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
-    if (!leaderboard) {
-      return;
-    }
-
     const tmp: { id: string; value: number }[] = [];
     let up: APILicenseLeaderboard | undefined;
     let down: APILicenseLeaderboard | undefined;
@@ -73,10 +70,6 @@ const Licenses: React.FC = () => {
     setTop10(leaderboard.data.slice(0, 10));
     setRest(leaderboard.data.slice(10));
   }, [leaderboard]);
-
-  if (!leaderboard) {
-    return null;
-  }
 
   return (
     <div>
