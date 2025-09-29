@@ -3,13 +3,9 @@ import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import {
-  optionsCategoryLeaderboardOptions,
-  optionsGetCategory,
-  useCategoryLeaderboard,
-} from '@/api/useCategory';
+import { optionsCategoryLeaderboardOptions, optionsGetCategory } from '@/api/useCategory';
 import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';

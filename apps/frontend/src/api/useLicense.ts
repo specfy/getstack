@@ -66,7 +66,11 @@ export const optionsGetLicense = ({ key }: { key?: string }) => {
 };
 
 export const useLicensesLeaderboard = () => {
-  return useQuery<APIGetLicensesLeaderboard['Success'], Error>({
+  return useQuery<APIGetLicensesLeaderboard['Success'], Error>(optionsLicensesLeaderboard());
+};
+
+export const optionsLicensesLeaderboard = () => {
+  return queryOptions<APIGetLicensesLeaderboard['Success'], Error>({
     queryKey: ['getLicensesLeaderboard'],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/1/licenses/leaderboard`, {

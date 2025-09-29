@@ -9,11 +9,12 @@ import {
   IconTrendingUp,
   IconX,
 } from '@tabler/icons-react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { addWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
-import { optionsGetLicense, useLicense, useLicensesLeaderboard } from '@/api/useLicense';
+import { optionsGetLicense, optionsLicensesLeaderboard, useLicense } from '@/api/useLicense';
 import { LicenseBadge } from '@/components/LicenseBadge';
 import { LoadingHeader } from '@/components/LoadingHeader';
 import { NotFound } from '@/components/NotFound';
@@ -21,7 +22,6 @@ import { Report } from '@/components/Report';
 import { TopRepositories } from '@/components/TopRepository';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -34,7 +34,7 @@ const License: React.FC = () => {
   const { license } = Route.useParams();
 
   const { data, isError, isLoading } = useLicense({ key: license });
-  const { data: leaderboard, isLoading: isLoadingLeaderboard } = useLicensesLeaderboard();
+  const { data: leaderboard } = useSuspenseQuery(optionsLicensesLeaderboard());
 
   const [current, trend, diff] = useMemo(() => {
     if (!data || data.data.volume.length <= 0) {
@@ -83,10 +83,6 @@ const License: React.FC = () => {
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & APILicenseLeaderboard)[]]
   >(() => {
-    if (!leaderboard) {
-      return [0, []];
-    }
-
     const tmp = leaderboard.data.findIndex((v) => v.license === license);
     if (tmp === -1) {
       return [
@@ -198,12 +194,6 @@ const License: React.FC = () => {
         </div>
       </div>
 
-      {isLoadingLeaderboard && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
-          <Skeleton className="h-20 w-full " />
-          <Skeleton className="h-20 w-full " />
-        </div>
-      )}
       {position > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
           <Card>
@@ -299,7 +289,6 @@ const License: React.FC = () => {
           />
         </div>
         <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
-          {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
             <div className="border-t pt-5">
               <Card>
@@ -350,13 +339,11 @@ const License: React.FC = () => {
                   </div>
                 );
               })}
-              {leaderboard &&
-                leaderboard.data.length > 4 &&
-                leaderboard.data.length > position + 2 && (
-                  <div className=" text-xs text-gray-400">
-                    <IconDots stroke={1} size={18} />
-                  </div>
-                )}
+              {leaderboard.data.length > 4 && leaderboard.data.length > position + 2 && (
+                <div className=" text-xs text-gray-400">
+                  <IconDots stroke={1} size={18} />
+                </div>
+              )}
             </div>
           </div>
 
