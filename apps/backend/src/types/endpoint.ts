@@ -1,4 +1,4 @@
-import type { Endpoint } from './api.js';
+import type { ApiError, Endpoint } from './api.js';
 import type {
   LicenseRow,
   LicensesWeeklyRow,
@@ -7,7 +7,7 @@ import type {
   TechnologyWeeklyRow,
 } from '../db/types.clickhouse.js';
 import type { LicensesInfoTableRow, PostsRow, RepositoryRow } from '../db/types.db.js';
-import type { AllowedKeys, TechType } from '@specfy/stack-analyser';
+import type { AllowedKeys, AnalyserJson, TechType } from '@specfy/stack-analyser';
 import type { AllowedLicenses } from '@specfy/stack-analyser/dist/types/licenses.js';
 
 export interface TechnologyByCategoryByWeekWithTrend {
@@ -176,4 +176,15 @@ export type APIGetPost = Endpoint<{
     success: true;
     data: APIPost;
   };
+}>;
+
+export type APIPostAnalyzeOne = Endpoint<{
+  Path: '/1/repositories/:org/:name/analyze';
+  Method: 'POST';
+  Params: { org: string; name: string };
+  Success: {
+    success: true;
+    data: { repo: RepositoryRow; analysis: AnalyserJson | null };
+  };
+  Error: ApiError<'failed_to_process'>;
 }>;

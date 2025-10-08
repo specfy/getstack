@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { queryOptions, useMutation, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
 import { ApiResError } from './api.js';
@@ -7,7 +7,7 @@ import { ALGOLIA_INDEX_NAME, API_URL } from '../lib/envs';
 import { algolia } from '@/lib/algolia.js';
 
 import type { AlgoliaRepositoryObject } from '@getstack/backend/src/types/algolia.js';
-import type { APIGetRepository } from '@getstack/backend/src/types/endpoint.js';
+import type { APIGetRepository, APIPostAnalyzeOne } from '@getstack/backend/src/types/endpoint.js';
 
 export const useRepository = (opts: { org: string; name: string }) => {
   return useQuery<APIGetRepository['Success'], Error>(optionsGetRepository(opts));
@@ -47,6 +47,31 @@ export const useRepositorySearchAlgolia = ({ search }: { search: string }) => {
       });
 
       return res.results[0].hits;
+    },
+  });
+};
+
+export const useAnalyzeRepository = () => {
+  return useMutation<APIPostAnalyzeOne['Success'], Error, APIPostAnalyzeOne['Params']>({
+    mutationFn: async (params) => {
+      const response = await fetch(
+        `${API_URL}/1/repositories/${params.org}/${params.name}/analyze`,
+        {
+          method: 'POST',
+        }
+      );
+
+      if (response.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw notFound();
+      }
+
+      const json = (await response.json()) as APIPostAnalyzeOne['Reply'];
+      if ('error' in json) {
+        throw new ApiResError(json);
+      }
+
+      return json;
     },
   });
 };

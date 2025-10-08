@@ -1,5 +1,5 @@
 import { listIndexed } from '@specfy/stack-analyser/dist/common/techs.generated.js';
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { getOrCache } from '../../../../models/cache.js';
 import { getActiveWeek } from '../../../../models/progress.js';
@@ -47,8 +47,8 @@ export const getTechnology: FastifyPluginCallback = (fastify: FastifyInstance) =
     const repos =
       topRepos.length > 0
         ? await getRepositories({
-            ids: topRepos.map((row) => row.id),
-          })
+          ids: topRepos.map((row) => row.id),
+        })
         : [];
     reply.status(200).send({
       success: true,

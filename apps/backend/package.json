@@ -13,6 +13,7 @@
   "dependencies": {
     "@clickhouse/client": "1.11.2",
     "@fastify/cors": "11.0.1",
+    "@fastify/rate-limit": "10.3.0",
     "@founderpath/kysely-clickhouse": "1.7.0",
     "@octokit/rest": "22.0.0",
     "@specfy/stack-analyser": "1.27.3",

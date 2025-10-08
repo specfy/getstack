@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { getOrCache } from '../../../../../models/cache.js';
 import { getLicensesByRepo } from '../../../../../models/licenses.js';
