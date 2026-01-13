@@ -8,7 +8,7 @@
     "apps/frontend"
   ],
   "scripts": {
-    "dev": "npm run dev:front && npm run dev:back",
+    "dev": "npm run dev:front & npm run dev:back",
     "dev:front": "cd apps/frontend && npm run dev",
     "dev:back": "cd apps/backend && npm run dev",
     "build:ts:watch": "tsc -b tsconfig.build.json -w",
