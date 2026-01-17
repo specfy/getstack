@@ -13,6 +13,8 @@ interface ImportMetaEnv {
   readonly VITE_ALGOLIA_APP_ID?: string | undefined;
   readonly VITE_ALGOLIA_API_KEY?: string | undefined;
   readonly VITE_ALGOLIA_INDEX_NAME?: string | undefined;
+  readonly VITE_SENTRY_DSN?: string | undefined;
+  readonly VITE_SENTRY_ENVIRONMENT?: string | undefined;
 }
 
 interface ImportMeta {
