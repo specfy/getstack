@@ -8,9 +8,9 @@ import {
   upsertRepository,
 } from '../models/repositories.js';
 import { algolia } from '../utils/algolia.js';
-import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
+import { formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
-import { octokit } from '../utils/github.js';
+import { githubToRepo, octokit } from '../utils/github.js';
 import { defaultLogger } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
@@ -120,29 +120,8 @@ export async function refreshOne(
 ): Promise<void> {
   const [org, name] = repo.full_name.split('/') as [string, string];
   const filtered = filter(repo);
-  await upsertRepository({
-    github_id: String(repo.id),
-    org,
-    name,
-    branch: repo.default_branch,
-    stars: repo.stargazers_count,
-    url: repo.html_url,
-    ignored: filtered === false ? 0 : 1,
-    ignored_reason: filtered === false ? 'ok' : filtered,
-    errored: 0,
-    last_fetched_at: formatToClickhouseDatetime(new Date('1970-01-01T00:00:00.000')),
-    last_analyzed_at: formatToClickhouseDatetime(new Date()),
-    size: repo.size,
-    avatar_url: repo.owner?.avatar_url || '',
-    homepage_url: repo.homepage
-      ? repo.homepage.startsWith('https:/')
-        ? repo.homepage
-        : `https://${repo.homepage}`
-      : '',
-    description: repo.description || '',
-    forks: repo.forks_count,
-    repo_created_at: formatToClickhouseDatetime(new Date(repo.created_at)),
-  });
+  await upsertRepository(githubToRepo(repo, filtered));
+
   await updateClickhouseRepository({
     id: String(repo.id),
     org,

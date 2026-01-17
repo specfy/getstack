@@ -1,6 +1,6 @@
 import { listIndexed } from '@specfy/stack-analyser/dist/register.js';
 import sharp from 'sharp';
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { getOrCache } from '../../../../../models/cache.js';
 import { getActiveWeek } from '../../../../../models/progress.js';
@@ -98,9 +98,9 @@ export const getRepositoryImage: FastifyPluginCallback = (fastify: FastifyInstan
     const tech =
       repo.ignored === 0
         ? await getOrCache({
-            keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
-            fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
-          })
+          keys: ['getTechnologiesByRepo', repo.id, weeks.currentWeek],
+          fn: () => getTechnologiesByRepo(repo, weeks.currentWeek),
+        })
         : [];
 
     // const stars = formatQuantity(repo.stars);
