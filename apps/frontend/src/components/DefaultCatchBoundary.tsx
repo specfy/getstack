@@ -1,4 +1,7 @@
+import * as Sentry from '@sentry/react';
 import { ErrorComponent, Link, rootRouteId, useMatch, useRouter } from '@tanstack/react-router';
+// eslint-disable-next-line import-x/default
+import { useEffect } from 'react';
 
 import type { ErrorComponentProps } from '@tanstack/react-router';
 
@@ -9,7 +12,24 @@ export const DefaultCatchBoundary: React.FC<{ error: ErrorComponentProps }> = ({
     select: (state) => state.id === rootRouteId,
   });
 
-  console.error('DefaultCatchBoundary Error:', error);
+  useEffect(() => {
+    // Capture error in Sentry
+    if (error.error) {
+      Sentry.captureException(error.error, {
+        tags: {
+          errorBoundary: 'DefaultCatchBoundary',
+          route: error.routeId || 'unknown',
+        },
+        contexts: {
+          router: {
+            routeId: error.routeId,
+            pathname: error.pathname,
+          },
+        },
+      });
+    }
+    console.error('DefaultCatchBoundary Error:', error);
+  }, [error]);
 
   return (
     <div className="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">

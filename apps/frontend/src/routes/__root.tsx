@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import * as Sentry from '@sentry/react';
 import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
@@ -78,7 +79,28 @@ function RootComponent() {
 
 function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  return (
+    <Sentry.ErrorBoundary fallback={<ErrorFallback />} showDialog>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </Sentry.ErrorBoundary>
+  );
+}
+
+function ErrorFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
+        <p className="text-gray-600 mb-4">We've been notified and are working on fixing this issue.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Reload Page
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
