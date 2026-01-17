@@ -39,7 +39,7 @@ dokku config:set --no-restart getstack \
   NODE_ENV=production \
   VITE_API_URL=https://api.getstack.dev \
   VITE_URL=https://getstack.dev \
-  DOKKU_DOCKERFILE_START_CMD="node apps/frontend/.output/server/index.mjs"
+  DOKKU_DOCKERFILE_START_CMD="npm run -w @getstack/frontend start"
 
 dokku domains:add getstack getstack.dev
 dokku ports:set getstack http:80:3000

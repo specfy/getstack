@@ -74,6 +74,7 @@ const Index: React.FC = () => {
       <div className="flex justify-end items-center mt-14">
         <DataProgress />
       </div>
+
       <div className="mt-2 space-y-14">
         {isLoading && (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
