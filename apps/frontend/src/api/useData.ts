@@ -21,7 +21,7 @@ export const useData = () => {
 
       const json = (await response.json()) as APIGetData['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: ${JSON.stringify(json.error)}`);
       }
 
       return json;

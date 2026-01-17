@@ -19,9 +19,18 @@ export const DefaultCatchBoundary: React.FC<{ error: ErrorComponentProps }> = ({
         tags: {
           errorBoundary: 'DefaultCatchBoundary',
         },
+        extra: {
+          errorInfo: error.info,
+        },
       });
     }
-    console.error('DefaultCatchBoundary Error:', error);
+    console.error('DefaultCatchBoundary Error:', {
+      error: error.error,
+      message: error.error?.message,
+      stack: error.error?.stack,
+      info: error.info,
+      fullError: error,
+    });
   }, [error]);
 
   return (
