@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/max-params */
+import * as Sentry from '@sentry/node';
 import cors from '@fastify/cors';
 
 import { routes } from './routes/index.js';
 import { notFound, serverError } from './utils/apiErrors.js';
+import { envs } from './utils/env.js';
 import { defaultLogger as logger } from './utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginOptions, FastifyServerOptions } from 'fastify';
@@ -33,8 +35,26 @@ export default async function createApp(
     exposedHeaders: ['set-cookie'],
   });
 
-  f.setErrorHandler(function (error, _req, res) {
+  f.setErrorHandler(function (error, req, res) {
     logger.error(error instanceof Error ? error.message : error);
+
+    // Capture error in Sentry
+    if (envs.SENTRY_DSN && error instanceof Error) {
+      Sentry.captureException(error, {
+        tags: {
+          route: req.url,
+          method: req.method,
+        },
+        contexts: {
+          request: {
+            method: req.method,
+            url: req.url,
+            headers: req.headers,
+          },
+        },
+      });
+    }
+
     // fastify will use parent error handler to handle this
     return serverError(res);
   });

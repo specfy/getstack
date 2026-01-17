@@ -15,6 +15,7 @@
     "@fastify/cors": "11.0.1",
     "@founderpath/kysely-clickhouse": "1.7.0",
     "@octokit/rest": "22.0.0",
+    "@sentry/node": "^8.47.0",
     "@specfy/stack-analyser": "1.27.3",
     "algoliasearch": "5.29.0",
     "close-with-grace": "2.2.0",

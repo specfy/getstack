@@ -38,6 +38,10 @@ const schema = z.object({
   // Newsletter
   BEEHIIV_PUBLICATION_ID: z.string().optional(),
   BEEHIIV_API_KEY: z.string().optional(),
+
+  // Sentry
+  SENTRY_DSN: z.string().optional(),
+  SENTRY_ENVIRONMENT: z.string().default('development'),
 });
 
 export const envs = schema.parse(process.env);

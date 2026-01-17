@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/no-process-exit */
+import * as Sentry from '@sentry/node';
 import closeWithGrace from 'close-with-grace';
 import Fastify from 'fastify';
 
@@ -10,6 +11,18 @@ import './processor/cronAnalyzer.js';
 import './processor/cronList.js';
 import './crons/algolia.js';
 
+// Initialize Sentry before anything else
+if (envs.SENTRY_DSN) {
+  Sentry.init({
+    dsn: envs.SENTRY_DSN,
+    environment: envs.SENTRY_ENVIRONMENT,
+    integrations: [
+      Sentry.httpIntegration(),
+    ],
+    tracesSampleRate: 1.0,
+  });
+}
+
 // Instantiate Fastify with some config
 const app = Fastify(options);
 
@@ -19,10 +32,29 @@ void app.register(createApp);
 process
   .on('unhandledRejection', (reason) => {
     logger.error('Unhandled Rejection at Promise', reason);
+    if (envs.SENTRY_DSN) {
+      Sentry.captureException(reason instanceof Error ? reason : new Error(String(reason)), {
+        tags: {
+          errorType: 'unhandledRejection',
+        },
+      });
+    }
   })
   .on('uncaughtException', (err) => {
     logger.error('Uncaught Exception thrown', err);
-    process.exit(1);
+    if (envs.SENTRY_DSN) {
+      Sentry.captureException(err, {
+        tags: {
+          errorType: 'uncaughtException',
+        },
+      });
+      // Flush Sentry before exiting
+      void Sentry.flush(2000).then(() => {
+        process.exit(1);
+      });
+    } else {
+      process.exit(1);
+    }
   });
 
 // delay is the number of milliseconds for the graceful close to finish
