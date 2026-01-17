@@ -2,7 +2,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type {
   APIGetTechnology,
@@ -18,7 +18,7 @@ export const optionsGetTechnology = ({ name }: { name?: string | undefined }) =>
     enabled: Boolean(name),
     queryKey: ['getTechnology', name],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/technologies/${name}`, {
+      const response = await apiFetch(`/1/technologies/${name}`, {
         method: 'GET',
       });
 
@@ -48,7 +48,7 @@ export const optionsRelatedTechnologyOptions = ({ name }: { name?: string | unde
     enabled: Boolean(name),
     queryKey: ['getTechnologyRelated', name],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/technologies/${name}/related`, {
+      const response = await apiFetch(`/1/technologies/${name}/related`, {
         method: 'GET',
       });
       if (response.status === 404) {

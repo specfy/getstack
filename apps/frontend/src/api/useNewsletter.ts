@@ -1,10 +1,10 @@
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type { APIPostSubscribe } from '../../../backend/src/types/endpoint';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const postSubscribe = async (body: APIPostSubscribe['Body']) => {
-  const response = await fetch(`${API_URL}/1/newsletter`, {
+  const response = await apiFetch('/1/newsletter', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: { 'content-type': 'application/json' },

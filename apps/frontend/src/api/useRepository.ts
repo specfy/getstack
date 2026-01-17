@@ -3,7 +3,8 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
 import { ApiResError } from './api.js';
-import { ALGOLIA_INDEX_NAME, API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
+import { ALGOLIA_INDEX_NAME } from '../lib/envs';
 import { algolia } from '@/lib/algolia.js';
 
 import type { AlgoliaRepositoryObject } from '@getstack/backend/src/types/algolia.js';
@@ -17,7 +18,7 @@ export const optionsGetRepository = ({ org, name }: { org: string; name: string 
     enabled: Boolean(name),
     queryKey: ['getRepository', name],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/repositories/${org}/${name}`, {
+      const response = await apiFetch(`/1/repositories/${org}/${name}`, {
         method: 'GET',
       });
 

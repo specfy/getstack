@@ -14,7 +14,6 @@ CLICKHOUSE_PORT="9000"
 
 # List of tables to backup (from types.ts Clickhouse interface)
 TABLES=(
-    "repositories"
     "repositories2"
     "technologies"
     "licenses"

@@ -2,7 +2,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type {
   APIGetLicense,
@@ -18,7 +18,7 @@ export const optionsGetLicenses = () => {
   return queryOptions<APIGetLicenses['Success'], Error>({
     queryKey: ['getLicenses'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/licenses`, {
+      const response = await apiFetch('/1/licenses', {
         method: 'GET',
       });
 
@@ -46,7 +46,7 @@ export const optionsGetLicense = ({ key }: { key?: string }) => {
     enabled: Boolean(key),
     queryKey: ['getLicense', key],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/licenses/${key}`, {
+      const response = await apiFetch(`/1/licenses/${key}`, {
         method: 'GET',
       });
 
@@ -73,7 +73,7 @@ export const optionsLicensesLeaderboard = () => {
   return queryOptions<APIGetLicensesLeaderboard['Success'], Error>({
     queryKey: ['getLicensesLeaderboard'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/licenses/leaderboard`, {
+      const response = await apiFetch('/1/licenses/leaderboard', {
         method: 'GET',
       });
 

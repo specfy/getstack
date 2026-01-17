@@ -17,7 +17,7 @@ import { nitro } from 'nitro/vite';
 export default defineConfig({
   plugins: [
     tanstackStart(),
-    nitro(),
+    nitro({ preset: 'node-server' }),
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),

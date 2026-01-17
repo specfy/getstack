@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+apt-get install mailutils
+
 set -ex
 
 IMAGE_TAG=459baeba7d956bbc40aee0d02bd38ba23c6ec8d8

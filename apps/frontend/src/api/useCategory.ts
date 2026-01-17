@@ -2,7 +2,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type {
   APIGetCategory,
@@ -18,7 +18,7 @@ export const optionsGetCategory = ({ name }: { name?: string }) => {
     enabled: Boolean(name),
     queryKey: ['getCategory', name],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/categories/${name}`, {
+      const response = await apiFetch(`/1/categories/${name}`, {
         method: 'GET',
       });
 
@@ -48,7 +48,7 @@ export const optionsCategoryLeaderboardOptions = ({ name }: { name?: string | un
     enabled: Boolean(name),
     queryKey: ['getCategoryLeaderboard', name],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/categories/${name}/leaderboard`, {
+      const response = await apiFetch(`/1/categories/${name}/leaderboard`, {
         method: 'GET',
       });
 

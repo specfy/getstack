@@ -2,7 +2,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type { APIGetPost, APIGetPosts } from '../../../backend/src/types/endpoint';
 
@@ -14,7 +14,7 @@ export const optionsGetPosts = () => {
   return queryOptions<APIGetPosts['Success']['data'], Error>({
     queryKey: ['getPosts'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/posts`, {
+      const response = await apiFetch('/1/posts', {
         method: 'GET',
       });
 
@@ -37,7 +37,7 @@ export const optionsGetPost = (id: number) => {
   return queryOptions<APIGetPost['Success']['data'], Error>({
     queryKey: ['getPost', id],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/posts/${id}`, {
+      const response = await apiFetch(`/1/posts/${id}`, {
         method: 'GET',
       });
 

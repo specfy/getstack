@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type { APIGetTop } from '../../../backend/src/types/endpoint';
 
@@ -14,7 +14,7 @@ export const optionsGetTop = () => {
   return queryOptions<APIGetTop['Success'], Error>({
     queryKey: ['getTop'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/top`, {
+      const response = await apiFetch('/1/top', {
         method: 'GET',
       });
 

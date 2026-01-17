@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
-import { API_URL } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 
 import type { APIGetData } from '@getstack/backend/src/types/endpoint';
 
@@ -10,7 +10,7 @@ export const useData = () => {
   return useQuery<APIGetData['Success'], Error>({
     queryKey: ['getData'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/1/data`, {
+      const response = await apiFetch('/1/data', {
         method: 'GET',
       });
 
