@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import { defineConfig, PluginOption } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
+import { nitro } from 'nitro/vite';
 
 // const imageHeaders = {
 //   'cache-control': 'public,max-age=86400',
@@ -15,12 +16,13 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
+    tanstackStart(),
+    nitro(),
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
     contentCollections(),
-    tanstackStart(),
   ] as PluginOption[],
 
   ssr: {
@@ -49,9 +51,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
-      // https://github.com/tabler/tabler-icons/issues/1233
-      // /esm/icons/index.mjs only exports the icons statically, so no separate chunks are created
-      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
     },
   },
 });
