@@ -6,7 +6,7 @@ import { FileMigrationProvider, Migrator } from 'kysely';
 import { db, kyselyClickhouse } from './client.js';
 import { algolia } from '../utils/algolia.js';
 import { envs } from '../utils/env.js';
-import { defaultLogger as logger } from '../utils/logger.js';
+import { defaultLogger as logger, logError } from '../utils/logger.js';
 
 import type { IndexSettings } from 'algoliasearch';
 
@@ -31,8 +31,7 @@ export async function migrate(): Promise<boolean> {
   {
     const { error, results } = await migratorDB.migrateToLatest();
     if (error !== undefined) {
-      logger.error('failed to migrate DN');
-      logger.error(error);
+      logError(new Error('failed to migrate DN'), error);
       return false;
     }
 
@@ -41,7 +40,7 @@ export async function migrate(): Promise<boolean> {
         if (it.status === 'Success') {
           logger.info(`migration "${it.migrationName}" was executed successfully`);
         } else if (it.status === 'Error') {
-          logger.error(`failed to execute migration "${it.migrationName}"`);
+          logError(new Error(`failed to execute migration "${it.migrationName}"`));
         }
       }
     }
@@ -51,8 +50,7 @@ export async function migrate(): Promise<boolean> {
   {
     const { error, results } = await migratorClickhouse.migrateToLatest();
     if (error !== undefined) {
-      logger.error('failed to migrate ClickHouse');
-      logger.error(error);
+      logError(new Error('failed to migrate ClickHouse'), error);
       return false;
     }
 
@@ -61,7 +59,7 @@ export async function migrate(): Promise<boolean> {
         if (it.status === 'Success') {
           logger.info(`migration "${it.migrationName}" was executed successfully`);
         } else if (it.status === 'Error') {
-          logger.error(`failed to execute migration "${it.migrationName}"`);
+          logError(new Error(`failed to execute migration "${it.migrationName}"`));
         }
       }
     }

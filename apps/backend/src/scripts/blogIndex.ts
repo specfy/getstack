@@ -2,7 +2,7 @@
 // @ts-nocheck in dockerfile it's not present
 import { allPosts } from '../../../frontend/.content-collections/generated/index.js';
 import { db } from '../db/client.js';
-import { defaultLogger } from '../utils/logger.js';
+import { defaultLogger, logError } from '../utils/logger.js';
 
 import type { PostsInsert } from '../db/types.db.js';
 
@@ -62,7 +62,7 @@ async function main(): Promise<void> {
 
     logger.info('Finished indexing all posts');
   } catch (err) {
-    logger.error('Failed to index posts', err);
+    logError(new Error('Failed to index posts'), err);
     throw err;
   }
 }

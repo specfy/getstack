@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/max-params */
-import * as Sentry from '@sentry/node';
 import cors from '@fastify/cors';
 
 import { routes } from './routes/index.js';
 import { notFound, serverError } from './utils/apiErrors.js';
-import { envs } from './utils/env.js';
-import { defaultLogger as logger } from './utils/logger.js';
+import { defaultLogger as logger, logError } from './utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginOptions, FastifyServerOptions } from 'fastify';
 
@@ -36,22 +34,16 @@ export default async function createApp(
   });
 
   f.setErrorHandler(function (error, req, res) {
-    logger.error(error instanceof Error ? error.message : error);
-
-    // Capture error in Sentry
-    if (envs.SENTRY_DSN && error instanceof Error) {
-      Sentry.captureException(error, {
-        tags: {
-          route: req.url,
-          method: req.method,
-        },
-        contexts: {
-          request: {
-            method: req.method,
-            url: req.url,
-            headers: req.headers,
-          },
-        },
+    // logError will handle both local logging and Sentry in production
+    if (error instanceof Error) {
+      logError(error, null, {
+        route: req.url,
+        method: req.method,
+      });
+    } else {
+      logError(new Error('unknown error in API'), error, {
+        route: req.url,
+        method: req.method,
       });
     }
 

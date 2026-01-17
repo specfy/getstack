@@ -11,7 +11,7 @@ import { algolia } from '../utils/algolia.js';
 import { formatToClickhouseDatetime, formatToDate, formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
 import { octokit } from '../utils/github.js';
-import { defaultLogger } from '../utils/logger.js';
+import { defaultLogger, logError } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
 import type { AlgoliaRepositoryObject } from '../types/algolia.js';
@@ -62,7 +62,7 @@ export const cronListGithubRepositories = CronJob.from({
         });
       }
     } catch (err) {
-      logger.error(err, 'Error fetching repositories from GitHub:');
+      logError(new Error('Error fetching repositories from GitHub'), err);
     }
 
     if (currentDate.getTime() <= endDate.getTime()) {

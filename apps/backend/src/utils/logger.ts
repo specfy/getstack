@@ -1,6 +1,7 @@
+import * as Sentry from '@sentry/node';
 import { pino } from 'pino';
 
-import { envs } from './env.js';
+import { envs, isProd } from './env.js';
 
 import type { LoggerOptions } from 'pino';
 
@@ -63,3 +64,27 @@ if (envs.IS_PROD && options.formatters) {
 
 export const defaultLogger = pino(options);
 export type Logger = typeof defaultLogger;
+
+/**
+ * Logs an error locally and sends to Sentry in production.
+ * Always logs locally for debugging, and sends to Sentry in production.
+ */
+export function logError(message: Error, err?: unknown, extra?: Record<string, unknown>): void {
+  // Always log locally
+  // @ts-expect-error - pino logger accepts flexible arguments
+  defaultLogger.error(...args);
+
+  // In production, also send to Sentry
+  if (isProd && envs.SENTRY_DSN) {
+
+    const context: { level?: 'error'; extra?: Record<string, unknown> } = { level: 'error' };
+    if (extra && Object.keys(extra).length > 0) {
+      context.extra = extra;
+    }
+    if (err) {
+      message.cause = err
+    }
+
+    Sentry.captureException(message, Object.keys(context).length > 0 ? context : undefined);
+  }
+}

@@ -5,7 +5,7 @@ import Fastify from 'fastify';
 
 import createApp, { options } from './app.js';
 import { envs } from './utils/env.js';
-import { defaultLogger as logger } from './utils/logger.js';
+import { defaultLogger as logger, logError } from './utils/logger.js';
 
 import './processor/cronAnalyzer.js';
 import './processor/cronList.js';
@@ -31,24 +31,16 @@ void app.register(createApp);
 
 process
   .on('unhandledRejection', (reason) => {
-    logger.error('Unhandled Rejection at Promise', reason);
+    logError(new Error('Unhandled Rejection at Promise'), reason);
+    // Flush Sentry before exiting in production
     if (envs.SENTRY_DSN) {
-      Sentry.captureException(reason instanceof Error ? reason : new Error(String(reason)), {
-        tags: {
-          errorType: 'unhandledRejection',
-        },
-      });
+      void Sentry.flush(2000);
     }
   })
   .on('uncaughtException', (err) => {
-    logger.error('Uncaught Exception thrown', err);
+    logError(new Error('Uncaught Exception thrown'), err);
+    // Flush Sentry before exiting in production
     if (envs.SENTRY_DSN) {
-      Sentry.captureException(err, {
-        tags: {
-          errorType: 'uncaughtException',
-        },
-      });
-      // Flush Sentry before exiting
       void Sentry.flush(2000).then(() => {
         process.exit(1);
       });
@@ -71,7 +63,7 @@ app.addHook('onClose', async (instance) => {
     closeListeners.uninstall();
     await instance.close();
   } catch (err) {
-    logger.error(err);
+    logError(new Error('Failed to close'), err);
   }
 });
 

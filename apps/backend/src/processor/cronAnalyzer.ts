@@ -8,7 +8,7 @@ import { getOrInsert, update } from '../models/progress.js';
 import { getRepositoryToAnalyze, updateRepository } from '../models/repositories.js';
 import { formatToYearWeek } from '../utils/date.js';
 import { envs } from '../utils/env.js';
-import { defaultLogger } from '../utils/logger.js';
+import { defaultLogger, logError } from '../utils/logger.js';
 import { wait } from '../utils/wait.js';
 
 import type { Payload } from '@specfy/stack-analyser';
@@ -53,14 +53,14 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
                 return true;
               }
             } catch (err) {
-              logger.error(err, 'Failed to get previous');
+              logError(new Error('Failed to get previous'), err);
             }
 
             let res: Payload;
             try {
               res = await analyze(repo, logger);
             } catch (err) {
-              logger.error(err, `Failed to analyze`);
+              logError(new Error(`Failed to analyze`), err);
               await updateRepository({ trx, id: repo.id, input: { errored: 1 } });
               await wait(envs.ANALYZE_WAIT);
               return true;
@@ -70,7 +70,7 @@ export const cronAnalyzeGithubRepositories = CronJob.from({
               await saveAnalysis({ trx, repo, res, dateWeek });
               logger.info(`Done`);
             } catch (err) {
-              logger.error(err, `Failed to save`);
+              logError(new Error(`Failed to save`), err);
               await updateRepository({ trx, id: repo.id, input: { errored: 1 } });
             }
 

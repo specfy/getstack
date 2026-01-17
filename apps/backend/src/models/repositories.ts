@@ -2,6 +2,7 @@ import { clickHouse, db } from '../db/client.js';
 import { algolia } from '../utils/algolia.js';
 import { formatToClickhouseDatetime } from '../utils/date.js';
 import { envs } from '../utils/env.js';
+import { logError } from '../utils/logger.js';
 
 import type { ClickhouseRepositoryInsert } from '../db/types.clickhouse.js';
 import type { RepositoryInsert, RepositoryRow, RepositoryUpdate, TX } from '../db/types.db.js';
@@ -174,7 +175,7 @@ export async function reindexRepositoriesToAlgolia(logger: Logger): Promise<void
       logger.info(`Reindexed ${success} repositories...`);
     } catch (err: unknown) {
       failed += objects.length;
-      logger.error(`Failed to reindex chunk:`, err);
+      logError(new Error('Failed to reindex chunk'), err);
     }
   }
 

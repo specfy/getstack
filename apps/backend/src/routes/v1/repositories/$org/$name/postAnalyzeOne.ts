@@ -5,7 +5,7 @@ import { getRepository } from '../../../../../models/repositories.js';
 import { analyze, saveAnalysis, savePreviousIfStale } from '../../../../../processor/analyzer.js';
 import { notFound } from '../../../../../utils/apiErrors.js';
 import { formatToYearWeek } from '../../../../../utils/date.js';
-import { defaultLogger } from '../../../../../utils/logger.js';
+import { defaultLogger, logError } from '../../../../../utils/logger.js';
 
 import type { FastifyInstance, FastifyPluginCallback } from 'fastify';
 
@@ -45,7 +45,7 @@ export const postAnalyzeOne: FastifyPluginCallback = (fastify: FastifyInstance) 
         }
       });
     } catch (err) {
-      logger.error(`Failed to process`, err);
+      logError(new Error('Failed to process'), err);
       reply.status(500).send({ error: { code: 'failed_to_process', status: 500 } });
       return;
     }

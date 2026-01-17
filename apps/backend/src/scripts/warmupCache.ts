@@ -1,7 +1,7 @@
 import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 
 import { listAllRepositories } from '../models/repositories.js';
-import { defaultLogger } from '../utils/logger.js';
+import { defaultLogger, logError } from '../utils/logger.js';
 import { categories } from '../utils/stacks.js';
 import { wait } from '../utils/wait.js';
 
@@ -32,15 +32,15 @@ if (hasCategories) {
 
       const res = await fetch(url);
       if (!res.ok) {
-        logger.error(`Error: status ${res.status}`);
+        logError(new Error(`Error: status ${res.status}`));
       }
 
       const resLeaderboard = await fetch(`${url}/leaderboard`);
       if (!resLeaderboard.ok) {
-        logger.error(`Error leaderboard: status ${resLeaderboard.status}`);
+        logError(new Error(`Error leaderboard: status ${resLeaderboard.status}`));
       }
     } catch (err) {
-      logger.error(`Error:`, err);
+      logError(new Error('Failed to warm up cache'), err);
     }
     await wait(100);
   }
@@ -57,14 +57,14 @@ if (hasTechs) {
       logger.info(`Tech: ${tech.key}`);
       const res = await fetch(url);
       if (!res.ok) {
-        logger.error(`Error: status ${res.status}`);
+        logError(new Error(`Error: status ${res.status}`));
       }
       const resRelated = await fetch(`${url}/related`);
       if (!resRelated.ok) {
-        logger.error(`Error related: status ${resRelated.status}`);
+        logError(new Error(`Error related: status ${resRelated.status}`));
       }
     } catch (err) {
-      logger.error(`Error:`, err);
+      logError(new Error(`Failed to fetch tech`), err);
     }
     await wait(100);
     techCount++;
@@ -88,10 +88,10 @@ if (hasRepos) {
       logger.info(`Repo: ${repo.org}/${repo.name}`);
       const res = await fetch(url);
       if (!res.ok) {
-        logger.error(`Error: status ${res.status}`);
+        logError(new Error(`Error: status ${res.status}`));
       }
     } catch (err) {
-      logger.error(`Error:`, err);
+      logError(new Error(`Failed to fetch repo`), err);
     }
     await wait(100);
     repoCount++;
