@@ -21,6 +21,8 @@ dokku config:set --no-restart getstack-api \
   DATABASE_URL= \
   IS_PROD=true \
   NODE_ENV="production" \
+  SENTRY_DSN= \
+  SENTRY_ENVIRONMENT=production \
   DOKKU_DOCKERFILE_START_CMD="node --run prod:start"
 
 dokku domains:add getstack-api api.getstack.dev

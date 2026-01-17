@@ -20,9 +20,7 @@ export default defineConfig({
     }),
     tailwindcss(),
     contentCollections(),
-    tanstackStart({
-      target: 'node-server',
-    }),
+    tanstackStart(),
   ],
 
   ssr: {

@@ -18,13 +18,6 @@ export const DefaultCatchBoundary: React.FC<{ error: ErrorComponentProps }> = ({
       Sentry.captureException(error.error, {
         tags: {
           errorBoundary: 'DefaultCatchBoundary',
-          route: error.routeId || 'unknown',
-        },
-        contexts: {
-          router: {
-            routeId: error.routeId,
-            pathname: error.pathname,
-          },
         },
       });
     }

@@ -1,11 +1,7 @@
 import * as Sentry from '@sentry/react';
-import { StartClient } from '@tanstack/react-start';
-import { hydrateRoot } from 'react-dom/client';
 
 import { SENTRY_DSN, SENTRY_ENVIRONMENT } from './lib/envs';
-import { createRouter } from './router';
 
-// Initialize Sentry
 if (SENTRY_DSN) {
   Sentry.init({
     dsn: SENTRY_DSN,
@@ -24,7 +20,3 @@ if (SENTRY_DSN) {
     replaysOnErrorSampleRate: 0,
   });
 }
-
-const router = createRouter();
-
-hydrateRoot(document, <StartClient router={router} />);

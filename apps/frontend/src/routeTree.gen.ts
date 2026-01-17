@@ -80,8 +80,8 @@ export interface FileRoutesByFullPath {
   '/category/$category': typeof CategoryCategoryRoute
   '/licenses/$license': typeof LicensesLicenseRoute
   '/tech/$techKey': typeof TechTechKeyRoute
-  '/blog': typeof BlogIndexRoute
-  '/licenses': typeof LicensesIndexRoute
+  '/blog/': typeof BlogIndexRoute
+  '/licenses/': typeof LicensesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,8 +119,8 @@ export interface FileRouteTypes {
     | '/category/$category'
     | '/licenses/$license'
     | '/tech/$techKey'
-    | '/blog'
-    | '/licenses'
+    | '/blog/'
+    | '/licenses/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -186,14 +186,14 @@ declare module '@tanstack/react-router' {
     '/licenses/': {
       id: '/licenses/'
       path: '/licenses'
-      fullPath: '/licenses'
+      fullPath: '/licenses/'
       preLoaderRoute: typeof LicensesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
-      fullPath: '/blog'
+      fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -250,3 +250,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
