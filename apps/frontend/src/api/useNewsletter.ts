@@ -11,12 +11,12 @@ export const postSubscribe = async (body: APIPostSubscribe['Body']) => {
   });
 
   if (response.status !== 200) {
-    throw new Error('error');
+    throw new Error(`API error: POST /1/newsletter returned status ${response.status}`);
   }
 
   const json = (await response.json()) as APIPostSubscribe['Reply'];
   if ('error' in json) {
-    throw new Error('error');
+    throw new Error(`API error: POST /1/newsletter - ${JSON.stringify(json.error)}`);
   }
 
   return json;

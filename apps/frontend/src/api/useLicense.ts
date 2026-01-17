@@ -29,7 +29,7 @@ export const optionsGetLicenses = () => {
 
       const json = (await response.json()) as APIGetLicenses['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/licenses - ${JSON.stringify(json.error)}`);
       }
 
       return json;
@@ -57,7 +57,7 @@ export const optionsGetLicense = ({ key }: { key?: string }) => {
 
       const json = (await response.json()) as APIGetLicense['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/licenses/${key} - ${JSON.stringify(json.error)}`);
       }
 
       return json;
@@ -84,7 +84,7 @@ export const optionsLicensesLeaderboard = () => {
 
       const json = (await response.json()) as APIGetLicensesLeaderboard['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/licenses/leaderboard - ${JSON.stringify(json.error)}`);
       }
 
       return json;

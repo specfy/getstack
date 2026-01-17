@@ -19,12 +19,12 @@ export const optionsGetTop = () => {
       });
 
       if (response.status !== 200) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/top returned status ${response.status}`);
       }
 
       const json = (await response.json()) as APIGetTop['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: ${JSON.stringify(json.error)}`);
       }
 
       return json;

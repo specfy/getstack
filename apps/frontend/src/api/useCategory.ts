@@ -29,7 +29,7 @@ export const optionsGetCategory = ({ name }: { name?: string }) => {
 
       const json = (await response.json()) as APIGetCategory['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/categories/${name} - ${JSON.stringify(json.error)}`);
       }
 
       return json;
@@ -59,7 +59,7 @@ export const optionsCategoryLeaderboardOptions = ({ name }: { name?: string | un
 
       const json = (await response.json()) as APIGetCategoryLeaderboard['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/categories/${name}/leaderboard - ${JSON.stringify(json.error)}`);
       }
 
       return json;

@@ -13,23 +13,28 @@ export const DefaultCatchBoundary: React.FC<{ error: ErrorComponentProps }> = ({
   });
 
   useEffect(() => {
+    // The error might be in error.error or error itself
+    const actualError = error.error || (error as unknown as Error);
+
     // Capture error in Sentry
-    if (error.error) {
-      Sentry.captureException(error.error, {
+    if (actualError instanceof Error) {
+      Sentry.captureException(actualError, {
         tags: {
           errorBoundary: 'DefaultCatchBoundary',
         },
         extra: {
           errorInfo: error.info,
+          errorObject: error,
         },
       });
     }
     console.error('DefaultCatchBoundary Error:', {
-      error: error.error,
-      message: error.error?.message,
-      stack: error.error?.stack,
+      error: actualError,
+      message: actualError instanceof Error ? actualError.message : String(actualError),
+      stack: actualError instanceof Error ? actualError.stack : undefined,
       info: error.info,
       fullError: error,
+      errorKeys: Object.keys(error),
     });
   }, [error]);
 

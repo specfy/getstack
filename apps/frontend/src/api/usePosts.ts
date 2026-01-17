@@ -25,7 +25,7 @@ export const optionsGetPosts = () => {
 
       const json = (await response.json()) as APIGetPosts['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/posts - ${JSON.stringify(json.error)}`);
       }
 
       return json.data;
@@ -48,7 +48,7 @@ export const optionsGetPost = (id: number) => {
 
       const json = (await response.json()) as APIGetPost['Reply'];
       if ('error' in json) {
-        throw new Error('error');
+        throw new Error(`API error: GET /1/posts/${id} - ${JSON.stringify(json.error)}`);
       }
 
       return json.data;
