@@ -11,7 +11,7 @@ import {
 } from '@tabler/icons-react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
-import { subWeeks, format, startOfISOWeek } from 'date-fns';
+import { addWeeks, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsGetLicense, optionsLicensesLeaderboard, useLicense } from '@/api/useLicense';
@@ -66,15 +66,16 @@ const License: React.FC = () => {
     if (!data) {
       return [];
     }
+    // data.data.volume.shift()
+    console.log(data.data);
     return [
       {
         id: 'volume',
         data: data.data.volume.map((r) => {
           // Parse YYYY-WW into a valid date
-          const [year] = r.date_week.split('-').map(Number);
-          const parsedDate = startOfISOWeek(subWeeks(new Date(year!, 0, 1), 1));
-          const formattedDate = format(parsedDate, 'MMM dd');
-          return { y: r.hits, x: formattedDate };
+          const [year, week] = r.date_week.split('-').map(Number);
+          const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
+          return { y: r.hits, x: parsedDate };
         }),
       },
     ];
@@ -242,7 +243,8 @@ const License: React.FC = () => {
             <ResponsiveLine
               data={chartData}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-              xScale={{ type: 'point' }}
+              xScale={{ type: 'time', format: '%Y-%m-%d', useUTC: false }}
+              xFormat="time:%b %d"
               enableArea={true}
               axisTop={null}
               axisRight={null}
@@ -272,6 +274,7 @@ const License: React.FC = () => {
                 legendOffset: 11,
                 legendPosition: 'middle',
                 truncateTickAt: 0,
+                format: '%b %d',
               }}
               axisLeft={null}
             />

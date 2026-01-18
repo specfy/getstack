@@ -8,7 +8,7 @@ import {
   IconWorld,
 } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound } from '@tanstack/react-router';
-import { subWeeks, format, startOfISOWeek } from 'date-fns';
+import { addWeeks, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsCategoryLeaderboardOptions, useCategoryLeaderboard } from '@/api/useCategory';
@@ -79,10 +79,9 @@ const Tech: React.FC = () => {
         id: 'volume',
         data: data.volume.map((r) => {
           // Parse YYYY-WW into a valid date
-          const [year] = r.date_week.split('-').map(Number);
-          const parsedDate = startOfISOWeek(subWeeks(new Date(year!, 0, 1), 1));
-          const formattedDate = format(parsedDate, 'MMM dd');
-          return { y: r.hits, x: formattedDate };
+          const [year, week] = r.date_week.split('-').map(Number);
+          const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
+          return { y: r.hits, x: parsedDate };
         }),
       },
     ];
