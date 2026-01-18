@@ -19,7 +19,7 @@ export const TrendsBadge: React.FC<{
         className={cn(
           'inline-flex gap-1 rounded-lg  border-transparent',
           size === 'lg' ? 'text-lg' : 'text-tiny',
-          pct > 0 ? ' text-emerald-600 bg-emerald-50' : ' text-red-400 bg-red-50'
+          pct > 0 ? ' bg-emerald-50 text-emerald-600' : ' bg-red-50 text-red-400'
         )}
       >
         {pct > 0 ? <IconTrendingUp /> : <IconTrendingDown />}

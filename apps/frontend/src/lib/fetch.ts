@@ -5,15 +5,14 @@ import { API_URL, APP_URL } from './envs';
  * - Automatically prepends API_URL to the path
  * - Adds proper headers for SSR requests to prevent 403 errors
  */
-export async function apiFetch(
-  path: string,
-  options: RequestInit = {}
-): Promise<Response> {
+export async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
   // Prepend API_URL if path doesn't start with http
-  const url = path.startsWith('http') ? path : `${API_URL}${path.startsWith('/') ? '' : '/'}${path}`;
+  const url = path.startsWith('http')
+    ? path
+    : `${API_URL}${path.startsWith('/') ? '' : '/'}${path}`;
 
   // Detect if we're in SSR (server-side)
-  const isSSR = typeof window === 'undefined';
+  const isSSR = globalThis.window === undefined;
 
   const headers = new Headers(options.headers);
 

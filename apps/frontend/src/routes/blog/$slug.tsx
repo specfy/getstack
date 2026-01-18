@@ -28,7 +28,7 @@ const BlogPost: React.FC = () => {
   const date = dayjs(post.updated_at);
 
   return (
-    <div className="mt-20">
+    <div className="relative mx-auto mt-20 max-w-screen-xl px-4">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -48,25 +48,25 @@ const BlogPost: React.FC = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <article className="prose max-w-none container py-8 w-full md:w-3/4 lg:w-2/3">
-        <h1 className="text-4xl font-bold mt-4 mb-4">{post.title}</h1>
-        <div className="mb-10 h-7 flex items-center gap-3">
+      <article className="prose container w-full max-w-none py-8 md:w-3/4 lg:w-2/3">
+        <h1 className="my-4 text-4xl font-bold">{post.title}</h1>
+        <div className="mb-10 flex h-7 items-center gap-3">
           <a
             href={post.metadata.authorUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 !text-gray-900 no-underline  text-xs"
+            className="flex items-center gap-2 text-xs !text-gray-900  no-underline"
           >
             <img
               src={post.metadata.avatarUrl}
-              className="h-6 w-6 rounded-full bg-gray-50"
+              className="size-6 rounded-full bg-gray-50"
               alt={`${post.metadata.author} avatar`}
               width={24}
               height={24}
             />
             <div className="text-sm leading-3">{post.metadata.author}</div>
           </a>
-          <time dateTime={post.created_at} className="text-gray-500 text-xs">
+          <time dateTime={post.created_at} className="text-xs text-gray-500">
             {date.format('MMMM DD, YYYY')}
           </time>
           {post.categories.data.length > 0 && (
@@ -161,8 +161,8 @@ export const Route = createFileRoute('/blog/$slug')({
         { name: 'article:published_time', content: data.created_at },
         { name: 'article:modified_time', content: data.updated_at },
         { name: 'article:author', content: data.metadata.author },
-        { name: 'article:section', content: data.categories?.data.join(',') ?? '' },
-        { name: 'article:tag', content: data.techs?.data.join(',') ?? '' },
+        { name: 'article:section', content: data.categories.data.join(',') },
+        { name: 'article:tag', content: data.techs.data.join(',') },
       ],
       links: [{ rel: 'canonical', href: url }],
       scripts: [{ type: 'application/ld+json', children: JSON.stringify(ldJson) }],

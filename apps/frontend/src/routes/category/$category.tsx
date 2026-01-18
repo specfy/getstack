@@ -100,27 +100,27 @@ const Category: React.FC = () => {
   }
 
   return (
-    <div>
-      <header className="mb-10 flex flex-col gap-2 mt-10">
+    <div className="relative mx-auto max-w-screen-xl px-4">
+      <header className="my-10 flex flex-col gap-2">
         <div className="flex gap-4 ">
-          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border">
+          <div className="size-14 rounded-md border bg-neutral-100 p-1">
             <cat.icon size={46} />
           </div>{' '}
           <div className="flex flex-col gap-1">
-            <div className="text-sm text-gray-400 leading-5">Category</div>
-            <h1 className="text-3xl font-semibold font-serif leading-8">{cat.name}</h1>
+            <div className="text-sm leading-5 text-gray-400">Category</div>
+            <h1 className="font-serif text-3xl font-semibold leading-8">{cat.name}</h1>
           </div>
         </div>
-        <h3 className="mt-5 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
+        <h3 className="mt-5 max-w-2xl text-pretty font-serif font-light text-gray-600 md:text-lg">
           {cat.description}
         </h3>
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-1 font-serif">Top {top10.length}</h3>
+        <h3 className="mb-1 font-serif text-lg font-semibold">Top {top10.length}</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
-            <div className="text-xs text-neutral-400 pt-1.5">
+            <div className="pt-1.5 text-xs text-neutral-400">
               By number of repositories in GitHub
             </div>
             <Card className="border-transparent p-0">
@@ -130,18 +130,18 @@ const Category: React.FC = () => {
                   const name = listIndexed[row.tech].name;
                   return (
                     <div
-                      className="flex justify-between items-center"
+                      className="flex items-center justify-between"
                       key={row.tech}
                       aria-description={`${name} is used by ${formatted} repositories`}
                     >
                       <TechBadge tech={row.tech} size="l" border />
-                      <div className="flex gap-1 items-center">
+                      <div className="flex items-center gap-1">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
                         <TT description={`${name} is used by ${formatted} repositories`}>
-                          <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                          <div className="w-8 text-right text-xs font-semibold">{formatted}</div>
                         </TT>
                       </div>
                     </div>
@@ -151,7 +151,7 @@ const Category: React.FC = () => {
             </Card>
           </div>
           <div className="md:col-span-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div className="text-xs text-neutral-400">Top {top10.length} over time</div>
               <div>
                 <DataProgress />
@@ -185,38 +185,38 @@ const Category: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-y-10 md:gap-x-14">
+      <div className="mt-10 grid grid-cols-1 gap-y-10 md:grid-cols-3 md:gap-x-14">
         <div className="md:col-span-1">
           <hr />
 
           {(rest.length > 0 || nonFoundTech.length > 0) && (
-            <Card className="border-transparent p-0 mt-10">
+            <Card className="mt-10 border-transparent p-0">
               <div className="flex flex-col gap-1">
                 {rest.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
                   return (
-                    <div className="flex justify-between items-center" key={row.tech}>
+                    <div className="flex items-center justify-between" key={row.tech}>
                       <TechBadge tech={row.tech} size="md" border />
-                      <div className="flex gap-1 items-center">
+                      <div className="flex items-center gap-1">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
-                        <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                        <div className="w-8 text-right text-xs font-semibold">{formatted}</div>
                       </div>
                     </div>
                   );
                 })}
                 {nonFoundTech.length > 0 && (
-                  <div className={cn(rest.length > 0 && 'border-t-1 pt-10 mt-10')}>
-                    <div className="text-neutral-400 text-xs mb-2">Never found</div>
+                  <div className={cn(rest.length > 0 && 'border-t-1 mt-10 pt-10')}>
+                    <div className="mb-2 text-xs text-neutral-400">Never found</div>
                     {nonFoundTech.map((row) => (
                       <div
-                        className="flex justify-between items-center text-xs text-gray-400"
+                        className="flex items-center justify-between text-xs text-gray-400"
                         key={row.key}
                       >
                         <TechBadge tech={row.key} />
-                        <div className="font-semibold w-8 text-right">0</div>
+                        <div className="w-8 text-right font-semibold">0</div>
                       </div>
                     ))}
                   </div>
@@ -226,7 +226,7 @@ const Category: React.FC = () => {
           )}
         </div>
         <div className="col-span-2">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             {winner && (
               <Card>
                 <CardHeader className="relative">
@@ -272,8 +272,8 @@ const Category: React.FC = () => {
               </Card>
             )}
           </div>
-          <h3 className="text-lg font-semibold mt-10 font-serif">Full Repartition</h3>
-          <div className="text-xs text-neutral-400 mb-4">
+          <h3 className="mt-10 font-serif text-lg font-semibold">Full Repartition</h3>
+          <div className="mb-4 text-xs text-neutral-400">
             Every {cat.name} by number of repositories using this technology in GitHub
           </div>
           <Card style={{ height: 350 }}>

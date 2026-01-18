@@ -41,35 +41,35 @@ export const TopRepositories: React.FC<{
 
   return (
     <div>
-      <h3 className="text-lg font-semibold font-serif">{title}</h3>
-      <div className="text-xs text-neutral-400 mb-4">{description}</div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <h3 className="font-serif text-lg font-semibold">{title}</h3>
+      <div className="mb-4 text-xs text-neutral-400">{description}</div>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {top10.map((repo) => {
           return (
             <Link
               key={repo.id}
-              className="py-4 pb-2 px-4 flex flex-col gap-3 border rounded-sm border-gray-200 hover:bg-gray-50 transition-colors"
+              className="flex flex-col gap-3 rounded-sm border border-gray-200 p-4 pb-2 transition-colors hover:bg-gray-50"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
               aria-description={`${repo.org}/${repo.name} is using ${emptyDesc}`}
             >
               <header className="flex gap-2">
-                <div className="border rounded-md bg-gray-50 w-9 p-0.5 px-1 flex items-center justify-center shrink-0">
+                <div className="flex w-9 shrink-0 items-center justify-center rounded-md border bg-gray-50 p-0.5 px-1">
                   <img
                     src={repo.avatar_url}
-                    className="w-6 h-6 rounded-sm overflow-hidden"
+                    className="size-6 overflow-hidden rounded-sm"
                     alt={`${repo.org} logo`}
                     width={24}
                     height={24}
                   />
                 </div>
                 <div className="flex flex-col truncate">
-                  <div className="font-semibold text-sm truncate text-ellipsis">{repo.name}</div>
-                  <div className="text-[10px] text-gray-400 truncate text-ellipsis">{repo.org}</div>
+                  <div className="truncate text-ellipsis text-sm font-semibold">{repo.name}</div>
+                  <div className="truncate text-ellipsis text-[10px] text-gray-400">{repo.org}</div>
                 </div>
               </header>
               <div className="text-xs text-gray-500">
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <IconStar stroke={1} size={16} />
                     <strong>{repo.stars}</strong>Stars
@@ -81,14 +81,14 @@ export const TopRepositories: React.FC<{
         })}
       </div>
       {rest.length > 0 && (
-        <div className="flex flex-wrap gap-1 mt-4 items-center ml-1">
+        <div className="ml-1 mt-4 flex flex-wrap items-center gap-1">
           {rest.map((repo) => {
             return (
               <Button
                 key={repo.id}
                 variant={'ghost'}
                 size={'sm'}
-                className="px-2 py-0 h-6 font-normal cursor-pointer text-xs text-gray-600 hover:text-gray-900"
+                className="h-6 cursor-pointer px-2 py-0 text-xs font-normal text-gray-600 hover:text-gray-900"
                 asChild
               >
                 <Link to="/$org/$name" params={{ org: repo.org, name: repo.name }}>
@@ -98,13 +98,13 @@ export const TopRepositories: React.FC<{
             );
           })}
           {volume && howMuch !== '0' && (
-            <div className="text-xs text-gray-400 px-2">{howMuch} more...</div>
+            <div className="px-2 text-xs text-gray-400">{howMuch} more...</div>
           )}
         </div>
       )}
 
       {topRepos.length === 0 && (
-        <div className="text-gray-400 italic">
+        <div className="italic text-gray-400">
           No open-source repositories are using {emptyDesc} yet.
         </div>
       )}

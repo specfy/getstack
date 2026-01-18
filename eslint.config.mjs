@@ -3,22 +3,31 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['**/dist/', '**/node_modules/', '**/.wrangler', '**/.content-collections/'],
+    ignores: [
+      '**/dist/',
+      '**/node_modules/',
+      '**/.wrangler',
+      '**/.content-collections/',
+      '**/.tanstack',
+      '**/.output',
+    ],
   },
   ...lint.configs.base,
   ...lint.configs.strict,
-  {
-    settings: {},
-    rules: {
-      'import-x/extensions': 'off', // does not work for some reason
-      'import-x/no-extraneous-dependencies': 'off', // does not work for some reason
-    },
-  },
+  ...lint.configs.tailwind,
   {
     files: ['**/*.test.ts'],
     rules: {
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
+    },
+  },
+  {
+    settings: {
+      tailwindcss: {
+        callees: ['cn'],
+        config: 'apps/frontend/tailwind.config.js',
+      },
     },
   },
   {
@@ -43,6 +52,7 @@ export default [
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'import-x/extensions': 'off',
     },
   },
   {
@@ -57,6 +67,7 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/naming-convention': 'off',
       'unicorn/filename-case': 'off',
+      'tailwindcss/no-custom-classname': 'off',
     },
   },
   {

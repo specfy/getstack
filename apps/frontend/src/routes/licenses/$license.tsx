@@ -81,7 +81,6 @@ const License: React.FC = () => {
     ];
   }, [data]);
 
-
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & APILicenseLeaderboard)[]]
   >(() => {
@@ -117,40 +116,40 @@ const License: React.FC = () => {
 
   const lic = data.data.license;
   return (
-    <div>
-      <header className="flex gap-2 justify-between mt-10">
-        <div className="flex gap-4 items-center">
-          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
+    <div className="relative mx-auto max-w-screen-xl px-4">
+      <header className="mt-10 flex justify-between gap-2">
+        <div className="flex items-center gap-4">
+          <div className="flex size-14 items-center justify-center rounded-md border bg-neutral-100 p-1">
             <IconLicense size={30} />
           </div>
           <div className="flex flex-col gap-1">
-            <Link to="/licenses" className="text-sm text-gray-400 leading-5">
+            <Link to="/licenses" className="text-sm leading-5 text-gray-400">
               License
             </Link>
-            <h1 className="text-3xl font-semibold leading-8 font-serif">{lic.full_name}</h1>
+            <h1 className="font-serif text-3xl font-semibold leading-8">{lic.full_name}</h1>
           </div>
         </div>
         {position > 0 && (
           <div>
-            <div className="text-[10px] text-right text-gray-500">position in category</div>
-            <div className="text-4xl text-right font-semibold text-gray-400 font-serif">
+            <div className="text-right text-[10px] text-gray-500">position in category</div>
+            <div className="text-right font-serif text-4xl font-semibold text-gray-400">
               <span className="font-normal text-gray-400">#</span>
               {position}
             </div>
           </div>
         )}
       </header>
-      <div className="flex flex-col md:flex-row gap-10 mt-6">
+      <div className="mt-6 flex flex-col gap-10 md:flex-row">
         <div
-          className="md:w-10/20 text-pretty text-gray-800 md:text-lg font-serif font-light"
+          className="md:w-10/20 text-pretty font-serif font-light text-gray-800 md:text-lg"
           aria-description={`${lic.full_name} explained and meaning`}
         >
           {lic.description}
         </div>
-        <div className="md:w-11/20 flex gap-10 justify-end">
+        <div className="md:w-11/20 flex justify-end gap-10">
           {lic.permissions.length > 0 && (
             <div className="">
-              <h3 className="text-md font-semibold mb-1 font-serif">Permissions</h3>
+              <h3 className="text-md mb-1 font-serif font-semibold">Permissions</h3>
               {lic.permissions.map((permission, i) => {
                 return (
                   <div key={i} className="flex items-center gap-2 text-sm text-gray-500">
@@ -165,7 +164,7 @@ const License: React.FC = () => {
           )}
           {lic.limitations.length > 0 && (
             <div className="">
-              <h3 className="text-md font-semibold mb-1 font-serif">Limitations</h3>
+              <h3 className="text-md mb-1 font-serif font-semibold">Limitations</h3>
               {lic.limitations.map((limitation, i) => {
                 return (
                   <div key={i} className="flex items-center gap-2 text-sm text-gray-500">
@@ -180,7 +179,7 @@ const License: React.FC = () => {
           )}
           {lic.conditions.length > 0 && (
             <div className="">
-              <h3 className="text-md font-semibold mb-1 font-serif">Conditions</h3>
+              <h3 className="text-md mb-1 font-serif font-semibold">Conditions</h3>
               {lic.conditions.map((condition, i) => {
                 return (
                   <div key={i} className="flex items-center gap-2 text-sm text-gray-500 ">
@@ -197,11 +196,11 @@ const License: React.FC = () => {
       </div>
 
       {position > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4 mt-10">
+        <div className="mt-10 grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-4">
           <Card>
             <CardHeader className="relative">
               <CardDescription>Repositories</CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
+              <CardTitle className="@[250px]/card:text-3xl font-serif text-2xl font-semibold tabular-nums">
                 {repoCount}
               </CardTitle>
 
@@ -239,7 +238,7 @@ const License: React.FC = () => {
               </CardFooter>
             )}
           </Card>
-          <Card style={{ height: 'auto', minHeight: '180px' }} className="py-0 col-span-3">
+          <Card style={{ height: 'auto', minHeight: '180px' }} className="col-span-3 py-0">
             <ResponsiveLine
               data={chartData}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
@@ -282,8 +281,8 @@ const License: React.FC = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
-        <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
+      <div className="mt-14 grid grid-cols-1 gap-14 md:grid-cols-10">
+        <div className="order-2 flex flex-col gap-14 md:order-1 md:col-span-7">
           <TopRepositories
             topRepos={data.data.topRepos}
             title={`Top repositories under ${lic.full_name}`}
@@ -292,30 +291,30 @@ const License: React.FC = () => {
             volume={current}
           />
         </div>
-        <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
+        <div className="order-1 mt-0 flex flex-col gap-5 md:order-2 md:col-span-3">
           {position > 0 && (
             <div className="border-t pt-5">
               <Card>
                 <CardHeader className="relative">
-                  <CardDescription className="flex gap-2 items-center">
+                  <CardDescription className="flex items-center gap-2">
                     <IconStar stroke={2} size={18} />
                     Cumulated Stars
                   </CardDescription>
-                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center font-serif">
+                  <CardTitle className="@[250px]/card:text-3xl flex items-center gap-2 font-serif text-2xl font-semibold tabular-nums">
                     {stars}
                   </CardTitle>
                 </CardHeader>
               </Card>
             </div>
           )}
-          <div className="border-t pt-5 mt-1">
+          <div className="mt-1 border-t pt-5">
             <h3 className="text-sm text-gray-500">
               More alternatives{' '}
               <Link to="/licenses" className="font-semibold text-gray-800">
                 licenses
               </Link>
             </h3>
-            <div className="text-sm ml-1 mt-3 flex flex-col gap-1">
+            <div className="ml-1 mt-3 flex flex-col gap-1 text-sm">
               {position > 3 && (
                 <div className=" text-xs text-gray-400">
                   <IconDots stroke={1} size={18} />
@@ -327,7 +326,7 @@ const License: React.FC = () => {
                   <div className="flex items-center gap-4" key={row.license}>
                     <div
                       className={cn(
-                        'text-gray-400 font-semibold text-md w-4',
+                        'text-md w-4 font-semibold text-gray-400',
                         is && 'text-lg text-gray-600'
                       )}
                     >
@@ -351,7 +350,7 @@ const License: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t pt-5 mt-1">
+          <div className="mt-1 border-t pt-5">
             <Report />
           </div>
         </div>

@@ -58,7 +58,9 @@ export const optionsRelatedTechnologyOptions = ({ name }: { name?: string | unde
 
       const json = (await response.json()) as APIGetTopRelatedTechnology['Reply'];
       if ('error' in json) {
-        throw new Error(`API error: GET /1/technologies/${name}/related - ${JSON.stringify(json.error)}`);
+        throw new Error(
+          `API error: GET /1/technologies/${name}/related - ${JSON.stringify(json.error)}`
+        );
       }
 
       return json;

@@ -3,8 +3,8 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
 
 import { ApiResError } from './api.js';
-import { apiFetch } from '../lib/fetch';
 import { ALGOLIA_INDEX_NAME } from '../lib/envs';
+import { apiFetch } from '../lib/fetch';
 import { algolia } from '@/lib/algolia.js';
 
 import type { AlgoliaRepositoryObject } from '@getstack/backend/src/types/algolia.js';

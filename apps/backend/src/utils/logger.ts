@@ -76,13 +76,12 @@ export function logError(message: Error, err?: unknown, extra?: Record<string, u
 
   // In production, also send to Sentry
   if (isProd && envs.SENTRY_DSN) {
-
     const context: { level?: 'error'; extra?: Record<string, unknown> } = { level: 'error' };
     if (extra && Object.keys(extra).length > 0) {
       context.extra = extra;
     }
     if (err) {
-      message.cause = err
+      message.cause = err;
     }
 
     Sentry.captureException(message, Object.keys(context).length > 0 ? context : undefined);

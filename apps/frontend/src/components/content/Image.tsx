@@ -1,7 +1,7 @@
 export const Image = ({ src, alt }: { src: string; alt: string }) => {
   return (
-    <div className="border border-gray-200 p-1 rounded-md mt-8 mb-8">
-      <img src={src} alt={alt} className={'rounded-md mt-0 mb-0'} />
+    <div className="my-8 rounded-md border border-gray-200 p-1">
+      <img src={src} alt={alt} className={'my-0 rounded-md'} />
     </div>
   );
 };

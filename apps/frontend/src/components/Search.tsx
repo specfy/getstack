@@ -75,14 +75,14 @@ export const Search: React.FC<{
           onBlur={() => {
             setTimeout(() => setIsFocused(false), 100);
           }}
-          icon={(isLoading || isFetching) && <IconLoader className="animate-spin size-4" />}
+          icon={(isLoading || isFetching) && <IconLoader className="size-4 animate-spin" />}
         />
         {showList && (
           <CommandEmpty
             className={cn(
-              'text-xs italic text-gray-500 px-4 py-2',
+              'px-4 py-2 text-xs italic text-gray-500',
               inline &&
-                'absolute top-full left-0 z-50 mt-1 w-full rounded-md border bg-white shadow-md'
+                'absolute left-0 top-full z-50 mt-1 w-full rounded-md border bg-white shadow-md'
             )}
           >
             No results...
@@ -92,7 +92,7 @@ export const Search: React.FC<{
           <CommandList
             className={cn(
               inline &&
-                'absolute top-full left-0 z-50 mt-1 w-full rounded-md border bg-white shadow-md'
+                'absolute left-0 top-full z-50 mt-1 w-full rounded-md border bg-white shadow-md'
             )}
           >
             {cats.length > 0 && (
@@ -101,7 +101,7 @@ export const Search: React.FC<{
                   return (
                     <CommandItem
                       key={row.name}
-                      className="flex justify-between cursor-pointer"
+                      className="flex cursor-pointer justify-between"
                       asChild
                       onMouseDown={(e) => {
                         e.preventDefault();
@@ -113,7 +113,7 @@ export const Search: React.FC<{
                       }}
                     >
                       <Link to="/category/$category" params={{ category: row.key }}>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex items-center gap-2">
                           <div className={'w-4'}>
                             <row.icon />
                           </div>
@@ -132,7 +132,7 @@ export const Search: React.FC<{
                   return (
                     <CommandItem
                       key={row.key}
-                      className="flex justify-between cursor-pointer"
+                      className="flex cursor-pointer justify-between"
                       asChild
                       onMouseDown={(e) => {
                         e.preventDefault();
@@ -144,7 +144,7 @@ export const Search: React.FC<{
                       }}
                     >
                       <Link to="/tech/$techKey" params={{ techKey: row.key }}>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex items-center gap-2">
                           <div className={'w-4'}>
                             <img
                               src={`/favicons/${row.key}.webp`}
@@ -155,7 +155,7 @@ export const Search: React.FC<{
                           </div>
                           <span>{row.name}</span>
                         </div>
-                        <div className="text-gray-500 text-xs">{name}</div>
+                        <div className="text-xs text-gray-500">{name}</div>
                       </Link>
                     </CommandItem>
                   );
@@ -168,7 +168,7 @@ export const Search: React.FC<{
                   return (
                     <CommandItem
                       key={row.objectID}
-                      className="flex justify-between cursor-pointer"
+                      className="flex cursor-pointer justify-between"
                       asChild
                       onMouseDown={(e) => {
                         e.preventDefault();
@@ -183,7 +183,7 @@ export const Search: React.FC<{
                       }}
                     >
                       <Link to="/$org/$name" params={{ org: row.org, name: row.name }}>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex items-center gap-2">
                           <div className={'w-4'}>
                             <img
                               src={row.avatarUrl}
@@ -194,7 +194,7 @@ export const Search: React.FC<{
                           </div>
                           <span>{row.name}</span>
                         </div>
-                        <div className="text-gray-500 text-xs flex gap-1 items-center">
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
                           <IconStar />
                           {formatQuantity(row.stars)}
                         </div>

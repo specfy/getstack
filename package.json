@@ -24,13 +24,18 @@
     "favicons:optimize": "npx tsx --env-file=.env apps/backend/src/scripts/optimizeFavicons.ts",
     "sitemap:generate": "npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts",
     "blog:generate": "npx tsx --env-file=.env apps/backend/src/scripts/getDataForBlog.ts",
-    "blog:index": "npx tsx --env-file=.env apps/backend/src/scripts/blogIndex.ts"
+    "blog:index": "npx tsx --env-file=.env apps/backend/src/scripts/blogIndex.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@h1fra/eslint-config": "1.0.12",
+    "@h1fra/eslint-config": "1.0.15",
     "@types/node": "22.14.1",
     "dotenv": "17.0.0",
-    "eslint": "9.30.0",
+    "globals": "16.1.0",
     "typescript": "5.8.3"
+  },
+  "optionalDependencies": {
+    "@unrs/resolver-binding-darwin-arm64": "^1.9.0"
   }
 }

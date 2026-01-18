@@ -90,11 +90,13 @@ function ErrorFallback() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
-        <p className="text-gray-600 mb-4">We've been notified and are working on fixing this issue.</p>
+        <h1 className="mb-4 text-2xl font-bold">Something went wrong</h1>
+        <p className="mb-4 text-gray-600">
+          We've been notified and are working on fixing this issue.
+        </p>
         <button
-          onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => globalThis.location.reload()}
+          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
           Reload Page
         </button>
@@ -120,13 +122,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
         <HeadContent />
       </head>
-      <body>
+      <body className="bg-white">
         <Providers>
-          <div className="min-h-screen flex justify-center">
-            <div className="flex flex-col w-full max-w-screen-xl">
+          <div className="flex min-h-screen justify-center bg-white">
+            <div className="flex w-full flex-col bg-white">
               <Header />
 
-              <div className="h-full px-4 min-h-[calc(100vh-150px)]">{children}</div>
+              <div className="h-full min-h-[calc(100vh-150px)] bg-white">{children}</div>
 
               <Footer />
             </div>

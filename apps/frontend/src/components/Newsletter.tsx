@@ -35,7 +35,7 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
   return (
     <div>
       <div className="text-md">{title ?? 'Subscribe to our newsletter'}</div>
-      <div className="text-xs text-gray-500 mt-0.5 mb-2">
+      <div className="mb-2 mt-0.5 text-xs text-gray-500">
         Join other members and get updates on open source trends.
       </div>
       {!msg && (
@@ -51,8 +51,8 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
           </Button>
         </form>
       )}
-      {msg && <div className="text-emerald-700 text-xs mt-2">{msg}</div>}
-      {err && <div className="text-red-700 text-xs mt-2">{err}</div>}
+      {msg && <div className="mt-2 text-xs text-emerald-700">{msg}</div>}
+      {err && <div className="mt-2 text-xs text-red-700">{err}</div>}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import React from 'react';
-import { StartClient } from '@tanstack/react-start/client';
-import { hydrateRoot } from 'react-dom/client';
 import * as Sentry from '@sentry/react';
+import { StartClient } from '@tanstack/react-start/client';
+import { StrictMode } from 'react';
+import { hydrateRoot } from 'react-dom/client';
 
 import { SENTRY_DSN, SENTRY_ENVIRONMENT } from './lib/envs';
 
@@ -17,17 +17,16 @@ if (SENTRY_DSN) {
       }),
     ],
     // Performance Monitoring
-    tracesSampleRate: SENTRY_ENVIRONMENT === 'production' ? 0.1 : 1.0,
+    tracesSampleRate: SENTRY_ENVIRONMENT === 'production' ? 0.1 : 1,
     // Session Replay
-    replaysSessionSampleRate: SENTRY_ENVIRONMENT === 'production' ? 0.1 : 1.0,
+    replaysSessionSampleRate: SENTRY_ENVIRONMENT === 'production' ? 0.1 : 1,
     replaysOnErrorSampleRate: 0,
   });
 }
 
-
 hydrateRoot(
   document,
-  <React.StrictMode>
+  <StrictMode>
     <StartClient />
-  </React.StrictMode>,
+  </StrictMode>
 );

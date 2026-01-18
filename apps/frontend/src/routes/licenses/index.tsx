@@ -75,27 +75,27 @@ const Licenses: React.FC = () => {
   }, [leaderboard]);
 
   return (
-    <div>
-      <header className="mb-10 flex flex-col gap-2 mt-10">
+    <div className="relative mx-auto max-w-screen-xl px-4">
+      <header className="my-10 flex flex-col gap-2">
         <h1 className="flex gap-4 ">
-          <div className="w-12 h-12 bg-neutral-100 rounded-md p-1 border">
+          <div className="size-12 rounded-md border bg-neutral-100 p-1">
             <IconLicense size={39} />
           </div>
           <div>
-            <div className="text-3xl font-semibold font-serif leading-14">Licenses</div>
+            <div className="leading-14 font-serif text-3xl font-semibold">Licenses</div>
           </div>
         </h1>
-        <h3 className="mt-2 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
+        <h3 className="mt-2 max-w-2xl text-pretty font-serif font-light text-gray-600 md:text-lg">
           Discover the most popular open source licenses used across GitHub repositories. This
           ranking shows which licenses are trending and how their adoption evolves over time.
         </h3>
       </header>
 
       <div className="mt-10">
-        <h3 className="text-lg font-semibold mb-1 font-serif">Top {top10.length}</h3>
+        <h3 className="mb-1 font-serif text-lg font-semibold">Top {top10.length}</h3>
         <div className="grid md:grid-cols-6 md:gap-14">
           <div className="md:col-span-2">
-            <div className="text-xs text-neutral-400 pt-1.5">
+            <div className="pt-1.5 text-xs text-neutral-400">
               By number of repositories in GitHub
             </div>
             <Card className="border-transparent p-0">
@@ -103,19 +103,19 @@ const Licenses: React.FC = () => {
                 {top10.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
                   return (
-                    <div className="flex justify-between items-center" key={row.license}>
+                    <div className="flex items-center justify-between" key={row.license}>
                       <LicenseBadge
                         licenseKey={row.license}
                         fullName={row.full_name}
                         size="l"
                         border
                       />
-                      <div className="flex gap-1 items-center">
+                      <div className="flex items-center gap-1">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
-                        <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                        <div className="w-8 text-right text-xs font-semibold">{formatted}</div>
                       </div>
                     </div>
                   );
@@ -124,7 +124,7 @@ const Licenses: React.FC = () => {
             </Card>
           </div>
           <div className="md:col-span-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div className="text-xs text-neutral-400">Top {top10.length} over time</div>
               <div>
                 <DataProgress />
@@ -158,29 +158,29 @@ const Licenses: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-y-10 md:gap-x-14">
+      <div className="mt-10 grid grid-cols-1 gap-y-10 md:grid-cols-3 md:gap-x-14">
         <div className="md:col-span-1">
           <hr />
 
           {rest.length > 0 && (
-            <Card className="border-transparent p-0 mt-10">
+            <Card className="mt-10 border-transparent p-0">
               <div className="flex flex-col gap-1">
                 {rest.map((row) => {
                   const formatted = formatQuantity(row.current_hits);
                   return (
-                    <div className="flex justify-between items-center" key={row.license}>
+                    <div className="flex items-center justify-between" key={row.license}>
                       <LicenseBadge
                         licenseKey={row.license}
                         fullName={row.full_name}
                         size="md"
                         border
                       />
-                      <div className="flex gap-1 items-center">
+                      <div className="flex items-center gap-1">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
-                        <div className="font-semibold w-8 text-right text-xs">{formatted}</div>
+                        <div className="w-8 text-right text-xs font-semibold">{formatted}</div>
                       </div>
                     </div>
                   );
@@ -190,7 +190,7 @@ const Licenses: React.FC = () => {
           )}
         </div>
         <div className="col-span-2">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             {winner && (
               <Card>
                 <CardHeader className="relative">
@@ -244,8 +244,8 @@ const Licenses: React.FC = () => {
               </Card>
             )}
           </div>
-          <h3 className="text-lg font-semibold mt-10 font-serif">Full Repartition</h3>
-          <div className="text-xs text-neutral-400 mb-4">
+          <h3 className="mt-10 font-serif text-lg font-semibold">Full Repartition</h3>
+          <div className="mb-4 text-xs text-neutral-400">
             Every License by number of repositories using it in GitHub
           </div>
           <Card style={{ height: 350 }}>

@@ -19,7 +19,7 @@ const Blog: React.FC = () => {
   const posts = Route.useLoaderData();
 
   return (
-    <div className="mt-20">
+    <div className="relative mx-auto mt-20 max-w-screen-xl px-4">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -43,7 +43,7 @@ const Blog: React.FC = () => {
               params={{ slug: `${post.metadata.slug}-${post.id}` }}
               key={post.id}
             >
-              <Card className="pt-0 hover:shadow-lg transition-shadow duration-30">
+              <Card className="duration-30 pt-0 transition-shadow hover:shadow-lg">
                 <img src={post.metadata.imageCover || post.metadata.image} alt={post.title} />
                 <CardHeader>
                   <CardTitle>
@@ -51,7 +51,7 @@ const Blog: React.FC = () => {
                       <a href={`/blog/${post.metadata.slug}-${post.id}`}>{post.title}</a>
                     </h2>
                   </CardTitle>
-                  <time dateTime={post.updated_at} className="text-gray-500 text-xs">
+                  <time dateTime={post.updated_at} className="text-xs text-gray-500">
                     {date.format('MMM DD, YYYY')}
                   </time>
                 </CardHeader>

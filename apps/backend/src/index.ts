@@ -16,10 +16,8 @@ if (envs.SENTRY_DSN) {
   Sentry.init({
     dsn: envs.SENTRY_DSN,
     environment: envs.SENTRY_ENVIRONMENT,
-    integrations: [
-      Sentry.httpIntegration(),
-    ],
-    tracesSampleRate: 1.0,
+    integrations: [Sentry.httpIntegration()],
+    tracesSampleRate: 1,
   });
 }
 

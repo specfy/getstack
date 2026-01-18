@@ -389,7 +389,7 @@ export const categoryOrder: TechType[] = [
 export const categoryGroup: { name: string; categories: TechType[]; description: string }[] = [
   {
     name: 'Highlight',
-    description: 'The most popular categories',
+    description: 'The most popular technology categories by adoption rate.',
     categories: ['language', 'db', 'ai'],
   },
 

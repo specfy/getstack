@@ -14,10 +14,10 @@ export const LicenseBadge: React.FC<{
   return (
     <Link
       className={cn(
-        'inline-flex gap-1.5 items-center text-gray-700 hover:text-gray-900 hover:text-shadow-xs h-7 text-xs',
-        size === 'l' && 'text-[13px] h-9 text-gray-950 hover:text-shadow-none',
-        size === 'xl' && 'text-sm h-9 text-gray-950 hover:text-shadow-none',
-        border && 'border rounded-sm px-2',
+        'hover:text-shadow-xs inline-flex h-7 items-center gap-1.5 text-xs text-gray-700 hover:text-gray-900',
+        size === 'l' && 'hover:text-shadow-none h-9 text-[13px] text-gray-950',
+        size === 'xl' && 'hover:text-shadow-none h-9 text-sm text-gray-950',
+        border && 'rounded-sm border px-2',
         className
       )}
       to={`/licenses/$license`}

@@ -3,9 +3,11 @@ import path from 'node:path';
 import contentCollections from '@content-collections/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import { defineConfig, PluginOption } from 'vite';
-import tsConfigPaths from 'vite-tsconfig-paths';
 import { nitro } from 'nitro/vite';
+import { defineConfig } from 'vite';
+import tsConfigPaths from 'vite-tsconfig-paths';
+
+import type { PluginOption } from 'vite';
 
 // const imageHeaders = {
 //   'cache-control': 'public,max-age=86400',

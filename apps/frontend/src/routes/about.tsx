@@ -6,86 +6,88 @@ import { seo } from '@/lib/seo';
 
 const About: React.FC = () => {
   return (
-    <div className="md:w-2/3 prose mt-10">
-      <h1 className="text-3xl font-semibold mb-2 font-serif">About</h1>
-      <p>
-        getStack is a powerful tool that provides comprehensive, and trending insights into the open
-        source world by analyzing <strong className="font-semibold">+33K open repositories</strong>{' '}
-        from GitHub.
-      </p>
-      <h3 className="font-serif">Which technologies are tracked?</h3>
-      <p>
-        This website is powered by{' '}
-        <a
-          href="https://github.com/specfy/stack-analyser"
-          target="_blank"
-          className="font-semibold underline"
-        >
-          @specfy/stack-analyzer
-        </a>
-        , an open-source library that parse any git repository and detects technologies from
-        dependencies, files, folders and lockfile. We have a list of more than{' '}
-        <strong>+600 technologies and native support for a dozen of languages</strong>. The list is
-        manually crafted and you can contribute.
-      </p>
-      <h3 className="font-serif">Which repositories are tracked?</h3>
-      <p>Each week we parse all the repositories following this set of conditions:</p>
-      <ol>
-        <li>No private repos, no templates, no forks, and not archived.</li>
-        <li>
-          Have more than <strong>+1000 stars</strong>
-        </li>
-        <li>Active in the last 2 years</li>
-        <li>Less than 2Gb in disk size </li>
-        <li>
-          Passes basic name filtering (e.g: awesome, templates, examples, boilerplate, tutorials,
-          etc.)
-        </li>
-      </ol>
-      <h3 className="font-serif">I don't see [well-known] in the list</h3>
-      <p>
-        Since we can only parse open-source repository some technologies never makes the cut (e.g:
-        infrastructure, security, some databases, etc.). However sometimes we just don't have a
-        configuration for the technology you are looking for. If that's so, you can make a feature
-        request or a pull request directly in our GitHub repository.
-      </p>
-      <div className="flex flex-col gap-2 md:flex-row">
-        <Button variant={'outline'} asChild>
-          <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
-            <img
-              src={`/favicons/github.webp`}
-              className="w-5 h-5"
-              alt="GitHub logo"
-              width={20}
-              height={20}
-            />
-            <span className="text-gray-800">@specfy/getstack</span>
-          </a>
-        </Button>
-        <Button variant={'outline'} asChild>
+    <div className="prose mx-auto mt-10 max-w-screen-xl px-4">
+      <div className="md:w-2/3">
+        <h1 className="mb-2 font-serif text-3xl font-semibold">About</h1>
+        <p>
+          getStack is a powerful tool that provides comprehensive, and trending insights into the
+          open source world by analyzing{' '}
+          <strong className="font-semibold">+33K open repositories</strong> from GitHub.
+        </p>
+        <h3 className="font-serif">Which technologies are tracked?</h3>
+        <p>
+          This website is powered by{' '}
           <a
             href="https://github.com/specfy/stack-analyser"
             target="_blank"
-            className="no-underline "
+            className="font-semibold underline"
           >
-            <img
-              src={`/favicons/github.webp`}
-              className="w-5 h-5"
-              alt="GitHub logo"
-              width={20}
-              height={20}
-            />
-            <span className="text-gray-800">@specfy/stack-analyzer</span>
+            @specfy/stack-analyzer
           </a>
-        </Button>
-      </div>
+          , an open-source library that parse any git repository and detects technologies from
+          dependencies, files, folders and lockfile. We have a list of more than{' '}
+          <strong>+600 technologies and native support for a dozen of languages</strong>. The list
+          is manually crafted and you can contribute.
+        </p>
+        <h3 className="font-serif">Which repositories are tracked?</h3>
+        <p>Each week we parse all the repositories following this set of conditions:</p>
+        <ol>
+          <li>No private repos, no templates, no forks, and not archived.</li>
+          <li>
+            Have more than <strong>+1000 stars</strong>
+          </li>
+          <li>Active in the last 2 years</li>
+          <li>Less than 2Gb in disk size </li>
+          <li>
+            Passes basic name filtering (e.g: awesome, templates, examples, boilerplate, tutorials,
+            etc.)
+          </li>
+        </ol>
+        <h3 className="font-serif">I don't see [well-known] in the list</h3>
+        <p>
+          Since we can only parse open-source repository some technologies never makes the cut (e.g:
+          infrastructure, security, some databases, etc.). However sometimes we just don't have a
+          configuration for the technology you are looking for. If that's so, you can make a feature
+          request or a pull request directly in our GitHub repository.
+        </p>
+        <div className="flex flex-col gap-2 md:flex-row">
+          <Button variant={'outline'} asChild>
+            <a href="https://github.com/specfy/getstack" target="_blank" className="no-underline">
+              <img
+                src={`/favicons/github.webp`}
+                className="size-5"
+                alt="GitHub logo"
+                width={20}
+                height={20}
+              />
+              <span className="text-gray-800">@specfy/getstack</span>
+            </a>
+          </Button>
+          <Button variant={'outline'} asChild>
+            <a
+              href="https://github.com/specfy/stack-analyser"
+              target="_blank"
+              className="no-underline "
+            >
+              <img
+                src={`/favicons/github.webp`}
+                className="size-5"
+                alt="GitHub logo"
+                width={20}
+                height={20}
+              />
+              <span className="text-gray-800">@specfy/stack-analyzer</span>
+            </a>
+          </Button>
+        </div>
 
-      <h3 className="font-serif">Thanks and attribution</h3>
-      <div>
-        Some techs logos are provided by{' '}
-        <a href="https://logo.dev?utm_source=getstack.Dev" title="Logo API">
-          Logo.dev
-        </a>
+        <h3 className="font-serif">Thanks and attribution</h3>
+        <div>
+          Some techs logos are provided by{' '}
+          <a href="https://logo.dev?utm_source=getstack.Dev" title="Logo API">
+            Logo.dev
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -11,14 +11,14 @@ export const BadgeRepo: React.FC<{ avatar_url: string; name: string; org: string
 }) => {
   return (
     <Link
-      className="inline-flex gap-1 border rounded-md px-[4px] py-[1px] text-sm !text-gray-800 no-underline"
+      className="inline-flex gap-1 rounded-md border px-[4px] py-px text-sm !text-gray-800 no-underline"
       to={'/$org/$name'}
       params={{ org, name }}
     >
-      <div className="bg-gray-50 w-5 h-5 flex items-center justify-center shrink-0">
+      <div className="flex size-5 shrink-0 items-center justify-center bg-gray-50">
         <img
           src={avatar_url}
-          className="w-4 h-4 rounded-sm overflow-hidden"
+          className="size-4 overflow-hidden rounded-sm"
           alt={`${org} logo`}
           width={16}
           height={16}

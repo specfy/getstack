@@ -71,13 +71,13 @@ const Repo: React.FC = () => {
 
   return (
     <div>
-      <header className="flex gap-2 justify-between items-end mt-10">
-        <div className="flex gap-4 items-center">
-          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border">
+      <header className="mt-10 flex items-end justify-between gap-2">
+        <div className="flex items-center gap-4">
+          <div className="size-14 rounded-md border bg-neutral-100 p-1">
             {repo.avatar_url ? (
               <img
                 src={repo.avatar_url}
-                className="rounded-md overflow-hidden"
+                className="overflow-hidden rounded-md"
                 alt={`${repo.org} logo`}
                 width={56}
                 height={56}
@@ -87,38 +87,38 @@ const Repo: React.FC = () => {
             )}
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-sm text-gray-400 leading-5">GitHub repository</div>
+            <div className="text-sm leading-5 text-gray-400">GitHub repository</div>
             <h1 className="text-3xl font-semibold leading-8">
-              <span className="text-gray-500 text-2xl">{repo.org} /</span> {repo.name}
+              <span className="text-2xl text-gray-500">{repo.org} /</span> {repo.name}
             </h1>
           </div>
         </div>
       </header>
       {repo.description && (
-        <div className="mt-5 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif">
+        <div className="mt-5 max-w-2xl text-pretty font-serif text-gray-600 md:text-lg">
           {repo.description}
         </div>
       )}
-      <main className="mt-14 flex flex-col-reverse md:flex-row gap-10">
+      <main className="mt-14 flex flex-col-reverse gap-10 md:flex-row">
         <div className="md:w-4/6">
-          <h3 className="text-lg font-semibold font-serif">Built with</h3>{' '}
-          <div className="text-xs text-neutral-400 mb-4">
+          <h3 className="font-serif text-lg font-semibold">Built with</h3>{' '}
+          <div className="mb-4 text-xs text-neutral-400">
             List of all the technologies this repository is using, automatically extracted every
             week.
           </div>
           {repo.ignored ? (
-            <div className="text-gray-600 italic ">
+            <div className="italic text-gray-600 ">
               This repository has been excluded from our automatic analysis{' '}
-              <span className="text-gray-400 text-xs">({repo.ignored_reason})</span>
+              <span className="text-xs text-gray-400">({repo.ignored_reason})</span>
             </div>
           ) : (
-            <div className="flex flex-col gap-1 items-start">
+            <div className="flex flex-col items-start gap-1">
               {groups.length > 0 &&
                 groups.map(([cat, keys]) => {
                   return (
-                    <div className="grid grid-cols-12 items-start border-t pt-4 w-full pb-4">
+                    <div className="grid w-full grid-cols-12 items-start border-t py-4">
                       <div className="col-span-3 text-xs text-gray-400">{categories[cat].name}</div>
-                      <div className="col-span-9 flex gap-x-2 gap-y-2 flex-wrap">
+                      <div className="col-span-9 flex flex-wrap gap-2">
                         {keys.map((row) => {
                           return <TechBadge tech={row} key={row} size="l" border />;
                         })}
@@ -127,7 +127,7 @@ const Repo: React.FC = () => {
                   );
                 })}
               {groups.length <= 0 && (
-                <div className="text-gray-600 italic ">
+                <div className="italic text-gray-600 ">
                   No technologies were found in this repository.
                 </div>
               )}
@@ -138,9 +138,9 @@ const Repo: React.FC = () => {
           </div>
         </div>
         <div className="md:w-2/6">
-          <div className="flex gap-4 mb-4">
-            <a href={`${repo.url}?utm_source=getstack.dev`} target="_blank" className="grow w-full">
-              <Button variant="outline" className="cursor-pointer w-full">
+          <div className="mb-4 flex gap-4">
+            <a href={`${repo.url}?utm_source=getstack.dev`} target="_blank" className="w-full grow">
+              <Button variant="outline" className="w-full cursor-pointer">
                 <IconBrandGithub stroke={1} /> GitHub
               </Button>
             </a>
@@ -148,9 +148,9 @@ const Repo: React.FC = () => {
               <a
                 href={`${repo.homepage_url}?utm_source=getstack.dev`}
                 target="_blank"
-                className="grow w-full"
+                className="w-full grow"
               >
-                <Button variant="outline" className="cursor-pointer w-full">
+                <Button variant="outline" className="w-full cursor-pointer">
                   <IconWorld stroke={1} /> Homepage
                 </Button>
               </a>
@@ -160,7 +160,7 @@ const Repo: React.FC = () => {
             <CardContent>
               <div>
                 <div className="flex items-center gap-3 py-1">
-                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                  <p className="flex items-center gap-1.5 text-sm text-gray-500">
                     <IconStar size={18} />
                     Stars
                   </p>
@@ -168,7 +168,7 @@ const Repo: React.FC = () => {
                   <span className="text-sm font-semibold">{formatQuantity(repo.stars)}</span>
                 </div>
                 <div className="flex items-center gap-3 py-1">
-                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                  <p className="flex items-center gap-1.5 text-sm text-gray-500">
                     <IconGitFork size={18} />
                     Forks
                   </p>
@@ -176,7 +176,7 @@ const Repo: React.FC = () => {
                   <span className="text-sm font-semibold">{formatQuantity(repo.forks)}</span>
                 </div>
                 <div className="flex items-center gap-3 py-1">
-                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                  <p className="flex items-center gap-1.5 text-sm text-gray-500">
                     <IconWeight size={18} />
                     Size
                   </p>
@@ -184,7 +184,7 @@ const Repo: React.FC = () => {
                   <span className="text-sm font-semibold">{formatSize(repo.size)}</span>
                 </div>
                 <div className="flex items-center gap-3 py-1">
-                  <p className="flex items-center gap-1.5 text-gray-500 text-sm">
+                  <p className="flex items-center gap-1.5 text-sm text-gray-500">
                     <IconClock size={18} />
                     Last Analyzed
                   </p>
@@ -192,12 +192,12 @@ const Repo: React.FC = () => {
                   <span className="text-sm font-semibold">{lastAnalyzed}</span>
                 </div>
                 <div className="flex items-start gap-3 py-1">
-                  <Link className="flex items-center gap-1.5 text-gray-500 text-sm" to="/licenses">
+                  <Link className="flex items-center gap-1.5 text-sm text-gray-500" to="/licenses">
                     <IconLicense size={18} />
                     License{licenses.length > 1 ? 's' : ''}
                   </Link>
-                  <hr className="flex-1 mt-2.5" />
-                  <span className="text-sm font-semibold text-right">
+                  <hr className="mt-2.5 flex-1" />
+                  <span className="text-right text-sm font-semibold">
                     {licenses.map((license) => {
                       return (
                         <Link

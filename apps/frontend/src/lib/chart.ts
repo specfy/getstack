@@ -13,9 +13,7 @@ export function calculateTickValues<T>(values: T[]): T[] {
   // Show fewer ticks: more aggressive reduction for better mobile display
   const step = dataLength > 20 ? 4 : dataLength > 12 ? 3 : dataLength > 6 ? 2 : 1;
 
-  return values.filter(
-    (_, index) => index % step === 0 || index === dataLength - 1
-  );
+  return values.filter((_, index) => index % step === 0 || index === dataLength - 1);
 }
 
 /**
@@ -25,7 +23,7 @@ export function calculateTickValues<T>(values: T[]): T[] {
  * @returns Filtered array of x values to display as ticks, or empty array if no data
  */
 export function calculateAreaBumpTickValues(
-  topNData: Array<{ data: Array<{ x: number | string }> }> | undefined | null
+  topNData: { data: { x: number | string }[] }[] | null | undefined
 ): string[] {
   if (!topNData || topNData.length === 0) return [];
   // Get all unique x values (date_week strings) from the first series

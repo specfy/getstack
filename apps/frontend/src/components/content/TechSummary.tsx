@@ -11,9 +11,9 @@ export const TechSummary: React.FC<{
   tech: string;
 }> = ({ volume, percentChange, stars, tech }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between gap-2 border rounded-md p-4">
+    <div className="flex flex-col justify-between gap-2 rounded-md border p-4 md:flex-row">
       <div className="flex items-center gap-2">
-        <div className="shrink-0 w-5">
+        <div className="w-5 shrink-0">
           <IconPackage className="text-black" size={20} />
         </div>
         <div className="flex items-center gap-2 leading-5">
@@ -25,7 +25,7 @@ export const TechSummary: React.FC<{
       </div>
       {stars && (
         <div className="flex items-center gap-2">
-          <div className="shrink-0 w-5">
+          <div className="w-5 shrink-0">
             <IconStar className="text-black" size={20} />
           </div>
           <div className="leading-5">
@@ -38,7 +38,7 @@ export const TechSummary: React.FC<{
           <Link
             to="/tech/$techKey"
             params={{ techKey: tech }}
-            className="no-underline !text-gray-500"
+            className="!text-gray-500 no-underline"
           >
             <IconArrowRight />
           </Link>

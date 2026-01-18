@@ -9,22 +9,22 @@ export const HTop = ({
 }) => {
   return (
     <a
-      className="flex items-center gap-5 text-xl h-10 mt-20 no-underline"
+      className="mt-20 flex h-10 items-center gap-5 text-xl no-underline"
       id={tech}
       href={`#${tech}`}
     >
-      <span className="text-gray-400 font-bold text-3xl">#{position}</span>
+      <span className="text-3xl font-bold text-gray-400">#{position}</span>
       <div className="flex items-center gap-2">
-        <div className="flex w-7 h-7 rounded overflow-hidden items-center justify-center">
+        <div className="flex size-7 items-center justify-center overflow-hidden rounded">
           <img
             src={`/favicons/${tech}.webp`}
-            className="h-full w-full"
+            className="size-full"
             alt={children as string}
             width={28}
             height={28}
           />
         </div>
-        <h2 className="leading-10 mt-0 mb-0">{children}</h2>
+        <h2 className="my-0 leading-10">{children}</h2>
       </div>
     </a>
   );

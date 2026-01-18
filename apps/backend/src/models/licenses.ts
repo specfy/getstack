@@ -1,4 +1,4 @@
-import { subWeeks, startOfISOWeek } from 'date-fns';
+import { startOfISOWeek, subWeeks } from 'date-fns';
 
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';

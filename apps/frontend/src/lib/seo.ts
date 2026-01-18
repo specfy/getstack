@@ -1,4 +1,4 @@
-import { APP_URL } from './envs';
+import { APP_URL } from './envs.js';
 
 export const seo = ({
   title,

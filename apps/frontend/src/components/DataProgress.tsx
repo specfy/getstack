@@ -1,4 +1,3 @@
-import { IconCheck, IconRefresh } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 
 import { TT } from './TT';
@@ -17,18 +16,26 @@ export const DataProgress: React.FC = () => {
   return (
     <TT
       description={
-        data.data.inProgress
-          ? `Data is being refreshed. Currently showing data from: ${lastRefresh.format('MMM DD, YYYY')}`
-          : `Data shown in the UI is up to date from: ${lastRefresh.format('MMM DD, YYYY')}`
+        data.data.inProgress ? (
+          `Data is being refreshed. Currently showing data from: ${lastRefresh.format('MMM DD, YYYY')}`
+        ) : (
+          <>
+            Data is up to date. Last refresh: {lastRefresh.format('MMM DD, YYYY')}. <br /> Updated
+            every monday.
+          </>
+        )
       }
     >
-      <div className="flex gap-1 text-xs text-gray-400 group">
+      <div className="group flex items-center gap-2 border border-gray-200 p-1 text-xs text-gray-400">
         {inProgress ? (
-          <IconRefresh stroke={1} size={16} className="group-hover:animate-spin" />
+          <>
+            <div className="size-2 animate-pulse bg-cyan-600"></div>Refresh in progress...
+          </>
         ) : (
-          <IconCheck stroke={1} size={16} className="text-lime-700" />
+          <>
+            <div className="size-2 animate-pulse bg-emerald-600"></div>Last update this monday
+          </>
         )}
-        Data is {data.data.inProgress ? 'refreshing' : 'fresh from this week'}
       </div>
     </TT>
   );

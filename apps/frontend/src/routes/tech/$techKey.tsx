@@ -87,7 +87,6 @@ const Tech: React.FC = () => {
     ];
   }, [data]);
 
-
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]
   >(() => {
@@ -120,13 +119,13 @@ const Tech: React.FC = () => {
   }
 
   return (
-    <div>
-      <header className="flex gap-2 justify-between mt-10">
-        <div className="flex gap-4 items-center">
-          <div className="w-14 h-14 bg-neutral-100 rounded-md p-1 border flex items-center justify-center">
+    <div className="relative mx-auto max-w-screen-xl px-4">
+      <header className="mt-10 flex justify-between gap-2">
+        <div className="flex items-center gap-4">
+          <div className="flex size-14 items-center justify-center rounded-md border bg-neutral-100 p-1">
             <img
               src={`/favicons/${tech.key}.webp`}
-              className="rounded-sm overflow-hidden"
+              className="overflow-hidden rounded-sm"
               alt={`${tech.name} logo`}
               width={56}
               height={56}
@@ -136,19 +135,19 @@ const Tech: React.FC = () => {
             <Link
               to="/category/$category"
               params={{ category: tech.type }}
-              className="text-sm text-gray-400 leading-5"
+              className="text-sm leading-5 text-gray-400"
             >
               {categories[tech.type].name}
             </Link>
-            <h1 className="text-3xl font-semibold leading-8 font-serif">{tech.name}</h1>
+            <h1 className="font-serif text-3xl font-semibold leading-8">{tech.name}</h1>
           </div>
         </div>
         {position > 0 && (
           <div
             aria-description={`${tech.name} is ranked #${position} in ${categories[tech.type].name}`}
           >
-            <div className="text-[10px] text-right text-gray-500">position in category</div>
-            <div className="text-4xl text-right font-semibold text-gray-400 font-serif">
+            <div className="text-right text-[10px] text-gray-500">position in category</div>
+            <div className="text-right font-serif text-4xl font-semibold text-gray-400">
               <span className="font-normal text-gray-400">#</span>
               {position}
             </div>
@@ -156,23 +155,23 @@ const Tech: React.FC = () => {
         )}
       </header>
       {tech.description && (
-        <div className="mt-6 max-w-2xl text-pretty text-gray-600 md:text-lg font-serif font-light">
+        <div className="mt-6 max-w-2xl text-pretty font-serif font-light text-gray-600 md:text-lg">
           {tech.description}
         </div>
       )}
 
       <div className="mt-10">
-        <div className="flex justify-end items-center">
+        <div className="flex items-center justify-end">
           <div>
             <DataProgress />
           </div>
         </div>
         {data.volume.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4">
+          <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-4">
             <Card>
               <CardHeader className="relative">
                 <CardDescription>Repositories</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums font-serif">
+                <CardTitle className="@[250px]/card:text-3xl font-serif text-2xl font-semibold tabular-nums">
                   {repoCount} <span className="text-xs text-gray-400">in GitHub</span>
                 </CardTitle>
 
@@ -210,7 +209,7 @@ const Tech: React.FC = () => {
                 </CardFooter>
               )}
             </Card>
-            <Card style={{ height: 'auto', minHeight: '180px' }} className="py-0 col-span-3">
+            <Card style={{ height: 'auto', minHeight: '180px' }} className="col-span-3 py-0">
               <ResponsiveLine
                 data={chartData}
                 margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
@@ -254,8 +253,8 @@ const Tech: React.FC = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-14 mt-14">
-        <div className="md:col-span-7 flex flex-col gap-14 order-2 md:order-1">
+      <div className="mt-14 grid grid-cols-1 gap-14 md:grid-cols-10">
+        <div className="order-2 flex flex-col gap-14 md:order-1 md:col-span-7">
           <TopRepositories
             topRepos={data.topRepos}
             title={`Top repositories using ${tech.name}`}
@@ -266,15 +265,15 @@ const Tech: React.FC = () => {
 
           <Related tech={tech} />
         </div>
-        <div className="md:col-span-3 mt-0 flex flex-col gap-5 order-1 md:order-2">
-          <div className="grid gap-2 grid-cols-2 md:gap-4">
+        <div className="order-1 mt-0 flex flex-col gap-5 md:order-2 md:col-span-3">
+          <div className="grid grid-cols-2 gap-2 md:gap-4">
             {tech.github && (
               <TT description={`https://github.com/${tech.github}`}>
                 <a
                   href={`https://github.com/${tech.github}?utm_source=getstack.dev`}
                   target="_blank"
                 >
-                  <Button variant="outline" className="cursor-pointer w-full">
+                  <Button variant="outline" className="w-full cursor-pointer">
                     <IconBrandGithub stroke={1} /> GitHub
                   </Button>
                 </a>
@@ -282,7 +281,7 @@ const Tech: React.FC = () => {
             )}
             <TT description={tech.website}>
               <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
-                <Button variant="outline" className="cursor-pointer w-full">
+                <Button variant="outline" className="w-full cursor-pointer">
                   <IconWorld stroke={1} /> Website
                 </Button>
               </a>
@@ -293,18 +292,18 @@ const Tech: React.FC = () => {
             <div className="border-t pt-5">
               <Card>
                 <CardHeader className="relative">
-                  <CardDescription className="flex gap-2 items-center">
+                  <CardDescription className="flex items-center gap-2">
                     <IconStar stroke={2} size={18} />
                     Cumulated Stars
                   </CardDescription>
-                  <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-2 items-center font-serif">
+                  <CardTitle className="@[250px]/card:text-3xl flex items-center gap-2 font-serif text-2xl font-semibold tabular-nums">
                     {stars}
                   </CardTitle>
                 </CardHeader>
               </Card>
             </div>
           )}
-          <div className="border-t pt-5 mt-1">
+          <div className="mt-1 border-t pt-5">
             <h3 className="text-sm text-gray-500">
               More alternatives in{' '}
               <Link
@@ -315,7 +314,7 @@ const Tech: React.FC = () => {
                 {categories[tech.type].name}
               </Link>
             </h3>
-            <div className="text-sm ml-1 mt-3 flex flex-col gap-1">
+            <div className="ml-1 mt-3 flex flex-col gap-1 text-sm">
               {position > 3 && (
                 <div className=" text-xs text-gray-400">
                   <IconDots stroke={1} size={18} />
@@ -327,7 +326,7 @@ const Tech: React.FC = () => {
                   <div className="flex items-center gap-4" key={row.tech}>
                     <div
                       className={cn(
-                        'text-gray-400 font-semibold text-md min-w-4',
+                        'text-md min-w-4 font-semibold text-gray-400',
                         is && 'text-lg text-gray-600'
                       )}
                     >
@@ -352,7 +351,7 @@ const Tech: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t pt-5 mt-1">
+          <div className="mt-1 border-t pt-5">
             <Report />
           </div>
         </div>
@@ -370,18 +369,18 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold font-serif">Most likely to be used with</h3>{' '}
-      <div className="text-xs text-neutral-400 mb-4">
+      <h3 className="font-serif text-lg font-semibold">Most likely to be used with</h3>{' '}
+      <div className="mb-4 text-xs text-neutral-400">
         Project using this technology also uses those, ordered by popularity
       </div>
       {isFetching && (
         <>
-          <Skeleton className="w-[100px] h-[20px]" />
-          <Skeleton className="w-[100px] h-[20px]" />
-          <Skeleton className="w-[100px] h-[20px]" />
+          <Skeleton className="h-[20px] w-[100px]" />
+          <Skeleton className="h-[20px] w-[100px]" />
+          <Skeleton className="h-[20px] w-[100px]" />
         </>
       )}
-      <div className="flex flex-wrap w-full gap-2 items-start">
+      <div className="flex w-full flex-wrap items-start gap-2">
         {data.data.map((row) => {
           return <TechBadge size="md" tech={row.tech} key={row.tech} border />;
         })}
