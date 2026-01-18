@@ -1,4 +1,4 @@
-import { addWeeks, startOfISOWeek } from 'date-fns';
+import { subWeeks, startOfISOWeek } from 'date-fns';
 
 import { clickHouse, kyselyClickhouse } from '../db/client.js';
 import { formatToYearWeek } from '../utils/date.js';
@@ -194,8 +194,8 @@ export async function getTop10TechnologiesByCategoryForNWeeks({
   weeks: number;
   currentWeek: string;
 }): Promise<TechnologyTopN[]> {
-  const [year, week] = currentWeek.split('-').map(Number);
-  const afterWeek = addWeeks(startOfISOWeek(new Date(year!, 0, 1)), week! - weeks);
+  const [year] = currentWeek.split('-').map(Number);
+  const afterWeek = startOfISOWeek(subWeeks(new Date(year!, 0, 1), weeks));
 
   const res = await clickHouse.query({
     query: `WITH

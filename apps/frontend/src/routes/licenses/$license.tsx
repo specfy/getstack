@@ -11,7 +11,7 @@ import {
 } from '@tabler/icons-react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
-import { addWeeks, format, startOfISOWeek } from 'date-fns';
+import { subWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsGetLicense, optionsLicensesLeaderboard, useLicense } from '@/api/useLicense';
@@ -71,8 +71,8 @@ const License: React.FC = () => {
         id: 'volume',
         data: data.data.volume.map((r) => {
           // Parse YYYY-WW into a valid date
-          const [year, week] = r.date_week.split('-').map(Number);
-          const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
+          const [year] = r.date_week.split('-').map(Number);
+          const parsedDate = startOfISOWeek(subWeeks(new Date(year!, 0, 1), 1));
           const formattedDate = format(parsedDate, 'MMM dd');
           return { y: r.hits, x: formattedDate };
         }),
