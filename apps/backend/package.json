@@ -16,7 +16,7 @@
     "@founderpath/kysely-clickhouse": "1.7.0",
     "@octokit/rest": "22.0.0",
     "@sentry/node": "^8.47.0",
-    "@specfy/stack-analyser": "1.27.3",
+    "@specfy/stack-analyser": "1.27.6",
     "algoliasearch": "5.29.0",
     "close-with-grace": "2.2.0",
     "cron": "4.3.1",

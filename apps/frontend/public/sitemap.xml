@@ -651,6 +651,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getstack.dev/tech/base44</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getstack.dev/tech/baseui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1192,6 +1197,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/electron</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/elevenlabs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2052,6 +2062,11 @@
   </url>
   <url>
     <loc>https://getstack.dev/tech/lordicon</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getstack.dev/tech/lovable</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

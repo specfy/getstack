@@ -191,7 +191,7 @@ const CategoryBlock: React.FC<{
         </div>
       )}
       <div className="mb-4 flex flex-col">
-        <h3 className="font-serif text-lg font-semibold text-gray-900">{group.name}</h3>
+        <h3 className="font-serif text-xl font-semibold text-gray-900">{group.name}</h3>
         <p className="text-muted-foreground text-xs">{group.description}</p>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

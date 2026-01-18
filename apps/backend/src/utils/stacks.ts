@@ -3825,6 +3825,18 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     website: 'https://useautumn.com/',
     description: 'Stripe payments for your SaaS.',
   },
+  base44: {
+    website: 'https://base44.com/',
+    description: 'Platform for building web applications with AI.',
+  },
+  elevenlabs: {
+    website: 'https://elevenlabs.io/',
+    description: 'AI platform for voice generation.',
+  },
+  lovable: {
+    website: 'https://lovable.dev/',
+    description: 'Platform for building web applications with AI.',
+  },
 };
 
 const extendedListTech: TechItemWithExtended[] = listTech.map((tech) => {
