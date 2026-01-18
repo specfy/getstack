@@ -38,6 +38,7 @@ export function getRouter() {
   });
   setupRouterSsrQueryIntegration({
     router,
+    // @ts-expect-error yes I know
     queryClient,
   });
   return router;
