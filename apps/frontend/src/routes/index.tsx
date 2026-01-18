@@ -1,3 +1,4 @@
+import { IconArrowRight } from '@tabler/icons-react';
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
@@ -77,9 +78,9 @@ type Highlight =
   | { type: 'tech'; name: string; displayName: string };
 
 const highlights: Highlight[] = [
-  { type: 'repo', org: 'n8n-io', name: 'n8n' },
-  { type: 'repo', org: 'firecrawl', name: 'firecrawl' },
-  { type: 'tech', name: 'mistralai', displayName: 'Mistral AI' },
+  { type: 'tech', name: 'tanstackstart', displayName: 'TanStack Start' },
+  { type: 'repo', name: 'n8n', org: 'n8n-io' },
+  { type: 'tech', name: 'betterauth', displayName: 'Better Auth' },
 ];
 
 const Try: React.FC = () => {
@@ -107,7 +108,9 @@ const Try: React.FC = () => {
                       height={16}
                     />
                   </div>
-                  <div className="truncate">{item.name}</div>
+                  <div className="truncate">
+                    {item.org}/{item.name}
+                  </div>
                 </Link>
               </Button>
             );
@@ -210,14 +213,25 @@ const CategoryBlock: React.FC<{
                   key={index}
                   to={`/category/$category`}
                   params={{ category }}
-                  className="mb-6 flex items-center gap-3 border-b border-b-gray-200 pb-3"
+                  className="mb-6 flex items-center justify-between gap-3 border-b border-b-gray-200 pb-3"
                 >
-                  <div className="size-8 p-1.5">
-                    <Icon size={20} />
+                  <div className="flex items-center gap-2">
+                    <div className="size-8 p-1.5">
+                      <Icon size={20} />
+                    </div>
+                    <h3 className="font-serif text-sm font-semibold uppercase text-gray-900">
+                      {def.name}
+                    </h3>
                   </div>
-                  <h3 className="font-serif text-sm font-semibold uppercase text-gray-900">
-                    {def.name}
-                  </h3>
+                  <div>
+                    <Button
+                      variant={'ghost'}
+                      size={'sm'}
+                      className="text-gray-300 hover:text-gray-900"
+                    >
+                      <IconArrowRight />
+                    </Button>
+                  </div>
                 </Link>
                 <ul className="flex flex-col gap-2">
                   {rows.map((row, rowIndex) => {
@@ -229,10 +243,14 @@ const CategoryBlock: React.FC<{
                         side="right"
                         align="center"
                       >
-                        <li
+                        <Link
                           key={rowIndex}
                           aria-description={`${name} is used by ${formatted} repositories`}
-                          className="cursor-pointer"
+                          to={`/tech/$techKey`}
+                          params={{ techKey: row.tech }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
                         >
                           <div className="flex h-6 items-center justify-between border bg-white px-4 py-5 text-xs">
                             <div className="flex items-center gap-2">
@@ -243,12 +261,12 @@ const CategoryBlock: React.FC<{
                                 (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                                   <TrendsBadge pct={row.percent_change} />
                                 )}
-                              <div className="text-right font-semibold text-gray-900">
+                              <div className="text-right font-mono font-medium text-gray-900">
                                 {formatted}
                               </div>
                             </div>
                           </div>
-                        </li>
+                        </Link>
                       </TT>
                     );
                   })}

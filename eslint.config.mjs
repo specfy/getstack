@@ -27,6 +27,7 @@ export default [
       tailwindcss: {
         callees: ['cn'],
         config: 'apps/frontend/tailwind.config.js',
+        cssFiles: ['apps/frontend/src/index.css'],
       },
     },
   },
@@ -53,6 +54,13 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'import-x/extensions': 'off',
+      'tailwindcss/no-custom-classname': 'off',
+    },
+  },
+  {
+    files: ['apps/backend/**/*.{ts,tsx}'],
+    rules: {
+      'import-x/extensions': 'off',
     },
   },
   {
@@ -67,7 +75,6 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/naming-convention': 'off',
       'unicorn/filename-case': 'off',
-      'tailwindcss/no-custom-classname': 'off',
     },
   },
   {

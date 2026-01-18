@@ -27,7 +27,9 @@ export function calculateAreaBumpTickValues(
 ): string[] {
   if (!topNData || topNData.length === 0) return [];
   // Get all unique x values (date_week strings) from the first series
-  const allDates = topNData[0]?.data.map((d) => d.x as string) || [];
-  if (allDates.length === 0) return [];
+  const allDates = topNData[0]?.data.map((d) => d.x as string);
+  if (allDates.length === 0) {
+    return [];
+  }
   return calculateTickValues(allDates);
 }
