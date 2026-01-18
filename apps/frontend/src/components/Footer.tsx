@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="mt-20 border-t px-4 pb-6 pt-10">
+    <footer className="mx-auto mt-10 w-full max-w-screen-xl border-t px-4 pb-6 pt-10">
       <div className="mb-8 flex flex-col gap-8 md:flex-row md:gap-12">
         {/* Left Column - getstack Info */}
         <div className="md:w-80">
@@ -38,6 +38,16 @@ export const Footer: React.FC = () => {
             >
               <Button variant={'outline'} size={'sm'}>
                 <IconAt size={16} />
+              </Button>
+            </a>
+            <a
+              href="https://linkedin.com/in/bodinsamuel?utm_source=getstack.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn"
+            >
+              <Button variant={'outline'} size={'sm'}>
+                <IconBrandLinkedin size={16} />
               </Button>
             </a>
             <Popover>
@@ -87,77 +97,39 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Middle Columns - Links */}
-        <div className="grid flex-1 grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid flex-1 grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-gray-900">PRODUCT</h4>
+            <h4 className="mb-3 text-sm font-semibold text-gray-900">GetStack</h4>
             <div className="flex flex-col gap-2 text-sm">
-              <a href="/docs" className="text-gray-600 transition-colors hover:text-gray-900">
-                Documentation
-              </a>
-              <a href="/api" className="text-gray-600 transition-colors hover:text-gray-900">
-                API Reference
-              </a>
-              <a href="/pricing" className="text-gray-600 transition-colors hover:text-gray-900">
-                Pricing
-              </a>
-              <Link to="/private" className="text-gray-600 transition-colors hover:text-gray-900">
-                Dashboard
+              <Link to="/about" className="text-gray-600 transition-colors hover:text-gray-900">
+                About
               </Link>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="mb-3 text-sm font-semibold text-gray-900">COMPANY</h4>
-            <div className="flex flex-col gap-2 text-sm">
               <Link to="/blog" className="text-gray-600 transition-colors hover:text-gray-900">
                 Blog
               </Link>
-              <a href="/roadmap" className="text-gray-600 transition-colors hover:text-gray-900">
-                Roadmap
-              </a>
-              <a
-                href="https://github.com/specfy/stack-analyser?utm_source=getstack.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 transition-colors hover:text-gray-900"
-              >
-                Contributors
-              </a>
-              <a href="/privacy" className="text-gray-600 transition-colors hover:text-gray-900">
-                Privacy
-              </a>
+              <Link to="/private" className="text-gray-600 transition-colors hover:text-gray-900">
+                Analyze your repo
+              </Link>
             </div>
           </div>
 
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-gray-900">SYSTEMS</h4>
-            <div className="flex flex-col gap-2 text-sm">
-              <div className="text-gray-600">
-                API STATUS: <span className="font-semibold text-green-600">STABLE</span>
-              </div>
-              <div className="text-gray-600">
-                SYNC RATE: <span className="font-semibold">120ms</span>
-              </div>
-              <div className="text-gray-600">
-                REGIONS: <span className="font-semibold">US-EAST-1</span>
-              </div>
-            </div>
+            <Newsletter title="Subscribe to our newsletter" />
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs text-gray-600 md:flex-row">
-        <div>© 2024 GETSTACK ANALYTICS. ALL RIGHTS RESERVED.</div>
-        <div className="flex gap-4">
-          <a href="/security" className="transition-colors hover:text-gray-900">
-            SECURITY
-          </a>
-          <a href="/terms" className="transition-colors hover:text-gray-900">
-            TERMS
-          </a>
-          <a href="/legal" className="transition-colors hover:text-gray-900">
-            LEGAL
+        <div>
+          Made by{' '}
+          <a
+            href="https://twitter.com/samdotb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-gray-900"
+          >
+            Samuel Bodin
           </a>
         </div>
       </div>

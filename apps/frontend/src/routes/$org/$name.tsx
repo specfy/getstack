@@ -70,7 +70,7 @@ const Repo: React.FC = () => {
   const licenses = data.data.licenses;
 
   return (
-    <div>
+    <div className="relative mx-auto max-w-screen-xl px-4">
       <header className="mt-10 flex items-end justify-between gap-2">
         <div className="flex items-center gap-4">
           <div className="size-14 rounded-md border bg-neutral-100 p-1">

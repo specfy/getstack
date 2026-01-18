@@ -34,7 +34,7 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
 
   return (
     <div>
-      <div className="text-md">{title ?? 'Subscribe to our newsletter'}</div>
+      <div>{title ?? 'Subscribe to our newsletter'}</div>
       <div className="mb-2 mt-0.5 text-xs text-gray-500">
         Join other members and get updates on open source trends.
       </div>
