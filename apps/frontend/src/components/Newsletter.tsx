@@ -39,14 +39,14 @@ export const Newsletter: React.FC<{ title?: string }> = ({ title }) => {
         Join other members and get updates on open source trends.
       </div>
       {!msg && (
-        <form onSubmit={onSubmit} className="flex gap-2">
+        <form onSubmit={onSubmit} className="flex">
           <Input
             placeholder="Enter your email"
-            className="h-8"
             value={email}
+            className="text-xs"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button size={'sm'} className="text-xs" type="submit">
+          <Button size={'sm'} className="h-9 text-xs" type="submit">
             Subscribe
           </Button>
         </form>
