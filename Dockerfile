@@ -1,5 +1,5 @@
 # Use the official Node.js 22 image as the base image
-FROM node:22.15.0-bookworm-slim AS compilation
+FROM node:22.22.0-bookworm-slim AS compilation
 
 # Set the working directory in the container
 WORKDIR /app
@@ -36,7 +36,7 @@ RUN true \
 
 # ---- Final ----
 # Resulting new, minimal image
-FROM node:22.15.0-bookworm-slim AS final
+FROM node:22.22.0-bookworm-slim AS final
 
 
 # - Bash is just to be able to log inside the image and have a decent shell
