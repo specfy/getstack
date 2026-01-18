@@ -214,7 +214,8 @@ const Tech: React.FC = () => {
               <ResponsiveLine
                 data={chartData}
                 margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
-                xScale={{ type: 'point' }}
+                xScale={{ type: 'time', format: '%Y-%m-%d', useUTC: false }}
+                xFormat="time:%b %d"
                 enableArea={true}
                 axisTop={null}
                 axisRight={null}
@@ -244,6 +245,7 @@ const Tech: React.FC = () => {
                   legendOffset: 11,
                   legendPosition: 'middle',
                   truncateTickAt: 0,
+                  format: '%b %d',
                 }}
                 axisLeft={null}
               />
