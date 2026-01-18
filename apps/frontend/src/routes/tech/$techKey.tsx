@@ -28,7 +28,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { APP_URL } from '@/lib/envs';
-import { calculateTickValues } from '@/lib/chart';
+import { createTickFormatter } from '@/lib/chart';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
 import { categories, listIndexed } from '@/lib/stack';
@@ -89,9 +89,9 @@ const Tech: React.FC = () => {
     ];
   }, [data]);
 
-  const tickValues = useMemo(() => {
-    if (chartData[0]?.data.length === 0) return [];
-    return calculateTickValues(chartData[0].data.map((d) => d.x));
+  const formatTick = useMemo(() => {
+    if (chartData[0]?.data.length === 0) return () => '';
+    return createTickFormatter(chartData[0].data.map((d) => d.x));
   }, [chartData]);
 
   const [position, inCategory] = useMemo<
@@ -250,7 +250,7 @@ const Tech: React.FC = () => {
                   legendOffset: 11,
                   legendPosition: 'middle',
                   truncateTickAt: 0,
-                  tickValues,
+                  format: formatTick,
                 }}
                 axisLeft={null}
               />

@@ -22,7 +22,7 @@ import { Report } from '@/components/Report';
 import { TopRepositories } from '@/components/TopRepository';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { calculateTickValues } from '@/lib/chart';
+import { createTickFormatter } from '@/lib/chart';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -81,9 +81,9 @@ const License: React.FC = () => {
     ];
   }, [data]);
 
-  const tickValues = useMemo(() => {
-    if (!chartData[0]?.data.length) return [];
-    return calculateTickValues(chartData[0].data.map((d) => d.x));
+  const formatTick = useMemo(() => {
+    if (!chartData[0]?.data.length) return () => '';
+    return createTickFormatter(chartData[0].data.map((d) => d.x));
   }, [chartData]);
 
   const [position, inCategory] = useMemo<
@@ -277,7 +277,7 @@ const License: React.FC = () => {
                 legendOffset: 11,
                 legendPosition: 'middle',
                 truncateTickAt: 0,
-                tickValues,
+                format: formatTick,
               }}
               axisLeft={null}
             />
