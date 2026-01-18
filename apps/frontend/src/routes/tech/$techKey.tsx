@@ -8,7 +8,7 @@ import {
   IconWorld,
 } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound } from '@tanstack/react-router';
-import { subWeeks, format, startOfISOWeek } from 'date-fns';
+import { subWeeks, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsCategoryLeaderboardOptions, useCategoryLeaderboard } from '@/api/useCategory';
@@ -28,7 +28,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { APP_URL } from '@/lib/envs';
-import { createTickFormatter } from '@/lib/chart';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
 import { categories, listIndexed } from '@/lib/stack';
@@ -82,17 +81,12 @@ const Tech: React.FC = () => {
           // Parse YYYY-WW into a valid date
           const [year] = r.date_week.split('-').map(Number);
           const parsedDate = startOfISOWeek(subWeeks(new Date(year!, 0, 1), 1));
-          const formattedDate = format(parsedDate, 'MMM dd');
-          return { y: r.hits, x: formattedDate };
+          return { y: r.hits, x: parsedDate };
         }),
       },
     ];
   }, [data]);
 
-  const formatTick = useMemo(() => {
-    if (chartData[0]?.data.length === 0) return () => '';
-    return createTickFormatter(chartData[0].data.map((d) => d.x));
-  }, [chartData]);
 
   const [position, inCategory] = useMemo<
     [number, ({ position: number } & TechnologyByCategoryByWeekWithTrend)[]]
@@ -220,7 +214,8 @@ const Tech: React.FC = () => {
               <ResponsiveLine
                 data={chartData}
                 margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
-                xScale={{ type: 'point' }}
+                xScale={{ type: 'time', format: '%Y-%m-%d', useUTC: false }}
+                xFormat="time:%b %d"
                 enableArea={true}
                 axisTop={null}
                 axisRight={null}
@@ -250,7 +245,7 @@ const Tech: React.FC = () => {
                   legendOffset: 11,
                   legendPosition: 'middle',
                   truncateTickAt: 0,
-                  format: formatTick,
+                  format: '%b %d',
                 }}
                 axisLeft={null}
               />
