@@ -47,6 +47,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --text-tiny: 0.625rem;
+  --text-s: 0.875rem;
+  --text-xs: 0.75rem;
   --font-medium: 500;
 }
 

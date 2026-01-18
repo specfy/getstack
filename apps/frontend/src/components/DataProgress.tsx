@@ -26,7 +26,7 @@ export const DataProgress: React.FC = () => {
         )
       }
     >
-      <div className="group flex items-center gap-2 border border-gray-200 p-1 text-xs text-gray-400">
+      <div className="group flex items-center gap-2 border border-gray-200 p-1 px-2 text-xs text-gray-400">
         {inProgress ? (
           <>
             <div className="size-2 animate-pulse bg-cyan-600"></div>Refresh in progress...

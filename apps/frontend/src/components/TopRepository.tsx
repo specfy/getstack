@@ -1,4 +1,3 @@
-import { IconStar } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 import { useMemo } from 'react';
 
@@ -48,13 +47,13 @@ export const TopRepositories: React.FC<{
           return (
             <Link
               key={repo.id}
-              className="flex flex-col gap-3 rounded-sm border border-gray-200 p-4 pb-2 transition-colors hover:bg-gray-50"
+              className="flex flex-col gap-3 border border-gray-200 p-4 transition-colors hover:bg-gray-50"
               to="/$org/$name"
               params={{ org: repo.org, name: repo.name }}
               aria-description={`${repo.org}/${repo.name} is using ${emptyDesc}`}
             >
               <header className="flex gap-2">
-                <div className="flex w-9 shrink-0 items-center justify-center rounded-md border bg-gray-50 p-0.5 px-1">
+                <div className="flex w-9 shrink-0 items-center justify-center border bg-gray-50 p-0.5 px-1">
                   <img
                     src={repo.avatar_url}
                     className="size-6 overflow-hidden rounded-sm"
@@ -64,16 +63,14 @@ export const TopRepositories: React.FC<{
                   />
                 </div>
                 <div className="flex flex-col truncate">
-                  <div className="truncate text-ellipsis text-sm font-semibold">{repo.name}</div>
-                  <div className="truncate text-ellipsis text-[10px] text-gray-400">{repo.org}</div>
+                  <div className="truncate text-sm font-semibold">{repo.name}</div>
+                  <div className="truncate text-[10px] text-gray-400">{repo.org}</div>
                 </div>
               </header>
               <div className="text-xs text-gray-500">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <IconStar stroke={1} size={16} />
-                    <strong>{repo.stars}</strong>Stars
-                  </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-400">Stars</span>
+                  <strong className="font-mono">{repo.stars}</strong>
                 </div>
               </div>
             </Link>

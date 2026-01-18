@@ -121,58 +121,56 @@ const Tech: React.FC = () => {
   return (
     <div className="relative mx-auto max-w-screen-xl px-4">
       <header className="mt-10 flex justify-between gap-2">
-        <div className="flex items-center gap-4">
-          <div className="flex size-14 items-center justify-center rounded-md border bg-neutral-100 p-1">
+        <div className="flex items-start gap-4">
+          <div className="flex size-20 items-center justify-center border bg-white p-2">
             <img
               src={`/favicons/${tech.key}.webp`}
-              className="overflow-hidden rounded-sm"
               alt={`${tech.name} logo`}
-              width={56}
-              height={56}
+              width={64}
+              height={64}
             />
           </div>{' '}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-3">
             <Link
               to="/category/$category"
               params={{ category: tech.type }}
-              className="text-sm leading-5 text-gray-400"
+              className="font-mono text-[10px] leading-5 text-gray-400 hover:text-gray-900"
             >
-              {categories[tech.type].name}
+              Category [{categories[tech.type].name}]
             </Link>
-            <h1 className="font-serif text-3xl font-semibold leading-8">{tech.name}</h1>
+            <h1 className="font-serif text-5xl font-semibold leading-8">{tech.name}</h1>
           </div>
         </div>
         {position > 0 && (
           <div
             aria-description={`${tech.name} is ranked #${position} in ${categories[tech.type].name}`}
+            className="flex flex-col items-end font-mono"
           >
             <div className="text-right text-[10px] text-gray-500">position in category</div>
-            <div className="text-right font-serif text-4xl font-semibold text-gray-400">
-              <span className="font-normal text-gray-400">#</span>
-              {position}
+            <div className="flex items-start text-right font-serif text-4xl font-semibold">
+              <span className="font-normal ">#</span>
+              <span className="text-7xl">{position}</span>
             </div>
           </div>
         )}
       </header>
       {tech.description && (
-        <div className="mt-6 max-w-2xl text-pretty font-serif font-light text-gray-600 md:text-lg">
+        <div className="text-s mt-2 max-w-2xl text-pretty font-mono font-light text-gray-600">
           {tech.description}
         </div>
       )}
 
       <div className="mt-10">
-        <div className="flex items-center justify-end">
-          <div>
-            <DataProgress />
-          </div>
+        <div className="mb-2 flex justify-end">
+          <DataProgress />
         </div>
         {data.volume.length > 0 && (
           <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-4">
-            <Card>
+            <Card className="">
               <CardHeader className="relative">
-                <CardDescription>Repositories</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl font-serif text-2xl font-semibold tabular-nums">
-                  {repoCount} <span className="text-xs text-gray-400">in GitHub</span>
+                <CardDescription>GitHub Repositories</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl font-mono text-4xl font-semibold tabular-nums">
+                  {repoCount}
                 </CardTitle>
 
                 {trend !== null && (
@@ -182,7 +180,7 @@ const Tech: React.FC = () => {
                 )}
               </CardHeader>
               {trend === null ? (
-                <CardFooter className="flex-col items-start gap-1 text-sm">
+                <CardFooter className="flex-col items-start gap-1 font-mono text-xs leading-tight text-gray-400">
                   No noticeable change in usage since last week
                 </CardFooter>
               ) : (
@@ -209,21 +207,34 @@ const Tech: React.FC = () => {
                 </CardFooter>
               )}
             </Card>
-            <Card style={{ height: 'auto', minHeight: '180px' }} className="col-span-3 py-0">
+            <Card style={{ height: 'auto', minHeight: '200px' }} className="col-span-3 py-0">
               <ResponsiveLine
                 data={chartData}
                 margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
+                theme={{
+                  axis: {
+                    ticks: {
+                      text: {
+                        fill: 'var(--muted-foreground)',
+                        fontSize: 10,
+                        fontFamily: 'var(--font-mono)',
+                      },
+                    },
+                  },
+                }}
                 xScale={{ type: 'time', format: '%Y-%m-%d', useUTC: false }}
                 xFormat="time:%b %d"
                 enableArea={true}
                 axisTop={null}
                 axisRight={null}
+                colors={['black']}
+                areaOpacity={0.05}
                 enableGridX={false}
                 enableGridY={false}
-                pointSize={5}
-                pointColor={{ theme: 'background' }}
+                pointSize={6}
+                pointColor={'black'}
                 pointBorderWidth={2}
-                pointBorderColor={{ from: 'seriesColor' }}
+                pointBorderColor={'white'}
                 pointLabelYOffset={-12}
                 enableTouchCrosshair={true}
                 useMesh={true}
@@ -244,7 +255,7 @@ const Tech: React.FC = () => {
                   legendOffset: 11,
                   legendPosition: 'middle',
                   truncateTickAt: 0,
-                  format: '%b %d',
+                  format: '%b',
                 }}
                 axisLeft={null}
               />
@@ -273,7 +284,7 @@ const Tech: React.FC = () => {
                   href={`https://github.com/${tech.github}?utm_source=getstack.dev`}
                   target="_blank"
                 >
-                  <Button variant="outline" className="w-full cursor-pointer">
+                  <Button variant="outline" className="w-full cursor-pointer justify-start">
                     <IconBrandGithub stroke={1} /> GitHub
                   </Button>
                 </a>
@@ -281,7 +292,7 @@ const Tech: React.FC = () => {
             )}
             <TT description={tech.website}>
               <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
-                <Button variant="outline" className="w-full cursor-pointer">
+                <Button variant="outline" className="w-full cursor-pointer justify-start">
                   <IconWorld stroke={1} /> Website
                 </Button>
               </a>
@@ -289,14 +300,14 @@ const Tech: React.FC = () => {
           </div>
           {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
-            <div className="border-t pt-5">
+            <div className="">
               <Card>
                 <CardHeader className="relative">
                   <CardDescription className="flex items-center gap-2">
                     <IconStar stroke={2} size={18} />
                     Cumulated Stars
                   </CardDescription>
-                  <CardTitle className="@[250px]/card:text-3xl flex items-center gap-2 font-serif text-2xl font-semibold tabular-nums">
+                  <CardTitle className="@[250px]/card:text-3xl flex items-center gap-2 font-mono text-2xl font-semibold tabular-nums">
                     {stars}
                   </CardTitle>
                 </CardHeader>
@@ -305,16 +316,16 @@ const Tech: React.FC = () => {
           )}
           <div className="mt-1 border-t pt-5">
             <h3 className="text-sm text-gray-500">
-              More alternatives in{' '}
               <Link
                 to="/category/$category"
                 params={{ category: tech.type }}
                 className="font-semibold text-gray-800"
               >
-                {categories[tech.type].name}
-              </Link>
+                [{categories[tech.type].name}]
+              </Link>{' '}
+              leaderboard
             </h3>
-            <div className="ml-1 mt-3 flex flex-col gap-1 text-sm">
+            <div className="ml-1 mt-3 flex flex-col gap-2 text-sm">
               {position > 3 && (
                 <div className=" text-xs text-gray-400">
                   <IconDots stroke={1} size={18} />
@@ -326,7 +337,7 @@ const Tech: React.FC = () => {
                   <div className="flex items-center gap-4" key={row.tech}>
                     <div
                       className={cn(
-                        'text-md min-w-4 font-semibold text-gray-400',
+                        'text-md w-4 font-mono font-semibold tabular-nums text-gray-400',
                         is && 'text-lg text-gray-600'
                       )}
                     >
