@@ -17,3 +17,19 @@ export function calculateTickValues<T>(values: T[]): T[] {
     (_, index) => index % step === 0 || index === dataLength - 1
   );
 }
+
+/**
+ * Extract and calculate tick values from AreaBump chart data.
+ * Gets all unique x values from the first series and reduces them to prevent overlapping labels.
+ * @param topNData - Array of AreaBump series data
+ * @returns Filtered array of x values to display as ticks, or empty array if no data
+ */
+export function calculateAreaBumpTickValues(
+  topNData: Array<{ data: Array<{ x: number | string }> }> | undefined | null
+): string[] {
+  if (!topNData || topNData.length === 0) return [];
+  // Get all unique x values (date_week strings) from the first series
+  const allDates = topNData[0]?.data.map((d) => d.x as string) || [];
+  if (allDates.length === 0) return [];
+  return calculateTickValues(allDates);
+}

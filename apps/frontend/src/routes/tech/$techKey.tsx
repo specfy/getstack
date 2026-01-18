@@ -8,7 +8,7 @@ import {
   IconWorld,
 } from '@tabler/icons-react';
 import { Link, createFileRoute, notFound } from '@tanstack/react-router';
-import { subWeeks, startOfISOWeek } from 'date-fns';
+import { subWeeks, format, startOfISOWeek } from 'date-fns';
 import { useMemo } from 'react';
 
 import { optionsCategoryLeaderboardOptions, useCategoryLeaderboard } from '@/api/useCategory';
@@ -81,7 +81,8 @@ const Tech: React.FC = () => {
           // Parse YYYY-WW into a valid date
           const [year] = r.date_week.split('-').map(Number);
           const parsedDate = startOfISOWeek(subWeeks(new Date(year!, 0, 1), 1));
-          return { y: r.hits, x: parsedDate };
+          const formattedDate = format(parsedDate, 'MMM dd');
+          return { y: r.hits, x: formattedDate };
         }),
       },
     ];
@@ -214,8 +215,7 @@ const Tech: React.FC = () => {
               <ResponsiveLine
                 data={chartData}
                 margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
-                xScale={{ type: 'time', format: '%Y-%m-%d', useUTC: false }}
-                xFormat="time:%b %d"
+                xScale={{ type: 'point' }}
                 enableArea={true}
                 axisTop={null}
                 axisRight={null}
@@ -245,7 +245,6 @@ const Tech: React.FC = () => {
                   legendOffset: 11,
                   legendPosition: 'middle',
                   truncateTickAt: 0,
-                  format: '%b %d',
                 }}
                 axisLeft={null}
               />

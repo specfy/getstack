@@ -11,6 +11,7 @@ import { LicenseBadge } from '@/components/LicenseBadge';
 import { Report } from '@/components/Report';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { calculateAreaBumpTickValues } from '@/lib/chart';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -50,6 +51,8 @@ const Licenses: React.FC = () => {
 
     return Object.values(topN);
   }, [data]);
+
+  const tickValues = useMemo(() => calculateAreaBumpTickValues(topNData), [topNData]);
 
   useEffect(() => {
     const tmp: { id: string; value: number }[] = [];
@@ -147,6 +150,7 @@ const Licenses: React.FC = () => {
                   legendPosition: 'middle',
                   legendOffset: 32,
                   truncateTickAt: 0,
+                  tickValues,
                 }}
               />
             </Card>

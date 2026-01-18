@@ -13,7 +13,7 @@ import { TT } from '@/components/TT';
 import { TechBadge } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { calculateTickValues } from '@/lib/chart';
+import { calculateAreaBumpTickValues } from '@/lib/chart';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -60,13 +60,7 @@ const Category: React.FC = () => {
     return Object.values(topN);
   }, [data, category]);
 
-  const tickValues = useMemo(() => {
-    if (!topNData || topNData.length === 0) return [];
-    // Get all unique x values (date_week strings) from the first series
-    const allDates = topNData[0]?.data.map((d) => d.x as string) || [];
-    if (allDates.length === 0) return [];
-    return calculateTickValues(allDates);
-  }, [topNData]);
+  const tickValues = useMemo(() => calculateAreaBumpTickValues(topNData), [topNData]);
 
   const { pie, winner, looser, nonFoundTech, top10, rest } = useMemo(() => {
     const tmp: { id: string; value: number }[] = [];
