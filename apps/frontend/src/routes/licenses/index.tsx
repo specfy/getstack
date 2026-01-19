@@ -11,7 +11,7 @@ import { LicenseBadge } from '@/components/LicenseBadge';
 import { Report } from '@/components/Report';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { calculateAreaBumpTickValues } from '@/lib/chart';
+import { AREA_BUMP_GRAY_10, calculateAreaBumpTickValues } from '@/lib/chart';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -135,7 +135,7 @@ const Licenses: React.FC = () => {
                 data={topNData!}
                 margin={{ top: 1, right: 100, bottom: 20, left: 40 }}
                 spacing={10}
-                colors={{ scheme: 'paired' }}
+                colors={AREA_BUMP_GRAY_10}
                 // colors={{ datum: 'data.color' }}
                 borderColor={{
                   from: 'color',

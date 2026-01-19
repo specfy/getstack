@@ -16,6 +16,35 @@ export function calculateTickValues<T>(values: T[]): T[] {
   return values.filter((_, index) => index % step === 0 || index === dataLength - 1);
 }
 
+export const AREA_BUMP_GRAY_10: string[] = [
+  '#0a0a0a',
+  '#171717',
+  '#262626',
+  '#404040',
+  '#525252',
+  '#737373',
+  '#a3a3a3',
+  '#d4d4d4',
+  '#e5e5e5',
+  '#fafafa',
+];
+
+export function hexToRgba(hex: string, alpha: number): string {
+  const normalized = hex.replace('#', '').trim();
+
+  const expanded =
+    normalized.length === 3 ? [...normalized].map((c) => c + c).join('') : normalized;
+
+  if (expanded.length !== 6) return hex;
+
+  const r = Number.parseInt(expanded.slice(0, 2), 16);
+  const g = Number.parseInt(expanded.slice(2, 4), 16);
+  const b = Number.parseInt(expanded.slice(4, 6), 16);
+
+  if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) return hex;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 /**
  * Extract and calculate tick values from AreaBump chart data.
  * Gets all unique x values from the first series and reduces them to prevent overlapping labels.

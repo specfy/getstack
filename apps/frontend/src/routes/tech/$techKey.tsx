@@ -136,7 +136,7 @@ const Tech: React.FC = () => {
               params={{ category: tech.type }}
               className="font-mono text-[10px] leading-5 text-gray-400 hover:text-gray-900"
             >
-              Category [{categories[tech.type].name}]
+              In category [{categories[tech.type].name}]
             </Link>
             <h1 className="font-serif text-5xl font-semibold leading-8">{tech.name}</h1>
           </div>
@@ -207,10 +207,10 @@ const Tech: React.FC = () => {
                 </CardFooter>
               )}
             </Card>
-            <Card style={{ height: 'auto', minHeight: '200px' }} className="col-span-3 py-0">
+            <Card style={{ height: 'auto', minHeight: '200px' }} className="col-span-3 !p-0">
               <ResponsiveLine
                 data={chartData}
-                margin={{ top: 20, right: 25, bottom: 20, left: 25 }}
+                margin={{ top: 20, right: 25, bottom: 30, left: 25 }}
                 theme={{
                   axis: {
                     ticks: {

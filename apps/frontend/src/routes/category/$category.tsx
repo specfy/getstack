@@ -2,18 +2,18 @@ import { ResponsiveAreaBump } from '@nivo/bump';
 import { ResponsivePie } from '@nivo/pie';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute, notFound } from '@tanstack/react-router';
-import { useMemo } from 'react';
+import { Link, createFileRoute, notFound } from '@tanstack/react-router';
+import { addWeeks, formatDate, startOfISOWeek } from 'date-fns';
+import { useMemo, useState } from 'react';
 
 import { optionsCategoryLeaderboardOptions, optionsGetCategory } from '@/api/useCategory';
 import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
-import { TT } from '@/components/TT';
-import { TechBadge } from '@/components/TechBadge';
+import { TechBadge, TechBadgeLite } from '@/components/TechBadge';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { calculateAreaBumpTickValues } from '@/lib/chart';
+import { AREA_BUMP_GRAY_10, calculateAreaBumpTickValues, hexToRgba } from '@/lib/chart';
 import { APP_URL } from '@/lib/envs';
 import { formatQuantity } from '@/lib/number';
 import { seo } from '@/lib/seo';
@@ -28,6 +28,7 @@ import type { TechType } from '@specfy/stack-analyser';
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
+  const [hoveredTech, setHoveredTech] = useState<null | string>(null);
 
   const cat = categories[category as TechType] as CategoryDefinition | undefined;
   const { data } = Route.useLoaderData();
@@ -35,7 +36,7 @@ const Category: React.FC = () => {
     optionsCategoryLeaderboardOptions({ name: category })
   );
 
-  const topNData = useMemo(() => {
+  const [topNData, tickValues] = useMemo(() => {
     const topN: Record<
       string,
       AreaBumpSerie<{ x: number | string; y: number }, { tech: string }>
@@ -46,21 +47,31 @@ const Category: React.FC = () => {
         const indexed = listIndexed[row.tech];
         topN[row.tech] = { id: indexed.name, tech: row.tech, data: [] };
       }
-      const week = Number.parseInt(row.date_week.split('-')[1], 10);
-      const date = new Date();
-      date.setMonth(0);
-      date.setDate(1);
-      date.setDate(date.getDate() + (week - 1) * 7);
+
+      const [year, week] = row.date_week.split('-').map(Number);
+      const parsedDate = addWeeks(startOfISOWeek(new Date(year, 0, 1)), week - 1);
+
       topN[row.tech].data.push({
-        x: row.date_week,
+        x: formatDate(parsedDate, 'MMM dd'),
         y: Number.parseInt(row.hits, 10),
       });
     }
 
-    return Object.values(topN);
+    const tmp = Object.values(topN);
+
+    return [tmp, calculateAreaBumpTickValues(tmp)];
   }, [data, category]);
 
-  const tickValues = useMemo(() => calculateAreaBumpTickValues(topNData), [topNData]);
+  const seriesColorByTech = useMemo(() => {
+    const m = new Map<string, string>();
+    for (let i = 0; i < topNData.length; i++) {
+      const serie = topNData[i] as unknown as { tech?: string };
+      if (typeof serie.tech === 'string') {
+        m.set(serie.tech, AREA_BUMP_GRAY_10[i % AREA_BUMP_GRAY_10.length] ?? '#737373');
+      }
+    }
+    return m;
+  }, [topNData]);
 
   const { pie, winner, looser, nonFoundTech, top10, rest } = useMemo(() => {
     const tmp: { id: string; value: number }[] = [];
@@ -103,72 +114,106 @@ const Category: React.FC = () => {
     <div className="relative mx-auto max-w-screen-xl px-4">
       <header className="my-10 flex flex-col gap-2">
         <div className="flex gap-4 ">
-          <div className="size-14 rounded-md border bg-neutral-100 p-1">
-            <cat.icon size={46} />
-          </div>{' '}
-          <div className="flex flex-col gap-1">
-            <div className="text-sm leading-5 text-gray-400">Category</div>
-            <h1 className="font-serif text-3xl font-semibold leading-8">{cat.name}</h1>
+          <div className="flex size-20 items-center justify-center border bg-neutral-100 p-1">
+            <cat.icon size={70} />
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="font-mono text-[10px] leading-5 text-gray-400 ">Category</div>
+
+            <h1 className="font-serif text-5xl font-semibold leading-8">{cat.name}</h1>
           </div>
         </div>
-        <h3 className="mt-5 max-w-2xl text-pretty font-serif font-light text-gray-600 md:text-lg">
+        <div className="text-s mt-2 max-w-2xl text-pretty font-mono font-light text-gray-600">
           {cat.description}
-        </h3>
+        </div>
       </header>
 
-      <div className="mt-10">
-        <h3 className="mb-1 font-serif text-lg font-semibold">Top {top10.length}</h3>
-        <div className="grid md:grid-cols-6 md:gap-14">
+      <div className="mt-14">
+        <div className="grid md:grid-cols-6 md:gap-8">
           <div className="md:col-span-2">
-            <div className="pt-1.5 text-xs text-neutral-400">
-              By number of repositories in GitHub
-            </div>
+            <h3 className="font-serif text-lg font-semibold">
+              Top {top10.length} by number of repositories
+            </h3>
+            <p className="font-mono text-xs text-gray-400">
+              Every {cat.name} by number of repositories using this technology in GitHub
+            </p>
             <Card className="border-transparent p-0">
               <div className="flex flex-col gap-1 ">
-                {top10.map((row) => {
+                {top10.map((row, i) => {
                   const formatted = formatQuantity(row.current_hits);
                   const name = listIndexed[row.tech].name;
                   return (
-                    <div
-                      className="flex items-center justify-between"
+                    <Link
                       key={row.tech}
+                      className={cn(
+                        'group flex h-6 cursor-pointer items-center justify-between border bg-white px-4 py-5 text-xs transition-colors hover:bg-gray-50',
+                        hoveredTech === row.tech && 'bg-gray-50'
+                      )}
                       aria-description={`${name} is used by ${formatted} repositories`}
+                      to={`/tech/$techKey`}
+                      params={{ techKey: row.tech }}
+                      onMouseEnter={() => setHoveredTech(row.tech)}
+                      onMouseLeave={() => setHoveredTech(null)}
+                      onFocus={() => setHoveredTech(row.tech)}
+                      onBlur={() => setHoveredTech(null)}
                     >
-                      <TechBadge tech={row.tech} size="l" border />
+                      <div className="flex items-center gap-4">
+                        <span className="w-4 font-mono text-gray-300">#{i + 1}</span>{' '}
+                        <TechBadgeLite tech={row.tech} size="xl" />
+                      </div>
                       <div className="flex items-center gap-1">
                         {row.previous_hits > 0 &&
                           (row.percent_change > 0.5 || row.percent_change < -0.5) && (
                             <TrendsBadge pct={row.percent_change} />
                           )}
-                        <TT description={`${name} is used by ${formatted} repositories`}>
-                          <div className="w-8 text-right text-xs font-semibold">{formatted}</div>
-                        </TT>
+                        <div className="flex items-center justify-end text-xs font-semibold tabular-nums">
+                          <span className="inline-block transition-transform duration-200">
+                            {formatted}
+                          </span>
+                          <span className="text-muted-foreground group-hover:max-w-18 ml-1 inline-block max-w-0 overflow-hidden whitespace-nowrap font-light opacity-0 transition-all duration-200 group-hover:opacity-100">
+                            repositories
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
             </Card>
           </div>
           <div className="md:col-span-4">
-            <div className="flex items-center justify-between">
-              <div className="text-xs text-neutral-400">Top {top10.length} over time</div>
+            <div className="mt-10 flex items-center justify-between pt-0.5">
+              <div className="font-mono text-xs text-neutral-400">Trends over time</div>
               <div>
                 <DataProgress />
               </div>
             </div>
-            <Card style={{ height: Math.max(200, top10.length * 40) }} className="mt-4">
+            <Card style={{ height: 456 }} className="mt-4 !p-0">
               <ResponsiveAreaBump
-                data={topNData!}
-                margin={{ top: 1, right: 100, bottom: 20, left: 40 }}
-                spacing={10}
-                colors={{ scheme: 'paired' }}
-                // colors={{ datum: 'data.color' }}
-                borderColor={{
-                  from: 'color',
-                  modifiers: [['darker', 0.2]],
+                data={topNData}
+                margin={{ top: 10, right: 100, bottom: 30, left: 35 }}
+                colors={(serie) => {
+                  const tech = (serie as unknown as { tech?: string }).tech;
+                  const base = (tech && seriesColorByTech.get(tech)) ?? '#737373';
+
+                  if (!hoveredTech || !tech) return base;
+                  return tech === hoveredTech ? base : hexToRgba(base, 0.15);
                 }}
+                theme={{
+                  axis: {
+                    ticks: {
+                      text: {
+                        fill: 'var(--muted-foreground)',
+                        fontSize: 10,
+                        fontFamily: 'var(--font-mono)',
+                      },
+                    },
+                  },
+                }}
+                spacing={10}
+                enableGridX={false}
                 startLabel={false}
+                axisTop={null}
                 axisBottom={{
                   tickSize: 5,
                   tickPadding: 5,
