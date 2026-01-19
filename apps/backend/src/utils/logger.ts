@@ -69,18 +69,22 @@ export type Logger = typeof defaultLogger;
  * Logs an error locally and sends to Sentry in production.
  * Always logs locally for debugging, and sends to Sentry in production.
  */
-export function logError(message: Error, err?: unknown, extra?: Record<string, unknown>): void {
+// eslint-disable-next-line @typescript-eslint/max-params
+export function logError(message: Error, err?: unknown, extra: Record<string, unknown> = {}): void {
   // Always log locally
-  // @ts-expect-error - pino logger accepts flexible arguments
-  defaultLogger.error(...args);
+  if (err !== undefined && err !== null) {
+    defaultLogger.error({ ...extra, err }, message.message);
+  } else {
+    defaultLogger.error(extra, message.message);
+  }
 
   // In production, also send to Sentry
   if (isProd && envs.SENTRY_DSN) {
     const context: { level?: 'error'; extra?: Record<string, unknown> } = { level: 'error' };
-    if (extra && Object.keys(extra).length > 0) {
+    if (Object.keys(extra).length > 0) {
       context.extra = extra;
     }
-    if (err) {
+    if (err !== undefined && err !== null) {
       message.cause = err;
     }
 
