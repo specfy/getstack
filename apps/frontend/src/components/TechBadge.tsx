@@ -49,7 +49,7 @@ export const TechBadgeLite: React.FC<{
   const name = listIndexed[tech].name;
   return (
     <div className={cn('flex items-center gap-1', className)}>
-      <div className={cn('w-4', size === 'xl' && 'w-8')}>
+      <div className={cn('w-4', size === 'xl' && 'w-6')}>
         <img
           src={`/favicons/${tech}.webp`}
           alt={`${name} logo`}

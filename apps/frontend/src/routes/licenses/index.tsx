@@ -1,5 +1,5 @@
 import { ResponsiveAreaBump } from '@nivo/bump';
-import { ResponsivePie } from '@nivo/pie';
+import { ResponsiveTreeMap } from '@nivo/treemap';
 import { IconLicense, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
@@ -53,6 +53,10 @@ const Licenses: React.FC = () => {
   }, [data]);
 
   const tickValues = useMemo(() => calculateAreaBumpTickValues(topNData), [topNData]);
+
+  const treeMapData = useMemo(() => {
+    return { id: 'root', children: pie };
+  }, [pie]);
 
   useEffect(() => {
     const tmp: { id: string; value: number }[] = [];
@@ -249,49 +253,37 @@ const Licenses: React.FC = () => {
             Every License by number of repositories using it in GitHub
           </div>
           <Card style={{ height: 350 }}>
-            <ResponsivePie
-              data={pie}
-              margin={{ top: 20, right: 100, bottom: 30, left: 100 }}
-              innerRadius={0.5}
-              padAngle={0.7}
-              cornerRadius={3}
-              colors={{ scheme: 'paired' }}
-              // colors={{ datum: 'data.color' }}
-              activeOuterRadiusOffset={8}
+            <ResponsiveTreeMap
+              data={treeMapData}
+              identity="id"
+              value="value"
+              leavesOnly
+              margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+              colors={AREA_BUMP_GRAY_10}
               borderWidth={1}
               borderColor={{
                 from: 'color',
                 modifiers: [['darker', 0.1]],
               }}
-              arcLinkLabelsSkipAngle={10}
-              arcLinkLabelsTextColor="#333333"
-              arcLinkLabelsThickness={2}
-              arcLinkLabelsColor={{ from: 'color' }}
-              arcLabelsSkipAngle={10}
-              arcLabelsTextColor={{
-                from: 'color',
-                modifiers: [['darker', 1]],
+              label={(node) => {
+                const w = (node as unknown as { width?: number }).width ?? 0;
+                const h = (node as unknown as { height?: number }).height ?? 0;
+
+                const hits = formatQuantity(node.value as number);
+
+                if (w < 90 || h < 18 || w * h < 1800) return hits;
+
+                return `${node.id} ${hits}`;
               }}
-              defs={[
-                {
-                  id: 'dots',
-                  type: 'patternDots',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  size: 4,
-                  padding: 1,
-                  stagger: true,
-                },
-                {
-                  id: 'lines',
-                  type: 'patternLines',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  rotation: -45,
-                  lineWidth: 6,
-                  spacing: 10,
-                },
-              ]}
+              labelSkipSize={14}
+              labelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
+              parentLabelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+              tooltip={({ node }) => (
+                <div className="rounded-md border bg-background px-2 py-1 text-xs shadow-sm">
+                  <div className="font-medium">{node.id}</div>
+                  <div className="text-muted-foreground">{formatQuantity(node.value as number)}</div>
+                </div>
+              )}
             />
           </Card>
           <div className="mt-10">
