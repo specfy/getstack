@@ -1,10 +1,12 @@
+/* eslint-disable import-x/default */
+// import { scan } from 'react-scan';
+
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as Sentry from '@sentry/react';
 import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-// eslint-disable-next-line import-x/default
 import React from 'react';
 
 import { Footer } from '@/components/Footer';
@@ -106,6 +108,13 @@ function ErrorFallback() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  // useEffect(() => {
+  //   // Make sure to run this only after hydration
+  //   scan({
+  //     enabled: true,
+  //   });
+  // }, []);
+
   return (
     <html lang="en">
       <head>

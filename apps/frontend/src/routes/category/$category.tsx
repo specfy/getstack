@@ -28,7 +28,13 @@ import type {
   TechnologyTopN,
 } from '@getstack/backend/src/types/endpoint';
 import type { AreaBumpSerie } from '@nivo/bump';
+import type { TreeMapDataProps } from '@nivo/treemap';
 import type { TechType } from '@specfy/stack-analyser';
+
+type TreeMapData = TreeMapDataProps<{
+  id: string;
+  children?: { id: string; value: number }[];
+}>['data'];
 
 const Category: React.FC = () => {
   const { category } = Route.useParams();
@@ -39,7 +45,7 @@ const Category: React.FC = () => {
     optionsCategoryLeaderboardOptions({ name: category })
   );
 
-  const { pie, winner, looser, nonFoundTech, rest } = useMemo(() => {
+  const { treeMapData, winner, looser, nonFoundTech, rest } = useMemo(() => {
     const tmp: { id: string; value: number }[] = [];
     let up: TechnologyByCategoryByWeekWithTrend | undefined;
     let down: TechnologyByCategoryByWeekWithTrend | undefined;
@@ -63,17 +69,13 @@ const Category: React.FC = () => {
     }
 
     return {
-      pie: tmp,
+      treeMapData: { id: 'root', children: tmp } satisfies TreeMapData,
       winner: up,
       looser: down,
       nonFoundTech: nonFound,
       rest: leaderboard.data.slice(10),
     };
   }, [leaderboard]);
-
-  const treeMapData = useMemo(() => {
-    return { id: 'root', children: pie };
-  }, [pie]);
 
   if (!cat) {
     return <NotFound />;
@@ -99,117 +101,40 @@ const Category: React.FC = () => {
 
       <Top10 data={data.top} leaderboard={leaderboard.data} category={cat} />
 
-      <div className="mt-10" style={{ height: 350 }}>
-        <ResponsiveTreeMap
-          data={treeMapData}
-          identity="id"
-          value="value"
-          leavesOnly
-          margin={{ top: 10, right: 0, bottom: 10, left: 0 }}
-          colors={AREA_BUMP_GRAY_10}
-          borderWidth={1}
-          borderColor={{
-            from: 'color',
-            modifiers: [['darker', 0.1]],
-          }}
-          label={(node) => {
-            const w = (node as unknown as { width?: number }).width ?? 0;
-            const h = (node as unknown as { height?: number }).height ?? 0;
-
-            const hits = formatQuantity(node.value);
-
-            // When the tile is small, show only hits.
-            if (w < 100 || h < 18 || w * h < 2000) return hits;
-
-            return `${node.id} (${hits})`;
-          }}
-          labelSkipSize={19}
-          orientLabel={false}
-          labelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
-          parentLabelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
-          tooltip={({ node }) => (
-            <div className="bg-background rounded-md border px-2 py-1 text-xs shadow-sm">
-              <div className="font-medium">{node.id}</div>
-              <div className="text-muted-foreground">{formatQuantity(node.value as number)}</div>
-            </div>
-          )}
-        />
-      </div>
-
       <div className="mt-10">
-        {(rest.length > 0 || nonFoundTech.length > 0) && (
-          <div className="grid grid-cols-3 gap-2">
-            {rest.map((row, i) => {
-              return <TechBloc position={i + 11} key={row.tech} row={row} />;
-            })}
-            {nonFoundTech.map((row, i) => {
-              return (
-                <TechBloc
-                  key={row.key}
-                  position={i + 10 + rest.length + 1}
-                  row={{
-                    category: category as TechType,
-                    tech: row.key,
-                    current_hits: 0,
-                    previous_hits: 0,
-                    trend: 0,
-                    percent_change: 0,
-                  }}
-                  className="opacity-50"
-                />
-              );
-            })}
+        <div className="grid md:grid-cols-6 md:gap-8">
+          <div className="md:col-span-2">
+            {(rest.length > 0 || nonFoundTech.length > 0) && (
+              <div className="flex flex-col gap-2">
+                {rest.map((row, i) => {
+                  return <TechBloc position={i + 11} key={row.tech} row={row} />;
+                })}
+                {nonFoundTech.map((row, i) => {
+                  return (
+                    <TechBloc
+                      key={row.key}
+                      position={i + 10 + rest.length + 1}
+                      row={{
+                        category: category as TechType,
+                        tech: row.key,
+                        current_hits: 0,
+                        previous_hits: 0,
+                        trend: 0,
+                        percent_change: 0,
+                      }}
+                      className="opacity-50"
+                    />
+                  );
+                })}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className="col-span-2">
-        {winner && (
-          <Card>
-            <CardHeader className="relative">
-              <CardDescription>Best</CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                <TechBadge tech={winner.tech} size="xl" />
-              </CardTitle>
-              <div className="absolute right-4 top-0">
-                <TrendsBadge pct={winner.percent_change} />
-              </div>
-            </CardHeader>
-
-            <CardFooter className="flex-col items-start gap-1 text-sm">
-              <div className="line-clamp-1 flex gap-2 font-medium">
-                Trending up this week <IconTrendingUp className="size-4" />
-              </div>
-              <div className="text-muted-foreground">
-                Found in {winner.trend} more repo{winner.trend > 1 && 's'}
-              </div>
-            </CardFooter>
-          </Card>
-        )}
-        {looser && (
-          <Card>
-            <CardHeader className="relative">
-              <CardDescription>Worst</CardDescription>
-              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                <TechBadge tech={looser.tech} size="xl" />
-              </CardTitle>
-              <div className="absolute right-4 top-0">
-                <TrendsBadge pct={looser.percent_change} />
-              </div>
-            </CardHeader>
-
-            <CardFooter className="flex-col items-start gap-1 text-sm">
-              <div className="line-clamp-1 flex gap-2 font-medium">
-                Trending down this week <IconTrendingDown className="size-4" />
-              </div>
-              <div className="text-muted-foreground">
-                Found in {looser.trend} less repo{looser.trend > 1 && 's'}
-              </div>
-            </CardFooter>
-          </Card>
-        )}
-      </div>
-      <div className="mt-10">
-        <Report />
+          <div className="flex flex-col gap-10 md:col-span-4">
+            <LooserWinner winner={winner} looser={looser} />
+            <TechTree treeMapData={treeMapData} category={cat} />
+            <Report />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -222,7 +147,7 @@ export const Top10: React.FC<{
 }> = ({ data, leaderboard, category }) => {
   const [hoveredTech, setHoveredTech] = useState<null | string>(null);
   const [debouncedHoveredTech, setDebouncedHoveredTech] = useState<null | string>(null);
-  useDebounce(() => setDebouncedHoveredTech(hoveredTech), 100, [hoveredTech]);
+  useDebounce(() => setDebouncedHoveredTech(hoveredTech), 50, [hoveredTech]);
   const top10 = useMemo(() => {
     return leaderboard.slice(0, 10);
   }, [leaderboard]);
@@ -280,6 +205,7 @@ export const Top10: React.FC<{
                 return (
                   <TechBloc
                     position={i + 1}
+                    animate={true}
                     key={row.tech}
                     row={row}
                     hoveredTech={hoveredTech}
@@ -344,14 +270,123 @@ export const Top10: React.FC<{
   );
 };
 
+export const LooserWinner: React.FC<{
+  winner?: TechnologyByCategoryByWeekWithTrend;
+  looser?: TechnologyByCategoryByWeekWithTrend;
+}> = ({ winner, looser }) => {
+  if (!winner && !looser) {
+    return null;
+  }
+
+  return (
+    <div className="flex flex-col gap-2">
+      {winner && (
+        <Card>
+          <CardHeader className="relative">
+            <CardDescription>Best</CardDescription>
+            <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+              <TechBadge tech={winner.tech} size="xl" />
+            </CardTitle>
+            <div className="absolute right-4 top-0">
+              <TrendsBadge pct={winner.percent_change} />
+            </div>
+          </CardHeader>
+
+          <CardFooter className="flex-col items-start gap-1 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Trending up this week <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Found in {winner.trend} more repo{winner.trend > 1 && 's'}
+            </div>
+          </CardFooter>
+        </Card>
+      )}
+      {looser && (
+        <Card>
+          <CardHeader className="relative">
+            <CardDescription>Worst</CardDescription>
+            <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+              <TechBadge tech={looser.tech} size="xl" />
+            </CardTitle>
+            <div className="absolute right-4 top-0">
+              <TrendsBadge pct={looser.percent_change} />
+            </div>
+          </CardHeader>
+
+          <CardFooter className="flex-col items-start gap-1 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Trending down this week <IconTrendingDown className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Found in {looser.trend} less repo{looser.trend > 1 && 's'}
+            </div>
+          </CardFooter>
+        </Card>
+      )}
+    </div>
+  );
+};
+
+export const TechTree: React.FC<{
+  treeMapData: TreeMapData;
+  category: CategoryDefinition;
+}> = ({ treeMapData, category }) => {
+  return (
+    <div>
+      <h3 className="font-serif text-lg font-semibold">Tech tree</h3>
+      <p className="font-mono text-xs text-gray-400">
+        Every {category.name} by number of repositories using this technology in GitHub
+      </p>
+      <div style={{ height: 350 }}>
+        <ResponsiveTreeMap
+          data={treeMapData}
+          identity="id"
+          value="value"
+          leavesOnly
+          margin={{ top: 10, right: 0, bottom: 10, left: 0 }}
+          colors={AREA_BUMP_GRAY_10}
+          borderWidth={1}
+          borderColor={{
+            from: 'color',
+            modifiers: [['darker', 0.1]],
+          }}
+          label={(node) => {
+            const w = (node as unknown as { width?: number }).width ?? 0;
+            const h = (node as unknown as { height?: number }).height ?? 0;
+
+            const hits = formatQuantity(node.value);
+
+            // When the tile is small, show only hits.
+            if (w < 100 || h < 18 || w * h < 2000) return hits;
+
+            return `${node.id} (${hits})`;
+          }}
+          labelSkipSize={19}
+          orientLabel={false}
+          labelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
+          parentLabelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+          tooltip={({ node }) => (
+            <div className="bg-background rounded-md border px-2 py-1 text-xs shadow-sm">
+              <div className="font-medium">{node.id}</div>
+              <div className="text-muted-foreground">{formatQuantity(node.value as number)}</div>
+            </div>
+          )}
+        />
+      </div>
+    </div>
+  );
+};
+
 export const TechBloc: React.FC<
   {
     row: TechnologyByCategoryByWeekWithTrend;
     hoveredTech?: null | string;
     position: number;
     className?: string;
+    animate?: boolean;
   } & React.AnchorHTMLAttributes<HTMLAnchorElement>
-> = ({ row, hoveredTech, position, className, ...props }) => {
+> = ({ row, hoveredTech, position, className, animate = false, ...props }) => {
   const formatted = formatQuantity(row.current_hits);
   const tech = listIndexed[row.tech];
 
@@ -376,8 +411,15 @@ export const TechBloc: React.FC<
           <TrendsBadge pct={row.percent_change} />
         )}
         <div className="flex items-center justify-end text-xs font-semibold tabular-nums">
-          <span className="inline-block transition-transform duration-200">{formatted}</span>
-          <span className="text-muted-foreground group-hover:max-w-18 ml-1 inline-block max-w-0 overflow-hidden whitespace-nowrap font-light opacity-0 transition-all duration-200 group-hover:opacity-100">
+          <span className={cn('inline-block', animate && 'transition-transform duration-200')}>
+            {formatted}
+          </span>
+          <span
+            className={cn(
+              'text-muted-foreground ml-1 inline-block max-w-0 overflow-hidden whitespace-nowrap font-light opacity-0 ',
+              animate && 'group-hover:max-w-18 transition-all duration-200 group-hover:opacity-100 '
+            )}
+          >
             repositories
           </span>
         </div>
