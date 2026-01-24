@@ -191,7 +191,7 @@ export const Top10: React.FC<{
 
   return (
     <div className="mt-14">
-      <div className="grid md:grid-cols-6 md:gap-8">
+      <div className="grid gap-10 md:grid-cols-6 md:gap-8">
         <div className="md:col-span-2">
           <h3 className="font-serif text-lg font-semibold">
             Top {top10.length} by number of repositories
@@ -279,7 +279,7 @@ export const LooserWinner: React.FC<{
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col md:flex-row gap-2">
       {winner && (
         <Card>
           <CardHeader className="relative">
