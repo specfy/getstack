@@ -13,15 +13,18 @@ import { useMemo } from 'react';
 
 import { optionsCategoryLeaderboardOptions, useCategoryLeaderboard } from '@/api/useCategory';
 import {
+  optionsGetTechInfo,
   optionsGetTechnology,
   optionsRelatedTechnologyOptions,
   useRelatedTechnology,
+  useTechInfo,
 } from '@/api/useTechnology';
 import { DataProgress } from '@/components/DataProgress';
 import { NotFound } from '@/components/NotFound';
 import { Report } from '@/components/Report';
 import { TT } from '@/components/TT';
 import { TechBadge } from '@/components/TechBadge';
+import { TechDescription } from '@/components/TechDescription';
 import { TopRepositories } from '@/components/TopRepository';
 import { TrendsBadge } from '@/components/TrendsBadge';
 import { Button } from '@/components/ui/button';
@@ -43,6 +46,7 @@ const Tech: React.FC = () => {
 
   const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
   const { data } = Route.useLoaderData();
+  const { data: techInfo } = useTechInfo({ name: tech?.key });
   const { data: leaderboard, isLoading: isLoadingLeaderboard } = useCategoryLeaderboard({
     name: tech?.type,
   });
@@ -154,9 +158,37 @@ const Tech: React.FC = () => {
           </div>
         )}
       </header>
-      {tech.description && (
-        <div className="text-s mt-2 max-w-2xl text-pretty font-mono font-light text-gray-600">
-          {tech.description}
+      {(techInfo?.data?.longDescription ?? tech.description) && (
+        <div className="flex flex-col gap-4 mt-6 sm:flex-row sm:items-start sm:gap-6">
+          <div className="min-w-0 flex-1">
+            <TechDescription content={techInfo?.data?.longDescription ?? tech.description} />
+          </div>
+          <div className="flex shrink-0 gap-2 sm:flex-col">
+            {(techInfo?.data?.github ?? tech.github) && (
+              <TT description={`https://github.com/${techInfo?.data?.github ?? tech.github}`}>
+                <Button variant="outline" className="cursor-pointer w-full sm:w-auto" asChild>
+                  <a
+                    href={`https://github.com/${techInfo?.data?.github ?? tech.github}?utm_source=getstack.dev`}
+                    target="_blank"
+                  >
+                    <IconBrandGithub stroke={1} /> GitHub
+                  </a>
+                </Button>
+              </TT>
+            )}
+            {(techInfo?.data?.website ?? tech.website) && (
+              <TT description={techInfo?.data?.website ?? tech.website}>
+                <Button variant="outline" className="cursor-pointer w-full sm:w-auto" asChild>
+                  <a
+                    href={`${techInfo?.data?.website ?? tech.website}?utm_source=getstack.dev`}
+                    target="_blank"
+                  >
+                    <IconWorld stroke={1} /> Website
+                  </a>
+                </Button>
+              </TT>
+            )}
+          </div>
         </div>
       )}
 
@@ -276,31 +308,10 @@ const Tech: React.FC = () => {
 
           <Related tech={tech} />
         </div>
-        <div className="order-1 mt-0 flex flex-col gap-5 md:order-2 md:col-span-3">
-          <div className="grid grid-cols-2 gap-2 md:gap-4">
-            {tech.github && (
-              <TT description={`https://github.com/${tech.github}`}>
-                <a
-                  href={`https://github.com/${tech.github}?utm_source=getstack.dev`}
-                  target="_blank"
-                >
-                  <Button variant="outline" className="w-full cursor-pointer justify-start">
-                    <IconBrandGithub stroke={1} /> GitHub
-                  </Button>
-                </a>
-              </TT>
-            )}
-            <TT description={tech.website}>
-              <a href={`${tech.website}?utm_source=getstack.dev`} target="_blank">
-                <Button variant="outline" className="w-full cursor-pointer justify-start">
-                  <IconWorld stroke={1} /> Website
-                </Button>
-              </a>
-            </TT>
-          </div>
+        <div className="md:col-span-3 mt-10 flex flex-col gap-5 order-1 md:order-2">
           {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
-            <div className="">
+            <div className="pt-5">
               <Card>
                 <CardHeader className="relative">
                   <CardDescription className="flex items-center gap-2">
@@ -466,6 +477,7 @@ export const Route = createFileRoute('/tech/$techKey')({
       optionsCategoryLeaderboardOptions({ name: tech.type })
     );
     await context.queryClient.ensureQueryData(optionsRelatedTechnologyOptions({ name: tech.key }));
+    await context.queryClient.ensureQueryData(optionsGetTechInfo({ name: tech.key }));
 
     return data;
   },

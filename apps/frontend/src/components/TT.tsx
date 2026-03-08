@@ -10,7 +10,7 @@ export const TT: React.FC<
 > = ({ children, description, ...props }) => {
   return (
     <Tooltip>
-      <TooltipTrigger>{children}</TooltipTrigger>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent {...props}>{description}</TooltipContent>
     </Tooltip>
   );

@@ -6,6 +6,7 @@ import { apiFetch } from '../lib/fetch';
 
 import type {
   APIGetTechnology,
+  APIGetTechInfo,
   APIGetTopRelatedTechnology,
 } from '@getstack/backend/src/types/endpoint.js';
 
@@ -35,6 +36,34 @@ export const optionsGetTechnology = ({ name }: { name?: string | undefined }) =>
       return json;
     },
   });
+};
+
+export const optionsGetTechInfo = ({ name }: { name?: string | undefined }) => {
+  return queryOptions<APIGetTechInfo['Success'], Error>({
+    enabled: Boolean(name),
+    queryKey: ['getTechInfo', name],
+    queryFn: async () => {
+      const response = await apiFetch(`/1/technologies/${name}/info`, {
+        method: 'GET',
+      });
+
+      if (response.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw notFound();
+      }
+
+      const json = (await response.json()) as APIGetTechInfo['Reply'];
+      if ('error' in json) {
+        throw new Error('error');
+      }
+
+      return json;
+    },
+  });
+};
+
+export const useTechInfo = (options: { name?: string | undefined }) => {
+  return useQuery<APIGetTechInfo['Success'], Error>(optionsGetTechInfo(options));
 };
 
 export const useRelatedTechnology = ({ name }: { name?: string | undefined }) => {

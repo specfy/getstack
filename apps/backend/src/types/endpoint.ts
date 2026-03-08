@@ -72,6 +72,30 @@ export type APIGetTopRelatedTechnology = Endpoint<{
   };
 }>;
 
+export type APIGetTechInfo = Endpoint<{
+  Path: '/1/technologies/:name/info';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: {
+      longDescription: string | null;
+      website: string | null;
+      github: string | null;
+    };
+  };
+}>;
+
+export type APIPutTechInfo = Endpoint<{
+  Path: '/1/technologies/:name/info';
+  Method: 'PUT';
+  Body: {
+    longDescription: string;
+    website?: string;
+    github?: string;
+  };
+  Success: { success: true };
+}>;
+
 export type APILicenseWithName = { full_name: string } & LicenseRow;
 export type APIGetRepository = Endpoint<{
   Path: '/1/repositories/:org/:name';

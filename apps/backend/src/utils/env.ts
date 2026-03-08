@@ -42,6 +42,9 @@ const schema = z.object({
   // Sentry
   SENTRY_DSN: z.string().optional(),
   SENTRY_ENVIRONMENT: z.string().default('development'),
+  
+  // Tech info (admin)
+  ADMIN_SECRET: z.string().optional(),
 });
 
 export const envs = schema.parse(process.env);

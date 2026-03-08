@@ -54,6 +54,16 @@ export type LicensesInfoTableRow = Selectable<LicensesInfoTable>;
 export type LicensesInfoInsert = Insertable<LicensesInfoTable>;
 export type LicensesInfoUpdate = Updateable<LicensesInfoTable>;
 
+export interface TechInfoTable {
+  key: string;
+  long_description: null | string;
+  website: null | string;
+  github: null | string;
+}
+export type TechInfoRow = Selectable<TechInfoTable>;
+export type TechInfoInsert = Insertable<TechInfoTable>;
+export type TechInfoUpdate = Updateable<TechInfoTable>;
+
 // Add cache table types
 export interface CacheTable {
   key: string;
@@ -90,6 +100,7 @@ export type PostsUpdate = Updateable<PostsTable>;
 export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
+  tech_info: TechInfoTable;
   repositories: RepositoriesTable;
   cache: CacheTable;
   posts: PostsTable;

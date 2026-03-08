@@ -15,6 +15,8 @@ import { getRepositoryImage } from './v1/repositories/$org/$name/getImage.js';
 import { getApiRepository } from './v1/repositories/$org/$name/getRepository.js';
 import { postAnalyzeOne } from './v1/repositories/$org/$name/postAnalyzeOne.js';
 import { postRefreshOne } from './v1/repositories/$org/$name/postRefresh.js';
+import { getTechInfoRoute } from './v1/technologies/$name/info/getTechInfo.js';
+import { putTechInfoRoute } from './v1/technologies/$name/info/putTechInfo.js';
 import { getTechnology } from './v1/technologies/$name/getTechnology.js';
 import { getTechnologyRelated } from './v1/technologies/$name/related/getRelated.js';
 
@@ -23,6 +25,8 @@ import type { FastifyPluginAsync } from 'fastify';
 export const routes: FastifyPluginAsync = async (f) => {
   await f.register(postAnalyzeOne, { prefix: '/1' });
   await f.register(postRefreshOne, { prefix: '/1' });
+  await f.register(getTechInfoRoute, { prefix: '/1' });
+  await f.register(putTechInfoRoute, { prefix: '/1' });
   await f.register(getTechnology, { prefix: '/1' });
   await f.register(getTechnologyRelated, { prefix: '/1' });
   await f.register(getApiRepository, { prefix: '/1' });
