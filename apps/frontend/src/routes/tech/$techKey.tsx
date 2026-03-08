@@ -193,9 +193,6 @@ const Tech: React.FC = () => {
       )}
 
       <div className="mt-10">
-        <div className="mb-2 flex justify-end">
-          <DataProgress />
-        </div>
         {data.volume.length > 0 && (
           <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-4">
             <Card className="">
@@ -294,6 +291,9 @@ const Tech: React.FC = () => {
             </Card>
           </div>
         )}
+        <div className="mt-2 flex justify-end">
+          <DataProgress />
+        </div>
       </div>
 
       <div className="mt-14 grid grid-cols-1 gap-14 md:grid-cols-10">
