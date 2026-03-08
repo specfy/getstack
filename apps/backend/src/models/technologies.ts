@@ -220,7 +220,7 @@ SELECT
     position
 FROM ranked
 WHERE position <= 10
-ORDER BY date_week, position`,
+ORDER BY toInt32(splitByChar('-', date_week)[1]), toInt32(splitByChar('-', date_week)[2]), position`,
     query_params: { category, currentWeek, afterWeek: formatToYearWeek(afterWeek) },
   });
 
@@ -299,7 +299,7 @@ export async function getTechnologyVolumePerWeek({
       coalesce(td.hits, 0) AS hits
     FROM all_weeks aw
     LEFT JOIN tech_data td ON aw.date_week = td.date_week
-    ORDER BY aw.date_week`,
+    ORDER BY toInt32(splitByChar('-', aw.date_week)[1]), toInt32(splitByChar('-', aw.date_week)[2])`,
     query_params: { tech, currentWeek },
   });
 

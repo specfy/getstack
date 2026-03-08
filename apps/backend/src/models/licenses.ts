@@ -43,7 +43,7 @@ SELECT
     position
 FROM ranked
 WHERE position <= 10
-ORDER BY date_week, position`,
+ORDER BY toInt32(splitByChar('-', date_week)[1]), toInt32(splitByChar('-', date_week)[2]), position`,
     query_params: { currentWeek, afterWeek: formatToYearWeek(afterWeek) },
   });
 
@@ -151,7 +151,7 @@ export async function getLicenseVolumePerWeek({
     FROM licenses_weekly_mv
     WHERE license = {license: String} AND date_week <= {currentWeek: String}
     GROUP BY date_week
-    ORDER BY date_week`,
+    ORDER BY toInt32(splitByChar('-', date_week)[1]), toInt32(splitByChar('-', date_week)[2])`,
     query_params: { license, currentWeek },
   });
 
