@@ -4,13 +4,13 @@ Long descriptions for each tech. See .cursor/skills/write-tech-info/ for writing
 
 **Total: 743**
 
-- [ ] adminer
-- [ ] adobe
-- [ ] adobe.commercecloud
+- [x] adminer
+- [x] adobe
+- [x] adobe.commercecloud
 - [ ] adyen
 - [ ] airbyte
 - [ ] airtable
-- [ ] algolia
+- [x] algolia
 - [ ] alibabacloud
 - [ ] alpinejs
 - [ ] amplitude

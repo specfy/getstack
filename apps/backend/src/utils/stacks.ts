@@ -24,7 +24,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Software company that provides a range of products and services for the creation, management, and distribution of digital content.',
   },
   'adobe.commercecloud': {
-    website: 'https://business.adobe.com/products/commerce/magento/cloud.html',
+    website: 'https://business.adobe.com/products/commerce/',
     github: 'magento/magento-cloud',
     description: 'Cloud-based e-commerce platform, formerly Magento.',
   },

@@ -28,7 +28,7 @@ export const TechDescription: React.FC<{ content: string }> = ({ content }) => {
         <div
           ref={contentRef}
           className={cn(
-            'text-pretty text-gray-600 text-s font-mono font-light prose prose-gray prose-p:my-4 prose-ul:my-4 prose-li:my-1 prose-headings:my-4 max-w-none',
+            'text-pretty text-gray-600 text-s font-mono font-light prose prose-gray prose-p:my-4 prose-p:first:mt-0 prose-ul:my-4 prose-li:my-1 prose-headings:my-4 max-w-none',
             !expanded && 'overflow-hidden'
           )}
           style={expanded ? undefined : { maxHeight: '10rem' }}

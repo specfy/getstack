@@ -23,20 +23,31 @@ Follow this structure for each tech:
 
 1. **Opening paragraph** (2–3 sentences)
    - What the tech is and its main value prop
+   - Never mention the brand name here
+   - Describe factually what it is and what is does
+
+2. **Second paragraph** (optional, 2-4 sentences)
    - Trust signals: notable customers, enterprises, adoption
-   - Key differentiator vs alternatives
+   - Key differentiator vs alternatives, mention names if possible
+   - Metrics: community size, number of customers, number of SDKs (never GitHub stars)
+   - You can mention the brand again here
 
-2. **Key capabilities** — Bullet list (4–6 items)
+3. **Key capabilities** — Bullet list (3–5 items)
    - Core features, integrations, deployment options
-   - Use "Key capabilities include:" as heading
+   - Order by most impactful to least
+   - Do not fill if not relevant or very common (e.g: SSO, SAML)
 
-3. **Use cases & social proof** (1–2 sentences)
-   - Example use cases by domain (IT ops, Security, Sales, etc.)
-   - Metrics: G2/Gartner ratings, community size (never GitHub stars)
-
-4. **Technical depth** (optional) — "Technical teams particularly value:" + bullets
-   - Developer-focused features: branching, debugging, APIs, SDKs
+4. **Use cases** (2–5 sentences)
+   - Give a few example of use cases.
+   - Why technical person would use this
    - Integration with dev tooling
+   - Do not start with "Typical use cases" try to come up with a different first sentence
+
+## Do
+
+- Mention AI only if it's a core part of the product
+- Focus on fact
+- Try to use synonyms for the headings
 
 ## Don't do
 
@@ -44,28 +55,24 @@ Follow this structure for each tech:
 - **Never mention pricing** — Do not include pricing, plans, or cost
 - **Never mention branded cloud offerings for open source** — For OSS tech, do not name commercial cloud products (e.g. "Tanzu RabbitMQ", "AWS Managed Kafka"). Describe capabilities generically (e.g. "cloud deployment options") without vendor names
 - **Never mention GitHub stars** — Do not cite star counts as social proof
+- **Avoid** buzzword and vague wording, keep it factual. Nothing is proven or amazing or blazing, etc.
+- **Never use parenthesis** it sucks, use commas or colons.
 
 ## Reference Example: n8n
 
 ```
-n8n stands out as a versatile workflow automation platform trusted by major enterprises like Cisco, Microsoft, and Liberty Mutual. The platform offers unique flexibility with both visual and code-based automation options, making it ideal for technical teams who need precise control.
+Workflow automation platform offering code-like flexibility with no-code speed. Supports both visual design and code-based customization for automations while keeping data under your control.
 
-Key capabilities include:
+Trusted by enterprises like Cisco, Microsoft, and Liberty Mutual. Stands out by letting technical teams switch between visual flows and raw code: JavaScript and Python in the same workflow.
 
-Seamless integration of AI with business processes
-Full code access with JavaScript and Python support
-On-premises or cloud deployment options
-1200+ pre-built templates and integrations
-Advanced debugging and testing features
-The platform excels in various use cases from IT operations (employee onboarding, account provisioning) to Security operations (incident management) and Sales automation (customer insights). n8n has proven its reliability and effectiveness in enterprise environments.
+**Key features:**
 
-Technical teams particularly value:
+- Full code access with JavaScript and Python support
+- On-premises or cloud deployment
+- 1200+ pre-built templates and integrations
+- Advanced debugging and testing features
 
-The ability to merge workflow branches
-Single-step execution for testing
-Built-in debugging tools
-Direct cURL request support
-npm and Python library integration
+Typical use cases: IT operations such as onboarding and provisioning, Security incident management, Sales automation and customer insights. Developers benefit from single-step execution for testing, direct cURL support, and npm or Python library integration.
 ```
 
 ## Research Steps
