@@ -156,7 +156,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description: 'Hosted continuous integration service for Windows, Linux, and macOS.',
   },
   assemble: {
-    website: 'http://assemble.io/',
+    website: 'https://assemble.io/',
     github: 'assemble/assemble',
     description:
       'Static site generator for Node.js, often used for creating project documentation and blogs.',
@@ -438,7 +438,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description: 'Managed PostgreSQL database service for app development and deployment.',
   },
   'azure.redis': {
-    website: 'https://azure.microsoft.com/en-us/products/cache/',
+    website: 'https://azure.microsoft.com/en-us/products/managed-redis',
     description: 'Managed Redis cache service providing fast, scalable data storage.',
   },
   'azure.sql': {
@@ -505,7 +505,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
     description: 'Database CI/CD and schema migration tool for teams.',
   },
   c: {
-    website: 'https://en.wikipedia.org/wiki/C_(programming_language)',
+    website: 'https://www.c-language.org/',
     description:
       'General-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion.',
   },

@@ -86,16 +86,29 @@ Before writing:
 
 ## Insertion
 
-Use the **PUT** endpoint to upsert tech info. Requires `ADMIN_SECRET` in `.env`; send it via header `X-Admin-Secret` or `Authorization: Bearer <secret>`.
+Use the **PUT** endpoint to upsert tech info.
+DO NOT check .env it's well configured.
+
+**Script** (loads `.env` via dotenv or `node --env-file=.env`):
 
 ```bash
-curl -X PUT "https://your-api/1/technologies/rabbitmq/info" \
-  -H "X-Admin-Secret: YOUR_SECRET" \
-  -H "Content-Type: application/json" \
-  -d '{"longDescription": "Full text...", "website": "https://www.rabbitmq.com/", "github": "rabbitmq/rabbitmq-server"}'
+npm run tech-info:put -- <json-file>
+# or
+node --env-file=.env .cursor/skills/write-tech-info/put-tech-info.js <json-file>
 ```
 
-**Body:** `longDescription` (required), `website` (optional), `github` (optional).
+**JSON file format:**
+
+```json
+{
+  "key": "rabbitmq",
+  "longDescription": "Full markdown text...",
+  "website": "https://www.rabbitmq.com/",
+  "github": "rabbitmq/rabbitmq-server"
+}
+```
+
+`key` and `longDescription` are required; `website` and `github` are optional. API base URL from `VITE_API_URL` (apps/frontend/.env) or `API_URL`; defaults to `http://localhost:3000`.
 
 ## Checklist
 

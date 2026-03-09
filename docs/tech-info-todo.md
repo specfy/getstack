@@ -7,113 +7,113 @@ Long descriptions for each tech. See .cursor/skills/write-tech-info/ for writing
 - [x] adminer
 - [x] adobe
 - [x] adobe.commercecloud
-- [ ] adyen
-- [ ] airbyte
-- [ ] airtable
+- [x] adyen
+- [x] airbyte
+- [x] airtable
 - [x] algolia
-- [ ] alibabacloud
-- [ ] alpinejs
-- [ ] amplitude
-- [ ] angular
-- [ ] ansible
-- [ ] anthropic
-- [ ] apache_airflow
-- [ ] apache_cassandra
-- [ ] apache_couchdb
-- [ ] apache_flink
-- [ ] apache_hadoop
-- [ ] apache_hive
-- [ ] apache_iceberg
-- [ ] apache_kafka
-- [ ] apache_solr
-- [ ] apache_spark
-- [ ] apache_storm
-- [ ] apache_thrift
-- [ ] apiplatform
-- [ ] appveyor
-- [ ] assemble
-- [ ] astro
-- [ ] atlasgo
-- [ ] atlassian.bitbucket
-- [ ] atlassian.confluence
-- [ ] atlassian.jira
-- [ ] atlassian.opsgenie
-- [ ] atlassian.trello
-- [ ] atlassian
-- [ ] auth0
-- [ ] aws.amplifyhosting
-- [ ] aws.apigateway
-- [ ] aws.athena
-- [ ] aws.bedrock
-- [ ] aws.cloudformation
-- [ ] aws.cloudfront
-- [ ] aws.cloudsearch
-- [ ] aws.cloudwatch
-- [ ] aws.codebuild
-- [ ] aws.documentdb
-- [ ] aws.dynamodb
-- [ ] aws.ebs
-- [ ] aws.ec2
-- [ ] aws.ecr
-- [ ] aws.ecs
-- [ ] aws.efs
-- [ ] aws.eks
-- [ ] aws.elasticache
-- [ ] aws.fargate
-- [ ] aws.glacier
-- [ ] aws.glue
-- [ ] aws.kafka
-- [ ] aws.kinesis
-- [ ] aws.kms
-- [ ] aws.lambda
-- [ ] aws.lightsail
-- [ ] aws.memorydb
-- [ ] aws.mq
-- [ ] aws.neptune
-- [ ] aws.opensearch
-- [ ] aws.polly
-- [ ] aws.rds
-- [ ] aws.redshift
-- [ ] aws.rekognition
-- [ ] aws.s3
-- [ ] aws.sagemaker
-- [ ] aws.secretsmanager
-- [ ] aws.ses
-- [ ] aws.sfn
-- [ ] aws.sns
-- [ ] aws.sqs
-- [ ] aws.timestream
-- [ ] aws.translate
-- [ ] aws
-- [ ] azure.aks
-- [ ] azure.ci
-- [ ] azure.cosmosdb
-- [ ] azure.functions
-- [ ] azure.mariadb
-- [ ] azure.mysql
-- [ ] azure.openai
-- [ ] azure.postgres
-- [ ] azure.redis
-- [ ] azure.sql
-- [ ] azure.staticwebapps
-- [ ] azure.storage
-- [ ] azure
-- [ ] bash
-- [ ] betterstack
-- [ ] bigcommerce
-- [ ] blackfire
-- [ ] blitzjs
-- [ ] bootstrap
-- [ ] box
-- [ ] brevo
-- [ ] browserstack
-- [ ] bytebase
-- [ ] c
-- [ ] caddy
-- [ ] celery
-- [ ] checkov
-- [ ] chef
-- [ ] circleci
+- [x] alibabacloud
+- [x] alpinejs
+- [x] amplitude
+- [x] angular
+- [x] ansible
+- [x] anthropic
+- [x] apache_airflow
+- [x] apache_cassandra
+- [x] apache_couchdb
+- [x] apache_flink
+- [x] apache_hadoop
+- [x] apache_hive
+- [x] apache_iceberg
+- [x] apache_kafka
+- [x] apache_solr
+- [x] apache_spark
+- [x] apache_storm
+- [x] apache_thrift
+- [x] apiplatform
+- [x] appveyor
+- [x] assemble
+- [x] astro
+- [x] atlasgo
+- [x] atlassian.bitbucket
+- [x] atlassian.confluence
+- [x] atlassian.jira
+- [x] atlassian.opsgenie
+- [x] atlassian.trello
+- [x] atlassian
+- [x] auth0
+- [x] aws.amplifyhosting
+- [x] aws.apigateway
+- [x] aws.athena
+- [x] aws.bedrock
+- [x] aws.cloudformation
+- [x] aws.cloudfront
+- [x] aws.cloudsearch
+- [x] aws.cloudwatch
+- [x] aws.codebuild
+- [x] aws.documentdb
+- [x] aws.dynamodb
+- [x] aws.ebs
+- [x] aws.ec2
+- [x] aws.ecr
+- [x] aws.ecs
+- [x] aws.efs
+- [x] aws.eks
+- [x] aws.elasticache
+- [x] aws.fargate
+- [x] aws.glacier
+- [x] aws.glue
+- [x] aws.kafka
+- [x] aws.kinesis
+- [x] aws.kms
+- [x] aws.lambda
+- [x] aws.lightsail
+- [x] aws.memorydb
+- [x] aws.mq
+- [x] aws.neptune
+- [x] aws.opensearch
+- [x] aws.polly
+- [x] aws.rds
+- [x] aws.redshift
+- [x] aws.rekognition
+- [x] aws.s3
+- [x] aws.sagemaker
+- [x] aws.secretsmanager
+- [x] aws.ses
+- [x] aws.sfn
+- [x] aws.sns
+- [x] aws.sqs
+- [x] aws.timestream
+- [x] aws.translate
+- [x] aws
+- [x] azure.aks
+- [x] azure.ci
+- [x] azure.cosmosdb
+- [x] azure.functions
+- [x] azure.mariadb
+- [x] azure.mysql
+- [x] azure.openai
+- [x] azure.postgres
+- [x] azure.redis
+- [x] azure.sql
+- [x] azure.staticwebapps
+- [x] azure.storage
+- [x] azure
+- [x] bash
+- [x] betterstack
+- [x] bigcommerce
+- [x] blackfire
+- [x] blitzjs
+- [x] bootstrap
+- [x] box
+- [x] brevo
+- [x] browserstack
+- [x] bytebase
+- [x] c
+- [x] caddy
+- [x] celery
+- [x] checkov
+- [x] chef
+- [x] circleci
 - [ ] cirrusci
 - [ ] clerk
 - [ ] clickhouse

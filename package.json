@@ -21,6 +21,7 @@
     "db:migrate": "cd apps/backend && npm run migrate",
     "prod:start": "node apps/backend/dist/db/migrate.js && node apps/backend/dist/index.js",
     "favicons:generate": "npx tsx --env-file=.env apps/backend/src/scripts/fetchFavicons.ts",
+    "tech-info:put": "node --env-file=.env .cursor/skills/write-tech-info/put-tech-info.js",
     "favicons:optimize": "npx tsx --env-file=.env apps/backend/src/scripts/optimizeFavicons.ts",
     "sitemap:generate": "npx tsx --env-file=.env apps/backend/src/scripts/generateSitemap.ts",
     "blog:generate": "npx tsx --env-file=.env apps/backend/src/scripts/getDataForBlog.ts",
