@@ -26,6 +26,7 @@ dokku config:set --no-restart getstack-api \
   SENTRY_DSN= \
   SENTRY_ENVIRONMENT=production \
   GITHUB_TOKEN= \
+  ADMIN_SECRET= \
   DOKKU_DOCKERFILE_START_CMD="node --run prod:start"
 
 dokku domains:add getstack-api api.getstack.dev

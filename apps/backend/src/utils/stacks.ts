@@ -621,7 +621,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   convexdb: {
     website: 'https://www.convex.dev/',
-    github: 'get-convex/convex',
+    github: 'get-convex/convex-backend',
     description:
       'Backend-as-a-Service platform with a reactive data model, simplifying full-stack web development.',
   },
@@ -1938,7 +1938,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Managed MySQL service by Railway, offering easy setup and integration for applications hosted on Railway.',
   },
   'railway.postgres': {
-    website: 'https://railway.app/template/postgresql',
+    website: 'https://railway.app/',
     description:
       'Managed PostgreSQL service on the Railway platform, facilitating quick deployment and scaling of Postgres databases.',
   },
@@ -2084,7 +2084,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Managed database services from Scaleway, supporting PostgreSQL, MySQL, and other engines.',
   },
   'scaleway.documentdb': {
-    website: 'https://www.scaleway.com/en/document-database/',
+    website: 'https://www.scaleway.com/en/docs/managed-mongodb-databases/',
     description:
       'Managed NoSQL document database service offered by Scaleway, compatible with MongoDB.',
   },
@@ -2104,7 +2104,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'Managed Kubernetes service (Kapsule) by Scaleway for deploying and scaling containerized applications.',
   },
   'scaleway.mq': {
-    website: 'https://www.scaleway.com/en/managed-message-queues/',
+    website: 'https://www.scaleway.com/en/queues/',
     description:
       'Managed message queuing services by Scaleway, supporting protocols like NATS and SQS for microservice communication.',
   },
@@ -2252,7 +2252,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
       'C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.',
   },
   sqreen: {
-    website: 'https://www.datadoghq.com/product/application-security-monitoring/',
+    website: 'https://www.datadoghq.com/product/app-and-api-protection/',
     description:
       'Application security monitoring and protection platform, focusing on runtime protection.',
   },
@@ -2457,7 +2457,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   tursodb: {
     website: 'https://turso.tech/',
-    github: 'tursodatabase/libsql',
+    github: 'tursodatabase/turso',
     description:
       'Edge-hosted, distributed database based on libSQL, offering low-latency global data access.',
   },
@@ -3021,7 +3021,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   sequelruby: {
     website: 'https://sequel.jeremyevans.net/',
-    github: 'sequelize/sequelize', // Note: GitHub link points to sequelize, which might be an error in original data or intentional.
+    github: 'jeremyevans/sequel',
     description:
       'Database toolkit for Ruby, providing a simple, flexible, and powerful ORM and SQL builder.',
   },
@@ -3774,7 +3774,7 @@ const extendedInfo: Record<AllowedKeys, ExtendedTechItem> = {
   },
   sveltekit: {
     website: 'https://kit.svelte.dev/',
-    github: 'sveltejs/svelte',
+    github: 'sveltejs/kit',
     description: 'SvelteKit is a framework for building web applications.',
   },
   databuddy: {
