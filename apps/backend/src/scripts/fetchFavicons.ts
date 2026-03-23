@@ -1,10 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { extendedListTech } from '../utils/stacks.js';
+import { getTechInfo } from '../models/techInfo.js';
+import { listTech } from '../utils/stacks.js';
 
 /**
- * LOGODEV_KEY=KEY npx tsx apps/backend/src/scripts/fetchFavicons.ts
+ * Requires DB (website URLs in tech_info). Example:
+ * LOGODEV_KEY=KEY npx tsx --env-file=.env apps/backend/src/scripts/fetchFavicons.ts
  */
 const fetchFavicons = async (): Promise<void> => {
   const logoDevKey = process.env['LOGODEV_KEY'];
@@ -14,11 +16,12 @@ const fetchFavicons = async (): Promise<void> => {
 
   const outputDir = path.resolve(import.meta.dirname, '../../../frontend/public/favicons');
 
-  // Ensure the output directory exists
   await fs.mkdir(outputDir, { recursive: true });
 
-  for (const tech of extendedListTech) {
-    if (!tech.website) {
+  for (const tech of listTech) {
+    const row = await getTechInfo(tech.key);
+    const website = row?.website;
+    if (!website) {
       continue;
     }
 
@@ -36,7 +39,7 @@ const fetchFavicons = async (): Promise<void> => {
       }
 
       const faviconUrl = new URL(
-        `https://img.logo.dev/${new URL(tech.website).hostname}?token=${process.env['LOGODEV_KEY']}&size=64&retina=true&format=webp`
+        `https://img.logo.dev/${new URL(website).hostname}?token=${process.env['LOGODEV_KEY']}&size=64&retina=true&format=webp`
       );
       const response = await fetch(faviconUrl, {
         method: 'GET',

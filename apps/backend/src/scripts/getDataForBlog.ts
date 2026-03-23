@@ -3,15 +3,15 @@ import path from 'node:path';
 
 import { getActiveWeek } from '../models/progress.js';
 import { getRepositories, getRepository } from '../models/repositories.js';
+import { getTechInfo } from '../models/techInfo.js';
 import {
   getTopRepositoriesForTechnology,
   getTopTechnologiesWithTrendByCategory,
 } from '../models/technologies.js';
-import { categories, extendedListTech } from '../utils/stacks.js';
+import { categories, listTech } from '../utils/stacks.js';
 
 import type { RepositoryRow } from '../db/types.db.js';
-import type { TechItemWithExtended } from '../utils/stacks.js';
-import type { TechType } from '@specfy/stack-analyser';
+import type { TechItem, TechType } from '@specfy/stack-analyser';
 
 interface TechnologyData {
   tech: string;
@@ -19,7 +19,13 @@ interface TechnologyData {
   hits: number;
   position: number;
   percent_change: number;
-  info: TechItemWithExtended;
+  info: TechItem;
+  /** tech_info row when present */
+  techInfo: {
+    github: null | string;
+    longDescription: null | string;
+    website: null | string;
+  } | null;
   websiteCover: string;
   githubRepo: null | RepositoryRow;
   topRepos: {
@@ -71,8 +77,15 @@ async function getDataForCategory(category: TechType): Promise<CategoryData> {
     }
     const reposData = repoIds.length > 0 ? await getRepositories({ ids: repoIds }) : [];
 
-    const info = extendedListTech.find((t) => t.key === tech.tech)!;
-    const split = info.github?.split('/');
+    const info = listTech.find((t) => t.key === tech.tech);
+    if (!info) {
+      throw new Error(`Unknown technology key (not in listTech): ${tech.tech}`);
+    }
+
+    const row = await getTechInfo(tech.tech);
+
+    const githubSlug = row?.github;
+    const split = githubSlug?.split('/');
     const technologyData: TechnologyData = {
       tech: tech.tech,
       date_week: currentWeek,
@@ -80,6 +93,13 @@ async function getDataForCategory(category: TechType): Promise<CategoryData> {
       position: i,
       percent_change: tech.percent_change,
       info,
+      techInfo: row
+        ? {
+            github: row.github,
+            longDescription: row.long_description,
+            website: row.website,
+          }
+        : null,
       websiteCover: `/website/${tech.tech}.png`,
       githubRepo:
         split && split[0] && split[1]

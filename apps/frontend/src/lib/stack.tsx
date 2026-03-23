@@ -1,4 +1,4 @@
-import { extendedListTech } from '@getstack/backend/dist/utils/stacks.js';
+import { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';
 import {
   IconAppWindow,
   IconApps,
@@ -40,7 +40,6 @@ import {
   IconUsersGroup,
 } from '@tabler/icons-react';
 
-import type { ExtendedTechItem } from '@getstack/backend/dist/utils/stacks.js';
 import type { AllowedKeys, TechItem, TechType } from '@specfy/stack-analyser';
 import type { Icon } from '@tabler/icons-react';
 
@@ -445,8 +444,8 @@ export const categoryGroup: { name: string; categories: TechType[]; description:
   },
 ];
 
-export const listIndexed = {} as Record<AllowedKeys, ExtendedTechItem & TechItem>;
-for (const tech of extendedListTech) {
+export const listIndexed = {} as Record<AllowedKeys, TechItem>;
+for (const tech of listTech) {
   listIndexed[tech.key] = tech;
 }
 
@@ -454,4 +453,4 @@ export const listCategories = Object.entries(categories).map((v) => {
   return { key: v[0], ...v[1] };
 });
 
-export { extendedListTech } from '@getstack/backend/dist/utils/stacks.js';
+export { listTech } from '@specfy/stack-analyser/dist/common/techs.generated.js';

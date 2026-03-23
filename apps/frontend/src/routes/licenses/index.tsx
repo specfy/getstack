@@ -279,9 +279,11 @@ const Licenses: React.FC = () => {
               labelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
               parentLabelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
               tooltip={({ node }) => (
-                <div className="rounded-md border bg-background px-2 py-1 text-xs shadow-sm">
+                <div className="bg-background rounded-md border px-2 py-1 text-xs shadow-sm">
                   <div className="font-medium">{node.id}</div>
-                  <div className="text-muted-foreground">{formatQuantity(node.value as number)}</div>
+                  <div className="text-muted-foreground">
+                    {formatQuantity(node.value as number)}
+                  </div>
                 </div>
               )}
             />

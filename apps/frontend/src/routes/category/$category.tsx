@@ -22,14 +22,13 @@ import type { CategoryDefinition } from '@/lib/stack';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
-import type { TechItemWithExtended } from '@getstack/backend/dist/utils/stacks';
 import type {
   TechnologyByCategoryByWeekWithTrend,
   TechnologyTopN,
 } from '@getstack/backend/src/types/endpoint';
 import type { AreaBumpSerie } from '@nivo/bump';
 import type { TreeMapDataProps } from '@nivo/treemap';
-import type { TechType } from '@specfy/stack-analyser';
+import type { TechItem, TechType } from '@specfy/stack-analyser';
 
 type TreeMapData = TreeMapDataProps<{
   id: string;
@@ -61,7 +60,7 @@ const Category: React.FC = () => {
 
     // Identify undiscovered tech by diffing listIndexed for the category with discoveredTech
     const discoveredTech = new Set(leaderboard.data.map((row) => row.tech));
-    const nonFound: TechItemWithExtended[] = [];
+    const nonFound: TechItem[] = [];
     for (const item of Object.values(listIndexed)) {
       if (item.type === category && !discoveredTech.has(item.key)) {
         nonFound.push(item);
@@ -279,7 +278,7 @@ export const LooserWinner: React.FC<{
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-2">
+    <div className="flex flex-col gap-2 md:flex-row">
       {winner && (
         <Card>
           <CardHeader className="relative">

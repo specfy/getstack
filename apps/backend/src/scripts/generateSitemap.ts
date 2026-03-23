@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { getAllLicensesNames } from '../models/licensesInfo.js';
-import { extendedListTech } from '../utils/stacks.js';
+import { categories, listTech } from '../utils/stacks.js';
 
 const BASE_URL = 'https://getstack.dev';
 
@@ -24,7 +24,6 @@ async function generateSitemap(): Promise<void> {
   </url>`;
   }
 
-  const categories = new Set<string>();
   for (const category of categories) {
     sitemap += `
   <url>
@@ -57,8 +56,7 @@ async function generateSitemap(): Promise<void> {
   </url>`;
   }
 
-  for (const tech of extendedListTech) {
-    categories.add(tech.type);
+  for (const tech of listTech) {
     sitemap += `
   <url>
     <loc>${BASE_URL}/tech/${tech.key}</loc>

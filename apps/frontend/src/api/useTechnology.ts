@@ -5,8 +5,8 @@ import { notFound } from '@tanstack/react-router';
 import { apiFetch } from '../lib/fetch';
 
 import type {
-  APIGetTechnology,
   APIGetTechInfo,
+  APIGetTechnology,
   APIGetTopRelatedTechnology,
 } from '@getstack/backend/src/types/endpoint.js';
 

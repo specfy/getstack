@@ -36,15 +36,14 @@ import { seo } from '@/lib/seo';
 import { categories, listIndexed } from '@/lib/stack';
 import { cn } from '@/lib/utils';
 
-import type { TechItemWithExtended } from '@getstack/backend/dist/utils/stacks';
 import type { TechnologyByCategoryByWeekWithTrend } from '@getstack/backend/src/types/endpoint';
 import type { LineSeries } from '@nivo/line';
-import type { AllowedKeys } from '@specfy/stack-analyser';
+import type { AllowedKeys, TechItem } from '@specfy/stack-analyser';
 
 const Tech: React.FC = () => {
   const { techKey } = Route.useParams();
 
-  const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
+  const tech = listIndexed[techKey as AllowedKeys] as TechItem | undefined;
   const { data } = Route.useLoaderData();
   const { data: techInfo } = useTechInfo({ name: tech?.key });
   const { data: leaderboard, isLoading: isLoadingLeaderboard } = useCategoryLeaderboard({
@@ -158,39 +157,41 @@ const Tech: React.FC = () => {
           </div>
         )}
       </header>
-      {(techInfo?.data?.longDescription ?? tech.description) && (
-        <div className="flex flex-col gap-4 mt-6 sm:flex-row sm:items-start sm:gap-6">
-          <div className="min-w-0 flex-1">
-            <TechDescription content={techInfo?.data?.longDescription ?? tech.description} />
-          </div>
-          <div className="flex shrink-0 gap-2 sm:flex-col">
-            {(techInfo?.data?.github ?? tech.github) && (
-              <TT description={`https://github.com/${techInfo?.data?.github ?? tech.github}`}>
-                <Button variant="outline" className="cursor-pointer w-full sm:w-auto" asChild>
-                  <a
-                    href={`https://github.com/${techInfo?.data?.github ?? tech.github}?utm_source=getstack.dev`}
-                    target="_blank"
-                  >
-                    <IconBrandGithub stroke={1} /> GitHub
-                  </a>
-                </Button>
-              </TT>
+      {techInfo?.data &&
+        (techInfo.data.longDescription || techInfo.data.github || techInfo.data.website) && (
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
+            {techInfo.data.longDescription && (
+              <div className="min-w-0 flex-1">
+                <TechDescription content={techInfo.data.longDescription} />
+              </div>
             )}
-            {(techInfo?.data?.website ?? tech.website) && (
-              <TT description={techInfo?.data?.website ?? tech.website}>
-                <Button variant="outline" className="cursor-pointer w-full sm:w-auto" asChild>
-                  <a
-                    href={`${techInfo?.data?.website ?? tech.website}?utm_source=getstack.dev`}
-                    target="_blank"
-                  >
-                    <IconWorld stroke={1} /> Website
-                  </a>
-                </Button>
-              </TT>
+            {(techInfo.data.github || techInfo.data.website) && (
+              <div className="flex shrink-0 gap-2 sm:flex-col">
+                {techInfo.data.github && (
+                  <TT description={`https://github.com/${techInfo.data.github}`}>
+                    <Button variant="outline" className="w-full cursor-pointer sm:w-auto" asChild>
+                      <a
+                        href={`https://github.com/${techInfo.data.github}?utm_source=getstack.dev`}
+                        target="_blank"
+                      >
+                        <IconBrandGithub stroke={1} /> GitHub
+                      </a>
+                    </Button>
+                  </TT>
+                )}
+                {techInfo.data.website && (
+                  <TT description={techInfo.data.website}>
+                    <Button variant="outline" className="w-full cursor-pointer sm:w-auto" asChild>
+                      <a href={`${techInfo.data.website}?utm_source=getstack.dev`} target="_blank">
+                        <IconWorld stroke={1} /> Website
+                      </a>
+                    </Button>
+                  </TT>
+                )}
+              </div>
             )}
           </div>
-        </div>
-      )}
+        )}
 
       <div className="mt-10">
         {data.volume.length > 0 && (
@@ -308,7 +309,7 @@ const Tech: React.FC = () => {
 
           <Related tech={tech} />
         </div>
-        <div className="md:col-span-3 mt-10 flex flex-col gap-5 order-1 md:order-2">
+        <div className="order-1 mt-10 flex flex-col gap-5 md:order-2 md:col-span-3">
           {isLoadingLeaderboard && <Skeleton className="h-20 w-full " />}
           {position > 0 && (
             <div className="pt-5">
@@ -382,7 +383,7 @@ const Tech: React.FC = () => {
   );
 };
 
-const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
+const Related: React.FC<{ tech: TechItem }> = ({ tech }) => {
   const { data, isFetching } = useRelatedTechnology({ name: tech.key });
 
   if (!data || data.data.length <= 0) {
@@ -411,7 +412,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
   );
 };
 
-// const RelatedByCategory: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
+// const RelatedByCategory: React.FC<{ tech: TechItem }> = ({ tech }) => {
 //   const { data, isLoading } = useRelatedTechnology({ name: tech.key });
 
 //   const groups = useMemo<[TechType, AllowedKeys[]][]>(() => {
@@ -464,7 +465,7 @@ const Related: React.FC<{ tech: TechItemWithExtended }> = ({ tech }) => {
 
 export const Route = createFileRoute('/tech/$techKey')({
   loader: async ({ params: { techKey }, context }) => {
-    const tech = listIndexed[techKey as AllowedKeys] as TechItemWithExtended | undefined;
+    const tech = listIndexed[techKey as AllowedKeys] as TechItem | undefined;
     if (!tech) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw notFound();
@@ -482,7 +483,7 @@ export const Route = createFileRoute('/tech/$techKey')({
     return data;
   },
   head: (ctx) => {
-    const tech = listIndexed[ctx.params.techKey as AllowedKeys] as TechItemWithExtended | undefined;
+    const tech = listIndexed[ctx.params.techKey as AllowedKeys] as TechItem | undefined;
     const url = `${APP_URL}/tech/${tech?.key}`;
     if (!tech) {
       return {};

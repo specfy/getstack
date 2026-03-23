@@ -23,12 +23,12 @@ export const TechDescription: React.FC<{ content: string }> = ({ content }) => {
   const showButtons = hasOverflow || (expanded && hadOverflowRef.current);
 
   return (
-    <div className="max-w-4xl relative">
+    <div className="relative max-w-4xl">
       <div className="relative">
         <div
           ref={contentRef}
           className={cn(
-            'text-pretty text-gray-600 text-s font-mono font-light prose prose-gray prose-p:my-4 prose-p:first:mt-0 prose-ul:my-4 prose-li:my-1 prose-headings:my-4 max-w-none',
+            'text-s prose prose-gray prose-p:my-4 prose-p:first:mt-0 prose-ul:my-4 prose-li:my-1 prose-headings:my-4 max-w-none text-pretty font-mono font-light text-gray-600',
             !expanded && 'overflow-hidden'
           )}
           style={expanded ? undefined : { maxHeight: '10rem' }}
@@ -37,7 +37,7 @@ export const TechDescription: React.FC<{ content: string }> = ({ content }) => {
         </div>
         {!expanded && hasOverflow && (
           <div
-            className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent dark:from-neutral-950"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent dark:from-neutral-950"
             aria-hidden
           />
         )}

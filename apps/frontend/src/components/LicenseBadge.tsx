@@ -23,7 +23,7 @@ export const LicenseBadge: React.FC<{
       to={`/licenses/$license`}
       params={{ license: licenseKey }}
     >
-      <div className="truncate text-ellipsis">{fullName}</div>
+      <div className="truncate">{fullName}</div>
     </Link>
   );
 };

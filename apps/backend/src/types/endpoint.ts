@@ -78,9 +78,9 @@ export type APIGetTechInfo = Endpoint<{
   Success: {
     success: true;
     data: {
-      longDescription: string | null;
-      website: string | null;
-      github: string | null;
+      longDescription: null | string;
+      website: null | string;
+      github: null | string;
     };
   };
 }>;

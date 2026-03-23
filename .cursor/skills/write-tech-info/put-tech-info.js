@@ -54,8 +54,8 @@ let data;
 try {
   const raw = await readFile(resolve(process.cwd(), jsonPath), 'utf-8');
   data = JSON.parse(raw);
-} catch (err) {
-  console.error('Failed to read/parse JSON:', err.message);
+} catch (error) {
+  console.error('Failed to read/parse JSON:', error.message);
   process.exit(1);
 }
 

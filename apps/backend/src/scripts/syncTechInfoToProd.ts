@@ -66,13 +66,13 @@ async function main() {
         body: JSON.stringify(body),
       });
 
-      if (!res.ok) {
+      if (res.ok) {
+        console.log(`${key}: OK`);
+        ok++;
+      } else {
         const text = await res.text();
         console.error(`${key}: ${res.status} ${res.statusText} - ${text.slice(0, 100)}`);
         failed++;
-      } else {
-        console.log(`${key}: OK`);
-        ok++;
       }
     } catch (err) {
       console.error(`${key}: ${err instanceof Error ? err.message : String(err)}`);
