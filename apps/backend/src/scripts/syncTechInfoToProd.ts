@@ -13,18 +13,17 @@
 
 import { db } from '../db/client.js';
 
-const adminSecret = process.env.ADMIN_SECRET;
-const prodApiUrl = process.env.PROD_API_URL;
-
-if (!adminSecret) {
-  console.error('ADMIN_SECRET is required');
-  process.exit(1);
+function requireEnv(name: string): string {
+  const value = process.env[name];
+  if (value === undefined || value === '') {
+    console.error(`${name} is required`);
+    process.exit(1);
+  }
+  return value;
 }
 
-if (!prodApiUrl) {
-  console.error('PROD_API_URL is required (e.g. https://api.getstack.dev)');
-  process.exit(1);
-}
+const adminSecret = requireEnv('ADMIN_SECRET');
+const prodApiUrl = requireEnv('PROD_API_URL');
 
 const baseUrl = prodApiUrl.replace(/\/$/, '');
 const basePath = '/1/technologies';
