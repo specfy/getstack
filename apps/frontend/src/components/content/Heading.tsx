@@ -24,7 +24,7 @@ export const HTop = ({
             height={28}
           />
         </div>
-        <h2 className="my-0 leading-10">{children}</h2>
+        <h2 className="!my-0 leading-10">{children}</h2>
       </div>
     </a>
   );

@@ -1,4 +1,4 @@
-import type { Endpoint } from './api.js';
+import type { ApiError, Endpoint } from './api.js';
 import type {
   LicenseRow,
   LicensesWeeklyRow,
@@ -52,6 +52,37 @@ export type APIGetCategoryLeaderboard = Endpoint<{
 }>;
 
 export type RepositoryTop = Pick<RepositoryRow, 'avatar_url' | 'id' | 'name' | 'org' | 'stars'>;
+export interface CategoryTopItem {
+  leaderboard: TechnologyByCategoryByWeekWithTrend;
+  longDescription: string;
+  topRepos: RepositoryTop[];
+}
+export type APIGetCategoryTrends = Endpoint<{
+  Path: '/1/categories/:name/trends/:slug';
+  Method: 'GET';
+  Success: {
+    success: true;
+    data: {
+      id: string;
+      category: string;
+      introduction: string;
+      slug: string;
+      items: CategoryTopItem[];
+    };
+  };
+}>;
+
+export type APIPutCategoryTop = Endpoint<{
+  Path: '/1/categories/:name/top';
+  Method: 'PUT';
+  Body: {
+    introduction: string;
+    slug?: string;
+  };
+  Success: { success: true };
+  Error: ApiError<'409_conflict'>;
+}>;
+
 export type TechnologyWeeklyVolume = Pick<TechnologiesWeeklyTable, 'date_week' | 'hits'>;
 export type APIGetTechnology = Endpoint<{
   Path: '/1/technologies/:name';

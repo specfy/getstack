@@ -23,7 +23,7 @@ interface TechnologyData {
   /** tech_info row when present */
   techInfo: {
     github: null | string;
-    longDescription: null | string;
+    longDescription: string;
     website: null | string;
   } | null;
   websiteCover: string;

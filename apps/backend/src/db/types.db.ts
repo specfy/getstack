@@ -56,7 +56,7 @@ export type LicensesInfoUpdate = Updateable<LicensesInfoTable>;
 
 export interface TechInfoTable {
   key: string;
-  long_description: null | string;
+  long_description: string;
   website: null | string;
   github: null | string;
 }
@@ -97,6 +97,16 @@ export type PostsRow = Selectable<PostsTable>;
 export type PostsInsert = Insertable<PostsTable>;
 export type PostsUpdate = Updateable<PostsTable>;
 
+export interface CategoryTrendsTable {
+  id: ColumnType<string, string, never>;
+  category: string;
+  slug: string;
+  introduction: string;
+}
+export type CategoryTrendsRow = Selectable<CategoryTrendsTable>;
+export type CategoryTrendsInsert = Insertable<CategoryTrendsTable>;
+export type CategoryTrendsUpdate = Updateable<CategoryTrendsTable>;
+
 export interface Database {
   progress: ProgressTable;
   licenses_info: LicensesInfoTable;
@@ -104,6 +114,7 @@ export interface Database {
   repositories: RepositoriesTable;
   cache: CacheTable;
   posts: PostsTable;
+  category_trends: CategoryTrendsTable;
 }
 
 export type TX = Transaction<Database>;

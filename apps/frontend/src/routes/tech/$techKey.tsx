@@ -492,7 +492,7 @@ export const Route = createFileRoute('/tech/$techKey')({
     return {
       meta: [
         ...seo({
-          title: `${tech.name} trends - getStack`,
+          title: `${tech.name} - getStack`,
           description: `Discover ${tech.name} usage and alternatives across the most popular open-source GitHub repositories`,
           url,
         }),

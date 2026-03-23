@@ -1,5 +1,7 @@
 import { getCategory } from './v1/categories/$name/getCategory.js';
 import { getCategoryLeaderboard } from './v1/categories/$name/leaderboard/getLeaderboard.js';
+import { getCategoryTrends } from './v1/categories/$name/trends/$slug/getTrends.js';
+import { putCategoryTopRoute } from './v1/categories/$name/trends/putTrends.js';
 import { postCronTriggerAnalyze } from './v1/cron/postTriggerAnalyze.js';
 import { postCronTriggerList } from './v1/cron/postTriggerList.js';
 import { getData } from './v1/data/getData.js';
@@ -40,6 +42,8 @@ export const routes: FastifyPluginAsync = async (f) => {
   await f.register(getPost, { prefix: '/1' });
 
   await f.register(getCategory, { prefix: '/1' });
+  await f.register(getCategoryTrends, { prefix: '/1' });
+  await f.register(putCategoryTopRoute, { prefix: '/1' });
   await f.register(getCategoryLeaderboard, { prefix: '/1' });
   await f.register(getTopRoute, { prefix: '/1' });
   await f.register(postCronTriggerList, { prefix: '/1' });

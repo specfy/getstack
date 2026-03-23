@@ -19,6 +19,7 @@ import { Route as LicensesLicenseRouteImport } from './routes/licenses/$license'
 import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as OrgNameRouteImport } from './routes/$org/$name'
+import { Route as TrendsCategorySlugRouteImport } from './routes/trends/$category/$slug'
 
 const PrivateRoute = PrivateRouteImport.update({
   id: '/private',
@@ -70,6 +71,11 @@ const OrgNameRoute = OrgNameRouteImport.update({
   path: '/$org/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrendsCategorySlugRoute = TrendsCategorySlugRouteImport.update({
+  id: '/trends/$category/$slug',
+  path: '/trends/$category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/tech/$techKey': typeof TechTechKeyRoute
   '/blog/': typeof BlogIndexRoute
   '/licenses/': typeof LicensesIndexRoute
+  '/trends/$category/$slug': typeof TrendsCategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/tech/$techKey': typeof TechTechKeyRoute
   '/blog': typeof BlogIndexRoute
   '/licenses': typeof LicensesIndexRoute
+  '/trends/$category/$slug': typeof TrendsCategorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/tech/$techKey': typeof TechTechKeyRoute
   '/blog/': typeof BlogIndexRoute
   '/licenses/': typeof LicensesIndexRoute
+  '/trends/$category/$slug': typeof TrendsCategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/tech/$techKey'
     | '/blog/'
     | '/licenses/'
+    | '/trends/$category/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/tech/$techKey'
     | '/blog'
     | '/licenses'
+    | '/trends/$category/$slug'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/tech/$techKey'
     | '/blog/'
     | '/licenses/'
+    | '/trends/$category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   TechTechKeyRoute: typeof TechTechKeyRoute
   BlogIndexRoute: typeof BlogIndexRoute
   LicensesIndexRoute: typeof LicensesIndexRoute
+  TrendsCategorySlugRoute: typeof TrendsCategorySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgNameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trends/$category/$slug': {
+      id: '/trends/$category/$slug'
+      path: '/trends/$category/$slug'
+      fullPath: '/trends/$category/$slug'
+      preLoaderRoute: typeof TrendsCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   TechTechKeyRoute: TechTechKeyRoute,
   BlogIndexRoute: BlogIndexRoute,
   LicensesIndexRoute: LicensesIndexRoute,
+  TrendsCategorySlugRoute: TrendsCategorySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
